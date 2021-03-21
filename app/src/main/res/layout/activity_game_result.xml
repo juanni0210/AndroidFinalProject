@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/trivia_bg"
+    tools:context=".GameResultActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="30dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/congratText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/purple_color"
+            android:textStyle="bold"
+            android:text="Congrats"
+            android:textSize="32dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            tools:layout_editor_absoluteX="196dp"
+            tools:layout_editor_absoluteY="141dp" />
+
+        <TextView
+            android:id="@+id/scoreText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/purple_color"
+            android:textStyle="bold"
+            android:text="Your Score"
+            android:textSize="40dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            tools:layout_editor_absoluteX="196dp"
+            tools:layout_editor_absoluteY="231dp" />
+
+        <TextView
+            android:id="@+id/resultDetils"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/purple_color"
+            android:textStyle="italic"
+            android:text="Result Details"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            tools:layout_editor_absoluteX="196dp"
+            tools:layout_editor_absoluteY="231dp" />
+        <Button
+            android:id="@+id/saveScoreBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bgbtn"
+            android:textSize="16dp"
+            android:textColor="@color/purple_color"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/saveScoreBtn" />
+
+        <ListView
+            android:id="@+id/scoreListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <Button
+            android:id="@+id/startAgainBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bgbtn"
+            android:textSize="16dp"
+            android:textColor="@color/purple_color"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:text="@string/startAgainBtn" />
+    </LinearLayout>
+</LinearLayout>

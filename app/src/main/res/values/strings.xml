@@ -1,3 +1,66 @@
 <resources>
     <string name="app_name">Final Project</string>
+
+    <!--    Main page-->
+    <string name="triviaStartBtn">TRIVIA GAME</string>
+    <string name="songsterStartBtn">SONGSTER SEARCH</string>
+    <string name="carDBStartBtn">CAR DATABASE</string>
+    <string name="soccertartBtn">SOCCER GAME</string>
+    <string name="projectInfo">CST2335 Final Project</string>
+    <string name="teamInfo">© 2021 TECH SAVVY TEAM</string>
+
+    <!--    Trivia game launch page-->
+    <string name="title_name">CHOOSE QUESTIONS:</string>
+    <string name="questions_number_label">Number of Questions:</string>
+    <string name="difficulty_label">Select Difficulty:</string>
+    <string name="question_type_label">Select Type:</string>
+    <string-array name="difficulty_array">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
+    <string-array name="type_array">
+        <item>Any Type</item>
+        <item>Multiple Choice</item>
+        <item>True/False</item>
+    </string-array>
+    <string name="gameStartBtn">START GAME</string>
+    <string name="backHomeBtn">BACK HOME</string>
+
+    <!--    Trivia game ongoing page-->
+    <string name="unAnsweredTextBegin">questions for your game.</string>
+    <string name="unAnsweredText">unanswered</string>
+    <string name="correctCountText">corrected</string>
+    <string name="wrongCountText">wrong</string>
+    <string name="nextBtn">NEXT</string>
+    <string name="startAgainBtn">START AGAIN</string>
+
+    <!--    Game result page-->
+    <string name="scoreTitle">SCORE:</string>
+    <string name="masterpiece">Masterpiece!</string>
+    <string name="amazing">Amazing!</string>
+    <string name="great">Great!</string>
+    <string name="good">Good!</string>
+    <string name="keepGoing">Keep Going!</string>
+    <string name="saveScoreBtn">SAVE SCORE</string>
+
+    <!--    Game result page AlertDialog-->
+    <string name="deleteNotice">Do you want to delete this record?</string>
+    <string name="selectRow">The selected row is: </string>
+    <string name="showPlayerName">Player Name: </string>
+    <string name="showScore">Player score: </string>
+    <string name="showQuestionAmount">Player answered: </string>
+    <string name="questionText">questions</string>
+    <string name="showDifficultyType">Difficulty type: </string>
+    <string name="showQuestionType">Question type: </string>
+
+    <!--    Game result page pop up window-->
+    <string name="playerNameInput">Enter your name here</string>
+    <string name="saveNameBtn">SAVE</string>
+    <string name="cancelSaveBtn">CANCEL</string>
+
+    <!-- Fragment details page -->
+    <string name="hideBtn">HIDE</string>
+
+
 </resources>
