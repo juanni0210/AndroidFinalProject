@@ -33,6 +33,7 @@
     <string name="correctCountText">corrected</string>
     <string name="wrongCountText">wrong</string>
     <string name="nextBtn">NEXT</string>
+    <string name="selectAnsNotice">Please select an answer!</string>
     <string name="startAgainBtn">START AGAIN</string>
 
     <!--    Game result page-->

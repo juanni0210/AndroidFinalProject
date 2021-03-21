@@ -30,7 +30,7 @@ import java.util.ArrayList;
 public class TriviaGameOngoingActivity extends AppCompatActivity {
     private ArrayList<Question> questionList = new ArrayList<>();
     private Question currentQuestion;
-    private String selectedAns;
+    private String selectedAns = "";
     private int totalQuestionCount;
     private int answerCount;
     private int correctCount;
@@ -38,8 +38,6 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
 
     private String generatedGameURL, questionType;
     private ProgressBar gameProgressBar;
-    private ChoiceListAdapter myChoiceAdapter;
-    private ListView choiceListView;
     private RadioGroup choiceRadioGroup;
 
     private TextView unAnsweredView, correctView, wrongView, questionTextView;
@@ -58,7 +56,12 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
         questionTextView = findViewById(R.id.questionText);
         nextButton = findViewById(R.id.nextBtn);
         nextButton.setVisibility(View.INVISIBLE);
-        choiceListView = findViewById(R.id.choiceListView);
+        choiceRadioGroup = findViewById(R.id.choiceRatioGroup);
+        //get selected answer from user
+        choiceRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            RadioButton currentBtn = (RadioButton) group.findViewById(checkedId);
+            selectedAns = currentBtn.getText().toString();
+        });
 
         gameProgressBar = findViewById(R.id.gameProgressBar);
         gameProgressBar.setVisibility(View.VISIBLE);
@@ -70,20 +73,25 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
 
 
         // click next button, it will show the next question by calling update method
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        nextButton.setOnClickListener(v -> {
+            //check whether user selected an answer or not, if not, create a toast to tell user
+            //it user answered the question, then go to next question
+            if (selectedAns == "") {
+                Toast.makeText(TriviaGameOngoingActivity.this, getResources().getString(R.string.selectAnsNotice), Toast.LENGTH_LONG).show();
+            } else {
                 answerCount++;
                 //call before update
-                if(currentQuestion.getCorrectedAns().equals(selectedAns)) {
+                if (currentQuestion.getCorrectedAns().equals(selectedAns)) {
                     correctCount++;
                 }
                 updateQuestion();
-                unAnsweredView.setText((totalQuestionCount-answerCount) + "/" + totalQuestionCount + " " + getResources().getString(R.string.unAnsweredText));
+                unAnsweredView.setText((totalQuestionCount - answerCount) + "/" + totalQuestionCount + " " + getResources().getString(R.string.unAnsweredText));
                 correctView.setText(correctCount + " " + getResources().getString(R.string.correctCountText));
-                wrongView.setText((answerCount-correctCount) + " " + getResources().getString(R.string.wrongCountText));
+                wrongView.setText((answerCount - correctCount) + " " + getResources().getString(R.string.wrongCountText));
             }
+
         });
+
 
 
         GameFactory triviaRequest = new GameFactory();
@@ -91,64 +99,35 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
     }
 
     public void updateQuestion() {
-        myChoiceAdapter = new ChoiceListAdapter();
+        selectedAns = "";
         currentQuestion = questionList.get(answerCount);
         int questionIndex = answerCount + 1;
         questionTextView.setText(questionIndex + ". " + currentQuestion.getQuestionText());
-        choiceListView.setAdapter(myChoiceAdapter);
-        myChoiceAdapter.notifyDataSetChanged();
+        choiceRadioGroup.removeAllViews();
+        //loop the choices list and create radio button for each choice in the radio group
+        for(int i=0; i < currentQuestion.getChoices().size(); i++){
+            RadioButton choiceRadioBtn = new RadioButton(this);
+            choiceRadioBtn.setText(currentQuestion.getChoices().get(i));
+            choiceRadioGroup.addView(choiceRadioBtn);
+        }
+
         if (answerCount == questionList.size()-1) {
             nextButton.setText("FINISH GAME");
             nextButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // check whether the last question you answered is right
-                    if(currentQuestion.getCorrectedAns().equals(selectedAns)) {
+                    if (currentQuestion.getCorrectedAns().equals(selectedAns)) {
                         correctCount++;
                     }
                     Intent goToGameResult = new Intent(TriviaGameOngoingActivity.this, GameResultActivity.class);
                     goToGameResult.putExtra("CORRECTED_ANSWER_COUNT", correctCount);
-                    goToGameResult.putExtra("WRONG_ANSWER_COUNT", totalQuestionCount-correctCount);
+                    goToGameResult.putExtra("WRONG_ANSWER_COUNT", totalQuestionCount - correctCount);
                     goToGameResult.putExtra("DIFFICULTY_TYPE", currentQuestion.getDifficultyType());
                     goToGameResult.putExtra("QUESTION_TYPE", questionType);
                     startActivity(goToGameResult);
                 }
             });
-        }
-
-
-    }
-
-
-    private class ChoiceListAdapter extends BaseAdapter {
-
-        public int getCount() { return currentQuestion.getChoices().size(); }
-
-        public String getItem(int position) { return currentQuestion.getChoices().get(position); }
-
-        //return the object's database id
-        public long getItemId(int position) { return (long)position; }
-
-        public View getView(int position, View old, ViewGroup parent)
-        {
-
-            LayoutInflater inflater = getLayoutInflater();
-
-            String choice = getItem(position);
-
-            View newView = inflater.inflate(R.layout.choices_row, parent, false);
-
-            Button choiceButton = newView.findViewById(R.id.choiceBtn);
-            choiceButton.setText(choice);
-            choiceButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    selectedAns = choiceButton.getText().toString();
-                }
-            });
-
-          //return it to be put in the table
-            return newView;
         }
     }
 
