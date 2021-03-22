@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">Final Project</string>
+    <string name="app_name" translatable="false">Final Project</string>
+    <string name="title_activity_soccer_games" translatable="false">SoccerGames</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="read">Read</string>
+    <string name="save">Save</string>
+    <string name="favorite">Favorite</string>
+
+    <!--    <string name="hello_world">Hello Square World!</string>-->
 </resources>
