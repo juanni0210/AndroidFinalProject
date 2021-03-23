@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/trivia_bg"
     android:orientation="vertical"
+    android:id="@+id/launch_layout"
     tools:context=".TriviaGameLaunchActivity">
 
     <TextView
@@ -97,6 +98,18 @@
         android:entries="@array/type_array"
         android:layout_below="@id/questionTypeLabel"/>
 
+    <Switch
+        android:id="@+id/timerSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/questionTypeSpinner"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:paddingTop="20dp"
+        android:text="@string/timerSwitch" />
+
     <Button
         android:id="@+id/startGameBtn"
         android:layout_width="wrap_content"
@@ -122,5 +135,7 @@
         android:layout_marginBottom="50dp"
         android:text="@string/backHomeBtn"
         android:layout_alignParentBottom="true"/>
+
+
 
 </RelativeLayout>

@@ -7,17 +7,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Switch;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class TriviaGameLaunchActivity extends AppCompatActivity {
-    private String questionNum;
-    private String difficultyType;
-    private String questionType;
+    private String questionNum, difficultyType, questionType, gameURL;
     private EditText questionNumberInput;
-    private Spinner difficultySpinner;
-    private Spinner questionTypeSpinner;
-    private String gameURL;
+    private Spinner difficultySpinner, questionTypeSpinner;
+    private Switch timerSwitch;
+    private RelativeLayout launchLayout;
     private Button gameStartBtn, backHomeBtn;
 
     @Override
@@ -63,6 +66,20 @@ public class TriviaGameLaunchActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {questionType = "anytype";}
         });
 
+        launchLayout = findViewById(R.id.launch_layout);
+        timerSwitch = findViewById(R.id.timerSwitch);
+        timerSwitch.setChecked(false);
+        timerSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton cb, boolean isChecked) {
+                if (isChecked) {
+                    showSnackbar(getResources().getString(R.string.switch_on_message), true);
+                } else {
+                    showSnackbar(getResources().getString(R.string.switch_off_message), false);
+                }
+            }
+        });
+
 
         Intent goToGameStart = new Intent(TriviaGameLaunchActivity.this, TriviaGameOngoingActivity.class);
         gameStartBtn.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +94,7 @@ public class TriviaGameLaunchActivity extends AppCompatActivity {
                 }
                 goToGameStart.putExtra("GENERATED_URL", gameURL);
                 goToGameStart.putExtra("QUESTION_TYPE", questionType);
+                goToGameStart.putExtra("TIMER_SWITCH", timerSwitch.isChecked());
                 startActivity(goToGameStart);
             }
         });
@@ -89,8 +107,17 @@ public class TriviaGameLaunchActivity extends AppCompatActivity {
             }
         });
 
+    }
 
-
+    public void showSnackbar(String message, boolean isOn) {
+        Snackbar snackbar = Snackbar.make(launchLayout, message, Snackbar.LENGTH_INDEFINITE)
+                .setAction(getResources().getString(R.string.undo_text), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        timerSwitch.setChecked(!isOn);
+                    }
+                });
+        snackbar.show();
     }
 
 

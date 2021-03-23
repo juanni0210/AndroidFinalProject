@@ -24,6 +24,10 @@
         <item>Multiple Choice</item>
         <item>True/False</item>
     </string-array>
+    <string name="timerSwitch">Timer Switch</string>
+    <string name="switch_on_message">Timer switch is on now.</string>
+    <string name="switch_off_message">Timer switch is off now.</string>
+    <string name="undo_text">UNDO</string>
     <string name="gameStartBtn">START GAME</string>
     <string name="backHomeBtn">BACK HOME</string>
 
@@ -35,6 +39,10 @@
     <string name="nextBtn">NEXT</string>
     <string name="selectAnsNotice">Please select an answer!</string>
     <string name="startAgainBtn">START AGAIN</string>
+    <string name="timerStart">START</string>
+    <string name="timerStop">STOP</string>
+    <string name="timerStartNotice">Please start the timer.</string>
+    <string name="timerStopNotice">Please stop the timer.</string>
 
     <!--    Game result page-->
     <string name="scoreTitle">SCORE:</string>
