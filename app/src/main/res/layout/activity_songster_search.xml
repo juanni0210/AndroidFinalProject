@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools = "http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SongsterSearch"
+    android:id="@+id/search_page">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/main_menu_songster"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/songster_search"
+        />
+
+    <RelativeLayout
+        android:id="@+id/relativeMenuLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_menu_songster">
+
+        <Button
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_search"
+            android:layout_alignParentRight="true"/>
+
+        <EditText
+            android:id="@+id/search_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:hint="@string/search_hint"
+            android:layout_toLeftOf="@id/searchButton"
+            />
+
+        <ProgressBar
+            android:layout_below="@id/search_editText"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:id="@+id/progress_bar"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/relativeMenuLayout">
+
+        <ListView
+            android:id="@+id/songsterListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
+        <Button
+            android:id="@+id/goToFavourites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignBottom="@+id/songsterListView"
+            android:text="@string/btn_favourite" />
+    </RelativeLayout>
+
+</RelativeLayout>

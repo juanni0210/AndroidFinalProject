@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">课程项目</string>
+    <string name="btn_add">加到列表</string>
+    <string name="btn_favourite">喜欢</string>
+    <string name="search_hint">输入搜索的内容</string>
+    <string name="btn_search">搜索</string>
+    <string name="songster_search">歌手搜索</string>
+
+</resources>

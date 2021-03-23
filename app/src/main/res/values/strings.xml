@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Final Project</string>
+    <string name="btn_add">Add to Favourite</string>
+    <string name="btn_favourite">Go To Favourite</string>
+    <string name="search_hint">Input Search Content Here</string>
+    <string name="btn_search">Search</string>
+    <string name="songster_search">Songster search page</string>
 </resources>
