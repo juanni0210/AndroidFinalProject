@@ -22,7 +22,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class GameResultActivity extends AppCompatActivity {
+public class TriviaGameResultActivity extends AppCompatActivity {
     private Button startAgainBtn, saveScoreBtn, saveNameBtn, cancelSaveBtn;
     private int totalQuestionCount, correctAnswerCount, wrongAnswerCount, gameScore;
     private TextView congratsTextView, scoreView, resultDetailsView, scoreResult;
@@ -49,7 +49,7 @@ public class GameResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_result);
+        setContentView(R.layout.activity_trivia_game_result);
 
         congratsTextView = findViewById(R.id.congratText);
         scoreView = findViewById(R.id.scoreText);
@@ -154,7 +154,7 @@ public class GameResultActivity extends AppCompatActivity {
             }
             else //isPhone
             {
-                Intent triviaNextActivity = new Intent(GameResultActivity.this, TriviaEmptyActivity.class);
+                Intent triviaNextActivity = new Intent(TriviaGameResultActivity.this, TriviaEmptyActivity.class);
                 triviaNextActivity.putExtras(dataToTriviaFragment); //send data to next activity
                 startActivity(triviaNextActivity); //make the transition
             }
@@ -174,7 +174,7 @@ public class GameResultActivity extends AppCompatActivity {
         startAgainBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToGameLaunch = new Intent(GameResultActivity.this, TriviaGameLaunchActivity.class);
+                Intent goToGameLaunch = new Intent(TriviaGameResultActivity.this, TriviaGameLaunchActivity.class);
                 startActivity(goToGameLaunch);
             }
         });
@@ -182,13 +182,13 @@ public class GameResultActivity extends AppCompatActivity {
 
     protected void deleteScoreRecord(ScoreRecord record)
     {
-        triviaDB.delete(TiviaOpener.TABLE_NAME, TiviaOpener.COL_ID + "= ?", new String[] {Long.toString(record.getId())});
+        triviaDB.delete(TiviaDatabaseOpener.TABLE_NAME, TiviaDatabaseOpener.COL_ID + "= ?", new String[] {Long.toString(record.getId())});
 
     }
 
     public void createNewScoreRecordDialog() {
         dialogBuilder = new AlertDialog.Builder(this);
-        final View popUpWindowView = getLayoutInflater().inflate(R.layout.save_score_window, null);
+        final View popUpWindowView = getLayoutInflater().inflate(R.layout.trivia_save_score_window, null);
         playerNameInput = popUpWindowView.findViewById(R.id.inputPlayerName);
         scoreResult = popUpWindowView.findViewById(R.id.yourScore);
         saveNameBtn = popUpWindowView.findViewById(R.id.saveNameBtn);
@@ -240,14 +240,14 @@ public class GameResultActivity extends AppCompatActivity {
 
         //Now provide a value for every database column defined in MyOpener.java:
 
-        newRowValues.put(TiviaOpener.COL_NAME, inputName);
-        newRowValues.put(TiviaOpener.COL_SCORE, gameScore);
-        newRowValues.put(TiviaOpener.COL_AMOUNT, totalQuestionCount);
-        newRowValues.put(TiviaOpener.COL_DIFFICULTY, difficultyType);
-        newRowValues.put(TiviaOpener.COL_TYPE, questionType);
+        newRowValues.put(TiviaDatabaseOpener.COL_NAME, inputName);
+        newRowValues.put(TiviaDatabaseOpener.COL_SCORE, gameScore);
+        newRowValues.put(TiviaDatabaseOpener.COL_AMOUNT, totalQuestionCount);
+        newRowValues.put(TiviaDatabaseOpener.COL_DIFFICULTY, difficultyType);
+        newRowValues.put(TiviaDatabaseOpener.COL_TYPE, questionType);
 
         //Now insert in the database:
-        long newId = triviaDB.insert(TiviaOpener.TABLE_NAME, null, newRowValues);
+        long newId = triviaDB.insert(TiviaDatabaseOpener.TABLE_NAME, null, newRowValues);
 
         ScoreRecord record = new ScoreRecord(inputName, gameScore, difficultyType, questionType, totalQuestionCount, newId);
 
@@ -260,23 +260,23 @@ public class GameResultActivity extends AppCompatActivity {
 
     private void loadScoreRecordFromDatabase() {
         //get a database connection:
-        TiviaOpener triviaDBOpener = new TiviaOpener(this);
+        TiviaDatabaseOpener triviaDBOpener = new TiviaDatabaseOpener(this);
         //This calls onCreate() if you've never built the table before, or onUpgrade if the version here is newer
         triviaDB = triviaDBOpener.getWritableDatabase();
 
         // We want to get all of the columns. Look at MyOpener.java for the definitions:
-        String[] columns = {TiviaOpener.COL_ID, TiviaOpener.COL_NAME, TiviaOpener.COL_SCORE, TiviaOpener.COL_AMOUNT, TiviaOpener.COL_DIFFICULTY, TiviaOpener.COL_TYPE};
+        String[] columns = {TiviaDatabaseOpener.COL_ID, TiviaDatabaseOpener.COL_NAME, TiviaDatabaseOpener.COL_SCORE, TiviaDatabaseOpener.COL_AMOUNT, TiviaDatabaseOpener.COL_DIFFICULTY, TiviaDatabaseOpener.COL_TYPE};
         //query all the results from the database:
-        Cursor results = triviaDB.query(false, TiviaOpener.TABLE_NAME, columns, null, null, null, null, null, null);
+        Cursor results = triviaDB.query(false, TiviaDatabaseOpener.TABLE_NAME, columns, null, null, null, null, null, null);
 
         //Now the results object has rows of results that match the query.
         //find the column indices:
-        int nameColumnIndex = results.getColumnIndex(TiviaOpener.COL_NAME);
-        int scoreColumnIndex = results.getColumnIndex(TiviaOpener.COL_SCORE);
-        int amountColumnIndex = results.getColumnIndex(TiviaOpener.COL_AMOUNT);
-        int difficultyColumnIndex = results.getColumnIndex(TiviaOpener.COL_DIFFICULTY);
-        int typeColumnIndex = results.getColumnIndex(TiviaOpener.COL_TYPE);
-        int idColIndex = results.getColumnIndex(TiviaOpener.COL_ID);
+        int nameColumnIndex = results.getColumnIndex(TiviaDatabaseOpener.COL_NAME);
+        int scoreColumnIndex = results.getColumnIndex(TiviaDatabaseOpener.COL_SCORE);
+        int amountColumnIndex = results.getColumnIndex(TiviaDatabaseOpener.COL_AMOUNT);
+        int difficultyColumnIndex = results.getColumnIndex(TiviaDatabaseOpener.COL_DIFFICULTY);
+        int typeColumnIndex = results.getColumnIndex(TiviaDatabaseOpener.COL_TYPE);
+        int idColIndex = results.getColumnIndex(TiviaDatabaseOpener.COL_ID);
 
         //iterate over the results, return true if there is a next item:
         while (results.moveToNext()) {
@@ -311,7 +311,7 @@ public class GameResultActivity extends AppCompatActivity {
 
             ScoreRecord record = getItem(position);
 
-            newView = inflater.inflate(R.layout.score_row, parent, false);
+            newView = inflater.inflate(R.layout.trivia_score_row, parent, false);
 
             TextView messageTextView = newView.findViewById(R.id.scoreRecord);
             messageTextView.setText((position + 1) + ". " + record.getName() + "        " + record.getScore());

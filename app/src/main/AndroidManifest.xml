@@ -13,7 +13,7 @@
         android:theme="@style/Theme.FinalProject">
         <activity android:name=".TriviaEmptyActivity"></activity>
         <activity android:name=".TriviaDetailsFragment" />
-        <activity android:name=".GameResultActivity" />
+        <activity android:name=".TriviaGameResultActivity" />
         <activity android:name=".TriviaGameOngoingActivity" />
         <activity android:name=".TriviaGameLaunchActivity" />
         <activity android:name=".MainActivity">

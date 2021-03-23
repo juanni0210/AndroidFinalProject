@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class TiviaOpener extends SQLiteOpenHelper {
+public class TiviaDatabaseOpener extends SQLiteOpenHelper {
     protected final static String DATABASE_NAME = "LeaderBoard";
     protected final static int VERSION_NUM = 1;
     public final static String TABLE_NAME = "RecordTable";
@@ -17,7 +17,7 @@ public class TiviaOpener extends SQLiteOpenHelper {
 
     //constructor
     //Context ctx – the Activity where the database is being opened.
-    public TiviaOpener(Context ctx)
+    public TiviaDatabaseOpener(Context ctx)
     {
         super(ctx, DATABASE_NAME, null, VERSION_NUM);
     }

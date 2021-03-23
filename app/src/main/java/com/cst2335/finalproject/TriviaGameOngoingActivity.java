@@ -5,12 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -120,7 +116,7 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
                     if (currentQuestion.getCorrectedAns().equals(selectedAns)) {
                         correctCount++;
                     }
-                    Intent goToGameResult = new Intent(TriviaGameOngoingActivity.this, GameResultActivity.class);
+                    Intent goToGameResult = new Intent(TriviaGameOngoingActivity.this, TriviaGameResultActivity.class);
                     goToGameResult.putExtra("CORRECTED_ANSWER_COUNT", correctCount);
                     goToGameResult.putExtra("WRONG_ANSWER_COUNT", totalQuestionCount - correctCount);
                     goToGameResult.putExtra("DIFFICULTY_TYPE", currentQuestion.getDifficultyType());

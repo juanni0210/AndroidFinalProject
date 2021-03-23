@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 public class TriviaDetailsFragment extends Fragment {
@@ -28,11 +27,11 @@ public class TriviaDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         dataFromResultActivity = getArguments();
-        playerName = dataFromResultActivity.getString(GameResultActivity.PLAYER_NAME);
-        score = dataFromResultActivity.getInt(GameResultActivity.PLAYER_SCORE);
-        questionAmount = dataFromResultActivity.getInt(GameResultActivity.QUESTION_AMOUNT);
-        difficultyType = dataFromResultActivity.getString(GameResultActivity.DIFFICULTY_TYPE);
-        questionType = dataFromResultActivity.getString(GameResultActivity.QUESTION_TYPE);
+        playerName = dataFromResultActivity.getString(TriviaGameResultActivity.PLAYER_NAME);
+        score = dataFromResultActivity.getInt(TriviaGameResultActivity.PLAYER_SCORE);
+        questionAmount = dataFromResultActivity.getInt(TriviaGameResultActivity.QUESTION_AMOUNT);
+        difficultyType = dataFromResultActivity.getString(TriviaGameResultActivity.DIFFICULTY_TYPE);
+        questionType = dataFromResultActivity.getString(TriviaGameResultActivity.QUESTION_TYPE);
 
         // Inflate the layout for this fragment
         View triviaResult =  inflater.inflate(R.layout.fragment_trivia_details, container, false);
