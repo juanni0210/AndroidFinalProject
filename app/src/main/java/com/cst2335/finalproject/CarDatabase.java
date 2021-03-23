@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ public class CarDatabase extends AppCompatActivity {
         Button goToShop = findViewById(R.id.shop);
         Button favorites = findViewById(R.id.favorites);
         LinearLayout layout = findViewById(R.id.topfunction);
+        RelativeLayout mostOuter = findViewById(R.id.mostOuter);
         searchMakeButton.setOnClickListener(b-> Toast.makeText(CarDatabase.this, "Searched Models for this make", Toast.LENGTH_LONG).show());
 
         ListView listView = findViewById(R.id.model_list);
@@ -45,7 +47,7 @@ public class CarDatabase extends AppCompatActivity {
             alertDialogBuilder.setTitle("By clicking Yes, you will be redirected to an external link.")
                     .setMessage("Are you sure?")
                     .setPositiveButton("Yes",(click, arg) -> {
-                        String url = "";
+                        String url = "http://www.google.ca";
                         Intent i = new Intent(Intent.ACTION_VIEW);
                         i.setData( Uri.parse(url) );
                         startActivity(i);
@@ -55,7 +57,8 @@ public class CarDatabase extends AppCompatActivity {
         });
         favorites.setOnClickListener(v -> {
             Snackbar snackbar;
-            snackbar = Snackbar.make(layout, "Favorites show your saved car models" , Snackbar.LENGTH_LONG);
+            snackbar = Snackbar.make(mostOuter, "Favorites show your saved car models" , Snackbar.LENGTH_LONG);
+            snackbar.show();
         });
 
 //        myAdapter = new MyListAdapter();

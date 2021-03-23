@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CarDatabase"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/mostOuter">
 
     <LinearLayout
         android:id="@+id/topfunction"
