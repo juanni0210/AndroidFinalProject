@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_search"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentEnd="true"/>
 
         <EditText
             android:id="@+id/search_editText"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:hint="@string/search_hint"
-            android:layout_toLeftOf="@id/searchButton"
+            android:layout_toStartOf="@id/searchButton"
             />
 
         <ProgressBar
@@ -44,6 +44,14 @@
             android:visibility="invisible"
             android:id="@+id/progress_bar"
             />
+
+        <Button
+            android:id="@+id/goToFavourites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/progress_bar"
+            android:text="@string/btn_favourite" />
 
     </RelativeLayout>
 
@@ -56,15 +64,8 @@
             android:id="@+id/songsterListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"/>
+            android:orientation="vertical" />
 
-        <Button
-            android:id="@+id/goToFavourites"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_alignBottom="@+id/songsterListView"
-            android:text="@string/btn_favourite" />
     </RelativeLayout>
 
 </RelativeLayout>

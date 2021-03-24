@@ -18,6 +18,18 @@ import android.widget.ProgressBar;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
+
 public class SongsterSearch extends AppCompatActivity {
 
     private Button searchButton;
@@ -46,8 +58,8 @@ public class SongsterSearch extends AppCompatActivity {
 
         //Search button
         searchButton.setOnClickListener(clk->{
-            /**
-             * show snackbar with text from searchbar
+            /*
+              show snackbar with text from searchbar
              */
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("search", searchEditText.getText().toString());
@@ -60,9 +72,7 @@ public class SongsterSearch extends AppCompatActivity {
                     ("Searching: "+searchEditText.getText().toString()), Snackbar.LENGTH_LONG)
                     .show();
 
-
-
-            //new AsyncHttpTask().execute(url+searchEditText.getText().toString());
+            new SongsterQuery().execute(url+searchEditText.getText().toString());
 
         });
 
@@ -75,10 +85,40 @@ public class SongsterSearch extends AppCompatActivity {
 
     private class SongsterQuery extends AsyncTask<String, Integer, String>{
 
-
         @Override
         protected String doInBackground(String... strings) {
+            String result = "";
+            String urlString="http://www.songsterr.com/a/ra/songs.xml?pattern="+searchEditText.getText().toString();
+
+            try {
+                URL url= new URL(urlString);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                InputStream inStream = conn.getInputStream();
+
+                conn.setRequestMethod("GET");
+                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+                factory.setNamespaceAware(false);
+                XmlPullParser xpp = factory.newPullParser();
+                xpp.setInput( inStream  , "UTF-8");
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }catch (XmlPullParserException e) {
+                e.printStackTrace();
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
             return null;
         }
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            mProgressBar.setVisibility(View.VISIBLE);
+            //Log.i("AsyncTaskExample", "update:" + values[0]);
+            //messageBox.setText("At step:" + values[0]);
+            mProgressBar.setProgress(values[0]);
+        }
+
     }
 }
