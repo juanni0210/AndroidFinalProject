@@ -13,11 +13,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.plattysoft.leonids.ParticleSystem;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,13 +30,12 @@ public class TriviaGameResultActivity extends AppCompatActivity {
     private Button startAgainBtn, saveScoreBtn, saveNameBtn, cancelSaveBtn;
     private int totalQuestionCount, correctAnswerCount, wrongAnswerCount, gameScore;
     private TextView congratsTextView, scoreView, resultDetailsView, scoreResult;
-    private String difficultyType, questionType;
-
+    private String difficultyType, questionType, timeSpent;
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
     private EditText playerNameInput;
 
-    SharedPreferences prefs;
+    SharedPreferences triviaPlayerPrefs;
     public static final String PLAYER_NAME_TAG = "player_name";
     SQLiteDatabase triviaDB;
     private ScoreListAdapter scoreAdapter;
@@ -55,17 +58,46 @@ public class TriviaGameResultActivity extends AppCompatActivity {
         scoreView = findViewById(R.id.scoreText);
         resultDetailsView = findViewById(R.id.resultDetils);
         saveScoreBtn = findViewById(R.id.saveScoreBtn);
-
         isTablet = findViewById(R.id.triviaFragment) != null;
 
+        //listen for view measured event, then emit particles
+        ViewTreeObserver viewTreeObserver = scoreView.getViewTreeObserver();
+        if (viewTreeObserver.isAlive()) {
+            viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    scoreView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    new ParticleSystem(TriviaGameResultActivity.this, 80, R.drawable.circle_yellow, 2000)
+                            .setSpeedModuleAndAngleRange(0f, 0.3f, 0, 360)
+                            .setAcceleration(0.0005f, 90)
+                            .setFadeOut(1000)
+                            .oneShot(scoreView, 80);
+
+                    new ParticleSystem(TriviaGameResultActivity.this, 80, R.drawable.circle_pink, 2000)
+                            .setSpeedModuleAndAngleRange(0f, 0.3f, 0, 360)
+                            .setAcceleration(0.0005f, 90)
+                            .setFadeOut(1000)
+                            .oneShot(scoreView, 80);
+
+                    new ParticleSystem(TriviaGameResultActivity.this, 80, R.drawable.circle_blue, 2000)
+                            .setSpeedModuleAndAngleRange(0f, 0.3f, 0, 360)
+                            .setAcceleration(0.0005f, 90)
+                            .setFadeOut(1000)
+                            .oneShot(scoreView, 80);
+                }
+            });
+        }
+
+        //get data from previous page
         Intent fromGamePage = getIntent();
         correctAnswerCount = fromGamePage.getIntExtra("CORRECTED_ANSWER_COUNT", 0);
         wrongAnswerCount = fromGamePage.getIntExtra("WRONG_ANSWER_COUNT", 0);
         difficultyType = fromGamePage.getStringExtra("DIFFICULTY_TYPE");
         questionType = fromGamePage.getStringExtra("QUESTION_TYPE");
+        timeSpent = fromGamePage.getStringExtra("TIME_SPENT");
         totalQuestionCount = correctAnswerCount + wrongAnswerCount;
 
-        prefs = getSharedPreferences("PlayerNames", Context.MODE_PRIVATE);
+        triviaPlayerPrefs = getSharedPreferences("TriviaPlayerNames", Context.MODE_PRIVATE);
 
 
         double rightRatio = correctAnswerCount/(double)totalQuestionCount * 100;
@@ -91,8 +123,8 @@ public class TriviaGameResultActivity extends AppCompatActivity {
         }
 
         scoreView.setText(getResources().getString(R.string.scoreTitle) + " " + gameScore);
-        resultDetailsView.setText(" YOU ANSWERED " + correctAnswerCount + " questions right!");
-
+        resultDetailsView.setText("Time spent: " + timeSpent + "\n"
+                                 + "You answered " + correctAnswerCount + " out of " + totalQuestionCount + " right!");
 
         ListView scoreListView = findViewById(R.id.scoreListView);
 
@@ -160,8 +192,6 @@ public class TriviaGameResultActivity extends AppCompatActivity {
             }
         });
 
-
-
         saveScoreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,7 +213,6 @@ public class TriviaGameResultActivity extends AppCompatActivity {
     protected void deleteScoreRecord(ScoreRecord record)
     {
         triviaDB.delete(TiviaDatabaseOpener.TABLE_NAME, TiviaDatabaseOpener.COL_ID + "= ?", new String[] {Long.toString(record.getId())});
-
     }
 
     public void createNewScoreRecordDialog() {
@@ -198,7 +227,7 @@ public class TriviaGameResultActivity extends AppCompatActivity {
         dialog = dialogBuilder.create();
         dialog.show();
 
-        String savedPlayerNames = prefs.getString(PLAYER_NAME_TAG, "");
+        String savedPlayerNames = triviaPlayerPrefs.getString(PLAYER_NAME_TAG, "");
         playerNameInput.setText(savedPlayerNames);
         scoreResult.setText(getResources().getString(R.string.scoreTitle) + " " + gameScore);
 
@@ -227,8 +256,8 @@ public class TriviaGameResultActivity extends AppCompatActivity {
     }
 
     private void savePlayerName(){
-        SharedPreferences prefs = getSharedPreferences("PlayerNames", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
+        SharedPreferences triviaPlayerPrefs = getSharedPreferences("TriviaPlayerNames", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = triviaPlayerPrefs.edit();
         editor.putString(PLAYER_NAME_TAG, playerNameInput.getText().toString());
         editor.commit();
     }
@@ -238,8 +267,7 @@ public class TriviaGameResultActivity extends AppCompatActivity {
         //add to the database and get the new ID
         ContentValues newRowValues = new ContentValues();
 
-        //Now provide a value for every database column defined in MyOpener.java:
-
+        //Now provide a value for every database column defined in TriviaDatabaseOpener.java:
         newRowValues.put(TiviaDatabaseOpener.COL_NAME, inputName);
         newRowValues.put(TiviaDatabaseOpener.COL_SCORE, gameScore);
         newRowValues.put(TiviaDatabaseOpener.COL_AMOUNT, totalQuestionCount);
@@ -252,6 +280,7 @@ public class TriviaGameResultActivity extends AppCompatActivity {
         ScoreRecord record = new ScoreRecord(inputName, gameScore, difficultyType, questionType, totalQuestionCount, newId);
 
         scoreRecordsList.add(record);
+        // sort the socre in order to show the score in the list view from highest to the lowest
         Collections.sort(scoreRecordsList, (ScoreRecord a, ScoreRecord b) -> {
             return b.getScore() - a.getScore();
         });
@@ -264,7 +293,7 @@ public class TriviaGameResultActivity extends AppCompatActivity {
         //This calls onCreate() if you've never built the table before, or onUpgrade if the version here is newer
         triviaDB = triviaDBOpener.getWritableDatabase();
 
-        // We want to get all of the columns. Look at MyOpener.java for the definitions:
+        // We want to get all of the columns. Look at TriviaDatabaseOpener.java for the definitions:
         String[] columns = {TiviaDatabaseOpener.COL_ID, TiviaDatabaseOpener.COL_NAME, TiviaDatabaseOpener.COL_SCORE, TiviaDatabaseOpener.COL_AMOUNT, TiviaDatabaseOpener.COL_DIFFICULTY, TiviaDatabaseOpener.COL_TYPE};
         //query all the results from the database:
         Cursor results = triviaDB.query(false, TiviaDatabaseOpener.TABLE_NAME, columns, null, null, null, null, null, null);
@@ -320,4 +349,5 @@ public class TriviaGameResultActivity extends AppCompatActivity {
             return newView;
         }
     }
+
 }

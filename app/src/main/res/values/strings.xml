@@ -30,19 +30,16 @@
     <string name="undo_text">UNDO</string>
     <string name="gameStartBtn">START GAME</string>
     <string name="backHomeBtn">BACK HOME</string>
+    <string name="helpBtn">HELP</string>
 
     <!--    Trivia game ongoing page-->
     <string name="unAnsweredTextBegin">questions for your game.</string>
     <string name="unAnsweredText">unanswered</string>
-    <string name="correctCountText">corrected</string>
+    <string name="correctCountText">correct</string>
     <string name="wrongCountText">wrong</string>
     <string name="nextBtn">NEXT</string>
     <string name="selectAnsNotice">Please select an answer!</string>
     <string name="startAgainBtn">START AGAIN</string>
-    <string name="timerStart">START</string>
-    <string name="timerStop">STOP</string>
-    <string name="timerStartNotice">Please start the timer.</string>
-    <string name="timerStopNotice">Please stop the timer.</string>
 
     <!--    Game result page-->
     <string name="scoreTitle">SCORE:</string>

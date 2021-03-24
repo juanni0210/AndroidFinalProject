@@ -62,9 +62,9 @@
 
     <Spinner
         android:id="@+id/difficultySpinner"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bgbtn"
+        android:background="@drawable/btn_orange"
         android:textSize="18dp"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="45dp"
@@ -88,10 +88,10 @@
 
     <Spinner
         android:id="@+id/questionTypeSpinner"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18dp"
-        android:background="@drawable/bgbtn"
+        android:background="@drawable/btn_orange"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="45dp"
         android:layout_marginRight="45dp"
@@ -114,7 +114,7 @@
         android:id="@+id/startGameBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bgbtn"
+        android:background="@drawable/btn_orange"
         android:textSize="16dp"
         android:textColor="@color/purple_color"
         android:textStyle="bold"
@@ -127,7 +127,7 @@
         android:id="@+id/backHomeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bgbtn"
+        android:background="@drawable/btn_orange"
         android:textSize="16dp"
         android:textColor="@color/purple_color"
         android:textStyle="bold"
@@ -135,7 +135,5 @@
         android:layout_marginBottom="50dp"
         android:text="@string/backHomeBtn"
         android:layout_alignParentBottom="true"/>
-
-
 
 </RelativeLayout>

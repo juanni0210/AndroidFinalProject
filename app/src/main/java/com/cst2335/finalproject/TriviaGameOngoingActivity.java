@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -33,7 +34,7 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
     private int totalQuestionCount, answerCount, correctCount;
     private boolean isTimerChecked;
     private String generatedGameURL, questionType;
-
+    private ImageView waitingImage;
     private TextView unAnsweredView, correctView, wrongView, questionTextView, timeTextView;
     private Button startStopBtn, nextButton;
     private LinearLayout timerLayout;
@@ -58,11 +59,12 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
         wrongView.setText("");
 
         timerLayout = findViewById(R.id.timerLayout);
+        //timer layout won'be show at beginning until we know user switch timer on in the previouis page
         timerLayout.setVisibility(View.GONE);
         timeTextView = findViewById(R.id.timeTextView);
-        startStopBtn = findViewById(R.id.startStopButton);
 
         questionTextView = findViewById(R.id.questionText);
+        questionTextView.setText("");
         nextButton = findViewById(R.id.nextBtn);
         nextButton.setVisibility(View.INVISIBLE);
         choiceRadioGroup = findViewById(R.id.choiceRatioGroup);
@@ -74,42 +76,15 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
 
         gameProgressBar = findViewById(R.id.gameProgressBar);
         gameProgressBar.setVisibility(View.VISIBLE);
+        waitingImage = findViewById(R.id.waitingImg);
 
         Intent fromLaunchPage = getIntent();
         generatedGameURL = fromLaunchPage.getStringExtra("GENERATED_URL");
         questionType = fromLaunchPage.getStringExtra("QUESTION_TYPE");
         isTimerChecked = fromLaunchPage.getBooleanExtra("TIMER_SWITCH", false);
         Toast.makeText(TriviaGameOngoingActivity.this, generatedGameURL, Toast.LENGTH_SHORT).show();
-
         timer = new Timer();
-        //start and stop timer
-        startStopBtn.setOnClickListener(v -> {
-            //stop the timer
-            if(!timerStarted) {
-                timerStarted = true;
-                startStopBtn.setText(getResources().getString(R.string.timerStop));
 
-                //start timer
-                timerTask = new TimerTask() {
-                    @Override
-                    public void run() {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                time++;
-                                timeTextView.setText(getTimerText());
-                            }
-                        });
-                    }
-                };
-                timer.scheduleAtFixedRate(timerTask, 0, 1000);
-            } else {
-                timerStarted = false;
-                startStopBtn.setText(getResources().getString(R.string.timerStart));
-
-                timerTask.cancel();
-            }
-        });
 
         // click next button, it will show the next question by calling update method
         nextButton.setOnClickListener(v -> {
@@ -145,6 +120,7 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
         for(int i=0; i < currentQuestion.getChoices().size(); i++){
             RadioButton choiceRadioBtn = new RadioButton(this);
             choiceRadioBtn.setText(currentQuestion.getChoices().get(i));
+            choiceRadioBtn.setTextSize(18);
             choiceRadioGroup.addView(choiceRadioBtn);
         }
 
@@ -155,22 +131,24 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     // check whether the timer is stop if user checked the timer switch
-                    if(isTimerChecked && startStopBtn.getText() == getResources().getString(R.string.timerStop)) {
-                        Toast.makeText(TriviaGameOngoingActivity.this, getResources().getString(R.string.timerStopNotice), Toast.LENGTH_SHORT).show();
-                    } else {
-                        //when click finish game, the timer view is gone
-                        timerLayout.setVisibility(View.GONE);
-                        // check whether the last question you answered is right
-                        if (currentQuestion.getCorrectedAns().equals(selectedAns)) {
-                            correctCount++;
-                        }
-                        Intent goToGameResult = new Intent(TriviaGameOngoingActivity.this, TriviaGameResultActivity.class);
-                        goToGameResult.putExtra("CORRECTED_ANSWER_COUNT", correctCount);
-                        goToGameResult.putExtra("WRONG_ANSWER_COUNT", totalQuestionCount - correctCount);
-                        goToGameResult.putExtra("DIFFICULTY_TYPE", currentQuestion.getDifficultyType());
-                        goToGameResult.putExtra("QUESTION_TYPE", questionType);
-                        startActivity(goToGameResult);
+                    if(isTimerChecked && timerStarted == true) {
+                        timerStarted = false;
+                        timerTask.cancel();
                     }
+                    //when click finish game, the timer view is gone
+                    timerLayout.setVisibility(View.GONE);
+                    // check whether the last question you answered is right
+                    if (currentQuestion.getCorrectedAns().equals(selectedAns)) {
+                        correctCount++;
+                    }
+                    Intent goToGameResult = new Intent(TriviaGameOngoingActivity.this, TriviaGameResultActivity.class);
+                    goToGameResult.putExtra("CORRECTED_ANSWER_COUNT", correctCount);
+                    goToGameResult.putExtra("WRONG_ANSWER_COUNT", totalQuestionCount - correctCount);
+                    goToGameResult.putExtra("DIFFICULTY_TYPE", currentQuestion.getDifficultyType());
+                    goToGameResult.putExtra("QUESTION_TYPE", questionType);
+                    goToGameResult.putExtra("TIME_SPENT", timeTextView.getText().toString());
+                    startActivity(goToGameResult);
+
 
                 }
             });
@@ -240,12 +218,34 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String fromDoInBackground)
         {
+            //if user switch on timerSwitch, the timer Layout shows on the game page
             if(isTimerChecked) {
                 timerLayout.setVisibility(View.VISIBLE);
             }
+            // start timer
+            if(!timerStarted) {
+                timerStarted = true;
+
+                //start timer
+                timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                time++;
+                                timeTextView.setText(getTimerText());
+                            }
+                        });
+                    }
+                };
+                timer.scheduleAtFixedRate(timerTask, 0, 1000);
+            }
             nextButton.setVisibility(View.VISIBLE);
             updateQuestion();
+            //when all the questions are loaded, progress bar and waiting iamge will be gone
             gameProgressBar.setVisibility(View.GONE);
+            waitingImage.setVisibility(View.GONE);
             unAnsweredView.setText((totalQuestionCount-answerCount) + "/" + totalQuestionCount + " " + getResources().getString(R.string.unAnsweredText));
             correctView.setText(correctCount + " " + getResources().getString(R.string.correctCountText));
             wrongView.setText((answerCount-correctCount) + " " + getResources().getString(R.string.wrongCountText));

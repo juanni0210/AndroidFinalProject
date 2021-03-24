@@ -24,7 +24,6 @@
             android:layout_marginBottom="10dp"
             tools:layout_editor_absoluteX="196dp"
             tools:layout_editor_absoluteY="141dp" />
-
         <TextView
             android:id="@+id/scoreText"
             android:layout_width="wrap_content"
@@ -54,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/bgbtn"
+            android:background="@drawable/btn_orange"
             android:textSize="16dp"
             android:textColor="@color/purple_color"
             android:textStyle="bold"
@@ -72,7 +71,7 @@
         android:id="@+id/startAgainBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bgbtn"
+        android:background="@drawable/btn_orange"
         android:layout_marginBottom="20dp"
         android:textSize="16dp"
         android:textColor="@color/purple_color"

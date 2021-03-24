@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.plattysoft.leonids.ParticleSystem;
 
 public class TriviaGameLaunchActivity extends AppCompatActivity {
     private String questionNum, difficultyType, questionType, gameURL;
@@ -81,6 +82,7 @@ public class TriviaGameLaunchActivity extends AppCompatActivity {
         });
 
 
+        // click start button, go to another page to play the game
         Intent goToGameStart = new Intent(TriviaGameLaunchActivity.this, TriviaGameOngoingActivity.class);
         gameStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +101,7 @@ public class TriviaGameLaunchActivity extends AppCompatActivity {
             }
         });
 
+        //go back to home page
         Intent goToHome = new Intent(TriviaGameLaunchActivity.this, MainActivity.class);
         backHomeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +109,7 @@ public class TriviaGameLaunchActivity extends AppCompatActivity {
                 startActivity(goToHome);
             }
         });
+
 
     }
 
