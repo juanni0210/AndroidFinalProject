@@ -58,13 +58,13 @@
             android:textColor="@color/purple_color"
             android:textStyle="bold"
             android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
             android:text="@string/saveScoreBtn" />
 
         <ListView
             android:id="@+id/scoreListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="30dp"
             android:paddingBottom="60dp"/>
     </LinearLayout>
     <Button

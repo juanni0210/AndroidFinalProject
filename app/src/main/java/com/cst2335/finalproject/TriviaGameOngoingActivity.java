@@ -36,7 +36,7 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
     private String generatedGameURL, questionType;
     private ImageView waitingImage;
     private TextView unAnsweredView, correctView, wrongView, questionTextView, timeTextView;
-    private Button startStopBtn, nextButton;
+    private Button nextButton;
     private LinearLayout timerLayout;
     private Timer timer;
     private TimerTask timerTask;
@@ -59,7 +59,7 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
         wrongView.setText("");
 
         timerLayout = findViewById(R.id.timerLayout);
-        //timer layout won'be show at beginning until we know user switch timer on in the previouis page
+        //timer layout won'be show at beginning until we know user switch timer on in the previous page
         timerLayout.setVisibility(View.GONE);
         timeTextView = findViewById(R.id.timeTextView);
 
