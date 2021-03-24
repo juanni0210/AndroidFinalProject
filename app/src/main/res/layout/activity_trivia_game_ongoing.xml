@@ -57,11 +57,14 @@
             android:layout_gravity="center"
             android:visibility="invisible"
             android:layout_below="@id/statusList"/>
+
         <ImageView
             android:id="@+id/waitingImg"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/waiting_icon" />
+            android:layout_height="271dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/waiting_dinasour" />
 
         <LinearLayout
             android:id="@+id/timerLayout"
