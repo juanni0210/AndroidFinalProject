@@ -8,7 +8,7 @@
     android:id="@+id/search_page">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/main_menu_songster"
+        android:id="@+id/main_toolbar_songster"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/songster_search"
@@ -18,7 +18,7 @@
         android:id="@+id/relativeMenuLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/main_menu_songster">
+        android:layout_below="@id/main_toolbar_songster">
 
         <Button
             android:id="@+id/searchButton"

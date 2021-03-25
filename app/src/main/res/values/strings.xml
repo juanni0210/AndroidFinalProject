@@ -14,4 +14,10 @@
     <string name="songster_search_hint">Input Search Content Here</string>
     <string name="songster_btn_search">Search</string>
     <string name="songster_search">Songster search page</string>
+    <string name="faveListTitle">Favourite List</string>
+    <string name="backBtn">Go Back</string>
+    <string name="add_to_favourite">Add to favourite list</string>
+    <string name="yes">Yes</string>
+    <string name="add">Successfully Added!</string>
+    <string name="no">No</string>
 </resources>
