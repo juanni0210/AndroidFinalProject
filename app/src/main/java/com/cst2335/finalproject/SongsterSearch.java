@@ -71,7 +71,7 @@ public class SongsterSearch extends AppCompatActivity {
     /**
      * sharedpre to store last time search result
      */
-    private SharedPreferences sharedPref;
+    //private SharedPreferences sharedPref;
 
     private String url = "http://www.songsterr.com/a/ra/songs.xml?pattern=";
 
@@ -88,18 +88,25 @@ public class SongsterSearch extends AppCompatActivity {
         favouritesButton = findViewById(R.id.goToFavourites);
         searchEditText = findViewById(R.id.search_editText);
         mProgressBar = findViewById(R.id.progress_bar);
-        mainToolbar = findViewById(R.id.main_toolbar_songster);
+        //mainToolbar = findViewById(R.id.main_toolbar_songster);
         songsterView = findViewById(R.id.songsterListView);
 
-        songsterView.setAdapter(songsterAdapter);
-        sharedPref = getSharedPreferences("Songster", MODE_PRIVATE);
+        //songsterView.setAdapter(songsterAdapter);
+        //sharedPref = getSharedPreferences("Songster", MODE_PRIVATE);
 
-        /**
-         * set tool bar
-         */
-        mProgressBar.setVisibility(View.VISIBLE);
-        setSupportActionBar(mainToolbar);
+//        /**
+//         * set tool bar
+//         */
+//        mProgressBar.setVisibility(View.VISIBLE);
+//        setSupportActionBar(mainToolbar);
 
+        Button goBackBtn = findViewById(R.id.backButton);
+        goBackBtn.setOnClickListener(btn->{
+
+            Intent goBack = new Intent(SongsterSearch.this, MainActivity.class);
+            startActivity(goBack);
+
+        });
 
         /**
          * CLick on Search button and show the search result and a snackbar
@@ -112,7 +119,7 @@ public class SongsterSearch extends AppCompatActivity {
                     ("Searching: "+searchEditText.getText().toString()), Snackbar.LENGTH_LONG)
                     .show();
 
-           // new SongsterQuery().execute("http://www.songsterr.com/a/ra/songs.xml?pattern=XXX");
+           //new SongsterQuery().execute("https://www.songsterr.com/a/ra/songs.xml?pattern=XXX");
 
         });
 
@@ -147,7 +154,6 @@ public class SongsterSearch extends AppCompatActivity {
                     .setPositiveButton(R.string.yes, (DialogInterface dialog, int which) -> {
 //                        songsterObject.add(SongsterDatabaseOpenHelper.TABLE_NAME, SongsterDatabaseOpenHelper.COL_ID + "=" + songsterObject.getId(), null);
 //                        songsterObject.add(position);
-                        // continued
                         songsterAdapter.notifyDataSetChanged();
                         Toast.makeText(SongsterSearch.this, R.string.add, Toast.LENGTH_LONG).show();
                     })
@@ -161,8 +167,17 @@ public class SongsterSearch extends AppCompatActivity {
          * Press Button go to favourite list.
          */
         favouritesButton.setOnClickListener(clk-> {
-                Intent intent = new Intent(SongsterSearch.this, SongsterFavouriteList.class);
-                startActivity(intent);
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder
+                    .setTitle(getString(R.string.go_to_favourite))
+                    .setPositiveButton(R.string.yes, (DialogInterface dialog, int which) -> {
+                        Intent intent = new Intent(SongsterSearch.this, SongsterFavouriteList.class);
+                        startActivity(intent);
+                        Toast.makeText(SongsterSearch.this, R.string.welcom_to_favourite, Toast.LENGTH_LONG).show();
+                    })
+                    .setNegativeButton(R.string.no, null)
+                    .show();
+
         });
 
 //        SharedPreferences.Editor editor = sharedPref.edit();
@@ -183,14 +198,13 @@ public class SongsterSearch extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
 
-            publishProgress(0);
             try {
                 String urlString = "http://www.songsterr.com/a/ra/songs.xml?pattern=" + searchEditText.getText().toString();
                 URL url = new URL(urlString);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 InputStream inStream = conn.getInputStream();
 
-                conn.setRequestMethod("GET");
+                //conn.setRequestMethod("GET");
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(false);
                 XmlPullParser xpp = factory.newPullParser();

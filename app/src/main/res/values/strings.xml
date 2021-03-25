@@ -20,4 +20,6 @@
     <string name="yes">Yes</string>
     <string name="add">Successfully Added!</string>
     <string name="no">No</string>
+    <string name="go_to_favourite">Go to Favourite List?</string>
+    <string name="welcom_to_favourite">Favourite List Page</string>
 </resources>
