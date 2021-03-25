@@ -17,7 +17,6 @@ import android.view.ViewTreeObserver;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -140,7 +139,7 @@ public class TriviaGameResultActivity extends AppCompatActivity {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle(getResources().getString(R.string.deleteNotice))
                     //What is the message:
-                    .setMessage(getResources().getString(R.string.selectRow) + " " + (position+1)  + " ." + "\n"
+                    .setMessage(getResources().getString(R.string.triviaSelectRow) + " " + (position+1)  + " ." + "\n"
                             + getResources().getString(R.string.showPlayerName) + " " + selectedRecord.getName() + "." + "\n"
                             + getResources().getString(R.string.showScore) + " " + selectedRecord.getScore() + "." + "\n"
                             + getResources().getString(R.string.showQuestionAmount) + " " + selectedRecord.getQuestionAmount() + " " + getResources().getString(R.string.questionText) + ".")

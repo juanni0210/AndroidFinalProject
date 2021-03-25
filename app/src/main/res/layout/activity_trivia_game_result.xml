@@ -78,5 +78,5 @@
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:text="@string/startAgainBtn" />
+        android:text="@string/triviaStartAgainBtn" />
 </RelativeLayout>

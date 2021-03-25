@@ -13,7 +13,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title_name"
+        android:text="@string/trivia_launch_title"
         android:textColor="@color/purple_color"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
@@ -89,7 +89,7 @@
         android:background="@drawable/btn_orange"
         android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true"
-        android:entries="@array/type_array"
+        android:entries="@array/question_type_array"
         android:layout_below="@id/questionTypeLabel"/>
 
     <Switch
@@ -103,7 +103,7 @@
         android:textSize="22sp"
         android:paddingTop="10dp"
         android:layout_marginBottom="10dp"
-        android:text="@string/timerSwitch" />
+        android:text="@string/triviaTimerSwitch" />
 
     <Button
         android:id="@+id/startGameBtn"
@@ -115,7 +115,7 @@
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
-        android:text="@string/gameStartBtn"
+        android:text="@string/triviaGameStartBtn"
         android:layout_above="@id/backHomeBtn"/>
 
     <Button
@@ -128,7 +128,7 @@
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
-        android:text="@string/backHomeBtn"
+        android:text="@string/triviaBackHomeBtn"
         android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

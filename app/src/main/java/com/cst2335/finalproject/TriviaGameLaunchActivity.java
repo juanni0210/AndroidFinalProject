@@ -14,7 +14,6 @@ import android.widget.Spinner;
 import android.widget.Switch;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.plattysoft.leonids.ParticleSystem;
 
 public class TriviaGameLaunchActivity extends AppCompatActivity {
     private String questionNum, difficultyType, questionType, gameURL;
@@ -74,9 +73,9 @@ public class TriviaGameLaunchActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton cb, boolean isChecked) {
                 if (isChecked) {
-                    showSnackbar(getResources().getString(R.string.switch_on_message), true);
+                    showSnackbar(getResources().getString(R.string.trivia_switch_on_message), true);
                 } else {
-                    showSnackbar(getResources().getString(R.string.switch_off_message), false);
+                    showSnackbar(getResources().getString(R.string.trivia_switch_off_message), false);
                 }
             }
         });

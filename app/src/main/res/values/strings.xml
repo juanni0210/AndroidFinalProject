@@ -5,12 +5,12 @@
     <string name="triviaStartBtn">TRIVIA GAME</string>
     <string name="songsterStartBtn">SONGSTER SEARCH</string>
     <string name="carDBStartBtn">CAR DATABASE</string>
-    <string name="soccertartBtn">SOCCER GAME</string>
+    <string name="soccerStartBtn">SOCCER GAME</string>
     <string name="projectInfo">CST2335 Final Project</string>
     <string name="teamInfo">© 2021 TECH SAVVY TEAM</string>
 
     <!--    Trivia game launch page-->
-    <string name="title_name">CHOOSE QUESTIONS:</string>
+    <string name="trivia_launch_title">CHOOSE QUESTIONS:</string>
     <string name="questions_number_label">Number of Questions:</string>
     <string name="difficulty_label">Select Difficulty:</string>
     <string name="question_type_label">Select Type:</string>
@@ -19,27 +19,26 @@
         <item>Medium</item>
         <item>Hard</item>
     </string-array>
-    <string-array name="type_array">
+    <string-array name="question_type_array">
         <item>Any Type</item>
         <item>Multiple Choice</item>
         <item>True/False</item>
     </string-array>
-    <string name="timerSwitch">Timer Switch</string>
-    <string name="switch_on_message">Timer switch is on now.</string>
-    <string name="switch_off_message">Timer switch is off now.</string>
+    <string name="triviaTimerSwitch">Timer Switch</string>
+    <string name="trivia_switch_on_message">Timer switch is on now.</string>
+    <string name="trivia_switch_off_message">Timer switch is off now.</string>
     <string name="undo_text">UNDO</string>
-    <string name="gameStartBtn">START GAME</string>
-    <string name="backHomeBtn">BACK HOME</string>
-    <string name="helpBtn">HELP</string>
+    <string name="triviaGameStartBtn">START GAME</string>
+    <string name="triviaBackHomeBtn">BACK HOME</string>
 
     <!--    Trivia game ongoing page-->
     <string name="unAnsweredTextBegin">questions for your game.</string>
     <string name="unAnsweredText">unanswered</string>
     <string name="correctCountText">correct</string>
     <string name="wrongCountText">wrong</string>
-    <string name="nextBtn">NEXT</string>
+    <string name="triviaNextBtn">NEXT</string>
     <string name="selectAnsNotice">Please select an answer!</string>
-    <string name="startAgainBtn">START AGAIN</string>
+    <string name="triviaStartAgainBtn">START AGAIN</string>
 
     <!--    Game result page-->
     <string name="scoreTitle">SCORE:</string>
@@ -52,7 +51,7 @@
 
     <!--    Game result page AlertDialog-->
     <string name="deleteNotice">Do you want to delete this record?</string>
-    <string name="selectRow">The selected row is: </string>
+    <string name="triviaSelectRow">The selected row is: </string>
     <string name="showPlayerName">Player Name: </string>
     <string name="showScore">Player score: </string>
     <string name="showQuestionAmount">Player answered: </string>
@@ -66,7 +65,7 @@
     <string name="cancelSaveBtn">CANCEL</string>
 
     <!-- Fragment details page -->
-    <string name="hideBtn">HIDE</string>
+    <string name="triviaHideBtn">HIDE</string>
 
 
 </resources>

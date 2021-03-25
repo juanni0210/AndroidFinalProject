@@ -89,6 +89,6 @@
             android:textColor="@color/purple_color"
             android:textStyle="bold"
             android:layout_gravity="center"
-            android:text="@string/startAgainBtn" />
+            android:text="@string/triviaStartAgainBtn" />
     </LinearLayout>
 </LinearLayout>
