@@ -83,7 +83,7 @@ public class SoccerGames extends AppCompatActivity {
         private String image;
         private String link;
         private String description;
-        private Bitmap itemImage;
+        Bitmap itemImage;
 
         TextView row = findViewById(R.id.textGoesHere);
 
@@ -138,28 +138,28 @@ public class SoccerGames extends AppCompatActivity {
                         } else if (xpp.getName().equalsIgnoreCase("media:thumbnail")) {
                             if (insideItem) {
                                 image = xpp.nextText();
-//                                if(!fileExistance(image)){
-//                                    URL url2 = new URL(image);
-//                                    HttpURLConnection imgConnection = (HttpURLConnection) url2.openConnection();
-//                                    imgConnection.connect();
-//                                    int responseCode = imgConnection.getResponseCode();
-//                                    if (responseCode == 200) {
-//                                        itemImage = BitmapFactory.decodeStream(imgConnection.getInputStream());
-//                                        publishProgress(100);
-//                                    }
-//                                    FileOutputStream outputStream = openFileOutput( image + ".jpeg", Context.MODE_PRIVATE);
-//                                    itemImage.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-//                                    outputStream.flush();
-//                                    outputStream.close();
-//                                } else {
-//                                    FileInputStream fis = null;
-//                                    try {
-//                                        fis = openFileInput(image);
-//                                        Log.e("Weather Image", "It is looking for " + image.toString());
-//                                        Log.e("Found or Not", "The image is found locally");
-//                                    } catch (FileNotFoundException e) {    e.printStackTrace();  }
-//                                    itemImage = BitmapFactory.decodeStream(fis);
-//                                }
+                                if(!fileExistance(image)){
+                                    URL url2 = new URL(image);
+                                    HttpURLConnection imgConnection = (HttpURLConnection) url2.openConnection();
+                                    imgConnection.connect();
+                                    int responseCode = imgConnection.getResponseCode();
+                                    if (responseCode == 200) {
+                                        itemImage = BitmapFactory.decodeStream(imgConnection.getInputStream());
+                                        publishProgress(100);
+                                    }
+                                    FileOutputStream outputStream = openFileOutput( image + ".jpeg", Context.MODE_PRIVATE);
+                                    itemImage.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+                                    outputStream.flush();
+                                    outputStream.close();
+                                } else {
+                                    FileInputStream fis = null;
+                                    try {
+                                        fis = openFileInput(image);
+                                        Log.e("Weather Image", "It is looking for " + image.toString());
+                                        Log.e("Found or Not", "The image is found locally");
+                                    } catch (FileNotFoundException e) {    e.printStackTrace();  }
+                                    itemImage = BitmapFactory.decodeStream(fis);
+                                }
                             }
                         }
                     }

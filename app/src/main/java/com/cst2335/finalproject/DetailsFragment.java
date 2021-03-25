@@ -1,16 +1,29 @@
 package com.cst2335.finalproject;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,13 +85,32 @@ public class DetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         View result =  inflater.inflate(R.layout.fragment_details, container, false);
 
+
         //show the image
 //        ImageView imgView = findViewById(R.id.imageNews);
+        ImageView imageView = (ImageView) result.findViewById(R.id.imageNews);
+        String image = dataFromActivity.getString(SoccerGames.ITEM_IMAGE);
+        imageView.setImageBitmap(BitmapFactory.decodeFile(image));
 
-        TextView message = (TextView)result.findViewById(R.id.pubDate);
-        message.setText(dataFromActivity.getString(SoccerGames.ITEM_DATE));
+        TextView itemDate = (TextView)result.findViewById(R.id.pubDate);
+        itemDate.setText(dataFromActivity.getString(SoccerGames.ITEM_DATE));
+
+        TextView itemLink = (TextView)result.findViewById(R.id.link);
+        itemLink.setText(dataFromActivity.getString(SoccerGames.ITEM_URL));
+
+        TextView itemDesciption = (TextView)result.findViewById(R.id.description);
+        itemDesciption.setText(dataFromActivity.getString(SoccerGames.ITEM_DESCRIPTION));
+
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_details, container, false);
+        return result;
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        //context will either be FragmentExample for a tablet, or EmptyActivity for phone
+        parentActivity = (AppCompatActivity)context;
     }
 }
