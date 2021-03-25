@@ -10,7 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * TriviaDetailsFragment is a piece of an application's user interface or behavior that can be placed in an Activity.
@@ -51,9 +55,6 @@ public class TriviaDetailsFragment extends Fragment {
         amountView.setText(getResources().getString(R.string.showQuestionAmount) + " " + questionAmount + " " + getResources().getString(R.string.questionText));
         difficultyView.setText(getResources().getString(R.string.showDifficultyType) + " " + difficultyType);
         questionTypeView.setText(getResources().getString(R.string.showQuestionType) + " " + questionType);
-
-
-
 
         // get the delete button, and add a click listener:
         Button hideButton = triviaResult.findViewById(R.id.hideTriviaFragBtn);
