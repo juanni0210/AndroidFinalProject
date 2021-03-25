@@ -1,8 +1,17 @@
 <resources>
     <string name="app_name">Final Project</string>
-    <string name="btn_add">Add to Favourite</string>
-    <string name="btn_favourite">Go To Favourite</string>
-    <string name="search_hint">Input Search Content Here</string>
-    <string name="btn_search">Search</string>
+    <!--    Main page-->
+    <string name="triviaStartBtn">TRIVIA GAME</string>
+    <string name="songsterStartBtn">SONGSTER SEARCH</string>
+    <string name="carDBStartBtn">CAR DATABASE</string>
+    <string name="soccerStartBtn">SOCCER GAME</string>
+    <string name="projectInfo">CST2335 Final Project</string>
+    <string name="teamInfo">© 2021 TECH SAVVY TEAM</string>
+
+    <!--    Songster page-->
+    <string name="songster_btn_add">Add to Favourite</string>
+    <string name="songster_btn_favourite">Go To Favourite</string>
+    <string name="songster_search_hint">Input Search Content Here</string>
+    <string name="songster_btn_search">Search</string>
     <string name="songster_search">Songster search page</string>
 </resources>

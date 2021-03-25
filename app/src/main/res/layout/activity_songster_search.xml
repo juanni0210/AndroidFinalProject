@@ -24,7 +24,7 @@
             android:id="@+id/searchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btn_search"
+            android:text="@string/songster_btn_search"
             android:layout_alignParentEnd="true"/>
 
         <EditText
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:hint="@string/search_hint"
+            android:hint="@string/songster_search_hint"
             android:layout_toStartOf="@id/searchButton"
             />
 
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_below="@id/progress_bar"
-            android:text="@string/btn_favourite" />
+            android:text="@string/songster_btn_favourite" />
 
     </RelativeLayout>
 

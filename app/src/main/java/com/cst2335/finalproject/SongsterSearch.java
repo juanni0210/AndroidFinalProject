@@ -1,10 +1,13 @@
+
 package com.cst2335.finalproject;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.AsyncQueryHandler;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -22,8 +25,11 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -58,21 +64,33 @@ public class SongsterSearch extends AppCompatActivity {
 
         //Search button
         searchButton.setOnClickListener(clk->{
-            /*
-              show snackbar with text from searchbar
-             */
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("search", searchEditText.getText().toString());
             editor.apply();
 
             /**
-             *
+             * show snackbar with text from searchbar
              */
             Snackbar.make(findViewById(R.id.search_page),
                     ("Searching: "+searchEditText.getText().toString()), Snackbar.LENGTH_LONG)
                     .show();
 
             new SongsterQuery().execute(url+searchEditText.getText().toString());
+
+            /**
+             * create alert dialog for user after search button pressed
+             */
+            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(SongsterSearch.this);
+            alertBuilder.setTitle("Search : " + searchEditText.getText());
+            alertBuilder.setMessage("Clear current view or add new search to current view");
+            /**
+             * function to run if users hits the 'Add' button
+             */
+            /** onclick for negative button of alert dialog, confirms that the user wants to clear the list of articles and create a new search */
+            alertBuilder.setNegativeButton("Add", (dialogInterface, i) -> {
+                dialogInterface.cancel();
+                new SongsterQuery().execute(url+searchEditText.getText().toString());
+            });
 
         });
 
@@ -90,28 +108,14 @@ public class SongsterSearch extends AppCompatActivity {
             String result = "";
             String urlString="http://www.songsterr.com/a/ra/songs.xml?pattern="+searchEditText.getText().toString();
 
-            try {
-                URL url= new URL(urlString);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                InputStream inStream = conn.getInputStream();
-
-                conn.setRequestMethod("GET");
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(false);
-                XmlPullParser xpp = factory.newPullParser();
-                xpp.setInput( inStream  , "UTF-8");
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }catch (XmlPullParserException e) {
-                e.printStackTrace();
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
 
 
-            return null;
+
+            return result;
         }
+
+
+
         @Override
         protected void onProgressUpdate(Integer... values) {
             mProgressBar.setVisibility(View.VISIBLE);
