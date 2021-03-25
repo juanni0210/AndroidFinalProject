@@ -23,6 +23,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SoccerGames extends AppCompatActivity {
 
@@ -38,12 +39,10 @@ public class SoccerGames extends AppCompatActivity {
 
         ListView myList = (ListView) findViewById(R.id.theListView);
         myList.setAdapter(myAdapter = new MyListAdapter());
-//        ArrayAdapter<String> theAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, elements);
-//        myList.setAdapter(theAdapter);
 
         MyHTTPRequest req = new MyHTTPRequest();
-        req.execute("http://www.goal.com/en/feeds/news?fmt=rss");
-
+        req.execute("https://www.goal.com/en/feeds/news");
+//        req.execute("https://feeds.24.com/articles/fin24/tech/rss");
     }
 
     private class MyHTTPRequest extends AsyncTask< String, Integer, String> {
@@ -69,32 +68,33 @@ public class SoccerGames extends AppCompatActivity {
                 XmlPullParser xpp = factory.newPullParser();
                 xpp.setInput( response  , "UTF-8");
 
+                boolean insideItem = false;
                 int eventType = xpp.getEventType(); //The parser is currently at START_DOCUMENT
 
+
+                System.out.println("1.========" + xpp.getText() + "===========");
                 while(eventType != XmlPullParser.END_DOCUMENT)
                 {
+                    System.out.println("2.========" + xpp.getText() + "===========");
                     if(eventType == XmlPullParser.START_TAG)
                     {
-                        //If you get here, then you are pointing at a start tag
-                        if(xpp.getName().equals("rss"))
-                        {
-                            xpp.next();
-                            title = xpp.getAttributeValue(null, "version");
-                            System.out.println("test rss");
-                            elements.add(title);
-                            //myAdapter.notifyDataSetChanged();
+                        if (xpp.getName().equalsIgnoreCase("item")){
+                            insideItem = true;
+                        } else if (xpp.getName().equalsIgnoreCase("title")) {
+                            if(insideItem) {
+                                elements.add(xpp.nextText());
+                            }
                         }
                     }
+                    else if (eventType == XmlPullParser.END_TAG && xpp.getName().equalsIgnoreCase("item")){
+                        insideItem = false;
+                    }
                     eventType = xpp.next(); //move to the next xml event and store it in a variable
-                }
-                System.out.println("test");
-                for(int i=0; i<elements.size(); i++) {
-                    System.out.println(elements.get(i));
                 }
             }
             catch (Exception e)
             {
-
+                System.out.println("error");
             }
             return "Done";
         }
@@ -102,18 +102,13 @@ public class SoccerGames extends AppCompatActivity {
         //Type 2
         public void onProgressUpdate(Integer ... args)
         {
-
         }
         //Type3
         public void onPostExecute(String fromDoInBackground)
         {
-//            row.setText(title);
-//            elements.add(title.toString());
-//            myAdapter.notifyDataSetChanged();
+         myAdapter.notifyDataSetChanged();
         }
     }
-
-
 
     private class MyListAdapter extends BaseAdapter {
 
@@ -131,8 +126,8 @@ public class SoccerGames extends AppCompatActivity {
 
             //set what the text should be for this row:
             TextView tView = newView.findViewById(R.id.textGoesHere);
-            tView.setText(getItem(position).toString() );
 
+            tView.setText(getItem(position).toString());
             //return it to be put in the table
             return newView;
         }
