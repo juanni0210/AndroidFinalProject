@@ -13,6 +13,11 @@
         android:theme="@style/Theme.FinalProject">
         <activity android:name=".Favorites"></activity>
         <activity android:name=".CarDatabase" />
+        <activity android:name=".TriviaEmptyActivity"></activity>
+        <activity android:name=".TriviaDetailsFragment" />
+        <activity android:name=".TriviaGameResultActivity" />
+        <activity android:name=".TriviaGameOngoingActivity" />
+        <activity android:name=".TriviaGameLaunchActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

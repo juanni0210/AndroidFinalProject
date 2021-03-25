@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TriviaDetailsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/playerNameFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:textSize="20dp"
+            android:textColor="@color/purple_color"
+            android:textStyle="bold|italic"
+            android:text="TextView" />
+
+
+        <TextView
+            android:id="@+id/playerScoreFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:textSize="20dp"
+            android:textColor="@color/purple_color"
+            android:textStyle="bold|italic"
+            android:text="TextView" />
+
+
+        <TextView
+            android:id="@+id/questionAmountFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:textSize="20dp"
+            android:textColor="@color/purple_color"
+            android:textStyle="bold|italic"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/difficultyTypeFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:textSize="20dp"
+            android:textColor="@color/purple_color"
+            android:textStyle="bold|italic"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/questionTypeFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:textSize="20dp"
+            android:textColor="@color/purple_color"
+            android:textStyle="bold|italic"
+            android:text="TextView" />
+
+
+        <Button
+            android:id="@+id/hideTriviaFragBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_orange"
+            android:textSize="16dp"
+            android:textColor="@color/purple_color"
+            android:layout_gravity="center"
+            android:text="@string/triviaHideBtn"
+            android:layout_marginTop="20dp"/>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
