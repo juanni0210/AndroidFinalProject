@@ -27,7 +27,7 @@ public class SongsterDetails extends AppCompatActivity {
         dbOpener = new SongsterDatabaseOpenHelper(this);
         db = dbOpener.getWritableDatabase();
 
-
+        //continued
     }
 
 }

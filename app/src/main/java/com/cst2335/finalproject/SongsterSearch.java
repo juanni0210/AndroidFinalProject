@@ -93,6 +93,10 @@ public class SongsterSearch extends AppCompatActivity {
 
         songsterView.setAdapter(songsterAdapter);
         sharedPref = getSharedPreferences("Songster", MODE_PRIVATE);
+
+        /**
+         * set tool bar
+         */
         mProgressBar.setVisibility(View.VISIBLE);
         setSupportActionBar(mainToolbar);
 
@@ -108,12 +112,12 @@ public class SongsterSearch extends AppCompatActivity {
                     ("Searching: "+searchEditText.getText().toString()), Snackbar.LENGTH_LONG)
                     .show();
 
-            //new SongsterQuery().execute();
+           // new SongsterQuery().execute("http://www.songsterr.com/a/ra/songs.xml?pattern=XXX");
 
         });
 
         /**
-         * click songster listview and show a alert dialog to choose if add to favourite list
+         * click songster listview to show details information of songs
          */
         songsterView.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(this, SongsterDetails.class);
@@ -128,16 +132,22 @@ public class SongsterSearch extends AppCompatActivity {
             startActivity(intent);
         });
 
+        /**
+         * long click listView to show a alter dialog to ask if what add to favourite list
+         */
         songsterView.setOnItemLongClickListener((AdapterView<?> parent, View view, int position, long id) -> {
 
             SongsterObject songsterObject = (SongsterObject)  parent.getAdapter().getItem(position);
-
+            /**
+             * Alert dialog to let user choose if they want to add to favourite list
+             */
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder
                     .setTitle(getString(R.string.add_to_favourite))
                     .setPositiveButton(R.string.yes, (DialogInterface dialog, int which) -> {
 //                        songsterObject.add(SongsterDatabaseOpenHelper.TABLE_NAME, SongsterDatabaseOpenHelper.COL_ID + "=" + songsterObject.getId(), null);
 //                        songsterObject.add(position);
+                        // continued
                         songsterAdapter.notifyDataSetChanged();
                         Toast.makeText(SongsterSearch.this, R.string.add, Toast.LENGTH_LONG).show();
                     })
@@ -155,9 +165,9 @@ public class SongsterSearch extends AppCompatActivity {
                 startActivity(intent);
         });
 
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("search", searchEditText.getText().toString());
-        editor.apply();
+//        SharedPreferences.Editor editor = sharedPref.edit();
+//        editor.putString("search", searchEditText.getText().toString());
+//        editor.apply();
 
     }
 
@@ -237,7 +247,6 @@ public class SongsterSearch extends AppCompatActivity {
     }
 
     protected class SongsterAdapter extends BaseAdapter {
-
         /**
          * returns the number of items
          * @return
