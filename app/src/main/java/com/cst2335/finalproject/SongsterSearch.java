@@ -24,12 +24,16 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -118,10 +122,11 @@ public class SongsterSearch extends AppCompatActivity {
             Snackbar.make(findViewById(R.id.search_page),
                     ("Searching: "+searchEditText.getText().toString()), Snackbar.LENGTH_LONG)
                     .show();
-
+            /**
+             *
+             */
             SongsterQuery search = new SongsterQuery();
             search.execute(url+searchEditText.getText().toString());
-
         });
 
         /**
@@ -130,13 +135,13 @@ public class SongsterSearch extends AppCompatActivity {
         songsterView.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(this, SongsterDetails.class);
             SongsterObject songsterObject = songsterAdapter.getItem(position);
-            intent.putExtra("SongID", songsterObject.getSongID());
+            //intent.putExtra("SongID", songsterObject.getSongID());
             intent.putExtra("Song", songsterObject.getSongName());
-            intent.putExtra("ArtistID", songsterObject.getArtistID());
+            //intent.putExtra("ArtistID", songsterObject.getArtistID());
             intent.putExtra("Artist", songsterObject.getArtistName());
-            intent.putExtra("useThePrefix", songsterObject.isUseThePrefix());
-            intent.putExtra("chordsPresent", songsterObject.isChordsPresent());
-            intent.putExtra("TabType", songsterObject.getTabType());
+//            intent.putExtra("useThePrefix", songsterObject.isUseThePrefix());
+//            intent.putExtra("chordsPresent", songsterObject.isChordsPresent());
+//            intent.putExtra("TabType", songsterObject.getTabType());
             startActivity(intent);
         });
 
@@ -188,64 +193,65 @@ public class SongsterSearch extends AppCompatActivity {
     }
 
     private class SongsterQuery extends AsyncTask<String, Integer, String>{
-        String songID;
+        long songID;
         String songName;
-        String artistID;
+        long artistID;
         String artistName;
-        String useThePrefix;
-        String chordsPresent;
+        boolean useThePrefix;
+        boolean chordsPresent;
         String tabType;
 
         @Override
-        protected String doInBackground(String... strings) {
+        protected String doInBackground(String... args) {
 
             try {
-                String urlString = "http://www.songsterr.com/a/ra/songs.xml?pattern=" + searchEditText.getText().toString();
-                URL url = new URL(urlString);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                InputStream inStream = conn.getInputStream();
+                //create a URL object of what server to contact:
+                URL url = new URL(args[0]);
+                //open the connection
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                //wait for data:
+                InputStream response = connection.getInputStream();
 
-                //conn.setRequestMethod("GET");
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(false);
-                XmlPullParser xpp = factory.newPullParser();
-                xpp.setInput(inStream, "UTF-8");  //inStream comes from line 46
+                BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"), 8);
+                StringBuilder sb = new StringBuilder();
 
-                while(xpp.getEventType() != XmlPullParser.END_DOCUMENT) {
-                    if(xpp.getEventType() == XmlPullParser.START_TAG){
-                        String tagName = xpp.getName();
+                String line = null;
+                while ((line = reader.readLine()) != null)
+                {
+                    sb.append(line + "\n");
+                }
+                String result = sb.toString();
 
-                        if(tagName.equals("Song")) {
-                            songID = xpp.getAttributeValue(null,"id");
-                            publishProgress(10);
-                        }else if(tagName.equals("title")){
-                            songName = xpp.nextText();
-                            publishProgress(25);
-                        }else if(tagName.equals("artist ")){
-                            artistID = xpp.getAttributeValue(null,"id");
-                            publishProgress(45);
-                        }else if(tagName.equals("name ")){
-                            artistName = xpp.nextText();
-                            publishProgress(60);
-                        }else if(tagName.equals("useThePrefix ")){
-                            useThePrefix = xpp.nextText();
-                            publishProgress(75);
-                        }else if(tagName.equals("chordsPresent ")){
-                            chordsPresent = xpp.nextText();
-                            publishProgress(90);
-                        }else if(tagName.equals("TabType")){
-                            tabType = xpp.nextText();
-                            publishProgress(100);
-                        }
-                    }
-                    xpp.next();
+                JSONObject jObject = new JSONObject(result);
+                JSONArray modelJsonArray = jObject.getJSONArray("Results");
+                for(int i = 0; i< modelJsonArray.length(); i++) {
+                    JSONObject songsterObj = (JSONObject) modelJsonArray.get(i);
+                    //songID = songsterObj.getLong("songID");
+                    songName = songsterObj.getString("songName");
+                    //artistID = songsterObj.getLong("artistID");
+                    artistName = songsterObj.getString("artistName");
+//                    useThePrefix = songsterObj.getBoolean("useThePrefix");
+//                    chordsPresent = songsterObj.getBoolean("chordsPresent");
+//                    tabType = songsterObj.getString("tabType");
+
+
+
+                    SongsterObject songsterObject = new SongsterObject(songName, artistName);
+                    songsterList.add(songsterObject);
                 }
 
-            } catch (IOException | XmlPullParserException e) {
+                for(int i = 0; i < songsterList.size(); i++) {
+                    System.out.println("test" + songsterList.get(i). getSongName());
+                    System.out.println("test" + songsterList.get(i). getArtistName());
+                }
+
+            }
+            catch (Exception e)
+            {
                 e.printStackTrace();
             }
 
-            return "finished";
+            return "Done";
         }
 
         @Override

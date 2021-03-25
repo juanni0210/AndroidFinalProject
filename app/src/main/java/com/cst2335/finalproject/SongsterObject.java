@@ -21,6 +21,11 @@ public class SongsterObject {
         setTabType(tabType);
     }
 
+    public SongsterObject(String songName, String artistName) {
+        setSongName(songName);
+        setArtistName(artistName);
+    }
+
     public long getId() {
         return id;
     }
