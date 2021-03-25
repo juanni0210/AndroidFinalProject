@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+
 /**
  * Main Activity of the application. User can access to four projects.
  * @author Juan Ni, Sophie Sun, Feiqiong Deng, Xueru Chen
@@ -27,13 +28,13 @@ public class MainActivity extends AppCompatActivity {
         Intent goToTrivaLaunch = new Intent(MainActivity.this, TriviaGameLaunchActivity.class);
         startTriviaBtn.setOnClickListener(v -> startActivity(goToTrivaLaunch));
 
-//        Intent goToSonsterLaunch = new Intent(MainActivity.this, SongsterSearch.class);
-//        startSongsterBtn.setOnClickListener(v -> startActivity(goToSonsterLaunch));
-//
+        Intent goToSonsterLaunch = new Intent(MainActivity.this, SongsterSearch.class);
+        startSongsterBtn.setOnClickListener(v -> startActivity(goToSonsterLaunch));
+
         Intent goToCarDBLaunch = new Intent(MainActivity.this, CarDatabase.class);
         startCarDBBtn.setOnClickListener(v -> startActivity(goToCarDBLaunch));
-//
-//        Intent goToSoccerLaunch = new Intent(MainActivity.this, SoccerGames.class);
-//        startSoccerBtn.setOnClickListener(v -> startActivity(goToSoccerLaunch));
+
+        Intent goToSoccerLaunch = new Intent(MainActivity.this, SoccerGames.class);
+        startSoccerBtn.setOnClickListener(v -> startActivity(goToSoccerLaunch));
     }
 }

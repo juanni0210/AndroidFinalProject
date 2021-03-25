@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="read">阅读</string>
+    <string name="save">保存</string>
+    <string name="favorite">喜爱</string>
+
     <string name="app_name">课程项目</string>
     <string name="songster_btn_add">加到列表</string>
     <string name="songster_btn_favourite">喜欢</string>

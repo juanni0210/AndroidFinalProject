@@ -82,4 +82,17 @@
     <string name="yes">Yes</string>
     <string name="add">Successfully Added!</string>
     <string name="no">No</string>
+
+    <string name="title_activity_soccer_games" translatable="false">SoccerGames</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="read">Read</string>
+    <string name="save">Save</string>
+    <string name="favorite">Favorite</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--    <string name="hello_world">Hello Square World!</string>-->
 </resources>
