@@ -4,6 +4,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * A helper class extends from SQLiteOpenHelper class to manage trivia game database creation and version management.
+ * @author Juan Ni
+ */
 public class TiviaDatabaseOpener extends SQLiteOpenHelper {
     protected final static String DATABASE_NAME = "LeaderBoard";
     protected final static int VERSION_NUM = 1;

@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+/**
+ * An Activity will display fragments layout when user uses phone.
+ * @author Juan Ni
+ */
 public class TriviaEmptyActivity extends AppCompatActivity {
 
     @Override

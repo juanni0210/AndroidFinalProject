@@ -25,6 +25,12 @@ import com.plattysoft.leonids.ParticleSystem;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Trivia game result page shows result details and will ask user whether to save the score or not, if they save
+ * the score it will be saved to the database as well, and user can see all the saved score records displayed
+ * once they save it.
+ * @author Juan Ni
+ */
 public class TriviaGameResultActivity extends AppCompatActivity {
     private Button startAgainBtn, saveScoreBtn, saveNameBtn, cancelSaveBtn;
     private int totalQuestionCount, correctAnswerCount, wrongAnswerCount, gameScore;
@@ -45,8 +51,6 @@ public class TriviaGameResultActivity extends AppCompatActivity {
     public static final String QUESTION_AMOUNT = "QUESTION AMOUNT";
     public static final String DIFFICULTY_TYPE = "DIFFICULTY TYPE";
     public static final String QUESTION_TYPE = "QUESTION TYPE";
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,6 +195,7 @@ public class TriviaGameResultActivity extends AppCompatActivity {
             }
         });
 
+        //when click save button, createNewScoreRecordDialog method will be called, a window pops up to ask user whether to save it or not
         saveScoreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -209,11 +214,18 @@ public class TriviaGameResultActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Deletes the score record from database.
+     * @param record ScoreRecord type called record
+     */
     protected void deleteScoreRecord(ScoreRecord record)
     {
         triviaDB.delete(TiviaDatabaseOpener.TABLE_NAME, TiviaDatabaseOpener.COL_ID + "= ?", new String[] {Long.toString(record.getId())});
     }
 
+    /**
+     * Pops up a window asking user to save the score record or not.
+     */
     public void createNewScoreRecordDialog() {
         dialogBuilder = new AlertDialog.Builder(this);
         final View popUpWindowView = getLayoutInflater().inflate(R.layout.trivia_save_score_window, null);
@@ -248,12 +260,9 @@ public class TriviaGameResultActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-    }
-
+    /**
+     * Saves player name input by users to the sharedPreferences.
+     */
     private void savePlayerName(){
         SharedPreferences triviaPlayerPrefs = getSharedPreferences("TriviaPlayerNames", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = triviaPlayerPrefs.edit();
@@ -261,6 +270,9 @@ public class TriviaGameResultActivity extends AppCompatActivity {
         editor.commit();
     }
 
+    /**
+     * Pop us a window asking user to save the score record or not.
+     */
     private void createScoreRecordAndAddToDatabase() {
         String inputName = playerNameInput.getText().toString();
         //add to the database and get the new ID
@@ -286,6 +298,9 @@ public class TriviaGameResultActivity extends AppCompatActivity {
         scoreAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Loads score records from database and displays on the list view.
+     */
     private void loadScoreRecordFromDatabase() {
         //get a database connection:
         TiviaDatabaseOpener triviaDBOpener = new TiviaDatabaseOpener(this);
@@ -324,14 +339,38 @@ public class TriviaGameResultActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Inner class ScoreListAdapter extends from BaseAdapter, a customized Adapter used in ListView
+     * @author Juan Ni
+     */
     private class ScoreListAdapter extends BaseAdapter {
+        /**
+         * Returns count of items.
+         * @return int value of the count of the items represented by this Adapter.
+         */
         public int getCount() { return scoreRecordsList.size(); }
 
+        /**
+         * Returns ScoreRecord type data at the specified position.
+         * @param position int - Position of the item whose data we want within the adapter's data set.
+         * @return ScoreRecord type object at specified position.
+         */
         public ScoreRecord getItem(int position) { return scoreRecordsList.get(position); }
 
-        //return the object's database id
+        /**
+         * Returns database id of ScoreRecord object at the specified position in the ListView.
+         * @param position int value of position
+         * @return long value of database id
+         */
         public long getItemId(int position) { return getItem(position).getId(); }
 
+        /**
+         * Gets a View that displays the scores at the specified position in the ListView.
+         * @param position  int - The position of the item within the adapter's data set of the item whose view we want.
+         * @param old View - The old view to reuse, if possible.
+         * @param parent ViewGroup - The parent that this view will eventually be attached to.
+         * @return A View corresponding to the data at the specified position.
+         */
         public View getView(int position, View old, ViewGroup parent)
         {
             View newView;

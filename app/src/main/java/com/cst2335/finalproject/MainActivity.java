@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * Main Activity of the application. User can access to four projects.
+ * @author Juan Ni
+ */
 public class MainActivity extends AppCompatActivity {
     private Button startTriviaBtn, startSongsterBtn, startCarDBBtn, startSoccerBtn;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

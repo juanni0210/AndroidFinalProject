@@ -12,6 +12,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * TriviaDetailsFragment is a piece of an application's user interface or behavior that can be placed in an Activity.
+ * @author Juan Ni
+ */
 public class TriviaDetailsFragment extends Fragment {
     private Bundle dataFromResultActivity;
     private String playerName;

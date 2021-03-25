@@ -15,6 +15,10 @@ import android.widget.Switch;
 
 import com.google.android.material.snackbar.Snackbar;
 
+/**
+ * Launch page of trivia game where user can select question number, type, difficulty type and other options.
+ * @author Juan Ni
+ */
 public class TriviaGameLaunchActivity extends AppCompatActivity {
     private String questionNum, difficultyType, questionType, gameURL;
     private EditText questionNumberInput;
@@ -112,6 +116,11 @@ public class TriviaGameLaunchActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Question class is a blueprint of questions of trivia game.
+     * @param message String value of message showing in the snackBar
+     * @param isOn boolean value of whether the snackBar is checked
+     */
     public void showSnackbar(String message, boolean isOn) {
         Snackbar snackbar = Snackbar.make(launchLayout, message, Snackbar.LENGTH_INDEFINITE)
                 .setAction(getResources().getString(R.string.undo_text), new View.OnClickListener() {

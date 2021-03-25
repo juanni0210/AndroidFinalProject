@@ -27,6 +27,10 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Trivia page where all the questions are loaded and user can start answer questions.
+ * @author Juan Ni
+ */
 public class TriviaGameOngoingActivity extends AppCompatActivity {
     private ArrayList<Question> questionList = new ArrayList<>();
     private Question currentQuestion;
@@ -96,7 +100,7 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
             } else {
                 answerCount++;
                 //call before update
-                if (currentQuestion.getCorrectedAns().equals(selectedAns)) {
+                if (currentQuestion.getCorrectAns().equals(selectedAns)) {
                     correctCount++;
                 }
                 updateQuestion();
@@ -111,6 +115,9 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
         triviaRequest.execute(generatedGameURL);
     }
 
+    /**
+     * Update the question after user answers one and pass data to next page when user answers all questions.
+     */
     public void updateQuestion() {
         selectedAns = "";
         currentQuestion = questionList.get(answerCount);
@@ -139,50 +146,57 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
                     //when click finish game, the timer view is gone
                     timerLayout.setVisibility(View.GONE);
                     // check whether the last question you answered is right
-                    if (currentQuestion.getCorrectedAns().equals(selectedAns)) {
+                    if (currentQuestion.getCorrectAns().equals(selectedAns)) {
                         correctCount++;
                     }
                     Intent goToGameResult = new Intent(TriviaGameOngoingActivity.this, TriviaGameResultActivity.class);
+                    //pass data to next page
                     goToGameResult.putExtra("CORRECTED_ANSWER_COUNT", correctCount);
                     goToGameResult.putExtra("WRONG_ANSWER_COUNT", totalQuestionCount - correctCount);
                     goToGameResult.putExtra("DIFFICULTY_TYPE", currentQuestion.getDifficultyType());
                     goToGameResult.putExtra("QUESTION_TYPE", questionType);
                     goToGameResult.putExtra("TIME_SPENT", timeTextView.getText().toString());
                     startActivity(goToGameResult);
-
-
                 }
             });
         }
     }
 
+    /**
+     * Inner class GameFactory extends from AsyncTask abstract class to get conncection to API, getting data from it in another thread
+     * and  integrating into UI.
+     * @author Juan Ni
+     */
     class GameFactory extends AsyncTask< String, Integer, String> {
         @Override
         protected String doInBackground(String ... args)
         {
             try {
-
-                URL gameURL = new URL(args[0]);
+                URL triviaGameURL = new URL(args[0]);
                 //open the connection
-                HttpURLConnection gameURLConnection = (HttpURLConnection) gameURL.openConnection();
+                HttpURLConnection gameURLConnection = (HttpURLConnection) triviaGameURL.openConnection();
                 //wait for data:
-                InputStream uvResponse = gameURLConnection.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(uvResponse, "UTF-8"), 8);
-                StringBuilder sb = new StringBuilder();
+                InputStream triviaResponse = gameURLConnection.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(triviaResponse, "UTF-8"), 8);
+                StringBuilder builder = new StringBuilder();
 
                 String line = null;
                 while ((line = reader.readLine()) != null)
                 {
-                    sb.append(line + "\n");
+                    builder.append(line + "\n");
                 }
-                String result = sb.toString();
+                String result = builder.toString();
                 result = result.replaceAll("&#039;", "'");
                 result = result.replaceAll("&quot;", "''");
                 result = result.replaceAll("&amp;", "&");
                 result = result.replaceAll("&eacute;", "É");
+                result = result.replaceAll("&Eacute;", "É");
+                result = result.replaceAll("&atilde;", "Ã");
+                result = result.replaceAll("&Atilde;", "Ã");
 
 
                 JSONObject jObject = new JSONObject(result);
+                //get the JSONArray of "results" which contains each question as an JSONObject
                 JSONArray questionsArray = jObject.getJSONArray("results");
 
                 if (questionsArray != null) {
@@ -193,17 +207,14 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
 
                     //want to see the right answer of each question - test purpose
                     for (int i = 0; i < questionList.size(); i++) {
-                        System.out.println((i+1) + ". " + questionList.get(i).getQuestionText() + "corrected: " + questionList.get(i).getCorrectedAns());
+                        System.out.println((i+1) + ". " + questionList.get(i).getQuestionText() + "corrected: " + questionList.get(i).getCorrectAns());
                     }
 
                     totalQuestionCount = questionList.size();
-                    System.out.println(totalQuestionCount);
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             return "Done";
         }
 
@@ -242,9 +253,11 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
                 };
                 timer.scheduleAtFixedRate(timerTask, 0, 1000);
             }
+            //when all the questions are loaded, the next button shows
             nextButton.setVisibility(View.VISIBLE);
+            //by calling the updateQuestion method here, the first question will be displayed
             updateQuestion();
-            //when all the questions are loaded, progress bar and waiting iamge will be gone
+            //when all the questions are loaded, progress bar and waiting image will be gone
             gameProgressBar.setVisibility(View.GONE);
             waitingImage.setVisibility(View.GONE);
             unAnsweredView.setText((totalQuestionCount-answerCount) + "/" + totalQuestionCount + " " + getResources().getString(R.string.unAnsweredText));
@@ -253,6 +266,10 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Returns text of time user spent on the game with format 00:00:00.
+     * @return String value of formated text showing time 00:00:00
+     */
     private String getTimerText() {
         int rounded = (int) Math.round(time);
         int seconds = ((rounded % 86400) % 3600) % 60;
@@ -260,8 +277,6 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
         int hours = (rounded % 86400) / 3600;
 
         return String.format("%02d", hours) + ":" + String.format("%02d", minutes) + ":" + String.format("%02d", seconds);
-
     }
-
 
 }
