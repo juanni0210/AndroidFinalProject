@@ -13,15 +13,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -38,6 +46,7 @@ public class SoccerGames extends AppCompatActivity {
 //    private TextView mTextView;
     private MyListAdapter myAdapter;
     private ArrayList<Item> elements = new ArrayList<>();
+    private ProgressBar progressBar;
 
     public static final String ITEM_SELECTED = "ITEM";
     public static final String ITEM_POSITION = "POSITION";
@@ -55,15 +64,39 @@ public class SoccerGames extends AppCompatActivity {
 
         ListView myList = (ListView) findViewById(R.id.theListView);
         myList.setAdapter(myAdapter = new MyListAdapter());
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
 
         MyHTTPRequest req = new MyHTTPRequest();
         req.execute("https://www.goal.com/en/feeds/news");
 //        req.execute("https://feeds.24.com/articles/fin24/tech/rss");
 
+        Button favoriteBtn = findViewById(R.id.favoriteBtn);
+        Button saveBtn = findViewById(R.id.saveBtn);
+        RelativeLayout layout = findViewById(R.id.newsLayout);
+
+        favoriteBtn.setOnClickListener( v -> {
+            Toast.makeText(SoccerGames.this, "Favorite news will be coming soon.",Toast.LENGTH_SHORT).show();
+                }
+        );
+
+        saveBtn.setOnClickListener( v -> {
+            Snackbar snackbar= Snackbar.make(layout, "Will be saved in the database.", Snackbar.LENGTH_SHORT);
+            snackbar.show();
+        });
+
         myList.setOnItemClickListener((p, b, pos, id) -> {
             Item selectedItem = elements.get(pos);
+
             Bundle dataToPass = new Bundle();
-            dataToPass.putString(ITEM_IMAGE, selectedItem.getImage());
+//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//            selectedItem.getImage().compress(Bitmap.CompressFormat.JPEG, 100, stream);
+//            byte[] byteArray = stream.toByteArray();
+
+//            dataToPass.putByteArray(ITEM_IMAGE, byteArray);
+            ImageView imgView = findViewById(R.id.image);
+            imgView.setImageBitmap(selectedItem.getItemImage());
+
             dataToPass.putString(ITEM_DATE, selectedItem.getDate());
             dataToPass.putString(ITEM_URL, selectedItem.getUrl());
             dataToPass.putString(ITEM_DESCRIPTION, selectedItem.getDescription());
@@ -117,7 +150,7 @@ public class SoccerGames extends AppCompatActivity {
                     if(eventType == XmlPullParser.START_TAG) {
                         if (xpp.getName().equalsIgnoreCase("item")) {
                             insideItem = true;
-                            Item item = new Item(title, date, image, link, description);
+                            Item item = new Item(title, date, image, itemImage, link, description);
                             elements.add(item);
                         } else if (xpp.getName().equalsIgnoreCase("title")) {
                             if (insideItem) {
@@ -180,10 +213,13 @@ public class SoccerGames extends AppCompatActivity {
         //Type 2
         public void onProgressUpdate(Integer ... args)
         {
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setProgress(args[0]);
         }
         //Type3
         public void onPostExecute(String fromDoInBackground)
         {
+            progressBar.setVisibility(View.GONE);
          myAdapter.notifyDataSetChanged();
         }
 

@@ -2,24 +2,50 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/newsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_grey"
     android:padding="@dimen/box_inset_layout_padding"
     tools:context=".SoccerGames"
+    android:orientation="vertical"
     tools:deviceIds="wear">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
     <ListView
         android:id="@+id/theListView"
         android:layout_width="130dp"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
     </ListView>
 
     <FrameLayout
         android:id="@+id/fragmentLocation"
+        android:layout_below="@id/image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_toEndOf="@+id/theListView" />
+        android:layout_toEndOf="@+id/theListView" >
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="43dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
 
     <Button
         android:id="@+id/readBtn"

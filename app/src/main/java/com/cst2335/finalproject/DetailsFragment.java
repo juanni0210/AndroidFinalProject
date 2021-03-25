@@ -88,9 +88,10 @@ public class DetailsFragment extends Fragment {
 
         //show the image
 //        ImageView imgView = findViewById(R.id.imageNews);
-        ImageView imageView = (ImageView) result.findViewById(R.id.imageNews);
-        String image = dataFromActivity.getString(SoccerGames.ITEM_IMAGE);
-        imageView.setImageBitmap(BitmapFactory.decodeFile(image));
+//        ImageView imageView = (ImageView) result.findViewById(R.id.imageNews);
+//        byte[] byteArray = dataFromActivity.getByteArray(SoccerGames.ITEM_IMAGE);
+//        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+//        imageView.setImageBitmap(bmp);
 
         TextView itemDate = (TextView)result.findViewById(R.id.pubDate);
         itemDate.setText(dataFromActivity.getString(SoccerGames.ITEM_DATE));
