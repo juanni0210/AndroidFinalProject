@@ -29,12 +29,30 @@
             tools:layout_editor_absoluteY="252dp" />
 
         <TextView
+            android:id="@+id/soccerText1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pubDate"
+            android:layout_centerHorizontal="true"
+            tools:layout_editor_absoluteX="68dp"
+            tools:layout_editor_absoluteY="252dp" />
+
+        <TextView
             android:id="@+id/link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/pubDate"
+            android:layout_below="@id/soccerText1"
+            tools:layout_editor_absoluteX="68dp"
+            tools:layout_editor_absoluteY="252dp" />
+
+        <TextView
+            android:id="@+id/soccerText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/link"
+            android:layout_centerHorizontal="true"
             tools:layout_editor_absoluteX="68dp"
             tools:layout_editor_absoluteY="252dp" />
 
@@ -44,7 +62,7 @@
             android:layout_height="wrap_content"
             android:text="TextView"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/link"
+            android:layout_below="@id/soccerText2"
             tools:layout_editor_absoluteX="68dp"
             tools:layout_editor_absoluteY="252dp" />
 

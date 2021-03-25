@@ -1,6 +1,7 @@
 package com.cst2335.finalproject;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -55,8 +57,12 @@ public class SoccerGames extends AppCompatActivity {
     public static final String ITEM_DATE = "DATE";
     public static final String ITEM_DESCRIPTION = "DESCRIPTION";
     public static final String ITEM_URL = "URL";
+    private DetailsFragment detailsFragment;
 
-
+    /**
+     * This is to initialize the activity and setting the http request.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,31 +75,51 @@ public class SoccerGames extends AppCompatActivity {
 
         MyHTTPRequest req = new MyHTTPRequest();
         req.execute("https://www.goal.com/en/feeds/news");
-//        req.execute("https://feeds.24.com/articles/fin24/tech/rss");
 
         Button favoriteBtn = findViewById(R.id.favoriteBtn);
         Button saveBtn = findViewById(R.id.saveBtn);
+        Button readBtn = findViewById(R.id.readBtn);
+
         RelativeLayout layout = findViewById(R.id.newsLayout);
 
+        /*
+        This is to create a toast when clicking the favorite button.
+         */
         favoriteBtn.setOnClickListener( v -> {
             Toast.makeText(SoccerGames.this, "Favorite news will be coming soon.",Toast.LENGTH_SHORT).show();
                 }
         );
 
+        /*
+        This is to create a snack bar when clicking the save button.
+         */
         saveBtn.setOnClickListener( v -> {
             Snackbar snackbar= Snackbar.make(layout, "Will be saved in the database.", Snackbar.LENGTH_SHORT);
             snackbar.show();
         });
 
+         /*
+        This is to create an  alert dialog when opening the API.
+         */
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Rating");
+        alertDialog.setMessage("Could you rate the API");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+
+        /*
+        when user click the item on the list view, details of the item will be sent to the fragment.
+         */
         myList.setOnItemClickListener((p, b, pos, id) -> {
             Item selectedItem = elements.get(pos);
 
             Bundle dataToPass = new Bundle();
-//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//            selectedItem.getImage().compress(Bitmap.CompressFormat.JPEG, 100, stream);
-//            byte[] byteArray = stream.toByteArray();
 
-//            dataToPass.putByteArray(ITEM_IMAGE, byteArray);
             ImageView imgView = findViewById(R.id.image);
             imgView.setImageBitmap(selectedItem.getItemImage());
 
@@ -110,6 +136,9 @@ public class SoccerGames extends AppCompatActivity {
         });
     }
 
+    /**
+     * This is the AsyncTask to connect to the link and get data from the API.
+     */
     private class MyHTTPRequest extends AsyncTask< String, Integer, String> {
         private String title;
         private String date;
@@ -133,7 +162,6 @@ public class SoccerGames extends AppCompatActivity {
                 //wait for data:
                 InputStream response = urlConnection.getInputStream();
 
-                //From part 3: slide 19
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(false);
                 XmlPullParser xpp = factory.newPullParser();
@@ -229,6 +257,9 @@ public class SoccerGames extends AppCompatActivity {
         }
     }
 
+    /**
+     * This is the adapter.
+     */
     private class MyListAdapter extends BaseAdapter {
 
         public int getCount() { return elements.size();}

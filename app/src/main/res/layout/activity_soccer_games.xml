@@ -25,7 +25,8 @@
     <ListView
         android:id="@+id/theListView"
         android:layout_width="130dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/soccer_editText">
     </ListView>
 
     <FrameLayout
@@ -37,11 +38,25 @@
 
     </FrameLayout>
 
+    <EditText
+        android:id="@+id/soccer_editText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/searchBtn"
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@id/soccer_editText"
+android:layout_alignParentRight="true"
+        android:layout_height="wrap_content"
+        android:text="@string/soccer_search" />
+
     <ImageView
         android:id="@+id/image"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/soccer_editText"
         tools:layout_editor_absoluteX="37dp"
         tools:layout_editor_absoluteY="43dp"
         tools:srcCompat="@tools:sample/avatars" />
