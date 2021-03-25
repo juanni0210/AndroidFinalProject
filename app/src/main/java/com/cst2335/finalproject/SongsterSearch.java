@@ -88,10 +88,10 @@ public class SongsterSearch extends AppCompatActivity {
         favouritesButton = findViewById(R.id.goToFavourites);
         searchEditText = findViewById(R.id.search_editText);
         mProgressBar = findViewById(R.id.progress_bar);
-        //mainToolbar = findViewById(R.id.main_toolbar_songster);
+        mainToolbar = findViewById(R.id.main_toolbar_songster);
         songsterView = findViewById(R.id.songsterListView);
 
-        //songsterView.setAdapter(songsterAdapter);
+        songsterView.setAdapter(songsterAdapter);
         //sharedPref = getSharedPreferences("Songster", MODE_PRIVATE);
 
 //        /**
@@ -119,7 +119,8 @@ public class SongsterSearch extends AppCompatActivity {
                     ("Searching: "+searchEditText.getText().toString()), Snackbar.LENGTH_LONG)
                     .show();
 
-           //new SongsterQuery().execute("https://www.songsterr.com/a/ra/songs.xml?pattern=XXX");
+            SongsterQuery search = new SongsterQuery();
+            search.execute(url+searchEditText.getText().toString());
 
         });
 
@@ -218,27 +219,22 @@ public class SongsterSearch extends AppCompatActivity {
                             songID = xpp.getAttributeValue(null,"id");
                             publishProgress(10);
                         }else if(tagName.equals("title")){
-                            xpp.next();
-                            songName = xpp.getName();
+                            songName = xpp.nextText();
                             publishProgress(25);
                         }else if(tagName.equals("artist ")){
                             artistID = xpp.getAttributeValue(null,"id");
                             publishProgress(45);
                         }else if(tagName.equals("name ")){
-                            xpp.next();
-                            artistName = xpp.getName();
+                            artistName = xpp.nextText();
                             publishProgress(60);
                         }else if(tagName.equals("useThePrefix ")){
-                            xpp.next();
-                            useThePrefix = xpp.getName();
+                            useThePrefix = xpp.nextText();
                             publishProgress(75);
                         }else if(tagName.equals("chordsPresent ")){
-                            xpp.next();
-                            chordsPresent = xpp.getName();
+                            chordsPresent = xpp.nextText();
                             publishProgress(90);
                         }else if(tagName.equals("TabType")){
-                            xpp.next();
-                            tabType = xpp.getName();
+                            tabType = xpp.nextText();
                             publishProgress(100);
                         }
                     }
