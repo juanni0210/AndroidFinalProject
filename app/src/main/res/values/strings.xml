@@ -2,4 +2,17 @@
     <string name="app_name">Final Project</string>
 
     <string name="startCarDB">START CAR DATABASE</string>
+
+    <!--    Main page-->
+    <string name="triviaStartBtn">TRIVIA GAME</string>
+    <string name="songsterStartBtn">SONGSTER SEARCH</string>
+    <string name="carDBStartBtn">CAR DATABASE</string>
+    <string name="soccerStartBtn">SOCCER GAME</string>
+    <string name="projectInfo">CST2335 Final Project</string>
+    <string name="teamInfo">© 2021 TECH SAVVY TEAM</string>
+
+
+
+
+
 </resources>
