@@ -8,8 +8,9 @@ public class SongsterObject {
     private String  artistName;
     private boolean useThePrefix;
     private boolean chordsPresent;
+    private String tabType;
 
-    public SongsterObject(long id, long songID, String songName, long artistID, String artistName, boolean useThePrefix, boolean chordsPresent) {
+    public SongsterObject(long id, long songID, String songName, long artistID, String artistName, boolean useThePrefix, boolean chordsPresent, String tabType) {
         setId(id);
         setSongID(songID);
         setSongName(songName);
@@ -17,6 +18,7 @@ public class SongsterObject {
         setArtistName(artistName);
         setUseThePrefix(useThePrefix);
         setChordsPresent(chordsPresent);
+        setTabType(tabType);
     }
 
     public long getId() {
@@ -73,5 +75,13 @@ public class SongsterObject {
 
     public void setChordsPresent(boolean chordsPresent) {
         this.chordsPresent = chordsPresent;
+    }
+
+    public String getTabType() {
+        return tabType;
+    }
+
+    public void setTabType(String tabType) {
+        this.tabType = tabType;
     }
 }
