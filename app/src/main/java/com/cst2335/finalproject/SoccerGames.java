@@ -43,6 +43,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This is the SoccerGames class to show the GUI and control the API behavior.
+ */
 public class SoccerGames extends AppCompatActivity {
 
 //    private TextView mTextView;
@@ -61,7 +64,7 @@ public class SoccerGames extends AppCompatActivity {
 
     /**
      * This is to initialize the activity and setting the http request.
-     * @param savedInstanceState
+     * @param savedInstanceState Passed to superclass onCreate method.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
