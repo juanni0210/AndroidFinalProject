@@ -21,7 +21,6 @@
         android:layout_height="match_parent"
         android:layout_toEndOf="@+id/theListView" />
 
-
     <Button
         android:id="@+id/readBtn"
         android:layout_width="wrap_content"
