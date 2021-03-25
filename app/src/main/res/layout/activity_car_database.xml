@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CarDatabase"
+    android:orientation="vertical"
+    android:id="@+id/mostOuter">
+
+    <LinearLayout
+        android:id="@+id/topfunction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true">
+
+        <EditText
+            android:id="@+id/makeInput"
+            android:hint="Please enter make/brand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+        <Button
+            android:id="@+id/searchmake"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="search model"/>
+    </LinearLayout>
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_below="@id/topfunction"
+         android:orientation="vertical">
+         <ProgressBar
+             android:id="@+id/carProgressBar"
+             style="?android:attr/progressBarStyle"
+             android:layout_gravity="center"
+             android:visibility="invisible"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <ListView
+             android:id="@+id/model_list"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+
+         </ListView>
+     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomFunctionButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/searchdetals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="search details"/>
+
+        <Button
+            android:id="@+id/shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="go to shop"/>
+        <Button
+            android:id="@+id/favorites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="your favorites"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
