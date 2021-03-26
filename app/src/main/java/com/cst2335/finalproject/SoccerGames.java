@@ -45,6 +45,8 @@ import java.util.List;
 
 /**
  * This is the SoccerGames class to show the GUI and control the API behavior.
+ * @author Feiqiong Deng
+ * @version version 1
  */
 public class SoccerGames extends AppCompatActivity {
 
@@ -129,6 +131,8 @@ public class SoccerGames extends AppCompatActivity {
             dataToPass.putString(ITEM_DATE, selectedItem.getDate());
             dataToPass.putString(ITEM_URL, selectedItem.getUrl());
             dataToPass.putString(ITEM_DESCRIPTION, selectedItem.getDescription());
+//            dataToPass.putString(ITEM_IMAGE, selectedItem.getImage());
+
 
             DetailsFragment dFragment = new DetailsFragment(); //add a DetailFragment
             dFragment.setArguments(dataToPass); //pass it a bundle for information
@@ -173,7 +177,7 @@ public class SoccerGames extends AppCompatActivity {
                 boolean insideItem = false;
                 int eventType = xpp.getEventType(); //The parser is currently at START_DOCUMENT
 
-
+                // to get the data from the xml and add data to  array list.
                 System.out.println("1.========" + xpp.getText() + "===========");
                 while(eventType != XmlPullParser.END_DOCUMENT)
                 {
@@ -205,6 +209,7 @@ public class SoccerGames extends AppCompatActivity {
                                 if(!fileExistance(image)){
                                     URL url2 = new URL(image);
                                     HttpURLConnection imgConnection = (HttpURLConnection) url2.openConnection();
+//                                    imgConnection.setDoInput(true);
                                     imgConnection.connect();
                                     int responseCode = imgConnection.getResponseCode();
                                     if (responseCode == 200) {

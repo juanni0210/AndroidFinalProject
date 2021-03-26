@@ -29,6 +29,8 @@ import java.net.URL;
  * A simple {@link Fragment} subclass.
  * Use the {@link DetailsFragment#newInstance} factory method to
  * create an instance of this fragment.
+ * @author Feiqiong Deng
+ * @version version 1
  */
 public class DetailsFragment extends Fragment {
 
@@ -101,6 +103,8 @@ public class DetailsFragment extends Fragment {
         TextView itemDesciption = (TextView)result.findViewById(R.id.description);
         itemDesciption.setText(dataFromActivity.getString(SoccerGames.ITEM_DESCRIPTION));
 
+//        TextView itemimg = (TextView)result.findViewById(R.id.soccerText1);
+//        itemimg.setText(dataFromActivity.getString(SoccerGames.ITEM_DESCRIPTION));
         // Inflate the layout for this fragment
         return result;
     }
