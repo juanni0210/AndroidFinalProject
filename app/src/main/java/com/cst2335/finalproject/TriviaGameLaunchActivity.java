@@ -62,6 +62,13 @@ public class TriviaGameLaunchActivity extends AppCompatActivity implements Navig
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 difficultyType = parent.getItemAtPosition(position).toString();
                 difficultyType = difficultyType.replaceAll("\\s+", "").toLowerCase();
+                if(difficultyType.equals("简单")) {
+                    difficultyType = "easy";
+                } else if (difficultyType.equals("中等")) {
+                    difficultyType = "medium";
+                } else if (difficultyType.equals("困难")){
+                    difficultyType = "hard";
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -75,16 +82,19 @@ public class TriviaGameLaunchActivity extends AppCompatActivity implements Navig
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 questionType = parent.getItemAtPosition(position).toString();
                 questionType = questionType.replaceAll("\\s+", "").toLowerCase();
-                if(questionType.equals("true/false")) {
+                if(questionType.equals("true/false") || questionType.equals("对错题")) {
                     questionType = "boolean";
-                }
-                if(questionType.equals("multiplechoice")) {
+                } else if(questionType.equals("multiplechoice") || questionType.equals("选择题")) {
                     questionType = "multiple";
+                } else if(questionType.equals("anytype") || questionType.equals("任何类型")) {
+                    questionType = "anytype";
                 }
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {questionType = "anytype";}
+            public void onNothingSelected(AdapterView<?> parent) {
+                questionType = "anytype";
+            }
         });
 
         launchLayout = findViewById(R.id.launch_layout);

@@ -148,7 +148,7 @@ public class TriviaGameResultActivity extends AppCompatActivity {
                             + getResources().getString(R.string.showScore) + " " + selectedRecord.getScore() + "." + "\n"
                             + getResources().getString(R.string.showQuestionAmount) + " " + selectedRecord.getQuestionAmount() + " " + getResources().getString(R.string.questionText) + ".")
                     //what the Yes button does:
-                    .setPositiveButton("Yes", (click, arg) -> {
+                    .setPositiveButton(getResources().getString(R.string.yesName), (click, arg) -> {
                         String idTag = Long.toString(id);
                         if (isTablet) {
                             if (getSupportFragmentManager().findFragmentByTag(idTag) != null) {
@@ -161,7 +161,7 @@ public class TriviaGameResultActivity extends AppCompatActivity {
 
                     })
                     //What the No button does:
-                    .setNegativeButton("No", (click, arg) -> { })
+                    .setNegativeButton(getResources().getString(R.string.noName), (click, arg) -> { })
                     //Show the dialog
                     .create().show();
             return true;
