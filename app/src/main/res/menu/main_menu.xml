@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/triviaItem"
+        android:title="@string/triviaMenuName"
+        android:icon="@drawable/trivia_icon"
+        android:orderInCategory="10"
+        app:showAsAction="always"/>  <!-- This uses showAsAction=always, so look at icon= parameter -->
+
+    <item android:id="@+id/songsterItem"
+        android:title="@string/songsterMenuName"
+        android:icon="@drawable/song_icon"
+        android:orderInCategory="20"
+        app:showAsAction="always"/>  <!-- This uses showAsAction=always, so look at icon= parameter -->
+
+    <item android:id="@+id/carDBItem"
+        android:icon="@drawable/car_icon"
+        android:title="@string/carDBMenuName"
+        android:orderInCategory="30"
+        app:showAsAction="always" /> <!-- This uses showAsAction=never, so look at title= parameter -->
+
+    <item android:id="@+id/soccerItem"
+        android:title="@string/soccerMenuName"
+        android:icon="@drawable/soccer_icon"
+        android:orderInCategory="40"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/helpItem"
+        android:title="@string/helpMenuName"
+        android:icon="@drawable/help_icon"
+        android:orderInCategory="50"
+        app:showAsAction="ifRoom" />
+</menu>

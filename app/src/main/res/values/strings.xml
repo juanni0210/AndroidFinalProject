@@ -9,6 +9,27 @@
     <string name="projectInfo">CST2335 Final Project</string>
     <string name="teamInfo">© 2021 TECH SAVVY TEAM</string>
 
+    <!--    Menu page-->
+    <string name="triviaMenuName">Trivia Game</string>
+    <string name="songsterMenuName">Songster Search</string>
+    <string name="carDBMenuName">Car Database</string>
+    <string name="soccerMenuName">Soccer Game</string>
+    <string name="helpMenuName">Help</string>
+    <string name="triviaHelpTile">All you need to know about Trivia Game:</string>
+    <string name="triviaInstructions1">1. Enter the number of questions you want to answer, select difficulty type (easy, medium, hard) and question type(multiple choice, true or false or both type mixed).</string>
+    <string name="triviaInstructions2">2. 1 score for every easy question, 2 scores for every medium question and 3 scores for every hard question. For example: </string>
+    <string name="triviaInstructions3">Answering 5 easy difficulty type question correct you will get 5 scores.</string>
+    <string name="triviaInstructions4">Answering 5 medium difficulty type question correct you will get 10 scores.</string>
+    <string name="triviaInstructions5">Answering 5 hard difficulty type question correct you will get 15 scores.</string>
+    <string name="closeHelpDialog">CLOSE</string>
+    <string name="triviaActivityTitle">Activity Title: Trivia API</string>
+    <string name="triviaActivityAuthor">Author: Juan Ni</string>
+    <string name="triviaActivityVersionNumber">Version Number: V1.0</string>
+    <string name="navigationOpen">Open</string>
+    <string name="navigationClose">Close</string>
+
+
+
     <!--    Trivia game launch page-->
     <string name="trivia_launch_title">CHOOSE QUESTIONS:</string>
     <string name="questions_number_label">Number of Questions:</string>

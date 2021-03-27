@@ -8,127 +8,165 @@
     android:orientation="vertical"
     android:id="@+id/launch_layout"
     tools:context=".TriviaGameLaunchActivity">
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/trivia_launch_title"
-        android:textColor="@color/purple_color"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:textSize="30dp"
-        android:textStyle="bold" />
+        android:id="@+id/toolbar"/>
 
-    <TextView
-        android:id="@+id/questionNumLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/questions_number_label"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="22sp"
-        android:layout_marginBottom="10dp"
-        android:layout_below="@id/title"/>
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        tools:openDrawer="start">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/trivia_launch_title"
+                android:textColor="@color/purple_color"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="30dp"
+                android:textStyle="bold"/>
 
-    <EditText
-        android:id="@+id/questionNumInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:textSize="22sp"
-        android:inputType="number"
-        android:textColor="@color/white"
-        android:text="5"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:layout_below="@id/questionNumLabel"/>
+            <TextView
+                android:id="@+id/questionNumLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/questions_number_label"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/title"/>
 
-    <TextView
-        android:id="@+id/difficultyLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="22sp"
-        android:layout_marginBottom="10dp"
-        android:layout_centerHorizontal="true"
-        android:text="@string/difficulty_label"
-        android:layout_below="@id/questionNumInput"/>
+            <EditText
+                android:id="@+id/questionNumInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textSize="22sp"
+                android:inputType="number"
+                android:textColor="@color/white"
+                android:text="5"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/questionNumLabel"/>
 
-    <Spinner
-        android:id="@+id/difficultySpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_orange"
-        android:textSize="22sp"
-        android:layout_marginBottom="10dp"
-        android:layout_centerHorizontal="true"
-        android:entries="@array/difficulty_array"
-        android:layout_below="@id/difficultyLabel"/>
+            <TextView
+                android:id="@+id/difficultyLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:layout_marginBottom="10dp"
+                android:layout_centerHorizontal="true"
+                android:text="@string/difficulty_label"
+                android:layout_below="@id/questionNumInput"/>
 
-    <TextView
-        android:id="@+id/questionTypeLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="22sp"
-        android:layout_marginBottom="10dp"
-        android:layout_centerHorizontal="true"
-        android:text="@string/question_type_label"
-        android:layout_below="@id/difficultySpinner"/>
+            <Spinner
+                android:id="@+id/difficultySpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_orange"
+                android:textSize="22sp"
+                android:layout_marginBottom="10dp"
+                android:layout_centerHorizontal="true"
+                android:entries="@array/difficulty_array"
+                android:layout_below="@id/difficultyLabel"/>
 
-    <Spinner
-        android:id="@+id/questionTypeSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:background="@drawable/btn_orange"
-        android:layout_marginBottom="10dp"
-        android:layout_centerHorizontal="true"
-        android:entries="@array/question_type_array"
-        android:layout_below="@id/questionTypeLabel"/>
+            <TextView
+                android:id="@+id/questionTypeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:layout_marginBottom="10dp"
+                android:layout_centerHorizontal="true"
+                android:text="@string/question_type_label"
+                android:layout_below="@id/difficultySpinner"/>
 
-    <Switch
-        android:id="@+id/timerSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/questionTypeSpinner"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="22sp"
-        android:paddingTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/triviaTimerSwitch" />
+            <Spinner
+                android:id="@+id/questionTypeSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:background="@drawable/btn_orange"
+                android:layout_marginBottom="10dp"
+                android:layout_centerHorizontal="true"
+                android:entries="@array/question_type_array"
+                android:layout_below="@id/questionTypeLabel"/>
 
-    <Button
-        android:id="@+id/startGameBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_orange"
-        android:textSize="20sp"
-        android:textColor="@color/purple_color"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        android:text="@string/triviaGameStartBtn"
-        android:layout_above="@id/backHomeBtn"/>
+            <Switch
+                android:id="@+id/timerSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/questionTypeSpinner"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:paddingTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/triviaTimerSwitch" />
 
-    <Button
-        android:id="@+id/backHomeBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_orange"
-        android:textSize="20sp"
-        android:textColor="@color/purple_color"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:text="@string/triviaBackHomeBtn"
-        android:layout_alignParentBottom="true"/>
+            <Button
+                android:id="@+id/startGameBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_orange"
+                android:textSize="20sp"
+                android:textColor="@color/purple_color"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="30dp"
+                android:text="@string/triviaGameStartBtn"
+                android:layout_above="@id/backHomeBtn"/>
+
+            <Button
+                android:id="@+id/backHomeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_orange"
+                android:textSize="20sp"
+                android:textColor="@color/purple_color"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="80dp"
+                android:text="@string/triviaBackHomeBtn"
+                android:layout_alignParentBottom="true"/>
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bnv"
+                android:background="#6C50EC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                app:menu="@menu/main_menu"/>
+        </RelativeLayout>
+
+        <!-- THIS IS WHAT IS WHAT POPS OUT FROM THE SIDE:-->
+        <com.google.android.material.navigation.NavigationView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/trivia_navigation_header"
+            app:menu="@menu/main_menu"
+            android:id="@+id/nav_view"/>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+
 
 </RelativeLayout>
