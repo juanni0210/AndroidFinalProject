@@ -36,8 +36,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,6 +55,8 @@ public class SoccerGames extends AppCompatActivity {
 //    private TextView mTextView;
     private MyListAdapter myAdapter;
     private ArrayList<Item> elements = new ArrayList<>();
+    private ArrayList<Bitmap> bit = new ArrayList<>();
+
     private ProgressBar progressBar;
 
     public static final String ITEM_SELECTED = "ITEM";
@@ -122,17 +126,26 @@ public class SoccerGames extends AppCompatActivity {
          */
         myList.setOnItemClickListener((p, b, pos, id) -> {
             Item selectedItem = elements.get(pos);
+            Bitmap itemImage;
 
-            Bundle dataToPass = new Bundle();
-
+            Intent goToNews = new Intent(SoccerGames.this, SoccerNewsPage.class);
             ImageView imgView = findViewById(R.id.image);
-            imgView.setImageBitmap(selectedItem.getItemImage());
+
+            Bundle linkToPass = new Bundle();
+            linkToPass.putString("news", selectedItem.getUrl());
+            goToNews.putExtras(linkToPass);
+
+            readBtn.setOnClickListener(click -> {
+                startActivity(goToNews);
+            });
+
+//            imgView.setImageBitmap(selectedItem.getItemImage());
+            Bundle dataToPass = new Bundle();
 
             dataToPass.putString(ITEM_DATE, selectedItem.getDate());
             dataToPass.putString(ITEM_URL, selectedItem.getUrl());
             dataToPass.putString(ITEM_DESCRIPTION, selectedItem.getDescription());
-//            dataToPass.putString(ITEM_IMAGE, selectedItem.getImage());
-
+            dataToPass.putString(ITEM_IMAGE, selectedItem.getImage());
 
             DetailsFragment dFragment = new DetailsFragment(); //add a DetailFragment
             dFragment.setArguments(dataToPass); //pass it a bundle for information
@@ -159,6 +172,7 @@ public class SoccerGames extends AppCompatActivity {
         public String doInBackground(String ... args)
         {
             try {
+
 
                 //create a URL object of what server to contact:
                 URL url = new URL(args[0]);
@@ -205,30 +219,49 @@ public class SoccerGames extends AppCompatActivity {
                             }
                         } else if (xpp.getName().equalsIgnoreCase("media:thumbnail")) {
                             if (insideItem) {
-                                image = xpp.nextText();
-                                if(!fileExistance(image)){
-                                    URL url2 = new URL(image);
-                                    HttpURLConnection imgConnection = (HttpURLConnection) url2.openConnection();
-//                                    imgConnection.setDoInput(true);
-                                    imgConnection.connect();
-                                    int responseCode = imgConnection.getResponseCode();
-                                    if (responseCode == 200) {
-                                        itemImage = BitmapFactory.decodeStream(imgConnection.getInputStream());
-                                        publishProgress(100);
-                                    }
-                                    FileOutputStream outputStream = openFileOutput( image + ".jpeg", Context.MODE_PRIVATE);
-                                    itemImage.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-                                    outputStream.flush();
-                                    outputStream.close();
-                                } else {
-                                    FileInputStream fis = null;
-                                    try {
-                                        fis = openFileInput(image);
-                                        Log.e("Weather Image", "It is looking for " + image.toString());
-                                        Log.e("Found or Not", "The image is found locally");
-                                    } catch (FileNotFoundException e) {    e.printStackTrace();  }
-                                    itemImage = BitmapFactory.decodeStream(fis);
-                                }
+                                image =  xpp.getAttributeValue(null, "url");
+
+//                                try {
+//                                    URL imageURL = new URL(image);
+//                                    HttpURLConnection connection = (HttpURLConnection) imageURL
+//                                            .openConnection();
+//                                    connection.setDoInput(true);
+//                                    connection.connect();
+//                                    InputStream input = connection.getInputStream();
+//                                    itemImage = BitmapFactory.decodeStream(input);
+//                                } catch (IOException e) {
+//                                    return null;
+//                                }
+
+//                                itemImage = getBitmapFromURL(image);
+
+//                                if(!fileExistance(image)){
+//                                    try {
+//                                        URL url2 = new URL(image);
+//                                        HttpURLConnection imgConnection = (HttpURLConnection) url2.openConnection();
+//                                        imgConnection.connect();
+//                                        int responseCode = imgConnection.getResponseCode();
+//                                        if (responseCode == 200) {
+//                                            itemImage = BitmapFactory.decodeStream(imgConnection.getInputStream());
+//                                            publishProgress(100);
+//                                        }
+//                                        FileOutputStream outputStream = openFileOutput(image + ".jpeg", Context.MODE_PRIVATE);
+//                                        itemImage.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+//                                        outputStream.flush();
+//                                        outputStream.close();
+//                                    } catch (IOException e) {
+//                                        // Log exception
+//                                        Log.e("Weather Image", "It is looking for " + image.toString());
+//                                    }
+//                                } else {
+//                                    FileInputStream fis = null;
+//                                    try {
+//                                        fis = openFileInput(image);
+//                                        Log.e("Weather Image", "It is looking for " + image.toString());
+//                                        Log.e("Found or Not", "The image is found locally");
+//                                    } catch (FileNotFoundException e) {    e.printStackTrace();  }
+//                                    itemImage = BitmapFactory.decodeStream(fis);
+//                                }
                             }
                         }
                     }
@@ -256,13 +289,32 @@ public class SoccerGames extends AppCompatActivity {
         public void onPostExecute(String fromDoInBackground)
         {
             progressBar.setVisibility(View.GONE);
-         myAdapter.notifyDataSetChanged();
+            myAdapter.notifyDataSetChanged();
+            bit.add(itemImage);
         }
 
         public boolean fileExistance (String image) {
             File file = getBaseContext().getFileStreamPath(image);
             return file.exists();
         }
+
+//        public Bitmap getBitmapFromURL(String src) {
+//            try {
+//                URL url = new URL(src);
+//                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//                connection.setDoInput(true);
+//                connection.connect();
+//                InputStream input = connection.getInputStream();
+//                Bitmap myBitmap = BitmapFactory.decodeStream(input);
+//
+//                return myBitmap;
+//            } catch (IOException e) {
+//                // Log exception
+//                System.out.println("BITMAP error");
+//                return null;
+//            }
+//        }
+
     }
 
     /**

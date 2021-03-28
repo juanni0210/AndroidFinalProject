@@ -1,6 +1,7 @@
 package com.cst2335.finalproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
@@ -103,8 +104,8 @@ public class DetailsFragment extends Fragment {
         TextView itemDesciption = (TextView)result.findViewById(R.id.description);
         itemDesciption.setText(dataFromActivity.getString(SoccerGames.ITEM_DESCRIPTION));
 
-//        TextView itemimg = (TextView)result.findViewById(R.id.soccerText1);
-//        itemimg.setText(dataFromActivity.getString(SoccerGames.ITEM_DESCRIPTION));
+        TextView itemimg = (TextView)result.findViewById(R.id.test);
+        itemimg.setText(dataFromActivity.getString(SoccerGames.ITEM_IMAGE));
         // Inflate the layout for this fragment
         return result;
     }

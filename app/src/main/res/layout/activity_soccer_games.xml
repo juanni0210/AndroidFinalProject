@@ -47,7 +47,7 @@
         android:id="@+id/searchBtn"
         android:layout_width="wrap_content"
         android:layout_toRightOf="@id/soccer_editText"
-android:layout_alignParentRight="true"
+        android:layout_alignParentRight="true"
         android:layout_height="wrap_content"
         android:text="@string/soccer_search" />
 
@@ -60,7 +60,6 @@ android:layout_alignParentRight="true"
         tools:layout_editor_absoluteX="37dp"
         tools:layout_editor_absoluteY="43dp"
         tools:srcCompat="@tools:sample/avatars" />
-
 
     <Button
         android:id="@+id/readBtn"
