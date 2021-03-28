@@ -27,6 +27,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.squareup.picasso.Picasso;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -56,6 +57,7 @@ public class SoccerGames extends AppCompatActivity {
     private MyListAdapter myAdapter;
     private ArrayList<Item> elements = new ArrayList<>();
     private ArrayList<Bitmap> bit = new ArrayList<>();
+    ImageView imgView;
 
     private ProgressBar progressBar;
 
@@ -81,6 +83,8 @@ public class SoccerGames extends AppCompatActivity {
         myList.setAdapter(myAdapter = new MyListAdapter());
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
+
+        imgView = findViewById(R.id.image);
 
         MyHTTPRequest req = new MyHTTPRequest();
         req.execute("https://www.goal.com/en/feeds/news");
@@ -126,10 +130,9 @@ public class SoccerGames extends AppCompatActivity {
          */
         myList.setOnItemClickListener((p, b, pos, id) -> {
             Item selectedItem = elements.get(pos);
-            Bitmap itemImage;
-
             Intent goToNews = new Intent(SoccerGames.this, SoccerNewsPage.class);
-            ImageView imgView = findViewById(R.id.image);
+
+            loadImage(selectedItem.getImage());
 
             Bundle linkToPass = new Bundle();
             linkToPass.putString("news", selectedItem.getUrl());
@@ -154,6 +157,22 @@ public class SoccerGames extends AppCompatActivity {
                     .replace(R.id.fragmentLocation, dFragment) //Add the fragment in FrameLayout
                     .commit(); //actually load the fragment. Calls onCreate() in DetailFragment
         });
+    }
+
+    private void loadImage(String url){
+        Picasso.get().load(url).resize(30, 30)
+                .error(R.mipmap.ic_launcher)
+                .into(imgView, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        System.out.println("Successful");
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        System.out.println("Error in loadImage.");
+                    }
+                });
     }
 
     /**
