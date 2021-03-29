@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -41,43 +43,37 @@ import java.util.ArrayList;
 public class SongsterSearch extends AppCompatActivity {
 
     /**
-     * Button used for search
+     * name of current activity
+     */
+    public static final String ACTIVITY_NAME = "SONGSTER_SEARCH_PAGE";
+    /**
+     * list of Songster
+     */
+    ArrayList<SongsterObject> songsterObject = new ArrayList<SongsterObject>();
+    /**
+     * Field from the screen accepts input from a user
+     */
+    private EditText searchText;
+    /**
+     * List with songster items from the screen
+     */
+    private ListView songsterList;
+    /**
+     *
      */
     private Button searchButton;
     /**
-     * Button used for favourite page
+     * shared preferences instance
      */
-    private Button favouritesButton;
+    private SharedPreferences sharedPref;
     /**
-     * edit text for user input search content
+     * toolbar instance
      */
-    private EditText searchEditText;
+    private Toolbar main_menu;
     /**
-     * Progress bar to show process
+     * progress bar instance
      */
-    private ProgressBar mProgressBar;
-    /**
-     * toolbar at the top
-     */
-    private Toolbar mainToolbar;
-    /**
-     * Listview to show the search result
-     */
-    private ListView songsterView;
-    /**
-     * Array list to all songster object
-     */
-    private ArrayList<SongsterObject> songsterList = new ArrayList<>();
-    /**
-     * set a adapter
-     */
-    private SongsterAdapter songsterAdapter = new SongsterAdapter();
-    /**
-     * sharedpre to store last time search result
-     */
-    //private SharedPreferences sharedPref;
-
-    private String url = "http://www.songsterr.com/a/ra/songs.xml?pattern=";
+    private ProgressBar progressBar;
 
 
     @Override
@@ -85,227 +81,152 @@ public class SongsterSearch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_songster_search);
 
-        /**
-         * set each element to id in layout
-         */
+        boolean isTablet = findViewById(R.id.fragmentLocation) != null; //check if the FrameLayout is loaded
+
         searchButton = findViewById(R.id.searchButton);
-        favouritesButton = findViewById(R.id.goToFavourites);
-        searchEditText = findViewById(R.id.search_editText);
-        mProgressBar = findViewById(R.id.progress_bar);
-        mainToolbar = findViewById(R.id.main_toolbar_songster);
-        songsterView = findViewById(R.id.songsterListView);
+        searchText = findViewById(R.id.search_editText);
+        progressBar = findViewById(R.id.progress_bar);
+        main_menu = findViewById(R.id.main_toolbar_songster);
+        songsterList = findViewById(R.id.songsterListView);
 
-        songsterView.setAdapter(songsterAdapter);
-        //sharedPref = getSharedPreferences("Songster", MODE_PRIVATE);
+        progressBar.setVisibility(View.INVISIBLE);
+        sharedPref = getSharedPreferences("SongsterPref", MODE_PRIVATE);
 
-//        /**
-//         * set tool bar
-//         */
-//        mProgressBar.setVisibility(View.VISIBLE);
-//        setSupportActionBar(mainToolbar);
 
-        Button goBackBtn = findViewById(R.id.backButton);
-        goBackBtn.setOnClickListener(btn->{
-
-            Intent goBack = new Intent(SongsterSearch.this, MainActivity.class);
-            startActivity(goBack);
-
-        });
 
         /**
          * CLick on Search button and show the search result and a snackbar
          */
-        searchButton.setOnClickListener(clk->{
-            /**
-             * show snackbar with text from searchbar
-             */
-            Snackbar.make(findViewById(R.id.search_page),
-                    ("Searching: "+searchEditText.getText().toString()), Snackbar.LENGTH_LONG)
-                    .show();
-            /**
-             *
-             */
-            SongsterQuery search = new SongsterQuery();
-            search.execute(url+searchEditText.getText().toString());
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "http://www.songsterr.com/a/ra/songs.xml?pattern="+searchText.getText().toString();
+                SongsterQuery downloadSongster = new SongsterQuery();
+                downloadSongster.execute(url);
+
+
+                searchText.onEditorAction(EditorInfo.IME_ACTION_DONE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("searchText", searchText.getText().toString());
+
+                editor.commit();
+            }
         });
 
         /**
          * click songster listview to show details information of songs
          */
-        songsterView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(this, SongsterDetails.class);
-            SongsterObject songsterObject = songsterAdapter.getItem(position);
-            //intent.putExtra("SongID", songsterObject.getSongID());
-            intent.putExtra("Song", songsterObject.getSongName());
-            //intent.putExtra("ArtistID", songsterObject.getArtistID());
-            intent.putExtra("Artist", songsterObject.getArtistName());
-//            intent.putExtra("useThePrefix", songsterObject.isUseThePrefix());
-//            intent.putExtra("chordsPresent", songsterObject.isChordsPresent());
-//            intent.putExtra("TabType", songsterObject.getTabType());
-            startActivity(intent);
+        songsterList.setOnItemClickListener(( parent,  view,  position,  id) ->{
+            SongsterObject chosenOne = songsterObject.get(position);
+            Bundle dataToPass = new Bundle();
+            dataToPass.putSerializable("SongsterObject", chosenOne);
+
+            if (isTablet) {
+                SongsterFragment dFragment = new SongsterFragment(); //add a DetailFragment
+                dFragment.setArguments(dataToPass); //pass it a bundle for information
+                dFragment.setTablet(true);  //tell the fragment if it's running on a tablet or not
+
+                getSupportFragmentManager()
+
+                        .beginTransaction()
+
+                        .replace(R.id.fragmentLocation, dFragment) //Add the fragment in FrameLayout
+
+                        .commit(); //actually load the fragment.
+            } else //isPhone
+            {
+                Intent nextActivity = new Intent(SongsterSearch.this, SongsterDetailContainer.class);
+                nextActivity.putExtras(dataToPass); //send data to next activity
+                startActivity(nextActivity); //make the transition
+            }
         });
 
-        /**
-         * long click listView to show a alter dialog to ask if what add to favourite list
-         */
-        songsterView.setOnItemLongClickListener((AdapterView<?> parent, View view, int position, long id) -> {
-
-            SongsterObject songsterObject = (SongsterObject)  parent.getAdapter().getItem(position);
-            /**
-             * Alert dialog to let user choose if they want to add to favourite list
-             */
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder
-                    .setTitle(getString(R.string.add_to_favourite))
-                    .setPositiveButton(R.string.yes, (DialogInterface dialog, int which) -> {
-//                        songsterObject.add(SongsterDatabaseOpenHelper.TABLE_NAME, SongsterDatabaseOpenHelper.COL_ID + "=" + songsterObject.getId(), null);
-//                        songsterObject.add(position);
-                        songsterAdapter.notifyDataSetChanged();
-                        Toast.makeText(SongsterSearch.this, R.string.add, Toast.LENGTH_LONG).show();
-                    })
-                    .setNegativeButton(R.string.no, null)
-                    .show();
-
-            return songsterView.isLongClickable();
-        });
-
-        /**
-         * Press Button go to favourite list.
-         */
-        favouritesButton.setOnClickListener(clk-> {
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder
-                    .setTitle(getString(R.string.go_to_favourite))
-                    .setPositiveButton(R.string.yes, (DialogInterface dialog, int which) -> {
-                        Intent intent = new Intent(SongsterSearch.this, SongsterFavouriteList.class);
-                        startActivity(intent);
-                        Toast.makeText(SongsterSearch.this, R.string.welcom_to_favourite, Toast.LENGTH_LONG).show();
-                    })
-                    .setNegativeButton(R.string.no, null)
-                    .show();
-
-        });
-
-//        SharedPreferences.Editor editor = sharedPref.edit();
-//        editor.putString("search", searchEditText.getText().toString());
-//        editor.apply();
+        String searchTextValue = sharedPref.getString("searchText", "");
+        searchText.setText(searchTextValue);
 
     }
 
     private class SongsterQuery extends AsyncTask<String, Integer, String>{
-        long songID;
-        String songName;
-        long artistID;
-        String artistName;
-        boolean useThePrefix;
-        boolean chordsPresent;
-        String tabType;
-
-        @Override
-        protected String doInBackground(String... args) {
-
-            try {
-                //create a URL object of what server to contact:
-                URL url = new URL(args[0]);
-                //open the connection
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                //wait for data:
-                InputStream response = connection.getInputStream();
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"), 8);
-                StringBuilder sb = new StringBuilder();
-
-                String line = null;
-                while ((line = reader.readLine()) != null)
-                {
-                    sb.append(line + "\n");
-                }
-                String result = sb.toString();
-
-                JSONObject jObject = new JSONObject(result);
-                JSONArray modelJsonArray = jObject.getJSONArray("Results");
-                for(int i = 0; i< modelJsonArray.length(); i++) {
-                    JSONObject songsterObj = (JSONObject) modelJsonArray.get(i);
-                    //songID = songsterObj.getLong("songID");
-                    songName = songsterObj.getString("songName");
-                    //artistID = songsterObj.getLong("artistID");
-                    artistName = songsterObj.getString("artistName");
-//                    useThePrefix = songsterObj.getBoolean("useThePrefix");
-//                    chordsPresent = songsterObj.getBoolean("chordsPresent");
-//                    tabType = songsterObj.getString("tabType");
-
-
-
-                    SongsterObject songsterObject = new SongsterObject(songName, artistName);
-                    songsterList.add(songsterObject);
-                }
-
-                for(int i = 0; i < songsterList.size(); i++) {
-                    System.out.println("test" + songsterList.get(i). getSongName());
-                    System.out.println("test" + songsterList.get(i). getArtistName());
-                }
-
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-
-            return "Done";
-        }
+        /**
+         * dialog to show a progression of downloading to the user
+         */
+        //private ProgressDialog p;
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            mProgressBar.setVisibility(View.VISIBLE);
-            mProgressBar.setProgress(values[0]);
+            super.onProgressUpdate(values);
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setProgress(values[0]);
         }
+        /**
+         * Methods connects to the server, retrieves the data about car charging stations
+         * @param urls link to the server
+         * @return data about car charging stations
+         */
+        protected String doInBackground(String... urls) {
+            HttpURLConnection urlConnection = null;
+            String result = "";
+            try {
+                URL link = new URL(urls[0]);
+                urlConnection = (HttpURLConnection) link.openConnection();
+                publishProgress(25);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                InputStream in = urlConnection.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                publishProgress(50);
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    result += line;
+                }
+                publishProgress(70);
+                return result;
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+            finally {
+                if (urlConnection != null) {
+                    urlConnection.disconnect();
+                }
+            }
+            return result;
+        }
+        /**
+         * Method gets car charging stations and displays them on the screen as a list of items
+         * @param result data about car charging stations retrieved by doInBackground method()
+         */
+        protected void onPostExecute(String result) {
+            songsterObject.clear(); // remove old results
+            try {
+                JSONArray songsterArray = new JSONArray(result);
+                SongsterObject songsterObject = new SongsterObject();
 
+                for(int i = 0; i < songsterArray.length(); i++){
+                    JSONObject songsterObj = (JSONObject) songsterArray.get(i);
+                    songsterObject.setSongID(songsterObj.getLong("id"));
+                    songsterObject.setSongName(songsterObj.getString("title"));
+                    songsterObject.setChordsPresent(songsterObj.getBoolean("chordsPresent"));
+
+                    JSONObject artistObj = new JSONObject("artist");
+                    songsterObject.setArtistID(artistObj.getLong("id"));
+                    songsterObject.setArtistName(artistObj.getString("name"));
+                    songsterObject.setUseThePrefix(artistObj.getBoolean("useThePrefix"));
+
+//                    JSONArray typeObj = new JSONArray("tabTypes");
+//                    songsterObject.setTabType(typeObj.getString(0));
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            SongsterAdapter adapter = new SongsterAdapter(getApplicationContext(), songsterObject, false);
+            songsterList.setAdapter(adapter);
+            progressBar.setVisibility(View.INVISIBLE);
+        }
     }
 
-    protected class SongsterAdapter extends BaseAdapter {
-        /**
-         * returns the number of items
-         * @return
-         */
-        @Override
-        public int getCount() {
-            return songsterList.size();
-        }
-
-        /**
-         * returns an item from a specific position
-         * @param position
-         * @return
-         */
-        @Override
-        public SongsterObject getItem(int position) {
-            return songsterList.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        /**
-         * return a story title to be shown at row position
-         * @param position
-         * @param old
-         * @param parent
-         * @return
-         */
-        public View getView(int position, View old, ViewGroup parent) {
-            LayoutInflater inflater = SongsterSearch.this.getLayoutInflater();
-            View newView = inflater.inflate(R.layout.activity_songster_search_content, null);
-            SongsterObject songsterObject = getItem(position);
-
-            TextView searchResultSong = newView.findViewById(R.id.searchResultSong);
-            TextView searchResultArtist = newView.findViewById(R.id.searchResultArtist);
-            assert songsterObject != null;
-            searchResultSong.setText(songsterObject.getSongName());
-            searchResultArtist.setText(songsterObject.getArtistName());
-
-            return newView;
-        }
-    }
 }

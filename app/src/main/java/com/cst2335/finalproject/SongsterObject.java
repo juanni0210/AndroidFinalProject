@@ -1,6 +1,8 @@
 package com.cst2335.finalproject;
 
-public class SongsterObject {
+import java.io.Serializable;
+
+public class SongsterObject implements Serializable {
     private long id;// database id
     private long songID;
     private String songName;
@@ -8,22 +10,22 @@ public class SongsterObject {
     private String  artistName;
     private boolean useThePrefix;
     private boolean chordsPresent;
-    private String tabType;
+    //private String tabType;
 
-    public SongsterObject(long id, long songID, String songName, long artistID, String artistName, boolean useThePrefix, boolean chordsPresent, String tabType) {
-        setId(id);
-        setSongID(songID);
-        setSongName(songName);
-        setArtistID(artistID);
-        setArtistName(artistName);
-        setUseThePrefix(useThePrefix);
-        setChordsPresent(chordsPresent);
-        setTabType(tabType);
+
+    public SongsterObject() {
     }
 
-    public SongsterObject(String songName, String artistName) {
-        setSongName(songName);
-        setArtistName(artistName);
+    public SongsterObject(long id, long songID, String songName, long artistID,
+                          String artistName, boolean useThePrefix, boolean chordsPresent) {
+        this.id = id;
+        this.songID = songID;
+        this.songName = songName;
+        this.artistID = artistID;
+        this.artistName = artistName;
+        this.useThePrefix = useThePrefix;
+        this.chordsPresent = chordsPresent;
+        //this.tabType = tabType;
     }
 
     public long getId() {
@@ -82,11 +84,11 @@ public class SongsterObject {
         this.chordsPresent = chordsPresent;
     }
 
-    public String getTabType() {
-        return tabType;
-    }
-
-    public void setTabType(String tabType) {
-        this.tabType = tabType;
-    }
+//    public String getTabType() {
+//        return tabType;
+//    }
+//
+//    public void setTabType(String tabType) {
+//        this.tabType = tabType;
+//    }
 }
