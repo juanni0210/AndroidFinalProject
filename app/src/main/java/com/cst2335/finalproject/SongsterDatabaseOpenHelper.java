@@ -12,8 +12,8 @@ public class SongsterDatabaseOpenHelper extends SQLiteOpenHelper {
     public static final String COL_SongID= "SongID";
     public static final String COL_ArtistName = "ArtistName";
     public static final String COL_ArtistID = "ArtistID";
-    public static final String COL_UseThePrefix = "UseThePrefix";
-    public static final String COL_ChordsPresent = "ChordsPresent";
+    //public static final String COL_UseThePrefix = "UseThePrefix";
+    // public static final String COL_ChordsPresent = "ChordsPresent";
     //public static final String COL_TabType = "TabType";
 
     private static final String DATABASE_NAME = "SongsterDatabase.db";
@@ -34,8 +34,9 @@ public class SongsterDatabaseOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLE_NAME + "( " + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COL_SongID + ", " + COL_SongName + ", "
-                + COL_ArtistID + ", " + COL_ArtistName + ", "
-                + COL_UseThePrefix + ", " + COL_ChordsPresent + ") ");
+                + COL_ArtistID + ", " + COL_ArtistName + ") "
+        );
+
     }
 
     /**

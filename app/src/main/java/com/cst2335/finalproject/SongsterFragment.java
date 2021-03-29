@@ -47,13 +47,13 @@ public class SongsterFragment extends Fragment {
         String checkArtistName = songsterObject.getArtistName();
         artistName.setText(checkArtistName);
 
-        TextView isUseThePrefix = result.findViewById(R.id.isUseThePrefix);
-        Boolean checkIsUseThePrefix = songsterObject.isUseThePrefix();
-        isUseThePrefix.setText(Boolean.toString(checkIsUseThePrefix));
-
-        TextView isChorsdPresent = result.findViewById(R.id.isChorsdPresent);
-        Boolean checkIsChorsdPresent = songsterObject.isChordsPresent();
-        isChorsdPresent.setText(Boolean.toString(checkIsChorsdPresent));
+//        TextView isUseThePrefix = result.findViewById(R.id.isUseThePrefix);
+//        Boolean checkIsUseThePrefix = songsterObject.isUseThePrefix();
+//        isUseThePrefix.setText(Boolean.toString(checkIsUseThePrefix));
+//
+//        TextView isChorsdPresent = result.findViewById(R.id.isChorsdPresent);
+//        Boolean checkIsChorsdPresent = songsterObject.isChordsPresent();
+//        isChorsdPresent.setText(Boolean.toString(checkIsChorsdPresent));
 
 //        TextView tabType = result.findViewById(R.id.tabType);
 //        String checkTabType = songsterObject.getTabType();
@@ -70,8 +70,8 @@ public class SongsterFragment extends Fragment {
             newRowValues.put(SongsterDatabaseOpenHelper.COL_SongName, checkSongName);
             newRowValues.put(SongsterDatabaseOpenHelper.COL_ArtistID, songsterObject.getArtistID());
             newRowValues.put(SongsterDatabaseOpenHelper.COL_ArtistName, checkArtistName);
-            newRowValues.put(SongsterDatabaseOpenHelper.COL_UseThePrefix, checkIsUseThePrefix);
-            newRowValues.put(SongsterDatabaseOpenHelper.COL_ChordsPresent, checkIsChorsdPresent);
+            //newRowValues.put(SongsterDatabaseOpenHelper.COL_UseThePrefix, checkIsUseThePrefix);
+            //newRowValues.put(SongsterDatabaseOpenHelper.COL_ChordsPresent, checkIsChorsdPresent);
             //newRowValues.put(SongsterDatabaseOpenHelper.COL_TabType, checkTabType);
 
 

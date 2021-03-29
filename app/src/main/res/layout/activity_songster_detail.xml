@@ -34,23 +34,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/isUseThePrefix"
-            android:textSize="20sp"
-            android:text="useThePrefix"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/isChorsdPresent"
             android:textSize="20sp"
             android:text="chordsPresent"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tabType"
-            android:textSize="20sp"
-            android:text="Tab Type"/>
+
     </LinearLayout>
 
     <RelativeLayout

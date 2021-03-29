@@ -8,8 +8,8 @@ public class SongsterObject implements Serializable {
     private String songName;
     private long artistID;
     private String  artistName;
-    private boolean useThePrefix;
-    private boolean chordsPresent;
+//    private boolean useThePrefix;
+//    private boolean chordsPresent;
     //private String tabType;
 
 
@@ -17,14 +17,14 @@ public class SongsterObject implements Serializable {
     }
 
     public SongsterObject(long id, long songID, String songName, long artistID,
-                          String artistName, boolean useThePrefix, boolean chordsPresent) {
+                          String artistName) {
         this.id = id;
         this.songID = songID;
         this.songName = songName;
         this.artistID = artistID;
         this.artistName = artistName;
-        this.useThePrefix = useThePrefix;
-        this.chordsPresent = chordsPresent;
+        //this.useThePrefix = useThePrefix;
+        //this.chordsPresent = chordsPresent;
         //this.tabType = tabType;
     }
 
@@ -68,21 +68,21 @@ public class SongsterObject implements Serializable {
         this.artistName = artistName;
     }
 
-    public boolean isUseThePrefix() {
-        return useThePrefix;
-    }
-
-    public void setUseThePrefix(boolean useThePrefix) {
-        this.useThePrefix = useThePrefix;
-    }
-
-    public boolean isChordsPresent() {
-        return chordsPresent;
-    }
-
-    public void setChordsPresent(boolean chordsPresent) {
-        this.chordsPresent = chordsPresent;
-    }
+//    public boolean isUseThePrefix() {
+//        return useThePrefix;
+//    }
+//
+//    public void setUseThePrefix(boolean useThePrefix) {
+//        this.useThePrefix = useThePrefix;
+//    }
+//
+//    public boolean isChordsPresent() {
+//        return chordsPresent;
+//    }
+//
+//    public void setChordsPresent(boolean chordsPresent) {
+//        this.chordsPresent = chordsPresent;
+//    }
 
 //    public String getTabType() {
 //        return tabType;

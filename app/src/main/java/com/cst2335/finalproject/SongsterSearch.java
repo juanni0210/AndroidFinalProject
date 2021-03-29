@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,20 +98,18 @@ public class SongsterSearch extends AppCompatActivity {
         /**
          * CLick on Search button and show the search result and a snackbar
          */
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = "http://www.songsterr.com/a/ra/songs.xml?pattern="+searchText.getText().toString();
-                SongsterQuery downloadSongster = new SongsterQuery();
-                downloadSongster.execute(url);
+        searchButton.setOnClickListener(v ->
+        {
+            String url = "http://www.songsterr.com/a/ra/songs.json?pattern="+searchText.getText().toString();
+            SongsterQuery downloadSongster = new SongsterQuery();
+            downloadSongster.execute(url);
 
 
-                searchText.onEditorAction(EditorInfo.IME_ACTION_DONE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("searchText", searchText.getText().toString());
+            searchText.onEditorAction(EditorInfo.IME_ACTION_DONE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("searchText", searchText.getText().toString());
 
-                editor.commit();
-            }
+            editor.apply();
         });
 
         /**
@@ -165,7 +164,7 @@ public class SongsterSearch extends AppCompatActivity {
          */
         protected String doInBackground(String... urls) {
             HttpURLConnection urlConnection = null;
-            String result = "";
+            StringBuilder result = new StringBuilder();
             try {
                 URL link = new URL(urls[0]);
                 urlConnection = (HttpURLConnection) link.openConnection();
@@ -174,46 +173,61 @@ public class SongsterSearch extends AppCompatActivity {
                 e.printStackTrace();
             }
             try {
+                assert urlConnection != null;
                 InputStream in = urlConnection.getInputStream();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                 publishProgress(50);
                 String line = null;
                 while ((line = reader.readLine()) != null) {
-                    result += line;
+                    result.append(line);
                 }
                 publishProgress(70);
-                return result;
+                Log.e("connect", result.toString());
+                return result.toString();
             }
             catch (IOException e) {
                 e.printStackTrace();
             }
-            finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-            }
-            return result;
+
+            Log.e("Error", result.toString());
+            return null;
         }
         /**
-         * Method gets car charging stations and displays them on the screen as a list of items
-         * @param result data about car charging stations retrieved by doInBackground method()
+         * Method gets songster and displays them on the screen as a list of items
+         * @param result data about songster retrieved by doInBackground method()
          */
         protected void onPostExecute(String result) {
+            Log.e("onPostExe",result);
             songsterObject.clear(); // remove old results
             try {
                 JSONArray songsterArray = new JSONArray(result);
-                SongsterObject songsterObject = new SongsterObject();
 
                 for(int i = 0; i < songsterArray.length(); i++){
+                    SongsterObject songsterObject = new SongsterObject();
                     JSONObject songsterObj = (JSONObject) songsterArray.get(i);
                     songsterObject.setSongID(songsterObj.getLong("id"));
                     songsterObject.setSongName(songsterObj.getString("title"));
-                    songsterObject.setChordsPresent(songsterObj.getBoolean("chordsPresent"));
+                    //songsterObject.setChordsPresent(songsterObj.getBoolean("chordsPresent"));
+                    Log.e("song", String.valueOf(songsterObj.getLong("id")));
+                    Log.e("songName", songsterObj.getString("title"));
 
-                    JSONObject artistObj = new JSONObject("artist");
+                    String artist = songsterObj.getString("artist");
+                    JSONObject artistObj = new JSONObject(artist);
                     songsterObject.setArtistID(artistObj.getLong("id"));
-                    songsterObject.setArtistName(artistObj.getString("name"));
-                    songsterObject.setUseThePrefix(artistObj.getBoolean("useThePrefix"));
+
+                    Log.e("artist", String.valueOf(artistObj.getLong("id")));
+
+
+                    Boolean isUseThePrefix = artistObj.getBoolean("useThePrefix");
+
+                    if(isUseThePrefix){
+                        songsterObject.setArtistName(artistObj.getString("name"));
+                        Log.e("artistName",artistObj.getString("name"));
+                    }else{
+                        songsterObject.setArtistName(artistObj.getString("nameWithoutThePrefix"));
+                        Log.e("artistNameWithout",artistObj.getString("nameWithoutThePrefix"));
+                    }
+
 
 //                    JSONArray typeObj = new JSONArray("tabTypes");
 //                    songsterObject.setTabType(typeObj.getString(0));
@@ -223,8 +237,10 @@ public class SongsterSearch extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            SongsterAdapter adapter = new SongsterAdapter(getApplicationContext(), songsterObject, false);
+            SongsterAdapter adapter = new SongsterAdapter(getApplicationContext(), songsterObject);
             songsterList.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+
             progressBar.setVisibility(View.INVISIBLE);
         }
     }

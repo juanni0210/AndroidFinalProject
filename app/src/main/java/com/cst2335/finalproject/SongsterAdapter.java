@@ -18,22 +18,17 @@ public class SongsterAdapter extends BaseAdapter {
      * context of the current state of an application
      */
     private Context mContext;
-    /**
-     * marker of a full or partial information of a car charging station displayed in an item view (needed for getView() method)
-     */
-    private Boolean fullInfo;
+
 
     /**
      * Constructor for an adapter
      * @param context current state of an application
      * @param songsterList list of songster objects
-     * @param fullInfo marker of a full details for an item view displayed on screen
      */
-    public SongsterAdapter(Context context, ArrayList<SongsterObject> songsterList, Boolean fullInfo) {
+    public SongsterAdapter(Context context, ArrayList<SongsterObject> songsterList) {
         super();
         this.mContext = context;
         this.songsterList = songsterList;
-        this.fullInfo = fullInfo;
     }
 
     /**
@@ -81,16 +76,9 @@ public class SongsterAdapter extends BaseAdapter {
         TextView searchResultSong = newView.findViewById(R.id.searchResultSong);
         TextView searchResultArtist = newView.findViewById(R.id.searchResultArtist);
 
+        searchResultSong.setText(row.getSongName());
+        searchResultArtist.setText(row.getArtistName());
 
-        if(fullInfo) {
-            searchResultSong.setText(row.getSongName());
-            searchResultArtist.setText(row.getArtistName());
-
-        }
-        else{
-            searchResultArtist.setText("no result");
-            searchResultSong.setText("no result");
-        }
         return newView;
     }
 }
