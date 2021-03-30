@@ -46,7 +46,7 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="18dp"
-                android:layout_marginLeft="50dp"
+                android:layout_centerHorizontal="true"
                 android:layout_marginBottom="10dp"
                 android:layout_below="@id/title"/>
 
@@ -59,7 +59,7 @@
                 android:inputType="number"
                 android:textColor="@color/white"
                 android:text="5"
-                android:layout_marginLeft="50dp"
+                android:layout_centerHorizontal="true"
                 android:layout_marginBottom="10dp"
                 android:layout_below="@id/questionNumLabel"/>
 
@@ -71,7 +71,7 @@
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginLeft="50dp"
+                android:layout_centerHorizontal="true"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:text="@string/difficulty_label"
@@ -84,8 +84,7 @@
                 android:background="@drawable/btn_orange"
                 android:textSize="18dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
+                android:layout_centerHorizontal="true"
                 android:entries="@array/difficulty_array"
                 android:layout_below="@id/difficultyLabel"/>
 
@@ -97,7 +96,7 @@
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginLeft="50dp"
+                android:layout_centerHorizontal="true"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:text="@string/question_type_label"
@@ -110,8 +109,7 @@
                 android:textSize="18dp"
                 android:background="@drawable/btn_orange"
                 android:layout_marginBottom="10dp"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
+                android:layout_centerHorizontal="true"
                 android:entries="@array/question_type_array"
                 android:layout_below="@id/questionTypeLabel"/>
 

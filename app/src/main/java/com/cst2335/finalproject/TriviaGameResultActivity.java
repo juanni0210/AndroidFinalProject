@@ -35,7 +35,8 @@ public class TriviaGameResultActivity extends AppCompatActivity {
     private Button startAgainBtn, saveScoreBtn, saveNameBtn, cancelSaveBtn;
     private int totalQuestionCount, correctAnswerCount, wrongAnswerCount, gameScore;
     private TextView congratsTextView, scoreView, resultDetailsView, scoreResult;
-    private String difficultyType, questionType, timeSpent;
+    private String difficultyType, timeSpent;
+    private QuestionType questionType;
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
     private EditText playerNameInput;
@@ -96,7 +97,7 @@ public class TriviaGameResultActivity extends AppCompatActivity {
         correctAnswerCount = fromGamePage.getIntExtra("CORRECTED_ANSWER_COUNT", 0);
         wrongAnswerCount = fromGamePage.getIntExtra("WRONG_ANSWER_COUNT", 0);
         difficultyType = fromGamePage.getStringExtra("DIFFICULTY_TYPE");
-        questionType = fromGamePage.getStringExtra("QUESTION_TYPE");
+        questionType = (QuestionType) fromGamePage.getSerializableExtra("QUESTION_TYPE");
         timeSpent = fromGamePage.getStringExtra("TIME_SPENT");
         totalQuestionCount = correctAnswerCount + wrongAnswerCount;
 
@@ -278,17 +279,18 @@ public class TriviaGameResultActivity extends AppCompatActivity {
         //add to the database and get the new ID
         ContentValues newRowValues = new ContentValues();
 
+        String questionTypeString = QuestionType.toDisplayText(questionType, getResources());
         //Now provide a value for every database column defined in TriviaDatabaseOpener.java:
         newRowValues.put(TiviaDatabaseOpener.COL_NAME, inputName);
         newRowValues.put(TiviaDatabaseOpener.COL_SCORE, gameScore);
         newRowValues.put(TiviaDatabaseOpener.COL_AMOUNT, totalQuestionCount);
         newRowValues.put(TiviaDatabaseOpener.COL_DIFFICULTY, difficultyType);
-        newRowValues.put(TiviaDatabaseOpener.COL_TYPE, questionType);
+        newRowValues.put(TiviaDatabaseOpener.COL_TYPE, questionTypeString);
 
         //Now insert in the database:
         long newId = triviaDB.insert(TiviaDatabaseOpener.TABLE_NAME, null, newRowValues);
 
-        ScoreRecord record = new ScoreRecord(inputName, gameScore, difficultyType, questionType, totalQuestionCount, newId);
+        ScoreRecord record = new ScoreRecord(inputName, gameScore, difficultyType, questionTypeString, totalQuestionCount, newId);
 
         scoreRecordsList.add(record);
         // sort the socre in order to show the score in the list view from highest to the lowest

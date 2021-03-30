@@ -37,7 +37,8 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
     private String selectedAns = "";
     private int totalQuestionCount, answerCount, correctCount;
     private boolean isTimerChecked;
-    private String generatedGameURL, questionType;
+    private String generatedGameURL;
+    private QuestionType questionType;
     private ImageView waitingImage;
     private TextView unAnsweredView, correctView, wrongView, questionTextView, timeTextView;
     private Button nextButton;
@@ -84,7 +85,7 @@ public class TriviaGameOngoingActivity extends AppCompatActivity {
 
         Intent fromLaunchPage = getIntent();
         generatedGameURL = fromLaunchPage.getStringExtra("GENERATED_URL");
-        questionType = fromLaunchPage.getStringExtra("QUESTION_TYPE");
+        questionType = (QuestionType)fromLaunchPage.getSerializableExtra("QUESTION_TYPE");
         isTimerChecked = fromLaunchPage.getBooleanExtra("TIMER_SWITCH", false);
         //just want to check the url from the previous page
         //Toast.makeText(TriviaGameOngoingActivity.this, generatedGameURL, Toast.LENGTH_SHORT).show();
