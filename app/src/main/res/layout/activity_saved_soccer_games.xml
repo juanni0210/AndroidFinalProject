@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/savedLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_grey"
+    android:padding="@dimen/box_inset_layout_padding"
+    tools:context=".SavedSoccerGames"
+    android:orientation="vertical"
+    tools:deviceIds="wear">
+
+    <ListView
+        android:id="@+id/theSavedListView"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/soccer_editText">
+    </ListView>
+
+<!--    <FrameLayout-->
+<!--        android:id="@+id/fragmentLocation"-->
+<!--        android:layout_below="@id/image"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_toEndOf="@+id/theListView" >-->
+
+<!--    </FrameLayout>-->
+
+    <EditText
+        android:id="@+id/soccer_editText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/searchBtn"
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@id/soccer_editText"
+        android:layout_alignParentRight="true"
+        android:layout_height="wrap_content"
+        android:text="@string/soccer_search" />
+
+    <ImageView
+        android:id="@+id/savedImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_toRightOf="@+id/theSavedListView"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/soccer_editText"
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="43dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/savedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/theSavedListView"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/savedImage"
+        tools:layout_editor_absoluteX="68dp"
+        tools:layout_editor_absoluteY="252dp" />
+
+    <TextView
+        android:id="@+id/blank1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/savedDate"
+        android:layout_toRightOf="@+id/theSavedListView"
+        android:layout_centerHorizontal="true"
+        tools:layout_editor_absoluteX="68dp"
+        tools:layout_editor_absoluteY="252dp" />
+
+
+    <TextView
+        android:id="@+id/savedDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/blank1"
+        android:layout_toRightOf="@+id/theSavedListView"
+        android:layout_centerHorizontal="true"
+        tools:layout_editor_absoluteX="68dp"
+        tools:layout_editor_absoluteY="252dp" />
+
+    <TextView
+        android:id="@+id/blank2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/savedDescription"
+        android:layout_toRightOf="@+id/theSavedListView"
+        android:layout_centerHorizontal="true"
+        tools:layout_editor_absoluteX="68dp"
+        tools:layout_editor_absoluteY="252dp" />
+
+    <TextView
+        android:id="@+id/savedLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/blank2"
+        android:layout_toRightOf="@+id/theSavedListView"
+        tools:layout_editor_absoluteX="68dp"
+        tools:layout_editor_absoluteY="252dp" />
+
+    <Button
+        android:id="@+id/readSavedBtn"
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@id/theSavedListView"
+        android:layout_alignBottom="@id/theSavedListView"
+        android:layout_height="wrap_content"
+        android:text="@string/read" />
+
+    <Button
+        android:id="@+id/removeBtn"
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@id/readSavedBtn"
+        android:layout_alignBottom="@id/theSavedListView"
+        android:layout_height="wrap_content"
+        android:text="@string/remove" />
+
+<!--    <Button-->
+<!--        android:id="@+id/favoriteBtn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_toRightOf="@id/saveBtn"-->
+<!--        android:layout_alignBottom="@id/theListView"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/favorite" />-->
+
+
+
+    <!--    <FrameLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:padding="@dimen/inner_frame_layout_padding"-->
+    <!--        app:boxedEdges="all">-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/text"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="@string/hello_world" />-->
+
+    <!--    </FrameLayout>-->
+</RelativeLayout>

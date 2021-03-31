@@ -19,6 +19,7 @@ public class SoccerNewsPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_soccer_news_page);
+
         Bundle bundle = getIntent().getExtras();
         String newsLink = bundle.getString("news");
 

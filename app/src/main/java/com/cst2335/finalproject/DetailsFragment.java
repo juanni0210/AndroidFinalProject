@@ -110,7 +110,6 @@ public class DetailsFragment extends Fragment {
         return result;
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
