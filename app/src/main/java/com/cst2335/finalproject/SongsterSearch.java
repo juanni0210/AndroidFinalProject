@@ -29,9 +29,6 @@ import com.google.android.material.snackbar.Snackbar;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -50,7 +47,7 @@ public class SongsterSearch extends AppCompatActivity {
     /**
      * list of Songster
      */
-    ArrayList<SongsterObject> songsterObject = new ArrayList<SongsterObject>();
+    ArrayList<SongsterObject> songsterObject = new ArrayList<>();
     /**
      * Field from the screen accepts input from a user
      */
@@ -189,7 +186,6 @@ public class SongsterSearch extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            Log.e("Error", result.toString());
             return null;
         }
         /**
@@ -201,9 +197,10 @@ public class SongsterSearch extends AppCompatActivity {
             songsterObject.clear(); // remove old results
             try {
                 JSONArray songsterArray = new JSONArray(result);
+                SongsterObject songsterObject = new SongsterObject();
 
                 for(int i = 0; i < songsterArray.length(); i++){
-                    SongsterObject songsterObject = new SongsterObject();
+
                     JSONObject songsterObj = (JSONObject) songsterArray.get(i);
                     songsterObject.setSongID(songsterObj.getLong("id"));
                     songsterObject.setSongName(songsterObj.getString("title"));
@@ -217,7 +214,6 @@ public class SongsterSearch extends AppCompatActivity {
 
                     Log.e("artist", String.valueOf(artistObj.getLong("id")));
 
-
                     Boolean isUseThePrefix = artistObj.getBoolean("useThePrefix");
 
                     if(isUseThePrefix){
@@ -228,15 +224,15 @@ public class SongsterSearch extends AppCompatActivity {
                         Log.e("artistNameWithout",artistObj.getString("nameWithoutThePrefix"));
                     }
 
-
 //                    JSONArray typeObj = new JSONArray("tabTypes");
 //                    songsterObject.setTabType(typeObj.getString(0));
+
+
 
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
             SongsterAdapter adapter = new SongsterAdapter(getApplicationContext(), songsterObject);
             songsterList.setAdapter(adapter);
             adapter.notifyDataSetChanged();
