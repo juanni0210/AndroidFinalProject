@@ -4,6 +4,20 @@
     <string name="save">保存</string>
     <string name="favorite">喜爱</string>
     <string name="soccer_search">搜索</string>
+    <string name="hello_blank_fragment">你好</string>
+    <string name="title_activity_main2">主页</string>
+    <string name="first_fragment_label">第一分段</string>
+    <string name="second_fragment_label">第二分段</string>
+    <string name="next">下一个</string>
+    <string name="previous">前一个</string>
+    <string name="hello_first_fragment">你好第一分段</string>
+    <string name="hello_second_fragment">你好第二分段</string>
+    <string name="title_activity_soccer_news_page">足球新闻</string>
+    <string name="back">后退</string>
+    <string name="remove">删除</string>
+    <string name="rating">评分</string>
+    <string name="submitRate">提交</string>
+    <string name="hello_world">你好！</string>
 
 
 </resources>

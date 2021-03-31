@@ -116,6 +116,8 @@
         android:layout_toRightOf="@id/readSavedBtn"
         android:layout_alignBottom="@id/theSavedListView"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="70dp"
         android:text="@string/remove" />
 
 <!--    <Button-->

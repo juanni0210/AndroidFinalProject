@@ -25,6 +25,10 @@
     <string name="title_activity_soccer_news_page">SoccerNewsPage</string>
     <string name="back">BACK</string>
     <string name="remove">REMOVE</string>
+    <string name="rating">Rate the SoccerGames APP</string>
+    <string name="submitRate">Submit</string>
+
+
 
     <!--
     This string is used for square devices and overridden by hello_world in

@@ -52,6 +52,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import hotchemi.android.rate.AppRate;
+
 import static com.cst2335.finalproject.SavedSoccerGames.mySavedAdapter;
 import static com.cst2335.finalproject.SavedSoccerGames.savedItems;
 
@@ -130,16 +132,16 @@ public class SoccerGames extends AppCompatActivity {
          /*
         This is to create an  alert dialog when opening the API.
          */
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Rating");
-        alertDialog.setMessage("Could you rate the API");
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
+//        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+//        alertDialog.setTitle("Rating");
+//        alertDialog.setMessage("Could you rate the API");
+//        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+//                new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//        alertDialog.show();
 
         /*
         when user click the item on the list view, details of the item will be sent to the fragment.

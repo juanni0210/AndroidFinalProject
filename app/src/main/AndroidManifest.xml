@@ -17,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject">
+<!--        <activity android:name=".RatingSoccerAPI"></activity>-->
         <activity android:name=".SavedSoccerGames" />
         <activity android:name=".SoccerNewsPage" />
 
@@ -35,6 +36,15 @@
             android:name="com.google.android.maps"
             android:required="true" />
 
+        <activity
+            android:name=".RatingSoccerAPI"
+            android:label="RatingSoccerAPI">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".SoccerGames"
             android:label="@string/title_activity_soccer_games">
