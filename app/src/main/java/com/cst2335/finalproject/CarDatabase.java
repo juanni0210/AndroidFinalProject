@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -49,6 +51,7 @@ public class CarDatabase extends AppCompatActivity {
     SQLiteDatabase db;
     String selectedModelName;
     String selectedMakeName;
+    SharedPreferences makeRef;
 
 
     @Override
@@ -112,7 +115,16 @@ public class CarDatabase extends AppCompatActivity {
             });
         });
 
+        //shared preference for user searched make name
+        makeRef = getSharedPreferences("FileName", Context.MODE_PRIVATE);
+
+        String savedString = makeRef.getString("ReserveName", "");
+        EditText makeInputField = findViewById(R.id.makeInput);
+        makeInputField.setText(savedString);
+
+
         searchMakeButton.setOnClickListener(b-> {
+            saveSharedPrefs(makeInputField.getText().toString());
             Toast.makeText(CarDatabase.this, "Searched Models for this make", Toast.LENGTH_LONG).show();
             carProgressBar.setVisibility(View.VISIBLE);
             userInput = makeNameInput.getText().toString();
@@ -149,7 +161,12 @@ public class CarDatabase extends AppCompatActivity {
             goToFavorites.setOnClickListener( click -> startActivity( goToFavoritesPage ));
         });
 
+    }
 
+    private void saveSharedPrefs(String stringToSave) {
+        SharedPreferences.Editor editor = makeRef.edit();
+        editor.putString("ReserveName", stringToSave);
+        editor.commit();
     }
 
     @Override
@@ -175,13 +192,7 @@ public class CarDatabase extends AppCompatActivity {
                                 "3. After models loaded, long click one item will show you the model info" +
                                 "4. You can also list it into your favorites" +
                                 "5. Short or normal click will choose that item and your can click search details to get more info for this item with online resources")
-//                        .setPositiveButton("Yes",(click, arg) -> {
-//                            String url = "https://www.google.com/search?q=" +selectedMakeName +"+" + selectedModelName;
-//                            Intent i = new Intent(Intent.ACTION_VIEW);
-//                            i.setData( Uri.parse(url) );
-//                            startActivity(i);
-//                        })
-//                        .setNegativeButton("No", (click, arg) -> {})
+
                         .create().show();
                 break;
 
