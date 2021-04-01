@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+/**
+ * This is the class to show the rating bar for the API.
+ */
 public class RatingSoccerAPI extends AppCompatActivity {
 
     TextView rateCount, showRating;
@@ -19,8 +22,8 @@ public class RatingSoccerAPI extends AppCompatActivity {
     Button submit;
     RatingBar ratingBar;
     float rateValue;
-    String temp;
-    SharedPreferences prefs = null;
+//    String temp;
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +31,16 @@ public class RatingSoccerAPI extends AppCompatActivity {
         setContentView(R.layout.activity_rating_soccer_a_p_i);
 
         prefs = getSharedPreferences("FileName", Context.MODE_PRIVATE);
-        float savedValue = prefs.getFloat("ReserveRating", 5);
         Intent goToSoccer = new Intent(RatingSoccerAPI.this, SoccerGames.class);
-
 
         rateCount = findViewById(R.id.rateCount);
         ratingBar = findViewById(R.id.ratingBar);
         review = findViewById(R.id.review);
         submit = findViewById(R.id.submitBtn);
         showRating = findViewById(R.id.showRating);
+
+        float savedValue = prefs.getFloat("ReserveRating", 5);
+        ratingBar.setRating(savedValue);
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -54,6 +58,7 @@ public class RatingSoccerAPI extends AppCompatActivity {
                     rateCount.setText("Best " + rateValue + "/5");
             }
         });
+
         submit.setOnClickListener(click -> {
             saveSharedPrefs(ratingBar.getRating());
             startActivity(goToSoccer);

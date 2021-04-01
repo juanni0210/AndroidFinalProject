@@ -1,5 +1,6 @@
 package com.cst2335.finalproject;
 
+import android.content.AsyncQueryHandler;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -67,9 +69,10 @@ public class SoccerGames extends AppCompatActivity {
 //    private TextView mTextView;
     private MyListAdapter myAdapter;
     private ArrayList<Item> elements = new ArrayList<>();
-    private ArrayList<Bitmap> bit = new ArrayList<>();
+//    private ArrayList<Bitmap> bit = new ArrayList<>();
     SQLiteDatabase db;
     ImageView imgView;
+    Bitmap bitmap;
     URL imageUrl;
 
     private ProgressBar progressBar;
@@ -96,7 +99,6 @@ public class SoccerGames extends AppCompatActivity {
         myList.setAdapter(myAdapter = new MyListAdapter());
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
-
         imgView = findViewById(R.id.image);
 
         MyHTTPRequest req = new MyHTTPRequest();
@@ -109,8 +111,10 @@ public class SoccerGames extends AppCompatActivity {
         Intent goToNews = new Intent(SoccerGames.this, SoccerNewsPage.class);
         Intent goToSaved = new Intent(SoccerGames.this, SavedSoccerGames.class);
 
+        // connection to database
         SoccerGamesOpener dbOpener = new SoccerGamesOpener(this);
         db = dbOpener.getWritableDatabase();
+
 
         /*
         This is to create a toast when clicking the favorite button.
@@ -156,8 +160,11 @@ public class SoccerGames extends AppCompatActivity {
 
             // intend to load image
             System.out.println(selectedItem.getImage());
-            loadImage(selectedItem.getImage());
-
+            Picasso.get().setLoggingEnabled(true);
+//            loadImage(selectedItem.getImage());
+//            loadImage("https://i.imgur.com/DvpvklR.png");
+            Drawable d = loadImageFromWebOperations(getImage);
+            imgView.setImageDrawable(d);
             Bundle linkToPass = new Bundle();
             linkToPass.putString("news", getLink);
             goToNews.putExtras(linkToPass);
@@ -217,22 +224,66 @@ public class SoccerGames extends AppCompatActivity {
         });
     }
 
-
-    private void loadImage(String url){
-        Picasso.get().load(url).resize(20, 20)
-                .error(R.mipmap.ic_launcher)
-                .into(imgView, new com.squareup.picasso.Callback() {
-                    @Override
-                    public void onSuccess() {
-                        System.out.println("Successful");
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        System.out.println("Error in loadImage.");
-                    }
-                });
+// Picasso method
+//    private void loadImage(String url){
+//        Picasso.get().load(url).resize(200, 200)
+//                .error(R.mipmap.ic_launcher)
+//                .into(imgView, new com.squareup.picasso.Callback() {
+//                    @Override
+//                    public void onSuccess() {
+//                        System.out.println("Successful");
+//                    }
+//
+//                    @Override
+//                    public void onError(Exception e) {
+//                        System.out.println("Error in loadImage.");
+//                    }
+//                });
+//    }
+    public static Drawable loadImageFromWebOperations(String url) {
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, "test");
+            return d;
+        } catch (Exception e) {
+            return null;
+        }
     }
+
+
+    //another way to load image
+//    public void loadImage2(View view){
+//        imgView = findViewById(R.id.image);
+//        class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
+//            private String url;
+//            private ImageView imageView2;
+//
+//            public ImageLoadTask(String url, ImageView imageView2){
+//                this.url = url;
+//                this.imageView2 = imageView2;
+//            }
+//            @Override
+//            protected Bitmap doInBackground(Void... params){
+//                try{
+//                    URL connection = new URL(url);
+//                    InputStream input = connection.openStream();
+//                    bitmap = BitmapFactory.decodeStream(input);
+//                    Bitmap resize = Bitmap.createScaledBitmap(bitmap, 100, 100, true);
+//                    return resize;
+//                } catch (Exception e) {
+//                    System.out.println("loading error");
+//                }
+//                return null;
+//            }
+//            @Override
+//            protected void onPostExecute(Bitmap result){
+//                super.onPostExecute(result);
+//                imageView2.setImageBitmap(result);
+//            }
+//        }
+//        ImageLoadTask obj = new ImageLoadTask("https://i.imgur.com/DvpvklR.png", imgView);
+//        obj.execute();
+//    }
 
     /**
      * This is the AsyncTask to connect to the link and get data from the API.
@@ -298,6 +349,7 @@ public class SoccerGames extends AppCompatActivity {
                         } else if (xpp.getName().equalsIgnoreCase("media:thumbnail")) {
                             if (insideItem) {
                                 image =  xpp.getAttributeValue(null, "url");
+
 //                                try {
 //                                    URL imageURL = new URL(image);
 //                                    HttpURLConnection connection = (HttpURLConnection) imageURL

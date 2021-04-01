@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * This is to show the news in a browser.
+ */
 public class SoccerNewsPage extends AppCompatActivity {
 
     WebView web;
