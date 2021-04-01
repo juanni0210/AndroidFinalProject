@@ -61,20 +61,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="search details"/>
+            android:text="@string/searchDetail"/>
 
         <Button
             android:id="@+id/shop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="go to shop"/>
+            android:text="@string/goToShop"/>
         <Button
             android:id="@+id/favorites"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="your favorites"/>
+            android:text="@string/favorites"/>
 
 
     </LinearLayout>

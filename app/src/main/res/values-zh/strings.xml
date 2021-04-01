@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    Car Database-->
+    <string name="SaveToFavorites">存入收藏夹</string>
+    <string name="enterHint">请输入品牌</string>
+    <string name="searchModel">车型</string>
+    <string name="searchDetail">查询详情</string>
+    <string name="goToShop">前往购买</string>
+    <string name="favorites">收藏夹</string>
+    <string name="backToPrevious">回到前页</string>
+    <string name="deleteFromFavorites">从收藏夹中删除</string>
+</resources>

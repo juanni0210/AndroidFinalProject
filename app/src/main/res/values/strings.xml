@@ -11,7 +11,15 @@
     <string name="projectInfo">CST2335 Final Project</string>
     <string name="teamInfo">© 2021 TECH SAVVY TEAM</string>
 
-
+    <!--    Car Database-->
+    <string name="SaveToFavorites">Save to Favorites</string>
+    <string name="enterHint">Please enter make/brand</string>
+    <string name="searchModel">search model</string>
+    <string name="searchDetail">search details</string>
+    <string name="goToShop">go to shop</string>
+    <string name="favorites">favorites</string>
+    <string name="backToPrevious">Back to previous</string>
+    <string name="deleteFromFavorites">delete from favorites</string>
 
 
 
