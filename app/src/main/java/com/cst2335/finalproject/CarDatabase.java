@@ -1,6 +1,7 @@
 package com.cst2335.finalproject;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -10,6 +11,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -22,6 +26,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
@@ -41,7 +47,8 @@ public class CarDatabase extends AppCompatActivity {
     private EditText makeNameInput;
     private ProgressBar carProgressBar;
     SQLiteDatabase db;
-
+    String selectedModelName;
+    String selectedMakeName;
 
 
     @Override
@@ -54,9 +61,9 @@ public class CarDatabase extends AppCompatActivity {
         Button searchDetails = findViewById(R.id.searchdetals);
         Button goToShop = findViewById(R.id.shop);
         Button favorites = findViewById(R.id.favorites);
-        //Button saveButton = findViewById(R.id.saveButton);
+        Button saveButton = findViewById(R.id.saveButton);
         LinearLayout layout = findViewById(R.id.topfunction);
-        RelativeLayout mostOuter = findViewById(R.id.mostOuter);
+        LinearLayout mostOuter = findViewById(R.id.mostOuter);
         ListView listView = findViewById(R.id.model_list);
 
         TextView makeName = findViewById(R.id.makeName);
@@ -67,6 +74,12 @@ public class CarDatabase extends AppCompatActivity {
 
         MyCarDB carDB = new MyCarDB(this);
         db = carDB.getWritableDatabase();
+
+        //This gets the toolbar from the layout:
+        Toolbar tBar = (Toolbar)findViewById(R.id.toolbar);
+
+        //This loads the toolbar, which calls onCreateOptionsMenu below:
+        setSupportActionBar(tBar);
 
 
         listView.setAdapter(myAdapter);
@@ -85,15 +98,29 @@ public class CarDatabase extends AppCompatActivity {
             return true;
         });
 
+        listView.setOnItemClickListener((p, b, pos, id) -> {
+            Model currentModel = modelList.get(pos);
+            selectedModelName = currentModel.getModel();
+            saveButton.setOnClickListener(v -> {
+                ContentValues cValues = new ContentValues();
+                cValues.put(MyCarDB.COL_MAKE, makeName.getText().toString());
+                cValues.put(MyCarDB.COL_MODEL, modelName.getText().toString());
+                long idSave = db.insert(MyCarDB.TABLE_NAME, null, cValues);
+                Model model = new Model(makeName.getText().toString(), modelName.getText().toString(), idSave);
+                modelList.add(model);
+                myAdapter.notifyDataSetChanged();
+            });
+        });
+
         searchMakeButton.setOnClickListener(b-> {
             Toast.makeText(CarDatabase.this, "Searched Models for this make", Toast.LENGTH_LONG).show();
             carProgressBar.setVisibility(View.VISIBLE);
             userInput = makeNameInput.getText().toString();
+            selectedMakeName = userInput;
             carDBUrl = "https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/"+userInput+"?format=json";
             CarDataRequest carReq = new CarDataRequest();
             carReq.execute(carDBUrl);  //Type 1
         });
-
 
 
         searchDetails.setOnClickListener(v -> {
@@ -101,7 +128,7 @@ public class CarDatabase extends AppCompatActivity {
             alertDialogBuilder.setTitle("By clicking Yes, you will be redirected to an external link.")
                     .setMessage("Are you sure?")
                     .setPositiveButton("Yes",(click, arg) -> {
-                        String url = "http://www.google.ca";
+                        String url = "https://www.google.com/search?q=" +selectedMakeName +"+" + selectedModelName;
                         Intent i = new Intent(Intent.ACTION_VIEW);
                         i.setData( Uri.parse(url) );
                         startActivity(i);
@@ -123,18 +150,44 @@ public class CarDatabase extends AppCompatActivity {
         });
 
 
-/*
-        saveButton.setOnClickListener(v -> {
-            ContentValues cValues = new ContentValues();
-            cValues.put(MyCarDB.COL_MAKE, makeName.getText().toString());
-            cValues.put(MyCarDB.COL_MODEL, modelName.getText().toString());
-            long id = db.insert(MyCarDB.TABLE_NAME, null, cValues);
-            Model model = new Model(makeName.getText().toString(), modelName.getText().toString(), id);
-            modelList.add(model);
-            myAdapter.notifyDataSetChanged();
-        });
-        */
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.car_database_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String message = null;
+
+        switch(item.getItemId())
+        {
+            //what to do when the menu item is selected:
+            case R.id.helpMenu:
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("How to play with the Car Database?")
+                        .setMessage("1. Type in the make or brand that you are interested. " +
+                                "2. Click the button to search the models of this make. " +
+                                "3. After models loaded, long click one item will show you the model info" +
+                                "4. You can also list it into your favorites" +
+                                "5. Short or normal click will choose that item and your can click search details to get more info for this item with online resources")
+//                        .setPositiveButton("Yes",(click, arg) -> {
+//                            String url = "https://www.google.com/search?q=" +selectedMakeName +"+" + selectedModelName;
+//                            Intent i = new Intent(Intent.ACTION_VIEW);
+//                            i.setData( Uri.parse(url) );
+//                            startActivity(i);
+//                        })
+//                        .setNegativeButton("No", (click, arg) -> {})
+                        .create().show();
+                break;
+
+        }
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        return true;
     }
 
     public class MyListAdapter extends BaseAdapter{

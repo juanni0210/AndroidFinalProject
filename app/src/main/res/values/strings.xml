@@ -20,7 +20,7 @@
     <string name="favorites">favorites</string>
     <string name="backToPrevious">Back to previous</string>
     <string name="deleteFromFavorites">delete from favorites</string>
-
+    <string name="help">Help</string>
 
 
 </resources>
