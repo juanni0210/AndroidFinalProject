@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 //        Intent goToTrivaLaunch = new Intent(MainActivity.this, TriviaGameLaunchActivity.class);
 //        startTriviaBtn.setOnClickListener(v -> startActivity(goToTrivaLaunch));
 
-        Intent goToSonsterLaunch = new Intent(MainActivity.this, SongsterSearch.class);
+        Intent goToSonsterLaunch = new Intent(MainActivity.this, SongsterMain.class);
         startSongsterBtn.setOnClickListener(v -> startActivity(goToSonsterLaunch));
 //
 //        Intent goToCarDBLaunch = new Intent(MainActivity.this, CarDatabase.class);

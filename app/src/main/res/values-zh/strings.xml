@@ -19,4 +19,17 @@
     <string name="songsterStartBtn">歌手搜索</string>
     <string name="carDBStartBtn">汽车搜索</string>
 
+    <string name="input">输入搜索内容</string>
+    <string name="search_button">搜索</string>
+    <string name="addFavorite">加到喜欢清单</string>
+    <string name="go">返回</string>
+    <string name="back">返回</string>
+    <string name="removeFav">移除</string>
+    <string name="favorite">喜欢清单</string>
+    <string name="help">帮助</string>
+    <string name="author">作者：陈雪茹</string>
+    <string name="version">版本： 1.0</string>
+    <string name="instructions">输入搜索内容，点击搜索按钮</string>
+
+
 </resources>
