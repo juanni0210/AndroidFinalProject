@@ -35,7 +35,7 @@ public class SavedSoccerGames extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_soccer_games);
 
-//        loadDataFromDatabase(); //get any previously saved Contact objects
+
 
         //Get the fields from the screen:
         TextView saveDate = (TextView) findViewById(R.id.savedDate);
@@ -73,10 +73,12 @@ public class SavedSoccerGames extends AppCompatActivity {
 //            imgView.setImageBitmap(selectedItem.getItemImage());
 
         });
+        loadDataFromDatabase(); //get any previously saved Contact objects
     }
 //
     private void loadDataFromDatabase()
     {
+        savedItems.clear();
         SoccerGamesOpener savedbOpener = new SoccerGamesOpener(SavedSoccerGames.this);
         db = savedbOpener.getWritableDatabase();
 
@@ -100,7 +102,7 @@ public class SavedSoccerGames extends AppCompatActivity {
             long id = results.getLong(idColIndex);
 
             savedItems.add(new Item(title, date, image, link, description,id));
-//            mySavedAdapter.notifyDataSetChanged();
+            mySavedAdapter.notifyDataSetChanged();
         }
     }
 

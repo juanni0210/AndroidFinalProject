@@ -1,5 +1,6 @@
 package com.cst2335.finalproject;
 
+import android.app.AsyncNotedAppOp;
 import android.content.AsyncQueryHandler;
 import android.content.ContentValues;
 import android.content.Context;
@@ -159,18 +160,25 @@ public class SoccerGames extends AppCompatActivity {
             String getLink = selectedItem.getUrl();
 
             // intend to load image
-            System.out.println(selectedItem.getImage());
-            Picasso.get().setLoggingEnabled(true);
+//            System.out.println(selectedItem.getImage());
+//            Picasso.get().setLoggingEnabled(true);
 //            loadImage(selectedItem.getImage());
 //            loadImage("https://i.imgur.com/DvpvklR.png");
-            Drawable d = loadImageFromWebOperations(getImage);
-            imgView.setImageDrawable(d);
+//            Drawable d = loadImageFromWebOperations(getImage);
+//            imgView.setImageDrawable(d);
+            ImageRequest imageReq=new ImageRequest();
+            imageReq.execute(getImage);
+
             Bundle linkToPass = new Bundle();
             linkToPass.putString("news", getLink);
             goToNews.putExtras(linkToPass);
 
             readBtn.setOnClickListener(click -> {
-                startActivity(goToNews);
+                Intent intent=new Intent();
+                intent.setData(Uri.parse(getLink));
+                intent.setAction(Intent.ACTION_VIEW);
+                startActivity(intent);
+                //startActivity(goToNews);
             });
 
 //            imgView.setImageBitmap(selectedItem.getItemImage());
@@ -284,6 +292,33 @@ public class SoccerGames extends AppCompatActivity {
 //        ImageLoadTask obj = new ImageLoadTask("https://i.imgur.com/DvpvklR.png", imgView);
 //        obj.execute();
 //    }
+
+    private class ImageRequest extends AsyncTask<String,Integer,String>{
+        Bitmap itemImage;
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                URL url2 = new URL(strings[0]);
+                HttpURLConnection imgConnection = (HttpURLConnection) url2.openConnection();
+                imgConnection.connect();
+                int responseCode = imgConnection.getResponseCode();
+                if (responseCode == 200) {
+                    itemImage = BitmapFactory.decodeStream(imgConnection.getInputStream());
+
+                }
+
+            } catch (IOException e) {
+
+            }
+            return "done";
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            imgView.setImageBitmap(itemImage);
+        }
+    }
 
     /**
      * This is the AsyncTask to connect to the link and get data from the API.

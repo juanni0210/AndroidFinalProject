@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SoccerGamesOpener extends SQLiteOpenHelper {
     protected final static String DATABASE_NAME = "SoccerGamesDB";
-    protected final static int VERSION_NUM = 1;
+    protected final static int VERSION_NUM = 2;
     public final static String TABLE_NAME = "ITEM";
     public final static String COL_TITLE = "TITLE";
     public final static String COL_DATE = "DATE";
@@ -26,8 +26,8 @@ public class SoccerGamesOpener extends SQLiteOpenHelper {
                 + COL_TITLE + " text,"
                 + COL_DATE + " text,"
                 + COL_IMAGE  + " text,"
-                + COL_LINK + "text,"
-                + COL_DESCRIPTION + "text);");
+                + COL_LINK + " text,"
+                + COL_DESCRIPTION + " text);");
     }
 
     @Override

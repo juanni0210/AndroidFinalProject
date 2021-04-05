@@ -1,8 +1,10 @@
 package com.cst2335.finalproject;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,8 +14,14 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import hotchemi.android.rate.AppRate;
+
 /**
  * This is the class to show the rating bar for the API.
+ * A dialog box is shown to ask to rate the API.
+ * The user is asked to rate the application using 5 stars and the rating result is saved by SharedPreferences.
+ *  @author Feiqiong Deng
+ *  @version version 1
  */
 public class RatingSoccerAPI extends AppCompatActivity {
 
@@ -30,6 +38,25 @@ public class RatingSoccerAPI extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating_soccer_a_p_i);
 
+        // The dialog box.
+        AlertDialog.Builder alertDialog= new AlertDialog.Builder(this);
+        alertDialog.setTitle("Rating");
+        alertDialog.setMessage("Could you rate the API");
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alertDialog.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent goToPage = new Intent(RatingSoccerAPI.this, SoccerGames.class);
+                startActivity(goToPage);
+            }
+        });
+        alertDialog.show();
+
+        // SharedPreferences to save the rating value.
         prefs = getSharedPreferences("FileName", Context.MODE_PRIVATE);
         Intent goToSoccer = new Intent(RatingSoccerAPI.this, SoccerGames.class);
 
@@ -70,4 +97,5 @@ public class RatingSoccerAPI extends AppCompatActivity {
         editor.putFloat("ReserveRating", valueToSave);
         editor.commit();
     }
+
 }
