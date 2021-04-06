@@ -20,6 +20,24 @@
     <string name="hello_world">你好！</string>
     <string name="news">足球新闻</string>
     <string name="savedNews">收藏夹</string>
+    <string name="backHomeIcon">首页</string>
+    <string name="triviaMenuName">益智问答</string>
+    <string name="songsterMenuName">歌手搜索</string>
+    <string name="carDBMenuName">汽车数据库</string>
+    <string name="soccerMenuName">足球新闻</string>
+    <string name="helpMenuName">帮助</string>
+    <string name="navigationOpen">打开</string>
+    <string name="navigationClose">关闭</string>
+    <string name="soccerActivityTitle">足球新闻</string>
+    <string name="soccerActivityAuthor">邓飞琼</string>
+    <string name="soccerActivityVersionNumber">2</string>
+    <string name="soccerHelpTile">使用指南</string>
+    <string name="soccerInstructions1">点击标题获得更多咨询</string>
+    <string name="soccerInstructions2">点击阅读浏览新闻</string>
+    <string name="soccerInstructions3">点击保存可以保存新闻</string>
+    <string name="soccerInstructions4">点击喜爱浏览已保存的新闻</string>
+    <string name="soccerInstructions5">点击移除会移除新闻</string>
+    <string name="closeHelpDialog">关闭</string>
 
 
 </resources>

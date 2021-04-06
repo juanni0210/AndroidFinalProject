@@ -29,6 +29,28 @@
     <string name="submitRate">Submit</string>
     <string name="news">Soccer News</string>
     <string name="savedNews">Favorite News</string>
+    <string name="backHomeIcon">Home</string>
+    <string name="triviaMenuName">Trivia Game</string>
+    <string name="songsterMenuName">Songster Search</string>
+    <string name="carDBMenuName">Car Database</string>
+    <string name="soccerMenuName">Soccer Game</string>
+    <string name="helpMenuName">Help</string>
+    <string name="navigationOpen">Open</string>
+    <string name="soccerActivityTitle">Soccer Games Activity</string>
+    <string name="soccerActivityAuthor">Feiqiong Deng</string>
+    <string name="soccerActivityVersionNumber">Version Number: 2</string>
+    <string name="navigationClose">Close</string>
+    <string name="soccerHelpTile">Soccer Games Help Menu</string>
+    <string name="soccerInstructions1">* Click the title to get more details about the news</string>
+    <string name="soccerInstructions2">* Click read button to load the article’s URL in a browser</string>
+    <string name="soccerInstructions3">* Click save button to save the article</string>
+    <string name="soccerInstructions4">* Click favorite button to show the saved news articles</string>
+    <string name="soccerInstructions5">* Click remove button to removes the story from favourites</string>
+    <string name="closeHelpDialog">Close</string>
+
+
+
+
 
 
     <!--

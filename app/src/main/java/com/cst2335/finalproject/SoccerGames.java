@@ -1,62 +1,41 @@
 package com.cst2335.finalproject;
 
-import android.app.AsyncNotedAppOp;
-import android.content.AsyncQueryHandler;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 //import android.support.wearable.activity.WearableActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.squareup.picasso.Picasso;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
-import hotchemi.android.rate.AppRate;
 
 
 /**
@@ -64,7 +43,7 @@ import hotchemi.android.rate.AppRate;
  * @author Feiqiong Deng
  * @version version 1
  */
-public class SoccerGames extends AppCompatActivity {
+public class SoccerGames extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     private MyListAdapter myAdapter;
     private ArrayList<Item> elements = new ArrayList<>();
@@ -96,6 +75,17 @@ public class SoccerGames extends AppCompatActivity {
 
         //This loads the toolbar, which calls onCreateOptionsMenu below:
         setSupportActionBar(tBar);
+
+        //For NavigationDrawer:
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+                drawer, tBar, R.string.navigationOpen, R.string.navigationClose);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
 
         ListView myList = (ListView) findViewById(R.id.theListView);
         myList.setAdapter(myAdapter = new MyListAdapter());
@@ -262,6 +252,104 @@ public class SoccerGames extends AppCompatActivity {
 //            imgView.setImageBitmap(itemImage);
 //        }
 //    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String message = null;
+        //Look at your menu XML file. Put a case for every id in that file:
+        switch(item.getItemId())
+        {
+            //what to do when the menu item is selected:
+            case R.id.backHomeItem:
+                startActivity(new Intent(SoccerGames.this, MainActivity.class));
+                break;
+            case R.id.triviaItem:
+                Toast.makeText(this, "Go to trivia game page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.songsterItem:
+                Toast.makeText(this, "Go to songster page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.carDBItem:
+                Toast.makeText(this, "Go to car database page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.soccerItem:
+                startActivity(new Intent(SoccerGames.this, SoccerGames.class));
+                break;
+            case R.id.helpItem:
+                AlertDialog.Builder triviaHelpDialog = new AlertDialog.Builder(this);
+                triviaHelpDialog.setTitle(getResources().getString(R.string.soccerHelpTile))
+                        //What is the message:
+                        .setMessage(getResources().getString(R.string.soccerInstructions1) + "\n"
+                                + getResources().getString(R.string.soccerInstructions2) + "\n"
+                                + getResources().getString(R.string.soccerInstructions3) + "\n"
+                                + getResources().getString(R.string.soccerInstructions4) + "\n"
+                                + getResources().getString(R.string.soccerInstructions5))
+                        //What the No button does:
+                        .setNegativeButton(getResources().getString(R.string.closeHelpDialog), (click, arg) -> {
+                        })
+                        //Show the dialog
+                        .create().show();
+                break;
+        }
+        return true;
+    }
+
+    // Needed for the OnNavigationItemSelected interface:
+    @Override
+    public boolean onNavigationItemSelected( MenuItem item) {
+
+        String message = null;
+
+        switch(item.getItemId())
+        {
+            case R.id.backHomeItem:
+                startActivity(new Intent(SoccerGames.this, MainActivity.class));
+                break;
+            case R.id.triviaItem:
+                Toast.makeText(this, "Go to trivia game page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.songsterItem:
+                Toast.makeText(this, "Go to songster page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.carDBItem:
+                Toast.makeText(this, "Go to car database page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.soccerItem:
+                startActivity(new Intent(SoccerGames.this, SoccerGames.class));
+                break;
+            case R.id.helpItem:
+                AlertDialog.Builder triviaHelpDialog = new AlertDialog.Builder(this);
+                triviaHelpDialog.setTitle(getResources().getString(R.string.soccerHelpTile))
+                        //What is the message:
+                        .setMessage(getResources().getString(R.string.soccerInstructions1) + "\n"
+                                + getResources().getString(R.string.soccerInstructions2) + "\n"
+                                + getResources().getString(R.string.soccerInstructions3) + "\n"
+                                + getResources().getString(R.string.soccerInstructions4) + "\n"
+                                + getResources().getString(R.string.soccerInstructions5))
+                        //What the No button does:
+                        .setNegativeButton(getResources().getString(R.string.closeHelpDialog), (click, arg) -> {
+                        })
+                        //Show the dialog
+                        .create().show();
+                break;
+        }
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        return false;
+    }
+
+
+
 
     /**
      * This is the AsyncTask to connect to the link and get data from the API.
