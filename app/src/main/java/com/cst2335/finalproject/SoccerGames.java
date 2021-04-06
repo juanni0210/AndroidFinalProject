@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
@@ -57,8 +58,6 @@ import java.util.concurrent.ExecutionException;
 
 import hotchemi.android.rate.AppRate;
 
-import static com.cst2335.finalproject.SavedSoccerGames.mySavedAdapter;
-import static com.cst2335.finalproject.SavedSoccerGames.savedItems;
 
 /**
  * This is the SoccerGames class to show the GUI and control the API behavior.
@@ -67,14 +66,10 @@ import static com.cst2335.finalproject.SavedSoccerGames.savedItems;
  */
 public class SoccerGames extends AppCompatActivity {
 
-//    private TextView mTextView;
     private MyListAdapter myAdapter;
     private ArrayList<Item> elements = new ArrayList<>();
-//    private ArrayList<Bitmap> bit = new ArrayList<>();
-    SQLiteDatabase db;
     ImageView imgView;
-    Bitmap bitmap;
-    URL imageUrl;
+
 
     private ProgressBar progressBar;
 
@@ -96,26 +91,25 @@ public class SoccerGames extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_soccer_games);
 
+        //This gets the toolbar from the layout:
+        Toolbar tBar = (Toolbar)findViewById(R.id.toolbar);
+
+        //This loads the toolbar, which calls onCreateOptionsMenu below:
+        setSupportActionBar(tBar);
+
         ListView myList = (ListView) findViewById(R.id.theListView);
         myList.setAdapter(myAdapter = new MyListAdapter());
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
         imgView = findViewById(R.id.image);
+        boolean isTablet = findViewById(R.id.fragmentLocation) != null; //check if the FrameLayout is loaded
 
         MyHTTPRequest req = new MyHTTPRequest();
         req.execute("https://www.goal.com/en/feeds/news");
 
         Button favoriteBtn = findViewById(R.id.favoriteBtn);
-        Button saveBtn = findViewById(R.id.saveBtn);
-        Button readBtn = findViewById(R.id.readBtn);
-        RelativeLayout layout = findViewById(R.id.newsLayout);
         Intent goToNews = new Intent(SoccerGames.this, SoccerNewsPage.class);
         Intent goToSaved = new Intent(SoccerGames.this, SavedSoccerGames.class);
-
-        // connection to database
-        SoccerGamesOpener dbOpener = new SoccerGamesOpener(this);
-        db = dbOpener.getWritableDatabase();
-
 
         /*
         This is to create a toast when clicking the favorite button.
@@ -159,29 +153,22 @@ public class SoccerGames extends AppCompatActivity {
             String getDescription = selectedItem.getDescription();
             String getLink = selectedItem.getUrl();
 
-            // intend to load image
-//            System.out.println(selectedItem.getImage());
-//            Picasso.get().setLoggingEnabled(true);
-//            loadImage(selectedItem.getImage());
-//            loadImage("https://i.imgur.com/DvpvklR.png");
-//            Drawable d = loadImageFromWebOperations(getImage);
-//            imgView.setImageDrawable(d);
-            ImageRequest imageReq=new ImageRequest();
-            imageReq.execute(getImage);
+            // 1.load image work
+//            ImageRequest imageReq=new ImageRequest();
+//            imageReq.execute(getImage);
 
-            Bundle linkToPass = new Bundle();
-            linkToPass.putString("news", getLink);
-            goToNews.putExtras(linkToPass);
+//            Bundle linkToPass = new Bundle();
+//            linkToPass.putString("news", getLink);
+//            goToNews.putExtras(linkToPass);
 
-            readBtn.setOnClickListener(click -> {
-                Intent intent=new Intent();
-                intent.setData(Uri.parse(getLink));
-                intent.setAction(Intent.ACTION_VIEW);
-                startActivity(intent);
-                //startActivity(goToNews);
-            });
+            // 2.read news in browser work
+//            readBtn.setOnClickListener(click -> {
+//                Intent intent=new Intent();
+//                intent.setData(Uri.parse(getLink));
+//                intent.setAction(Intent.ACTION_VIEW);
+//                startActivity(intent);
+//            });
 
-//            imgView.setImageBitmap(selectedItem.getItemImage());
             Bundle dataToPass = new Bundle();
             dataToPass.putString(ITEM_TITLE, getTitle);
             dataToPass.putString(ITEM_DATE, getDate);
@@ -189,136 +176,92 @@ public class SoccerGames extends AppCompatActivity {
             dataToPass.putString(ITEM_DESCRIPTION, getDescription);
             dataToPass.putString(ITEM_IMAGE, getImage);
 
-            DetailsFragment dFragment = new DetailsFragment(); //add a DetailFragment
-            dFragment.setArguments(dataToPass); //pass it a bundle for information
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragmentLocation, dFragment) //Add the fragment in FrameLayout
-                    .commit(); //actually load the fragment. Calls onCreate() in DetailFragment
-        });
-
-        myList.setOnItemLongClickListener( (p, b, pos, id) -> {
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle("Do you want to save this?")
-
-                    //What is the message:
-                    .setMessage("The selected row is: " + pos + "The database id id:" + id)
-
-                    //what the Yes button does:
-                    .setPositiveButton("Yes", (click, arg) -> {
-                        Item selectedItem = elements.get(pos);
-                        String getTitle = selectedItem.getTitle();
-                        String getDate = selectedItem.getDate();
-                        String getImage = selectedItem.getImage();
-                        String getDescription = selectedItem.getDescription();
-                        String getLink = selectedItem.getUrl();
-
-                        ContentValues newRowValues = new ContentValues();
-                        newRowValues.put(SoccerGamesOpener.COL_TITLE, getTitle);
-                        newRowValues.put(SoccerGamesOpener.COL_DATE, getDate);
-                        newRowValues.put(SoccerGamesOpener.COL_IMAGE, getImage);
-                        newRowValues.put(SoccerGamesOpener.COL_LINK, getLink);
-                        newRowValues.put(SoccerGamesOpener.COL_DESCRIPTION, getDescription);
-                        long newId = db.insert(SoccerGamesOpener.TABLE_NAME, null, newRowValues);
-
-                        Item oneItem = new Item(getTitle, getDate, getImage, getLink, getDescription, newId);
-                        savedItems.add(oneItem);
-                    })
-                    //What the No button does:
-                    .setNegativeButton("No", (click, arg) -> { })
-                    //Show the dialog
-                    .create().show();
-            return true;
-        });
-    }
-
-// Picasso method
-//    private void loadImage(String url){
-//        Picasso.get().load(url).resize(200, 200)
-//                .error(R.mipmap.ic_launcher)
-//                .into(imgView, new com.squareup.picasso.Callback() {
-//                    @Override
-//                    public void onSuccess() {
-//                        System.out.println("Successful");
-//                    }
-//
-//                    @Override
-//                    public void onError(Exception e) {
-//                        System.out.println("Error in loadImage.");
-//                    }
-//                });
-//    }
-    public static Drawable loadImageFromWebOperations(String url) {
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "test");
-            return d;
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-
-    //another way to load image
-//    public void loadImage2(View view){
-//        imgView = findViewById(R.id.image);
-//        class ImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
-//            private String url;
-//            private ImageView imageView2;
-//
-//            public ImageLoadTask(String url, ImageView imageView2){
-//                this.url = url;
-//                this.imageView2 = imageView2;
-//            }
-//            @Override
-//            protected Bitmap doInBackground(Void... params){
-//                try{
-//                    URL connection = new URL(url);
-//                    InputStream input = connection.openStream();
-//                    bitmap = BitmapFactory.decodeStream(input);
-//                    Bitmap resize = Bitmap.createScaledBitmap(bitmap, 100, 100, true);
-//                    return resize;
-//                } catch (Exception e) {
-//                    System.out.println("loading error");
-//                }
-//                return null;
-//            }
-//            @Override
-//            protected void onPostExecute(Bitmap result){
-//                super.onPostExecute(result);
-//                imageView2.setImageBitmap(result);
-//            }
-//        }
-//        ImageLoadTask obj = new ImageLoadTask("https://i.imgur.com/DvpvklR.png", imgView);
-//        obj.execute();
-//    }
-
-    private class ImageRequest extends AsyncTask<String,Integer,String>{
-        Bitmap itemImage;
-        @Override
-        protected String doInBackground(String... strings) {
-            try {
-                URL url2 = new URL(strings[0]);
-                HttpURLConnection imgConnection = (HttpURLConnection) url2.openConnection();
-                imgConnection.connect();
-                int responseCode = imgConnection.getResponseCode();
-                if (responseCode == 200) {
-                    itemImage = BitmapFactory.decodeStream(imgConnection.getInputStream());
-
-                }
-
-            } catch (IOException e) {
-
+            if(isTablet) {
+                SoccerGamesFragment dFragment = new SoccerGamesFragment(); //add a DetailFragment
+                dFragment.setArguments(dataToPass); //pass it a bundle for information
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentLocation, dFragment) //Add the fragment in FrameLayout
+                        .commit(); //actually load the fragment. Calls onCreate() in DetailFragment
             }
-            return "done";
-        }
+            else {
+                Intent soccerGamesFragment = new Intent(SoccerGames.this, SoccerGamesEmpty.class);
+                soccerGamesFragment.putExtras(dataToPass);
+                startActivity(soccerGamesFragment);
+            }
+        });
 
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            imgView.setImageBitmap(itemImage);
-        }
+//            DetailsFragment dFragment = new DetailsFragment(); //add a DetailFragment
+//            dFragment.setArguments(dataToPass); //pass it a bundle for information
+//            getSupportFragmentManager()
+//                    .beginTransaction()
+//                    .replace(R.id.fragmentLocation, dFragment) //Add the fragment in FrameLayout
+//                    .commit(); //actually load the fragment. Calls onCreate() in DetailFragment
+
+
+//        myList.setOnItemLongClickListener( (p, b, pos, id) -> {
+//            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+//            alertDialogBuilder.setTitle("Do you want to save this?")
+//
+//                    //What is the message:
+//                    .setMessage("The selected row is: " + pos + "The database id id:" + id)
+//
+//                    //what the Yes button does:
+//                    .setPositiveButton("Yes", (click, arg) -> {
+//                        Item selectedItem = elements.get(pos);
+//                        String getTitle = selectedItem.getTitle();
+//                        String getDate = selectedItem.getDate();
+//                        String getImage = selectedItem.getImage();
+//                        String getDescription = selectedItem.getDescription();
+//                        String getLink = selectedItem.getUrl();
+//
+//                        ContentValues newRowValues = new ContentValues();
+//                        newRowValues.put(SoccerGamesOpener.COL_TITLE, getTitle);
+//                        newRowValues.put(SoccerGamesOpener.COL_DATE, getDate);
+//                        newRowValues.put(SoccerGamesOpener.COL_IMAGE, getImage);
+//                        newRowValues.put(SoccerGamesOpener.COL_LINK, getLink);
+//                        newRowValues.put(SoccerGamesOpener.COL_DESCRIPTION, getDescription);
+//                        long newId = db.insert(SoccerGamesOpener.TABLE_NAME, null, newRowValues);
+//
+//                        Item oneItem = new Item(getTitle, getDate, getImage, getLink, getDescription, newId);
+//                        savedItems.add(oneItem);
+//                    })
+//                    //What the No button does:
+//                    .setNegativeButton("No", (click, arg) -> { })
+//                    //Show the dialog
+//                    .create().show();
+//            return true;
+//        });
     }
+
+
+    // 3. Load Image
+//    private class ImageRequest extends AsyncTask<String,Integer,String>{
+//        Bitmap itemImage;
+//        @Override
+//        protected String doInBackground(String... strings) {
+//            try {
+//                URL url2 = new URL(strings[0]);
+//                HttpURLConnection imgConnection = (HttpURLConnection) url2.openConnection();
+//                imgConnection.connect();
+//                int responseCode = imgConnection.getResponseCode();
+//                if (responseCode == 200) {
+//                    itemImage = BitmapFactory.decodeStream(imgConnection.getInputStream());
+//
+//                }
+//
+//            } catch (IOException e) {
+//
+//            }
+//            return "done";
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String s) {
+//            super.onPostExecute(s);
+//            imgView.setImageBitmap(itemImage);
+//        }
+//    }
 
     /**
      * This is the AsyncTask to connect to the link and get data from the API.

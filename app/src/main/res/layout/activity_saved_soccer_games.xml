@@ -14,7 +14,7 @@
         android:id="@+id/theSavedListView"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/soccer_editText">
+        android:layout_below="@id/savedNewsTop">
     </ListView>
 
 <!--    <FrameLayout-->
@@ -25,19 +25,16 @@
 <!--        android:layout_toEndOf="@+id/theListView" >-->
 
 <!--    </FrameLayout>-->
-
-    <EditText
-        android:id="@+id/soccer_editText"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/searchBtn"
-        android:layout_width="wrap_content"
-        android:layout_toRightOf="@id/soccer_editText"
-        android:layout_alignParentRight="true"
+    <TextView
+        android:id="@+id/savedNewsTop"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/soccer_search" />
+        android:layout_alignParentStart="true"
+        android:text="@string/savedNews"
+        android:textAlignment="center"
+        android:textAppearance="?android:textAppearanceLarge">
+    </TextView>
+
 
     <ImageView
         android:id="@+id/savedImage"
@@ -45,10 +42,22 @@
         android:layout_height="200dp"
         android:layout_toRightOf="@+id/theSavedListView"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/soccer_editText"
+        android:layout_below="@+id/savedTitle"
         tools:layout_editor_absoluteX="37dp"
         tools:layout_editor_absoluteY="43dp"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/savedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/theSavedListView"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textAlignment="center"
+        android:layout_below="@id/savedNewsTop"
+         />
 
     <TextView
         android:id="@+id/savedDate"
@@ -58,6 +67,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/savedImage"
+        android:textAlignment="center"
         tools:layout_editor_absoluteX="68dp"
         tools:layout_editor_absoluteY="252dp" />
 
@@ -108,6 +118,7 @@
         android:layout_toRightOf="@id/theSavedListView"
         android:layout_alignBottom="@id/theSavedListView"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:text="@string/read" />
 
     <Button
@@ -118,6 +129,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="70dp"
+        android:layout_alignParentBottom="true"
         android:text="@string/remove" />
 
 <!--    <Button-->

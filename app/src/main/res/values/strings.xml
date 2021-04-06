@@ -27,7 +27,8 @@
     <string name="remove">REMOVE</string>
     <string name="rating">Rate the SoccerGames APP</string>
     <string name="submitRate">Submit</string>
-
+    <string name="news">Soccer News</string>
+    <string name="savedNews">Favorite News</string>
 
 
     <!--

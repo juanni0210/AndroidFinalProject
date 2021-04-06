@@ -18,6 +18,8 @@
     <string name="rating">评分</string>
     <string name="submitRate">提交</string>
     <string name="hello_world">你好！</string>
+    <string name="news">足球新闻</string>
+    <string name="savedNews">收藏夹</string>
 
 
 </resources>
