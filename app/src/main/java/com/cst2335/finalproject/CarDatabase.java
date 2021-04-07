@@ -113,16 +113,6 @@ public class CarDatabase extends AppCompatActivity {
         listView.setOnItemClickListener((p, b, pos, id) -> {
             Model currentModel = modelList.get(pos);
             selectedModelName = currentModel.getModel();
-//            saveButton.setOnClickListener(v -> {
-//                ContentValues cValues = new ContentValues();
-//                cValues.put(MyCarDB.COL_MAKE, makeName.getText().toString());
-//                cValues.put(MyCarDB.COL_MODEL, modelName.getText().toString());
-//                long idSave = db.insert(MyCarDB.TABLE_NAME, null, cValues);
-//                Model model = new Model(makeName.getText().toString(), modelName.getText().toString(), idSave);
-//                modelList.add(model);
-//                myAdapter.notifyDataSetChanged();
-//            });
-
             Bundle dataToPass = new Bundle();
             dataToPass.putString(MAKE_SELECTED, currentModel.getMake() );
             dataToPass.putString(MODEL_SELECTED, currentModel.getModel());
@@ -177,17 +167,20 @@ public class CarDatabase extends AppCompatActivity {
                     .setNegativeButton("No", (click, arg) -> {})
                     .create().show();
         });
-        favorites.setOnClickListener(v -> {
-            Snackbar snackbar;
-            snackbar = Snackbar.make(mostOuter, "Favorites show your saved car models" , Snackbar.LENGTH_LONG);
-            snackbar.show();
-            Button goToFavorites = findViewById(R.id.favorites);
 
+        goToShop.setOnClickListener(v -> {
+            String urlShop = "https://www.autotrader.ca/cars/?mdl=" + selectedModelName + "&make=" + selectedMakeName + "&loc=K2G1V8" ;
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData( Uri.parse(urlShop) );
+            startActivity(i);
+        });
+
+        favorites.setOnClickListener(v -> {
             //This creates a transition to load SecontActivity.java:
             Intent goToFavoritesPage = new Intent(this, Favorites.class);
 
             //when you click the button, start the next activity:
-            goToFavorites.setOnClickListener( click -> startActivity( goToFavoritesPage ));
+            startActivity(goToFavoritesPage);
         });
 
     }

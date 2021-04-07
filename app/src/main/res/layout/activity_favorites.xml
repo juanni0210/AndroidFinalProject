@@ -28,7 +28,15 @@
             android:id="@+id/previousPageButton"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_weight="1"
             android:text="@string/backToPrevious"/>
+
+        <Button
+            android:id="@+id/shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/goToShop"/>
 
         <Button
             android:id="@+id/deleteButton"

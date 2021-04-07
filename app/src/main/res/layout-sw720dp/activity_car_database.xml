@@ -16,9 +16,9 @@
 
     <LinearLayout
         android:id="@+id/topfunction"
+        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:orientation="horizontal">
 
         <EditText
@@ -52,21 +52,22 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/body_tablet"
+        android:layout_height="1166dp"
         android:layout_below="@id/barLayout"
         android:orientation="horizontal">
+
         <ListView
             android:id="@+id/model_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-        </ListView>
+            android:layout_weight="1"></ListView>
+
         <FrameLayout
             android:id="@+id/fragmentLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-        </FrameLayout>
+            android:layout_weight="1"></FrameLayout>
 
     </LinearLayout>
 

@@ -1,9 +1,11 @@
 package com.cst2335.finalproject;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -66,6 +68,14 @@ public class CarDetailsFragment extends Fragment {
                Toast.makeText(container.getContext(), "Added to your favorite list!", Toast.LENGTH_LONG).show();
             }
 
+        });
+
+        Button goToShop = newView.findViewById(R.id.shop);
+        goToShop.setOnClickListener(v -> {
+            String urlShop = "https://www.autotrader.ca/cars/?mdl=" + modelName + "&make=" + makeName + "&loc=K2G1V8" ;
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData( Uri.parse(urlShop) );
+            startActivity(i);
         });
 
 
