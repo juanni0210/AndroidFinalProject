@@ -10,6 +10,7 @@
     <string name="teamInfo">© 2021 TECH SAVVY TEAM</string>
 
     <!--    Menu page-->
+    <string name="backHomeIcon">Home</string>
     <string name="triviaMenuName">Trivia Game</string>
     <string name="songsterMenuName">Songster Search</string>
     <string name="carDBMenuName">Car Database</string>

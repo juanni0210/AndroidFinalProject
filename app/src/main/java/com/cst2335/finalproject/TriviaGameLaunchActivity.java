@@ -141,9 +141,6 @@ public class TriviaGameLaunchActivity extends AppCompatActivity implements Navig
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //For bottomNavigationBar
-        BottomNavigationView bnv = findViewById(R.id.bnv);
-        bnv.setOnNavigationItemSelectedListener(this);
     }
 
     /**
@@ -177,6 +174,9 @@ public class TriviaGameLaunchActivity extends AppCompatActivity implements Navig
         switch(item.getItemId())
         {
             //what to do when the menu item is selected:
+            case R.id.backHomeItem:
+                startActivity(new Intent(TriviaGameLaunchActivity.this, MainActivity.class));
+                break;
             case R.id.triviaItem:
                 startActivity(new Intent(TriviaGameLaunchActivity.this, TriviaGameLaunchActivity.class));
                 break;
@@ -216,6 +216,9 @@ public class TriviaGameLaunchActivity extends AppCompatActivity implements Navig
 
         switch(item.getItemId())
         {
+            case R.id.backHomeItem:
+                startActivity(new Intent(TriviaGameLaunchActivity.this, MainActivity.class));
+                break;
             case R.id.triviaItem:
                 startActivity(new Intent(TriviaGameLaunchActivity.this, TriviaGameLaunchActivity.class));
                 break;

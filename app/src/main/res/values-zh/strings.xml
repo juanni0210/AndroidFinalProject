@@ -11,6 +11,7 @@
     <string name="teamInfo">© 2021 TECH SAVVY 小组</string>
 
     <!--    Menu page-->
+    <string name="backHomeIcon">首页</string>
     <string name="triviaMenuName">益智问答</string>
     <string name="songsterMenuName">歌手搜索</string>
     <string name="carDBMenuName">汽车数据库</string>
