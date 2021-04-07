@@ -42,6 +42,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static com.cst2335.finalproject.MyCarDB.COL_MAKE;
+import static com.cst2335.finalproject.MyCarDB.COL_MODEL;
+
 public class CarDatabase extends AppCompatActivity {
     MyListAdapter myAdapter= new MyListAdapter();
     ArrayList<Model> modelList = new ArrayList<>();
@@ -52,6 +55,8 @@ public class CarDatabase extends AppCompatActivity {
     String selectedModelName;
     String selectedMakeName;
     SharedPreferences makeRef;
+    public static final String MAKE_SELECTED = "MAKE";
+    public static final String MODEL_SELECTED = "MODEL";
 
 
     @Override
@@ -64,9 +69,9 @@ public class CarDatabase extends AppCompatActivity {
         Button searchDetails = findViewById(R.id.searchdetals);
         Button goToShop = findViewById(R.id.shop);
         Button favorites = findViewById(R.id.favorites);
-        Button saveButton = findViewById(R.id.saveButton);
+        //Button saveButton = findViewById(R.id.saveButton);
         LinearLayout layout = findViewById(R.id.topfunction);
-        LinearLayout mostOuter = findViewById(R.id.mostOuter);
+        RelativeLayout mostOuter = findViewById(R.id.mostOuter);
         ListView listView = findViewById(R.id.model_list);
 
         TextView makeName = findViewById(R.id.makeName);
@@ -78,14 +83,18 @@ public class CarDatabase extends AppCompatActivity {
         MyCarDB carDB = new MyCarDB(this);
         db = carDB.getWritableDatabase();
 
+       // ArrayList<Model> elements = new ArrayList<>();
+
         //This gets the toolbar from the layout:
         Toolbar tBar = (Toolbar)findViewById(R.id.toolbar);
 
         //This loads the toolbar, which calls onCreateOptionsMenu below:
         setSupportActionBar(tBar);
 
+        boolean isTablet = findViewById(R.id.fragmentLocation) != null;
 
         listView.setAdapter(myAdapter);
+
         listView.setOnItemLongClickListener((p, b, pos, id) -> {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             Model currentModel = modelList.get(pos);
@@ -104,15 +113,35 @@ public class CarDatabase extends AppCompatActivity {
         listView.setOnItemClickListener((p, b, pos, id) -> {
             Model currentModel = modelList.get(pos);
             selectedModelName = currentModel.getModel();
-            saveButton.setOnClickListener(v -> {
-                ContentValues cValues = new ContentValues();
-                cValues.put(MyCarDB.COL_MAKE, makeName.getText().toString());
-                cValues.put(MyCarDB.COL_MODEL, modelName.getText().toString());
-                long idSave = db.insert(MyCarDB.TABLE_NAME, null, cValues);
-                Model model = new Model(makeName.getText().toString(), modelName.getText().toString(), idSave);
-                modelList.add(model);
-                myAdapter.notifyDataSetChanged();
-            });
+//            saveButton.setOnClickListener(v -> {
+//                ContentValues cValues = new ContentValues();
+//                cValues.put(MyCarDB.COL_MAKE, makeName.getText().toString());
+//                cValues.put(MyCarDB.COL_MODEL, modelName.getText().toString());
+//                long idSave = db.insert(MyCarDB.TABLE_NAME, null, cValues);
+//                Model model = new Model(makeName.getText().toString(), modelName.getText().toString(), idSave);
+//                modelList.add(model);
+//                myAdapter.notifyDataSetChanged();
+//            });
+
+            Bundle dataToPass = new Bundle();
+            dataToPass.putString(MAKE_SELECTED, currentModel.getMake() );
+            dataToPass.putString(MODEL_SELECTED, currentModel.getModel());
+
+            if(isTablet)
+            {
+                CarDetailsFragment dFragment = new CarDetailsFragment(); //add a DetailFragment
+                dFragment.setArguments( dataToPass ); //pass it a bundle for information
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentLocation, dFragment, Long.toString(id)) //Add the fragment in FrameLayout
+                        .commit(); //actually load the fragment. Calls onCreate() in DetailFragment
+            }
+            else //isPhone
+            {
+                Intent nextActivity = new Intent(CarDatabase.this, EmptyCarActivity.class);
+                nextActivity.putExtras(dataToPass); //send data to next activity
+                startActivity(nextActivity); //make the transition
+            }
         });
 
         //shared preference for user searched make name

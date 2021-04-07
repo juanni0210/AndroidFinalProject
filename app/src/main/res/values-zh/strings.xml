@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">结课项目</string>
+
+    <string name="startCarDB">开始汽车数据库</string>
+
+    <!--    Main page-->
+    <!--    Main page-->
+    <string name="triviaStartBtn">益智问答</string>
+    <string name="songsterStartBtn">歌手搜索</string>
+    <string name="carDBStartBtn">汽车数据库</string>
+    <string name="soccerStartBtn">足球新闻</string>
+    <string name="projectInfo">CST2335 期终项目</string>
+    <string name="teamInfo"> 2021 TECH SAVVY 小组</string>
+
+
     <!--    Car Database-->
     <string name="SaveToFavorites">存入收藏夹</string>
     <string name="enterHint">请输入品牌</string>
@@ -10,4 +24,8 @@
     <string name="backToPrevious">回到前页</string>
     <string name="deleteFromFavorites">从收藏夹中删除</string>
     <string name="help">帮助</string>
+    <string name="detail_make">品牌</string>
+    <string name="detail_model">车型</string>
+    <string name="addToFavorite">添加至收藏夹</string>
+    <string name="deleteFromFavorite">移出收藏夹</string>
 </resources>

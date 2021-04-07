@@ -21,6 +21,12 @@
     <string name="backToPrevious">Back to previous</string>
     <string name="deleteFromFavorites">delete from favorites</string>
     <string name="help">Help</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="detail_make">detail_make</string>
+    <string name="detail_model">detail_model</string>
+    <string name="addToFavorite">Add to Favorite</string>
+    <string name="deleteFromFavorite">Delete from Favorite</string>
+
 
 
 </resources>
