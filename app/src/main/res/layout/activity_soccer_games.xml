@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_grey"
-    android:padding="@dimen/box_inset_layout_padding"
+    android:padding="15dp"
     tools:context=".SoccerGames"
     android:orientation="vertical"
     tools:deviceIds="wear">
@@ -35,7 +35,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical">>
+
+        </RelativeLayout>
 
     <TextView
         android:id="@+id/newsTop"
@@ -52,17 +54,33 @@
         android:id="@+id/theListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/newsTop">
+        android:layout_below="@id/newsTop"
+        android:layout_marginBottom="40dp">
     </ListView>
 
-    <Button
-        android:id="@+id/favoriteBtn"
-        android:layout_width="wrap_content"
-        android:layout_alignBottom="@id/theListView"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content"
-        android:text="@string/favorite" />
-        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageButton
+                android:id="@+id/favoriteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:background="#00000000"
+                app:srcCompat="@drawable/favorite" />
+        </LinearLayout>
+
+
+        <!--    <Button-->
+<!--        android:id="@+id/favoriteBtn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_alignBottom="@id/theListView"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/favorite" />-->
+<!--        </RelativeLayout>-->
+
 
         <com.google.android.material.navigation.NavigationView
             android:layout_width="wrap_content"

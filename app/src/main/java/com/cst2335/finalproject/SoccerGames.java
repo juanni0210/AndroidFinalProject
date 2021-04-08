@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -97,7 +98,7 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
         MyHTTPRequest req = new MyHTTPRequest();
         req.execute("https://www.goal.com/en/feeds/news");
 
-        Button favoriteBtn = findViewById(R.id.favoriteBtn);
+        ImageButton favoriteBtn = findViewById(R.id.favoriteBtn);
         Intent goToNews = new Intent(SoccerGames.this, SoccerNewsPage.class);
         Intent goToSaved = new Intent(SoccerGames.this, SavedSoccerGames.class);
 

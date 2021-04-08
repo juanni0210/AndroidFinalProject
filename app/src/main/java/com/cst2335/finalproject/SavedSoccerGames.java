@@ -55,6 +55,7 @@ public class SavedSoccerGames extends AppCompatActivity {
         Button removeBtn = (Button)findViewById(R.id.removeBtn);
         ListView theSavedList = (ListView)findViewById(R.id.theSavedListView);
         imgView = (ImageView)findViewById(R.id.savedImage);
+        imgView.setImageResource(R.drawable.soccerdefault);
 
         mySavedAdapter = new MyOwnAdapter();
         theSavedList.setAdapter(mySavedAdapter);
