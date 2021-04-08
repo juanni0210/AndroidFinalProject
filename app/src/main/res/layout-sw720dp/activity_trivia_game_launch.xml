@@ -145,14 +145,6 @@
                 android:layout_marginBottom="80dp"
                 android:text="@string/triviaBackHomeBtn"
                 android:layout_alignParentBottom="true"/>
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bnv"
-                android:background="#6C50EC"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                app:menu="@menu/main_menu"/>
         </RelativeLayout>
 
         <!-- THIS IS WHAT IS WHAT POPS OUT FROM THE SIDE:-->
