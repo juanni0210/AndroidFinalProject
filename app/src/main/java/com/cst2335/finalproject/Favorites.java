@@ -1,3 +1,9 @@
+/**
+ * This is the favorite page which loads and displays user's favorites
+ * @author Sophie Sun
+ * @since 1.0
+ */
+
 package com.cst2335.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;

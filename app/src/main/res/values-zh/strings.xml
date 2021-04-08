@@ -14,6 +14,20 @@
     <string name="teamInfo"> 2021 TECH SAVVY 小组</string>
 
 
+    <!--    menu and navigation-->
+    <string name="backHomeIcon">首页</string>
+    <string name="triviaMenuName">益智问答</string>
+    <string name="songsterMenuName">歌手搜索</string>
+    <string name="carDBMenuName">汽车数据库</string>
+    <string name="soccerMenuName">足球新闻</string>
+    <string name="helpMenuName">帮助</string>
+    <string name="navigationOpen">打开</string>
+    <string name="navigationClose">关闭</string>
+    <string name="carDatabaseActivityTitle">汽车数据库</string>
+    <string name="carDatabaseActivityAuthor">菲菲</string>
+    <string name="carDatabaseActivityVersionNumber">1.0</string>
+
+
     <!--    Car Database-->
     <string name="SaveToFavorites">存入收藏夹</string>
     <string name="enterHint">请输入品牌</string>

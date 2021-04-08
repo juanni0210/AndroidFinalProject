@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Favorites"
+    android:background="@drawable/cardatabase_bg"
     android:id="@+id/favoritesPage"
     android:orientation="vertical">
 
@@ -29,21 +30,27 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_weight="1"
-            android:text="@string/backToPrevious"/>
+            android:layout_marginHorizontal="2dp"
+            android:text="@string/backToPrevious"
+            android:textSize="16dp"/>
 
         <Button
             android:id="@+id/shop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/goToShop"/>
+            android:layout_marginHorizontal="2dp"
+            android:text="@string/goToShop"
+            android:textSize="16dp"/>
 
         <Button
             android:id="@+id/deleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/deleteFromFavorites"/>
+            android:layout_marginHorizontal="2dp"
+            android:text="@string/deleteFromFavorites"
+            android:textSize="16dp"/>
 
     </LinearLayout>
 

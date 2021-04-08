@@ -1,3 +1,11 @@
+/**
+ * When the user end is mobile phone, when user goes to see
+ * details of a car model, he will be directed to this page,
+ * this is on a different thread from database
+ * @author Sophie Sun
+ * @since 1.0
+ */
+
 package com.cst2335.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;

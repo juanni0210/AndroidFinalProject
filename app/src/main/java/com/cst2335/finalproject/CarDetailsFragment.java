@@ -1,3 +1,9 @@
+/**
+ * This is the the fragment of car details, which is used to fragment
+ * for tablet and inflate an empty page on another thread for phone
+ * @author Sophie Sun
+ * @since 1.0
+ */
 package com.cst2335.finalproject;
 
 import android.content.ContentValues;

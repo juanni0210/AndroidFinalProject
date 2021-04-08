@@ -1,3 +1,9 @@
+/**
+ * This is the database page of the CarDatabase in this app
+ * @author Sophie Sun
+ * @since 1.0
+ */
+
 package com.cst2335.finalproject;
 
 import android.content.Context;
