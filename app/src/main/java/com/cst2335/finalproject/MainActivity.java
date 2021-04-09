@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
     private Button startTriviaBtn, startSongsterBtn, startCarDBBtn, startSoccerBtn;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 //        Intent goToTrivaLaunch = new Intent(MainActivity.this, TriviaGameLaunchActivity.class);
 //        startTriviaBtn.setOnClickListener(v -> startActivity(goToTrivaLaunch));
 
-        Intent goToSonsterLaunch = new Intent(MainActivity.this, SongsterMain.class);
+        Intent goToSonsterLaunch = new Intent(MainActivity.this, SongsterSearch.class);
         startSongsterBtn.setOnClickListener(v -> startActivity(goToSonsterLaunch));
 //
 //        Intent goToCarDBLaunch = new Intent(MainActivity.this, CarDatabase.class);
@@ -32,5 +34,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //        Intent goToSoccerLaunch = new Intent(MainActivity.this, SoccerGames.class);
 //        startSoccerBtn.setOnClickListener(v -> startActivity(goToSoccerLaunch));
+
     }
+
 }

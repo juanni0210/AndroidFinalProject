@@ -7,6 +7,28 @@
     <string name="soccerStartBtn">SOCCER GAME</string>
     <string name="projectInfo">CST2335 Final Project</string>
     <string name="teamInfo">© 2021 TECH SAVVY TEAM</string>
+    <!--   Main Menu    -->
+    <string name="triviaMenuName">Trivia Game</string>
+    <string name="songsterMenuName">Songster Search</string>
+    <string name="carDBMenuName">Car Database</string>
+    <string name="soccerMenuName">Soccer Game</string>
+    <string name="helpMenuName">Help</string>
+    <string name="navigationOpen">Open</string>
+    <string name="navigationClose">Close</string>
+    <string name="closeHelpDialog">CLOSE</string>
+    <string name="backHomeIcon">Back to Home page</string>
+    <string name="songsterActivityTitle">Activity Title: Songster Search</string>
+    <string name="songsterActivityAuthor">Author: Xueru Chen</string>
+    <string name="songsterActivityVersionNumber">Version number: V1.0</string>
+    <string name="song_title">Song Title</string>
+    <string name="artist_name">Artist Name</string>
+    <string name="songsterHelpTile">All you need to know about Songsterr Search:</string>
+    <string name="songsterInstructions1">1)Enter song title you want to search, click search button</string>
+    <string name="songsterInstructions2">2)Click song title you want to know details</string>
+    <string name="songsterInstructions3">3) Click Song ID or Artist ID to another website</string>
+    <string name="songsterInstructions4">4) Add to favourite list if you want</string>
+    <string name="songsterInstructions5">"5) or Delete "</string>
+
 
     <!--    Songster page-->
     <string name="songster_btn_add">Add to Favourite</string>
@@ -20,23 +42,13 @@
     <string name="yes">Yes</string>
     <string name="add">Successfully Added!</string>
     <string name="no">No</string>
-    <string name="listOfFavourites">Favourite List</string>
 
     <string name="input">Input search content</string>
     <string name="search_button">Search</string>
 
     <string name="addFavorite">Add to favorites</string>
-    <string name="go">Go back</string>
-    <string name="back">Back</string>
     <string name="removeFav">Remove Favorite</string>
-    <string name="favorite">Favorites</string>
-
-    <string name="help">Help</string>
-    <string name="author">Author: Xueru Chen</string>
-    <string name="version">Version: 1.0 </string>
-    <string name="instructions">Instructions:1)Enter Song name/2)Click search button/3)Press item for more info, navigation and adding to favorites/Home button returns to home screen/Heart goes to favorite page</string>
-    <string name="Fav_button">Go to Favourite</string>
-    <string name="goBackButton">Go back</string>
+    <string name="goToFav">Go to Favorite List</string>
 
 
 </resources>
