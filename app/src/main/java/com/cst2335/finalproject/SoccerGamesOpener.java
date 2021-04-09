@@ -4,6 +4,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * This is the database opener to set up a database to store details of the saved item.
+ * @author Feiqiong Deng
+ * @version version 1
+ */
 public class SoccerGamesOpener extends SQLiteOpenHelper {
     protected final static String DATABASE_NAME = "SoccerGamesDB";
     protected final static int VERSION_NUM = 3;

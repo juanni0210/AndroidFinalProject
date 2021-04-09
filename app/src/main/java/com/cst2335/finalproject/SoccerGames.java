@@ -48,18 +48,12 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
     private MyListAdapter myAdapter;
     private ArrayList<Item> elements = new ArrayList<>();
     ImageView imgView;
-
-
     private ProgressBar progressBar;
-
-    public static final String ITEM_SELECTED = "ITEM";
-    public static final String ITEM_POSITION = "POSITION";
     public static final String ITEM_TITLE = "TITLE";
     public static final String ITEM_IMAGE = "IMAGE";
     public static final String ITEM_DATE = "DATE";
     public static final String ITEM_DESCRIPTION = "DESCRIPTION";
     public static final String ITEM_URL = "URL";
-    private DetailsFragment detailsFragment;
 
     /**
      * This is to initialize the activity and setting the http request.
@@ -98,39 +92,15 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
         req.execute("https://www.goal.com/en/feeds/news");
 
         ImageButton favoriteBtn = findViewById(R.id.favoriteBtn);
-        Intent goToNews = new Intent(SoccerGames.this, SoccerNewsPage.class);
         Intent goToSaved = new Intent(SoccerGames.this, SavedSoccerGames.class);
 
         /*
         This is to create a toast when clicking the favorite button.
          */
         favoriteBtn.setOnClickListener( click -> {
-//            Toast.makeText(SoccerGames.this, "Favorite news will be coming soon.",Toast.LENGTH_SHORT).show();
                     startActivity(goToSaved);
                 }
         );
-
-        /*
-        This is to create a snack bar when clicking the save button.
-         */
-//        saveBtn.setOnClickListener( v -> {
-//            Snackbar snackbar= Snackbar.make(layout, "Will be saved in the database.", Snackbar.LENGTH_SHORT);
-//            snackbar.show();
-//        });
-
-         /*
-        This is to create an  alert dialog when opening the API.
-         */
-//        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-//        alertDialog.setTitle("Rating");
-//        alertDialog.setMessage("Could you rate the API");
-//        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//        alertDialog.show();
 
         /*
         when user click the item on the list view, details of the item will be sent to the fragment.
@@ -142,22 +112,6 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
             String getImage = selectedItem.getImage();
             String getDescription = selectedItem.getDescription();
             String getLink = selectedItem.getUrl();
-
-            // 1.load image work
-//            ImageRequest imageReq=new ImageRequest();
-//            imageReq.execute(getImage);
-
-//            Bundle linkToPass = new Bundle();
-//            linkToPass.putString("news", getLink);
-//            goToNews.putExtras(linkToPass);
-
-            // 2.read news in browser work
-//            readBtn.setOnClickListener(click -> {
-//                Intent intent=new Intent();
-//                intent.setData(Uri.parse(getLink));
-//                intent.setAction(Intent.ACTION_VIEW);
-//                startActivity(intent);
-//            });
 
             Bundle dataToPass = new Bundle();
             dataToPass.putString(ITEM_TITLE, getTitle);
@@ -180,78 +134,7 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
                 startActivity(soccerGamesFragment);
             }
         });
-
-//            DetailsFragment dFragment = new DetailsFragment(); //add a DetailFragment
-//            dFragment.setArguments(dataToPass); //pass it a bundle for information
-//            getSupportFragmentManager()
-//                    .beginTransaction()
-//                    .replace(R.id.fragmentLocation, dFragment) //Add the fragment in FrameLayout
-//                    .commit(); //actually load the fragment. Calls onCreate() in DetailFragment
-
-
-//        myList.setOnItemLongClickListener( (p, b, pos, id) -> {
-//            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-//            alertDialogBuilder.setTitle("Do you want to save this?")
-//
-//                    //What is the message:
-//                    .setMessage("The selected row is: " + pos + "The database id id:" + id)
-//
-//                    //what the Yes button does:
-//                    .setPositiveButton("Yes", (click, arg) -> {
-//                        Item selectedItem = elements.get(pos);
-//                        String getTitle = selectedItem.getTitle();
-//                        String getDate = selectedItem.getDate();
-//                        String getImage = selectedItem.getImage();
-//                        String getDescription = selectedItem.getDescription();
-//                        String getLink = selectedItem.getUrl();
-//
-//                        ContentValues newRowValues = new ContentValues();
-//                        newRowValues.put(SoccerGamesOpener.COL_TITLE, getTitle);
-//                        newRowValues.put(SoccerGamesOpener.COL_DATE, getDate);
-//                        newRowValues.put(SoccerGamesOpener.COL_IMAGE, getImage);
-//                        newRowValues.put(SoccerGamesOpener.COL_LINK, getLink);
-//                        newRowValues.put(SoccerGamesOpener.COL_DESCRIPTION, getDescription);
-//                        long newId = db.insert(SoccerGamesOpener.TABLE_NAME, null, newRowValues);
-//
-//                        Item oneItem = new Item(getTitle, getDate, getImage, getLink, getDescription, newId);
-//                        savedItems.add(oneItem);
-//                    })
-//                    //What the No button does:
-//                    .setNegativeButton("No", (click, arg) -> { })
-//                    //Show the dialog
-//                    .create().show();
-//            return true;
-//        });
     }
-
-
-    // 3. Load Image
-//    private class ImageRequest extends AsyncTask<String,Integer,String>{
-//        Bitmap itemImage;
-//        @Override
-//        protected String doInBackground(String... strings) {
-//            try {
-//                URL url2 = new URL(strings[0]);
-//                HttpURLConnection imgConnection = (HttpURLConnection) url2.openConnection();
-//                imgConnection.connect();
-//                int responseCode = imgConnection.getResponseCode();
-//                if (responseCode == 200) {
-//                    itemImage = BitmapFactory.decodeStream(imgConnection.getInputStream());
-//
-//                }
-//
-//            } catch (IOException e) {
-//
-//            }
-//            return "done";
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String s) {
-//            super.onPostExecute(s);
-//            imgView.setImageBitmap(itemImage);
-//        }
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -263,7 +146,6 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        String message = null;
         //Look at your menu XML file. Put a case for every id in that file:
         switch(item.getItemId())
         {
@@ -311,9 +193,6 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
     // Needed for the OnNavigationItemSelected interface:
     @Override
     public boolean onNavigationItemSelected( MenuItem item) {
-
-        String message = null;
-
         switch(item.getItemId())
         {
             case R.id.backHomeItem:
@@ -370,8 +249,6 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
         private String link;
         private String description;
 
-        TextView row = findViewById(R.id.textGoesHere);
-
         public String doInBackground(String ... args)
         {
             try {
@@ -393,10 +270,8 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
                 int eventType = xpp.getEventType(); //The parser is currently at START_DOCUMENT
 
                 // to get the data from the xml and add data to  array list.
-                System.out.println("1.========" + xpp.getText() + "===========");
                 while(eventType != XmlPullParser.END_DOCUMENT)
                 {
-                    System.out.println("2.========" + xpp.getText() + "===========");
                     if(eventType == XmlPullParser.START_TAG) {
                         if (xpp.getName().equalsIgnoreCase("item")) {
                             insideItem = true;
@@ -450,12 +325,6 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
             progressBar.setVisibility(View.GONE);
             myAdapter.notifyDataSetChanged();
         }
-
-        public boolean fileExistance (String image) {
-            File file = getBaseContext().getFileStreamPath(image);
-            return file.exists();
-        }
-
     }
 
     /**

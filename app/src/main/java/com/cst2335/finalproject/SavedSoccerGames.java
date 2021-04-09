@@ -28,6 +28,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+/**
+ * This is the SavedSoccerGames class to show the saved items from the database.
+ * @author Feiqiong Deng
+ * @version version 2
+ */
 public class SavedSoccerGames extends AppCompatActivity {
 
     public static ArrayList<Item> savedItems = new ArrayList<>();
@@ -55,6 +60,7 @@ public class SavedSoccerGames extends AppCompatActivity {
         mySavedAdapter = new MyOwnAdapter();
         theSavedList.setAdapter(mySavedAdapter);
 
+        // click the selected item to show details of the item.
         theSavedList.setOnItemClickListener((p, b, pos, id) -> {
             Item selectedItem = savedItems.get(pos);
             String getTitle = selectedItem.getTitle();
@@ -78,6 +84,7 @@ public class SavedSoccerGames extends AppCompatActivity {
                 startActivity(intent);
             });
 
+            // When clicking the remove button, the item is removed from the database.
             removeBtn.setOnClickListener(click -> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(SavedSoccerGames.this);
                 View view = LayoutInflater.from(SavedSoccerGames.this).inflate(R.layout.soccer_dialog, null);
@@ -195,12 +202,9 @@ public class SavedSoccerGames extends AppCompatActivity {
             TextView tView = newView.findViewById(R.id.itemGoesHere);
             tView.setText(item.getTitle());
 
-//            tView.setText(getItem(position).toString());
             //return it to be put in the table
             return newView;
-
         }
-
         //last week we returned (long) position. Now we return the object's database id that we get from line 71
         public long getItemId(int position)
         {

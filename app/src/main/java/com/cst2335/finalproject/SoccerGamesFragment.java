@@ -32,10 +32,11 @@ import java.net.URL;
 import static com.cst2335.finalproject.SavedSoccerGames.savedItems;
 import static com.cst2335.finalproject.SavedSoccerGames.mySavedAdapter;
 
-
 /**
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
+ * @author Feiqiong Deng
+ * @version version 1
  */
 public class SoccerGamesFragment extends Fragment {
 
@@ -120,7 +121,6 @@ public class SoccerGamesFragment extends Fragment {
             startActivity(goToSaved);
         });
 
-
         // Inflate the layout for this fragment
         return result;
     }
@@ -148,7 +148,6 @@ public class SoccerGamesFragment extends Fragment {
             imgView.setImageBitmap(itemImage);
         }
     }
-
 
     @Override
     public void onAttach(Context context) {
