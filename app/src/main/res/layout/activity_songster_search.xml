@@ -7,10 +7,16 @@
     android:id="@+id/songsterMain">
 
 
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/songsterrToolbar"/>
+
         <!-- THIS IS WHAT IS VISIBLE ON SCREEN:-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/songsterrToolbar"
             android:orientation="vertical">
 
             <EditText
