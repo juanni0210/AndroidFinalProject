@@ -8,9 +8,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -30,34 +32,44 @@ public class RatingSoccerAPI extends AppCompatActivity {
     Button submit;
     RatingBar ratingBar;
     float rateValue;
-//    String temp;
     SharedPreferences prefs;
+    SharedPreferences prefsComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating_soccer_a_p_i);
 
-        // The dialog box.
-        AlertDialog.Builder alertDialog= new AlertDialog.Builder(this);
-        alertDialog.setTitle("Rating");
-        alertDialog.setMessage("Could you rate the API");
-        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        // Setting the alert dialog when starting the app.
+        AlertDialog.Builder builder = new AlertDialog.Builder(RatingSoccerAPI.this);
+        View view = LayoutInflater.from(RatingSoccerAPI.this).inflate(R.layout.soccer_dialog, null);
+
+        TextView dialogTitle = (TextView) view.findViewById(R.id.dialogTitle);
+        ImageButton dialogBtn = view.findViewById(R.id.dialogBtn);
+        TextView dialogContent = (TextView) view.findViewById(R.id.dialogContent);
+
+        dialogTitle.setText("Rating");
+        dialogBtn.setImageResource(R.drawable.rating);
+        dialogContent.setText("Could you rate the API?");
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });
-        alertDialog.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent goToPage = new Intent(RatingSoccerAPI.this, SoccerGames.class);
                 startActivity(goToPage);
             }
         });
-        alertDialog.show();
+        builder.setView(view);
+        builder.show();
 
         // SharedPreferences to save the rating value.
         prefs = getSharedPreferences("FileName", Context.MODE_PRIVATE);
+        prefsComment = getSharedPreferences("Comments", Context.MODE_PRIVATE);
         Intent goToSoccer = new Intent(RatingSoccerAPI.this, SoccerGames.class);
 
         rateCount = findViewById(R.id.rateCount);
@@ -68,6 +80,9 @@ public class RatingSoccerAPI extends AppCompatActivity {
 
         float savedValue = prefs.getFloat("ReserveRating", 5);
         ratingBar.setRating(savedValue);
+
+        String savedComments = prefsComment.getString("ReserveComments", "");
+        review.setText(savedComments);
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -88,6 +103,7 @@ public class RatingSoccerAPI extends AppCompatActivity {
 
         submit.setOnClickListener(click -> {
             saveSharedPrefs(ratingBar.getRating());
+            saveSharedPrefs(review.getText().toString());
             startActivity(goToSoccer);
         });
     }
@@ -95,6 +111,12 @@ public class RatingSoccerAPI extends AppCompatActivity {
     private void saveSharedPrefs(float valueToSave) {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putFloat("ReserveRating", valueToSave);
+        editor.commit();
+    }
+
+    private void saveSharedPrefs(String commentsToSave) {
+        SharedPreferences.Editor editor = prefsComment.edit();
+        editor.putString("ReserveComments", commentsToSave);
         editor.commit();
     }
 

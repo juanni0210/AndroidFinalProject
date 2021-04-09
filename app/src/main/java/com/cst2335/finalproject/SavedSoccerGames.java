@@ -3,7 +3,6 @@ package com.cst2335.finalproject;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,27 +11,22 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-
-import static com.cst2335.finalproject.SoccerGames.ITEM_DATE;
-import static com.cst2335.finalproject.SoccerGames.ITEM_DESCRIPTION;
-import static com.cst2335.finalproject.SoccerGames.ITEM_IMAGE;
-import static com.cst2335.finalproject.SoccerGames.ITEM_TITLE;
-import static com.cst2335.finalproject.SoccerGames.ITEM_URL;
 
 public class SavedSoccerGames extends AppCompatActivity {
 
@@ -51,8 +45,9 @@ public class SavedSoccerGames extends AppCompatActivity {
         TextView saveDate = (TextView) findViewById(R.id.savedDate);
         TextView saveDescription = (TextView) findViewById(R.id.savedDescription);
         TextView saveLink = (TextView) findViewById(R.id.savedLink);
-        Button readSavedBtn = (Button)findViewById(R.id.readSavedBtn);
-        Button removeBtn = (Button)findViewById(R.id.removeBtn);
+        ImageButton readSavedBtn = findViewById(R.id.readSavedBtn);
+
+        ImageButton removeBtn = findViewById(R.id.removeBtn);
         ListView theSavedList = (ListView)findViewById(R.id.theSavedListView);
         imgView = (ImageView)findViewById(R.id.savedImage);
         imgView.setImageResource(R.drawable.soccerdefault);
@@ -84,24 +79,34 @@ public class SavedSoccerGames extends AppCompatActivity {
             });
 
             removeBtn.setOnClickListener(click -> {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setTitle("Do you want to delete this?")
-                        //What is the message:
-                        .setMessage("The selected news is: " + pos + "The database id id:" + id)
-                        .setPositiveButton("Yes", (e, arg) -> {
-                            deleteItem(selectedItem);
-                            savedItems.remove(pos);
-                            mySavedAdapter.notifyDataSetChanged();
-                            saveTitle.setText("");
-                            saveDate.setText("");
-                            saveDescription.setText("");
-                            saveLink.setText("");
-                            imgView.setImageBitmap(null);
-                        })
-                         //What the No button does:
-                        .setNegativeButton("No", (e, arg) -> { })
-                        //Show the dialog
-                        .create().show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(SavedSoccerGames.this);
+                View view = LayoutInflater.from(SavedSoccerGames.this).inflate(R.layout.soccer_dialog, null);
+
+                TextView dialogTitle = (TextView) view.findViewById(R.id.dialogTitle);
+                ImageButton dialogBtn = view.findViewById(R.id.dialogBtn);
+                TextView dialogContent = (TextView) view.findViewById(R.id.dialogContent);
+
+                dialogTitle.setText("Delete this news?");
+                dialogBtn.setImageResource(R.drawable.remove);
+                dialogContent.setText("The selected news is: " + pos + "The database id id:" + id);
+
+                builder.setPositiveButton("Yes", (e, arg) -> {
+                    deleteItem(selectedItem);
+                    savedItems.remove(pos);
+                    mySavedAdapter.notifyDataSetChanged();
+                    saveTitle.setText("");
+                    saveDate.setText("");
+                    saveDescription.setText("");
+                    saveLink.setText("");
+                    imgView.setImageBitmap(null);
+
+                    Snackbar snackbar= Snackbar.make(findViewById(R.id.savedLayout), "The selected news is already deleted.", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                });
+
+                builder.setNegativeButton("No", (e, arg) -> { });
+                builder.setView(view);
+                builder.show();
             });
 
         });

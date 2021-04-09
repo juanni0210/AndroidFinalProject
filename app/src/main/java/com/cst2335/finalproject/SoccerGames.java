@@ -38,7 +38,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-
 /**
  * This is the SoccerGames class to show the GUI and control the API behavior.
  * @author Feiqiong Deng
@@ -285,19 +284,25 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
                 startActivity(new Intent(SoccerGames.this, SoccerGames.class));
                 break;
             case R.id.helpItem:
-                AlertDialog.Builder triviaHelpDialog = new AlertDialog.Builder(this);
-                triviaHelpDialog.setTitle(getResources().getString(R.string.soccerHelpTile))
-                        //What is the message:
-                        .setMessage(getResources().getString(R.string.soccerInstructions1) + "\n"
-                                + getResources().getString(R.string.soccerInstructions2) + "\n"
-                                + getResources().getString(R.string.soccerInstructions3) + "\n"
-                                + getResources().getString(R.string.soccerInstructions4) + "\n"
-                                + getResources().getString(R.string.soccerInstructions5))
-                        //What the No button does:
-                        .setNegativeButton(getResources().getString(R.string.closeHelpDialog), (click, arg) -> {
-                        })
-                        //Show the dialog
-                        .create().show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(SoccerGames.this);
+                View view = LayoutInflater.from(SoccerGames.this).inflate(R.layout.soccer_dialog, null);
+
+                TextView dialogTitle = (TextView) view.findViewById(R.id.dialogTitle);
+                ImageButton dialogBtn = view.findViewById(R.id.dialogBtn);
+                TextView dialogContent = (TextView) view.findViewById(R.id.dialogContent);
+
+                dialogTitle.setText("App Help Menu");
+                dialogBtn.setImageResource(R.drawable.soccerball);
+                dialogContent.setText(getResources().getString(R.string.soccerInstructions1) + "\n"
+                        + getResources().getString(R.string.soccerInstructions2) + "\n"
+                        + getResources().getString(R.string.soccerInstructions3) + "\n"
+                        + getResources().getString(R.string.soccerInstructions4) + "\n"
+                        + getResources().getString(R.string.soccerInstructions5));
+
+                builder.setNegativeButton(getResources().getString(R.string.closeHelpDialog), (click, arg) -> {
+                });
+                builder.setView(view);
+                builder.show();
                 break;
         }
         return true;
@@ -327,19 +332,25 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
                 startActivity(new Intent(SoccerGames.this, SoccerGames.class));
                 break;
             case R.id.helpItem:
-                AlertDialog.Builder triviaHelpDialog = new AlertDialog.Builder(this);
-                triviaHelpDialog.setTitle(getResources().getString(R.string.soccerHelpTile))
-                        //What is the message:
-                        .setMessage(getResources().getString(R.string.soccerInstructions1) + "\n"
-                                + getResources().getString(R.string.soccerInstructions2) + "\n"
-                                + getResources().getString(R.string.soccerInstructions3) + "\n"
-                                + getResources().getString(R.string.soccerInstructions4) + "\n"
-                                + getResources().getString(R.string.soccerInstructions5))
-                        //What the No button does:
-                        .setNegativeButton(getResources().getString(R.string.closeHelpDialog), (click, arg) -> {
-                        })
-                        //Show the dialog
-                        .create().show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(SoccerGames.this);
+                View view = LayoutInflater.from(SoccerGames.this).inflate(R.layout.soccer_dialog, null);
+
+                TextView dialogTitle = (TextView) view.findViewById(R.id.dialogTitle);
+                ImageButton dialogBtn = view.findViewById(R.id.dialogBtn);
+                TextView dialogContent = (TextView) view.findViewById(R.id.dialogContent);
+
+                dialogTitle.setText("App Help Menu");
+                dialogBtn.setImageResource(R.drawable.soccerball);
+                dialogContent.setText(getResources().getString(R.string.soccerInstructions1) + "\n"
+                        + getResources().getString(R.string.soccerInstructions2) + "\n"
+                        + getResources().getString(R.string.soccerInstructions3) + "\n"
+                        + getResources().getString(R.string.soccerInstructions4) + "\n"
+                        + getResources().getString(R.string.soccerInstructions5));
+
+                builder.setNegativeButton(getResources().getString(R.string.closeHelpDialog), (click, arg) -> {
+                });
+                builder.setView(view);
+                builder.show();
                 break;
         }
 
@@ -348,9 +359,6 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
 
         return false;
     }
-
-
-
 
     /**
      * This is the AsyncTask to connect to the link and get data from the API.
@@ -361,15 +369,12 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
         private String image;
         private String link;
         private String description;
-//        Bitmap itemImage;
 
         TextView row = findViewById(R.id.textGoesHere);
 
         public String doInBackground(String ... args)
         {
             try {
-
-
                 //create a URL object of what server to contact:
                 URL url = new URL(args[0]);
 
@@ -416,48 +421,6 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
                         } else if (xpp.getName().equalsIgnoreCase("media:thumbnail")) {
                             if (insideItem) {
                                 image =  xpp.getAttributeValue(null, "url");
-
-//                                try {
-//                                    URL imageURL = new URL(image);
-//                                    HttpURLConnection connection = (HttpURLConnection) imageURL
-//                                            .openConnection();
-//                                    connection.setDoInput(true);
-//                                    connection.connect();
-//                                    InputStream input = connection.getInputStream();
-//                                    itemImage = BitmapFactory.decodeStream(input);
-//                                } catch (IOException e) {
-//                                    return null;
-//                                }
-
-//                                itemImage = getBitmapFromURL(image);
-
-//                                if(!fileExistance(image)){
-//                                    try {
-//                                        URL url2 = new URL(image);
-//                                        HttpURLConnection imgConnection = (HttpURLConnection) url2.openConnection();
-//                                        imgConnection.connect();
-//                                        int responseCode = imgConnection.getResponseCode();
-//                                        if (responseCode == 200) {
-//                                            itemImage = BitmapFactory.decodeStream(imgConnection.getInputStream());
-//                                            publishProgress(100);
-//                                        }
-//                                        FileOutputStream outputStream = openFileOutput(image + ".jpeg", Context.MODE_PRIVATE);
-//                                        itemImage.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-//                                        outputStream.flush();
-//                                        outputStream.close();
-//                                    } catch (IOException e) {
-//                                        // Log exception
-//                                        Log.e("Weather Image", "It is looking for " + image.toString());
-//                                    }
-//                                } else {
-//                                    FileInputStream fis = null;
-//                                    try {
-//                                        fis = openFileInput(image);
-//                                        Log.e("Weather Image", "It is looking for " + image.toString());
-//                                        Log.e("Found or Not", "The image is found locally");
-//                                    } catch (FileNotFoundException e) {    e.printStackTrace();  }
-//                                    itemImage = BitmapFactory.decodeStream(fis);
-//                                }
                             }
                         }
                     }
@@ -465,7 +428,6 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
                         insideItem = false;
                     }
                     eventType = xpp.next(); //move to the next xml event and store it in a variable
-//                }
               }
             }
             catch (Exception e)
@@ -494,23 +456,6 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
             return file.exists();
         }
 
-//        public Bitmap getBitmapFromURL(String src) {
-//            try {
-//                URL url = new URL(src);
-//                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//                connection.setDoInput(true);
-//                connection.connect();
-//                InputStream input = connection.getInputStream();
-//                Bitmap myBitmap = BitmapFactory.decodeStream(input);
-//
-//                return myBitmap;
-//            } catch (IOException e) {
-//                // Log exception
-//                System.out.println("BITMAP error");
-//                return null;
-//            }
-//        }
-
     }
 
     /**
@@ -534,8 +479,6 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
             TextView tView = newView.findViewById(R.id.textGoesHere);
             tView.setText(item.getTitle());
 
-//            tView.setText(getItem(position).toString());
-            //return it to be put in the table
             return newView;
         }
     }

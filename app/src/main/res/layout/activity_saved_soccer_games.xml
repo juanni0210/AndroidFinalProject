@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/savedLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_grey"
-    android:padding="15dp"
     tools:context=".SavedSoccerGames"
     android:orientation="vertical"
     tools:deviceIds="wear">
@@ -14,6 +14,7 @@
         android:id="@+id/theSavedListView"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
+        android:padding="15dp"
         android:layout_below="@id/savedNewsTop">
     </ListView>
 
@@ -32,7 +33,12 @@
         android:layout_alignParentStart="true"
         android:text="@string/savedNews"
         android:textAlignment="center"
-        android:textAppearance="?android:textAppearanceLarge">
+        android:background="@color/green"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:paddingTop="8dp"
+        android:textSize="35dp"
+        android:elegantTextHeight="true">
     </TextView>
 
 
@@ -42,6 +48,7 @@
         android:layout_height="200dp"
         android:layout_toRightOf="@+id/theSavedListView"
         android:layout_alignParentEnd="true"
+        android:paddingRight="15dp"
         android:layout_below="@+id/savedTitle"
         tools:layout_editor_absoluteX="37dp"
         tools:layout_editor_absoluteY="43dp"
@@ -54,8 +61,12 @@
         android:layout_toRightOf="@+id/theSavedListView"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/green"
+        android:textAppearance="?android:textAppearanceLarge"
         android:textAlignment="center"
+        android:textStyle="bold"
+        android:paddingRight="15dp"
+        android:paddingTop="50dp"
         android:layout_below="@id/savedNewsTop"
          />
 
@@ -66,6 +77,8 @@
         android:layout_toRightOf="@+id/theSavedListView"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
+        android:paddingRight="15dp"
+        android:textAppearance="?android:textAppearanceMedium"
         android:layout_below="@id/savedImage"
         android:textAlignment="center"
         tools:layout_editor_absoluteX="68dp"
@@ -88,7 +101,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/blank1"
         android:layout_toRightOf="@+id/theSavedListView"
+        android:textAppearance="?android:textAppearanceMedium"
         android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:paddingRight="15dp"
         tools:layout_editor_absoluteX="68dp"
         tools:layout_editor_absoluteY="252dp" />
 
@@ -108,29 +124,57 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/blank2"
+        android:textAlignment="center"
+        android:paddingRight="15dp"
+        android:textAppearance="?android:textAppearanceMedium"
         android:layout_toRightOf="@+id/theSavedListView"
         tools:layout_editor_absoluteX="68dp"
         tools:layout_editor_absoluteY="252dp" />
 
-    <Button
+    <ImageButton
         android:id="@+id/readSavedBtn"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
         android:layout_toRightOf="@id/theSavedListView"
         android:layout_alignBottom="@id/theSavedListView"
-        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="@string/read" />
+        android:paddingLeft="20dp"
+        android:paddingRight="100dp"
+        app:srcCompat="@drawable/browse" />
 
-    <Button
+    <ImageButton
         android:id="@+id/removeBtn"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_toRightOf="@id/readSavedBtn"
         android:layout_alignBottom="@id/theSavedListView"
-        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginLeft="70dp"
         android:layout_alignParentBottom="true"
-        android:text="@string/remove" />
+        android:paddingLeft="30dp"
+        android:background="#00000000"
+        app:srcCompat="@drawable/delete" />
+
+
+    <!--    <Button-->
+<!--        android:id="@+id/removeBtn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_toRightOf="@id/theSavedListView"-->
+<!--        android:layout_alignBottom="@id/theSavedListView"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:text="@string/read" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/removeBtn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_toRightOf="@id/readSavedBtn"-->
+<!--        android:layout_alignBottom="@id/theSavedListView"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_marginLeft="70dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:text="@string/remove" />-->
 
 <!--    <Button-->
 <!--        android:id="@+id/favoriteBtn"-->

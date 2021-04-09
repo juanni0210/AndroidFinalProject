@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -83,7 +84,7 @@ public class SoccerGamesFragment extends Fragment {
         itemLink.setText(link);
 
         // Load the article’s URL in a browser.
-        Button readBtn = (Button)result.findViewById(R.id.readBtn);
+        ImageButton readBtn = result.findViewById(R.id.readBtn);
         readBtn.setOnClickListener(click -> {
                 Intent intent=new Intent();
                 intent.setData(Uri.parse(dataFromActivity.getString(SoccerGames.ITEM_URL)));
@@ -94,7 +95,7 @@ public class SoccerGamesFragment extends Fragment {
         // connection to database
         SoccerGamesOpener dbOpener = new SoccerGamesOpener(container.getContext());
         db = dbOpener.getWritableDatabase();
-        Button saveBtn = (Button)result.findViewById(R.id.saveBtn);
+        ImageButton saveBtn =result.findViewById(R.id.saveBtn);
 
         // save items to database
         saveBtn.setOnClickListener(click -> {
@@ -113,7 +114,7 @@ public class SoccerGamesFragment extends Fragment {
 
         });
 
-        Button favoriteBtn = (Button)result.findViewById(R.id.favoriteBtn);
+        ImageButton favoriteBtn = result.findViewById(R.id.favoriteBtn);
         favoriteBtn.setOnClickListener(click -> {
             Intent goToSaved = new Intent(container.getContext(), SavedSoccerGames.class);
             startActivity(goToSaved);
