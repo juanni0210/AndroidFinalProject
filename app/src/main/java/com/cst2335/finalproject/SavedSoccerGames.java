@@ -95,7 +95,7 @@ public class SavedSoccerGames extends AppCompatActivity {
 
                 dialogTitle.setText("Delete this news?");
                 dialogBtn.setImageResource(R.drawable.remove);
-                dialogContent.setText("The selected news is: " + pos + "The database id id:" + id);
+                dialogContent.setText("The selected news is: " + pos + "\n" + "The database id id: " + id);
 
                 builder.setPositiveButton("Yes", (e, arg) -> {
                     deleteItem(selectedItem);

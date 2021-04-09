@@ -41,15 +41,12 @@
     <string name="soccerActivityVersionNumber">Version Number: 2</string>
     <string name="navigationClose">Close</string>
     <string name="soccerHelpTile">Soccer Games Help Menu</string>
-    <string name="soccerInstructions1">* Click the title to get more details about the news</string>
-    <string name="soccerInstructions2">* Click read button to load the article’s URL in a browser</string>
+    <string name="soccerInstructions1">* Click the title to get details</string>
+    <string name="soccerInstructions2">* Click read button to load article in a browser</string>
     <string name="soccerInstructions3">* Click save button to save the article</string>
-    <string name="soccerInstructions4">* Click favorite button to show the saved news articles</string>
-    <string name="soccerInstructions5">* Click remove button to removes the story from favourites</string>
+    <string name="soccerInstructions4">* Click heart button to show favorites</string>
+    <string name="soccerInstructions5">* Click delete button to remove the story</string>
     <string name="closeHelpDialog">Close</string>
-
-
-
 
 
 
