@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject">
-        <activity android:name=".SongsterSearch"></activity>
+        <activity android:name=".SongsterSearch" />
         <activity android:name=".SongsterrEmptyActivity"/>
         <activity android:name=".SongsterrFavoritesList"/>
         <activity android:name=".SongsterrFavEmpty"/>
