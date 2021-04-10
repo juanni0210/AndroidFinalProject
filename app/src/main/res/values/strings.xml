@@ -49,6 +49,7 @@
     <string name="addFavorite">Add to favorites</string>
     <string name="removeFav">Remove Favorite</string>
     <string name="goToFav">Go to Favorite List</string>
+    <string name="favorite">Favorite List</string>
 
 
 </resources>
