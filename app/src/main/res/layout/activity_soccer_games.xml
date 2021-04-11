@@ -65,14 +65,6 @@
         </ListView>
     </LinearLayout>
 
-<!--    <ListView-->
-<!--        android:id="@+id/theListView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/newsTop"-->
-<!--        android:layout_marginBottom="40dp">-->
-<!--    </ListView>-->
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,17 +81,6 @@
                 android:background="#00000000"
                 app:srcCompat="@drawable/favorite" />
         </LinearLayout>
-
-
-<!--            <Button-->
-<!--        android:id="@+id/favoriteBtn"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_alignBottom="@id/theListView"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/favorite" />-->
-<!--        </RelativeLayout>-->
-
 
         <com.google.android.material.navigation.NavigationView
             android:layout_width="wrap_content"

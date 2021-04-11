@@ -42,5 +42,4 @@
         android:textAppearance="?android:textAppearanceMedium"
         android:text="@string/soccerActivityVersionNumber" />
 
-
 </LinearLayout>

@@ -71,6 +71,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
         android:paddingRight="15dp"
+        android:textColor="@color/black"
         android:textAppearance="?android:textAppearanceMedium"
         android:layout_below="@id/savedImage"
         android:textAlignment="center"
@@ -98,6 +99,7 @@
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:paddingRight="15dp"
+        android:textColor="@color/black"
         tools:layout_editor_absoluteX="68dp"
         tools:layout_editor_absoluteY="252dp" />
 
@@ -119,6 +121,7 @@
         android:layout_below="@id/blank2"
         android:textAlignment="center"
         android:paddingRight="15dp"
+        android:textColor="@color/black"
         android:textAppearance="?android:textAppearanceMedium"
         android:layout_toRightOf="@+id/theSavedListView"
         tools:layout_editor_absoluteX="68dp"
@@ -147,49 +150,5 @@
         android:paddingLeft="30dp"
         android:background="#00000000"
         app:srcCompat="@drawable/delete" />
-
-
-    <!--    <Button-->
-<!--        android:id="@+id/removeBtn"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_toRightOf="@id/theSavedListView"-->
-<!--        android:layout_alignBottom="@id/theSavedListView"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:text="@string/read" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/removeBtn"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_toRightOf="@id/readSavedBtn"-->
-<!--        android:layout_alignBottom="@id/theSavedListView"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:layout_marginLeft="70dp"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:text="@string/remove" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/favoriteBtn"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_toRightOf="@id/saveBtn"-->
-<!--        android:layout_alignBottom="@id/theListView"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/favorite" />-->
-
-
-
-    <!--    <FrameLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:padding="@dimen/inner_frame_layout_padding"-->
-    <!--        app:boxedEdges="all">-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/text"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:text="@string/hello_world" />-->
-
-    <!--    </FrameLayout>-->
+    
 </RelativeLayout>
