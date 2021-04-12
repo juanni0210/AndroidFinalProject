@@ -49,7 +49,9 @@
     <string name="removeFav">Remove Favorite</string>
     <string name="goToFav">Go to Favorite List</string>
     <string name="favorite">Favorite List</string>
-    <string name="searching">"Searching: "</string>
+    <string name="searching">Searching: </string>
+    <string name="alertDeleteTitle">Delete this song?</string>
+    <string name="deleteSnackbar">The selected song is already deleted.</string>
 
 
 </resources>

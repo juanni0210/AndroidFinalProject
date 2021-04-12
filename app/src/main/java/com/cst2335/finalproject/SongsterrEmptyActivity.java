@@ -22,11 +22,9 @@ public class SongsterrEmptyActivity extends AppCompatActivity {
 
         SongsterrDetailFragment dFragment = new SongsterrDetailFragment();
         dFragment.setArguments(dataToPass);
-        dFragment.setTablet(false);
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.songsterEmptyFragment, dFragment)
-                .addToBackStack("AnyName")
+                .add(R.id.songsterFragment, dFragment)
                 .commit();
     }
 }

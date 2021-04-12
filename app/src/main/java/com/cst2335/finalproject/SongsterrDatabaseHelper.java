@@ -2,6 +2,7 @@ package com.cst2335.finalproject;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -48,7 +49,7 @@ public class SongsterrDatabaseHelper extends SQLiteOpenHelper {
      * Constructor for database helper
      * @param ctx
      */
-    public SongsterrDatabaseHelper(Activity ctx){
+    public SongsterrDatabaseHelper(Context ctx){
         super(ctx, DATABASE_NAME, null, VERSION_NUM );
     }
 

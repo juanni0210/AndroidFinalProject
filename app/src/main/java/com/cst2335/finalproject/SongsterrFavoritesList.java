@@ -3,7 +3,9 @@ package com.cst2335.finalproject;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -49,13 +51,11 @@ public class SongsterrFavoritesList extends AppCompatActivity {
         setContentView(R.layout.songsterr_favorites);
 
         //Set up
-        TextView songTitle = (TextView) findViewById(R.id.detailSongName);
-        TextView songID = (TextView) findViewById(R.id.detailSongID);
-        TextView artistName = (TextView) findViewById(R.id.detailArtistName);
-        TextView artistID = (TextView) findViewById(R.id.detailArtistID);
+        TextView songTitle =  findViewById(R.id.detailSongName);
+        TextView songID = findViewById(R.id.detailSongID);
+        TextView artistName =  findViewById(R.id.detailArtistName);
+        TextView artistID = findViewById(R.id.detailArtistID);
         ImageButton deleteBtn = findViewById(R.id.songsterrDetailFavoriteButton);
-        //Button goToSearch = findViewById(R.id.songsterrDetailFavoriteButton);
-
 
         ListView theFavList = findViewById(R.id.songsterrFavList);
         theFavList.setAdapter( myAdapter = new SongsterrFavListAdapter() );
@@ -75,15 +75,15 @@ public class SongsterrFavoritesList extends AppCompatActivity {
 
             deleteBtn.setOnClickListener(clk->{
                 AlertDialog.Builder builder = new AlertDialog.Builder(SongsterrFavoritesList.this);
-                // View view = LayoutInflater.from(SongsterrFavoritesList.this).inflate(R.layout.songsterr_dialog, null);
-//
-//                TextView dialogTitle = (TextView) view.findViewById(R.id.dialogTitle);
-//                ImageButton dialogBtn = view.findViewById(R.id.dialogBtn);
-//                TextView dialogContent = (TextView) view.findViewById(R.id.dialogContent);
+                View view = LayoutInflater.from(SongsterrFavoritesList.this).inflate(R.layout.songsterr_alert, null);
 
-                builder.setTitle("Delete this Song?");
+                TextView alertTitle = (TextView) view.findViewById(R.id.alertTitle);
+                ImageButton alertImg = view.findViewById(R.id.alertImg);
 
-                builder.setPositiveButton("Yes", (e, arg) -> {
+                alertTitle.setText(R.string.alertDeleteTitle);
+                alertImg.setImageResource(R.drawable.exclamation_mark);
+
+                builder.setPositiveButton(R.string.yes, (e, arg) -> {
                     deleteItem(selectedItem);
                     favorites.remove(position);
                     myAdapter.notifyDataSetChanged();
@@ -92,16 +92,29 @@ public class SongsterrFavoritesList extends AppCompatActivity {
                     artistName.setText("");
                     artistID.setText("");
 
-                    Snackbar.make(findViewById(R.id.favLayout), "The selected song is already deleted.", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(R.id.favLayout), R.string.deleteSnackbar, Snackbar.LENGTH_SHORT).show();
                 });
 
-                builder.setNegativeButton("No", (e, arg) -> { });
+                builder.setNegativeButton(R.string.no, (e, arg) -> { });
                 builder.create();
                 builder.show();
             });
 
         });
 
+        songID.setOnClickListener(v -> {
+            String url = "http://www.songsterr.com/a/wa/song?id="+songID ;
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData( Uri.parse(url) );
+            startActivity(i);
+        });
+
+        artistID.setOnClickListener(v -> {
+            String url = "http://www.songsterr.com/a/wa/artist?id="+artistID ;
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData( Uri.parse(url) );
+            startActivity(i);
+        });
 
         loadDataFromDatabase();
 
@@ -135,7 +148,6 @@ public class SongsterrFavoritesList extends AppCompatActivity {
             String artistName = results.getString(artistNameColumnIndex);
             String artistID = results.getString(artistIDColIndex);
             long id = results.getLong(idColIndex);
-
 
             favorites.add(new SongsterrObject(songName, songID, artistName, artistID, id));
             myAdapter.notifyDataSetChanged();
