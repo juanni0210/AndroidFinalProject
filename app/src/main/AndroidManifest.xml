@@ -15,7 +15,6 @@
         <activity android:name=".SongsterSearch" />
         <activity android:name=".SongsterrEmptyActivity"/>
         <activity android:name=".SongsterrFavoritesList"/>
-        <activity android:name=".SongsterrFavEmpty"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

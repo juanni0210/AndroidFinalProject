@@ -23,11 +23,11 @@
     <string name="song_title">Song Title</string>
     <string name="artist_name">Artist Name</string>
     <string name="songsterHelpTile">All you need to know about Songsterr Search:</string>
-    <string name="songsterInstructions1">1)Enter song title you want to search, click search button</string>
-    <string name="songsterInstructions2">2)Click song title you want to know details</string>
-    <string name="songsterInstructions3">3) Click Song ID or Artist ID to another website</string>
-    <string name="songsterInstructions4">4) Add to favourite list if you want</string>
-    <string name="songsterInstructions5">"5) or Delete "</string>
+    <string name="songsterInstructions1">1) Enter song title you want to search, click search button</string>
+    <string name="songsterInstructions2">2) Click song title you want to know details</string>
+    <string name="songsterInstructions3">3) Click Song ID or Artist ID transfer to another websit </string>
+    <string name="songsterInstructions4">4) Add to favourites list</string>
+    <string name="songsterInstructions5">"5) Or Delete "</string>
 
 
     <!--    Songster page-->
@@ -37,7 +37,6 @@
     <string name="songster_btn_search">Search</string>
     <string name="songster_search">Songster search page</string>
     <string name="faveListTitle">Favourite List</string>
-    <string name="backBtn">Go Back</string>
     <string name="add_to_favourite">Add to favourite list</string>
     <string name="yes">Yes</string>
     <string name="add">Successfully Added!</string>
@@ -50,6 +49,7 @@
     <string name="removeFav">Remove Favorite</string>
     <string name="goToFav">Go to Favorite List</string>
     <string name="favorite">Favorite List</string>
+    <string name="searching">"Searching: "</string>
 
 
 </resources>

@@ -7,11 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -24,7 +28,7 @@ public class SongsterrFavoritesList extends AppCompatActivity {
     /**
      * ArrayList containing all favorite Song name
      */
-    private ArrayList<SongsterrObject> favorites;
+    private ArrayList<SongsterrObject> favorites = new ArrayList<>();;
     /**
      * db helper
      */
@@ -44,13 +48,75 @@ public class SongsterrFavoritesList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.songsterr_favorites);
 
-        favorites = new ArrayList<>();
+        //Set up
+        TextView songTitle = (TextView) findViewById(R.id.detailSongName);
+        TextView songID = (TextView) findViewById(R.id.detailSongID);
+        TextView artistName = (TextView) findViewById(R.id.detailArtistName);
+        TextView artistID = (TextView) findViewById(R.id.detailArtistID);
+        ImageButton deleteBtn = findViewById(R.id.songsterrDetailFavoriteButton);
+        //Button goToSearch = findViewById(R.id.songsterrDetailFavoriteButton);
 
+
+        ListView theFavList = findViewById(R.id.songsterrFavList);
+        theFavList.setAdapter( myAdapter = new SongsterrFavListAdapter() );
+
+        theFavList.setOnItemClickListener( (list, item, position, id) -> {
+            SongsterrObject selectedItem = favorites.get(position);
+
+            String getSongTitle = selectedItem.getSongName();
+            String getSongID = selectedItem.getSongID();
+            String getArtistName = selectedItem.getArtistName();
+            String getArtistID = selectedItem.getArtistID();
+
+            songTitle.setText(getSongTitle);
+            songID.setText(getSongID);
+            artistName.setText(getArtistName);
+            artistID.setText(getArtistID);
+
+            deleteBtn.setOnClickListener(clk->{
+                AlertDialog.Builder builder = new AlertDialog.Builder(SongsterrFavoritesList.this);
+                // View view = LayoutInflater.from(SongsterrFavoritesList.this).inflate(R.layout.songsterr_dialog, null);
+//
+//                TextView dialogTitle = (TextView) view.findViewById(R.id.dialogTitle);
+//                ImageButton dialogBtn = view.findViewById(R.id.dialogBtn);
+//                TextView dialogContent = (TextView) view.findViewById(R.id.dialogContent);
+
+                builder.setTitle("Delete this Song?");
+
+                builder.setPositiveButton("Yes", (e, arg) -> {
+                    deleteItem(selectedItem);
+                    favorites.remove(position);
+                    myAdapter.notifyDataSetChanged();
+                    songTitle.setText("");
+                    songID.setText("");
+                    artistName.setText("");
+                    artistID.setText("");
+
+                    Snackbar.make(findViewById(R.id.favLayout), "The selected song is already deleted.", Snackbar.LENGTH_SHORT).show();
+                });
+
+                builder.setNegativeButton("No", (e, arg) -> { });
+                builder.create();
+                builder.show();
+            });
+
+        });
+
+
+        loadDataFromDatabase();
+
+    }
+
+    protected void deleteItem(SongsterrObject object)
+    {
+        db.delete(SongsterrDatabaseHelper.TABLE_NAME, SongsterrDatabaseHelper.COL_ID + "= ?", new String[] {Long.toString(object.getId())});
+    }
+
+
+    private void loadDataFromDatabase(){
+        favorites.clear();
         SongsterrDatabaseHelper dbOpener = new SongsterrDatabaseHelper(this);
         db = dbOpener.getWritableDatabase();
-
-        ListView theList = findViewById(R.id.songsterrFavList);
-        theList.setAdapter( myAdapter = new SongsterrFavListAdapter() );
 
         String[] columns = {SongsterrDatabaseHelper.COL_ID, SongsterrDatabaseHelper.COL_SONGNAME, SongsterrDatabaseHelper.COL_SONGID, SongsterrDatabaseHelper.COL_ARTISTNAME, SongsterrDatabaseHelper.COL_ARTISTID};
         Cursor results = db.query(false, SongsterrDatabaseHelper.TABLE_NAME, columns, null, null, null, null, null, null);
@@ -72,75 +138,8 @@ public class SongsterrFavoritesList extends AppCompatActivity {
 
 
             favorites.add(new SongsterrObject(songName, songID, artistName, artistID, id));
+            myAdapter.notifyDataSetChanged();
         }
-        myAdapter.notifyDataSetChanged();
-
-
-        theList.setOnItemClickListener( (list, item, position, id) -> {
-
-            Bundle dataToPass = new Bundle();
-            dataToPass.putString(SongsterrDatabaseHelper.COL_SONGNAME, favorites.get(position).getSongName());
-            dataToPass.putString(SongsterrDatabaseHelper.COL_SONGID, favorites.get(position).getSongID());
-            dataToPass.putString(SongsterrDatabaseHelper.COL_ARTISTNAME, favorites.get(position).getArtistName());
-            dataToPass.putString(SongsterrDatabaseHelper.COL_ARTISTID, favorites.get(position).getArtistID());
-            dataToPass.putInt(SongsterSearch.ITEM_POSITION, position);
-            dataToPass.putLong(SongsterrDatabaseHelper.COL_ID, id);
-
-            boolean isTablet = findViewById(R.id.songsterrFavFragmentLocation) != null;
-
-            if(isTablet)
-            {
-                SongsterrFavDetailFragment dFragment = new SongsterrFavDetailFragment();
-                dFragment.setArguments( dataToPass );
-                dFragment.setTablet(true);
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.songsterrFavFragmentLocation, dFragment)
-                        .addToBackStack("AnyName")
-                        .commit();
-            }
-            else //isPhone
-            {
-                Intent nextActivity = new Intent(SongsterrFavoritesList.this, SongsterrFavEmpty.class);
-                nextActivity.putExtras(dataToPass); //send data to next activity
-                startActivityForResult(nextActivity, SongsterSearch.EMPTY_ACTIVITY); //make the transition
-
-            }
-        });
-    }
-
-    /**
-     * Method to check if the results were successful from the empty activity.
-     * If proper codes are given take the id from the data and remove from favorites
-     *
-     * @param requestCode int to check if the result came from the empty activity
-     * @param resultCode int to check if the activity finished successfully
-     * @param data data from activity
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == SongsterSearch.EMPTY_ACTIVITY)
-        {
-            if(resultCode == RESULT_OK) //if you hit the delete button instead of back button
-            {
-                long id = data.getIntExtra(SongsterrDatabaseHelper.COL_ID, 0);
-                int pos = data.getIntExtra(SongsterSearch.ITEM_POSITION, 0);
-                removeFromFavorite((int)id, pos);
-            }
-        }
-    }
-
-    /**
-     * Method that take an id of the item and then removes that item from the favorites database
-     * @param id id of the item being removed from favorites
-     */
-    public void removeFromFavorite(int id, int pos) {
-        db.delete(SongsterrDatabaseHelper.TABLE_NAME, SongsterrDatabaseHelper.COL_ID + "=" + id, null);
-        favorites.remove(pos);
-        Toast.makeText(this, "Removed From Favorite", Toast.LENGTH_LONG).show();
-        myAdapter.notifyDataSetChanged();
-
     }
 
     /**
@@ -185,11 +184,7 @@ public class SongsterrFavoritesList extends AppCompatActivity {
             View thisRow = getLayoutInflater().inflate(R.layout.songsterr_listview_layout, null);
 
             TextView latText = thisRow.findViewById(R.id.songNameList );
-            latText.setText("Song Name: " + getItem(p).getSongName() );
-
-            TextView longText = thisRow.findViewById(R.id.artistNameList );
-            longText.setText("Artist Name: " + getItem(p).getArtistName() );
-
+            latText.setText(getItem(p).getSongName() );
 
             return thisRow;
         }

@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -59,9 +60,13 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
      */
     private ProgressBar progressBar;
     /**
-     * button that starts the search function
+     * ImageButton that starts the search function
      */
-    private Button searchButton;
+    private ImageButton searchButton;
+    /**
+     * ImageButton that starts the favorite activity
+     */
+    private ImageButton goToFavButton;
     /**
      * Adapter to handle list view for displaying search results
      */
@@ -70,14 +75,16 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
      * Database helper to handle adding to favorites
      */
     private SQLiteDatabase db;
+
     /**
      * String for item position text
      */
     public static final String ITEM_POSITION = "POSITION";
-    /**
-     * int to show being used for empty activity
-     */
-    public static final int EMPTY_ACTIVITY = 345;
+    public static final String ITEM_SONG_TITLE = "TITLE";
+    public static final String ITEM_SONG_ID = "S_ID";
+    public static final String ITEM_ARTIST_NAME = "NAME";
+    public static final String ITEM_ARTIST_ID = "A_ID";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,19 +136,22 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
             SongsterrQuery query = new SongsterrQuery(editSongsterr.getText().toString());
             query.execute();
 
-            Snackbar.make(findViewById(R.id.songsterMain), "Searching: "+ editSongsterr.getText().toString(), Snackbar.LENGTH_LONG).show();
-
+            //pop up a snackbar to show input searching content
+            Snackbar.make(findViewById(R.id.songsterMain), R.string.searching+ editSongsterr.getText().toString(), Snackbar.LENGTH_LONG).show();
         });
 
         theList.setOnItemClickListener( (list, item, position, id) -> {
+            SongsterrObject selectedItem = search.get(position);
+            String getSongTitle = selectedItem.getSongName();
+            String getSongID = selectedItem.getSongID();
+            String getArtistName = selectedItem.getArtistName();
+            String getArtistID = selectedItem.getArtistID();
 
             Bundle dataToPass = new Bundle();
-            dataToPass.putString(SongsterrDatabaseHelper.COL_SONGNAME, search.get(position).getSongName());
-            dataToPass.putString(SongsterrDatabaseHelper.COL_SONGID, search.get(position).getSongID());
-            dataToPass.putString(SongsterrDatabaseHelper.COL_ARTISTNAME, search.get(position).getArtistName());
-            dataToPass.putString(SongsterrDatabaseHelper.COL_ARTISTID, search.get(position).getArtistID());
-            dataToPass.putInt(ITEM_POSITION, position);
-            dataToPass.putLong(SongsterrDatabaseHelper.COL_ID, position);
+            dataToPass.putString(ITEM_SONG_TITLE,getSongTitle);
+            dataToPass.putString(ITEM_SONG_ID,getSongID);
+            dataToPass.putString(ITEM_ARTIST_NAME, getArtistName);
+            dataToPass.putString(ITEM_ARTIST_ID,getArtistID);
 
             boolean isTablet = findViewById(R.id.songsterFragmentLocation) != null;
 
@@ -149,63 +159,24 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
             {
                 SongsterrDetailFragment dFragment = new SongsterrDetailFragment();
                 dFragment.setArguments( dataToPass );
-                dFragment.setTablet(true);
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.songsterFragmentLocation, dFragment)
-                        .addToBackStack("AnyName")
                         .commit();
             }
             else //isPhone
             {
                 Intent nextActivity = new Intent(SongsterSearch.this, SongsterrEmptyActivity.class);
                 nextActivity.putExtras(dataToPass); //send data to next activity
-                startActivityForResult(nextActivity, EMPTY_ACTIVITY); //make the transition
+                startActivity(nextActivity); //make the transition
 
             }
         });
 
-    }
-
-    /**
-     * Method to check if the results were successful from the empty activity.
-     * If proper codes are given take the id from the data and add to favorites
-     *
-     * @param requestCode int to check if the result came from the empty activity
-     * @param resultCode int to check if the activity finished successfully
-     * @param data data from activity
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == EMPTY_ACTIVITY)
-        {
-            if(resultCode == RESULT_OK) //if you hit the delete button instead of back button
-            {
-                long id = data.getIntExtra(SongsterrDatabaseHelper.COL_ID, 0);
-                addToFavorite((int)id);
-            }
-        }
-    }
-
-    /**
-     * Method that take an id of the item and then adds that item to the favorites database
-     * @param id id of the item being added to favorites
-     */
-    public void addToFavorite(int id){
-        SongsterrObject addObj = search.get(id);
-
-        ContentValues newRowValues = new ContentValues();
-
-        newRowValues.put(SongsterrDatabaseHelper.COL_SONGNAME, addObj.getSongName());
-        newRowValues.put(SongsterrDatabaseHelper.COL_SONGID, addObj.getSongID());
-        newRowValues.put(SongsterrDatabaseHelper.COL_ARTISTNAME, addObj.getArtistName());
-        newRowValues.put(SongsterrDatabaseHelper.COL_ARTISTID, addObj.getArtistID());
-
-        long newId = db.insert(SongsterrDatabaseHelper.TABLE_NAME, null, newRowValues);
-        if(newId > 0 ){
-            Toast.makeText(this, "Added to Favorite", Toast.LENGTH_LONG).show();
-        }
+        goToFavButton = findViewById(R.id.goToFavBtn);
+        Intent goToFav = new Intent(SongsterSearch.this, SongsterrFavoritesList.class);
+        Toast.makeText(this,R.string.goToFav, Toast.LENGTH_LONG).show();
+        startActivity(goToFav);
 
     }
 
@@ -251,10 +222,7 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
             View thisRow = getLayoutInflater().inflate(R.layout.songsterr_listview_layout, null);
 
             TextView songName = thisRow.findViewById(R.id.songNameList );
-            songName.setText("Song name: " + getItem(p).getSongName() );
-
-            TextView artistName = thisRow.findViewById(R.id.artistNameList);
-            artistName.setText("Artist Name: " + getItem(p).getArtistName() );
+            songName.setText(getItem(p).getSongName() );
 
             return thisRow;
         }

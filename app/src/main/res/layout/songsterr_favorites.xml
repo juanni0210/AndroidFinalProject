@@ -1,23 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@drawable/songsterr_bg"
+    android:id="@+id/favLayout"
+    tools:deviceIds="wear">
 
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/songsterrToolbar"
+        android:background="@color/blue"/>
 
     <TextView
         android:id="@+id/songsterrFavTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:layout_height="60dp"
         android:text="@string/favorite"
-        android:layout_alignParentStart="true"/>
+        android:layout_below="@+id/songsterrToolbar"
+        android:layout_alignParentStart="true"
+        android:textAlignment="center"
+        android:background="@drawable/songsterr_bg_2"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:paddingTop="5dp"
+        android:textSize="30sp"
+        android:elegantTextHeight="true"
+        />
 
     <ListView
         android:id="@+id/songsterrFavList"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="match_parent"
         android:layout_below="@id/songsterrFavTitle"
         android:layout_alignParentStart="true"/>
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/detailLayout"
+        android:layout_toEndOf="@+id/songsterrFavList"
+        android:layout_below="@+id/songsterrFavTitle">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="30dp"
+            android:id="@+id/detailSongName"
+            android:textSize="20sp"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/detailSongID"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@+id/detailSongName"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/detailArtistName"
+            android:layout_marginLeft="30dp"
+            android:textSize="20dp"
+            android:layout_below="@id/detailSongID"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/detailArtistID"
+            android:layout_marginLeft="30dp"
+            android:layout_below="@id/detailArtistName"
+            />
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="105dp"
+            android:layout_below="@+id/detailArtistID"
+            android:text="@string/removeFav"
+            android:background="@drawable/delete_icon"
+            android:id="@+id/songsterrDetailFavoriteButton"/>
+    </RelativeLayout>
 
 
 </RelativeLayout>
