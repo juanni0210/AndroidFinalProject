@@ -1,11 +1,15 @@
 package com.cst2335.finalproject;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -40,10 +45,12 @@ public class SongsterrFavoritesList extends AppCompatActivity {
      */
     private BaseAdapter myAdapter;
 
+
     /**
      * Populates and display favorites in list view
      * Handles selection of a favorite from listview or back button
      */
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -56,10 +63,12 @@ public class SongsterrFavoritesList extends AppCompatActivity {
         TextView artistName =  findViewById(R.id.detailArtistName);
         TextView artistID = findViewById(R.id.detailArtistID);
         ImageButton deleteBtn = findViewById(R.id.songsterrDetailFavoriteButton);
+        Toolbar toolbar = findViewById(R.id.songsterrToolbar);
+        setSupportActionBar(toolbar);
 
         ListView theFavList = findViewById(R.id.songsterrFavList);
-        theFavList.setAdapter( myAdapter = new SongsterrFavListAdapter() );
 
+        theFavList.setAdapter( myAdapter = new SongsterrFavListAdapter() );
         theFavList.setOnItemClickListener( (list, item, position, id) -> {
             SongsterrObject selectedItem = favorites.get(position);
 
@@ -68,10 +77,10 @@ public class SongsterrFavoritesList extends AppCompatActivity {
             String getArtistName = selectedItem.getArtistName();
             String getArtistID = selectedItem.getArtistID();
 
-            songTitle.setText(getSongTitle);
-            songID.setText(getSongID);
-            artistName.setText(getArtistName);
-            artistID.setText(getArtistID);
+            songTitle.setText(R.string.songTitle + getSongTitle);
+            songID.setText(R.string.songID + getSongID);
+            artistName.setText(R.string.artistName + getArtistName);
+            artistID.setText(R.string.artistID + getArtistID);
 
             deleteBtn.setOnClickListener(clk->{
                 AlertDialog.Builder builder = new AlertDialog.Builder(SongsterrFavoritesList.this);
@@ -200,5 +209,62 @@ public class SongsterrFavoritesList extends AppCompatActivity {
 
             return thisRow;
         }
+    }
+
+    /**
+     * Inflates menu bar
+     * @param menu menu to be inflated
+     * @return if menu has been inflated
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    /**
+     * Handles actions of selected menu items
+     * @param item which item has been selected
+     * @return if actions have been successful
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            //what to do when the menu item is selected:
+            case R.id.backHomeItem:
+                startActivity(new Intent(SongsterrFavoritesList.this, MainActivity.class));
+                break;
+            case R.id.triviaItem:
+                //startActivity(new Intent(TriviaGameLaunchActivity.this, TriviaGameLaunchActivity.class));
+                break;
+            case R.id.songsterItem:
+                startActivity(new Intent(SongsterrFavoritesList.this, SongsterSearch.class));
+                Toast.makeText(this, "Go to songster page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.carDBItem:
+                Toast.makeText(this, "Go to car database page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.soccerItem:
+                Toast.makeText(this, "Go to soccer game page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.helpItem:
+                AlertDialog.Builder songsterHelpDialog = new AlertDialog.Builder(this);
+                songsterHelpDialog.setTitle(getResources().getString(R.string.songsterHelpTile))
+                        //What is the message:
+                        .setMessage(getResources().getString(R.string.songsterInstructions1) + "\n"
+                                + getResources().getString(R.string.songsterInstructions2) + "\n"
+                                + getResources().getString(R.string.songsterInstructions3) + "\n"
+                                + getResources().getString(R.string.songsterInstructions4) + "\n"
+                                + getResources().getString(R.string.songsterInstructions5))
+                        //What the No button does:
+                        .setNegativeButton(getResources().getString(R.string.closeHelpDialog), (click, arg) -> {
+                        })
+                        //Show the dialog
+                        .create().show();
+                break;
+        }
+        return true;
     }
 }

@@ -137,7 +137,7 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
             query.execute();
 
             //pop up a snackbar to show input searching content
-            Snackbar.make(findViewById(R.id.songsterMain), R.string.searching + editSongsterr.getText().toString(), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.songsterMain), "Searching: "+ editSongsterr.getText().toString(), Snackbar.LENGTH_LONG).show();
         });
 
         theList.setOnItemClickListener( (list, item, position, id) -> {
@@ -171,6 +171,7 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
                 startActivity(nextActivity); //make the transition
 
             }
+
         });
 
         goToFavButton = findViewById(R.id.goToFavBtn);

@@ -23,7 +23,6 @@
         android:layout_below="@+id/songsterrToolbar"
         android:layout_alignParentStart="true"
         android:textAlignment="center"
-        android:background="@drawable/songsterr_bg_2"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:paddingTop="5dp"
@@ -33,7 +32,7 @@
 
     <ListView
         android:id="@+id/songsterrFavList"
-        android:layout_width="150dp"
+        android:layout_width="180dp"
         android:layout_height="match_parent"
         android:layout_below="@id/songsterrFavTitle"
         android:layout_alignParentStart="true"/>
@@ -45,12 +44,23 @@
         android:layout_below="@+id/songsterrFavTitle">
 
         <TextView
+            android:id="@+id/songsterDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Songsterr Details:"
+            android:layout_marginLeft="26dp"
+            android:textColor="@color/dark_blue"
+            android:textSize="20dp"
+            android:layout_marginTop="60dp"/>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
             android:layout_marginLeft="30dp"
             android:id="@+id/detailSongName"
-            android:textSize="20sp"
+            android:textColor="@color/dark_blue"
+            android:textSize="15sp"
             android:layout_alignParentStart="true"/>
 
         <TextView
@@ -65,7 +75,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/detailArtistName"
             android:layout_marginLeft="30dp"
-            android:textSize="20dp"
+            android:textColor="@color/dark_blue"
+            android:textSize="15sp"
             android:layout_below="@id/detailSongID"
             android:layout_alignParentStart="true"/>
 
@@ -78,8 +89,8 @@
             />
 
         <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="105dp"
             android:layout_below="@+id/detailArtistID"

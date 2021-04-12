@@ -52,6 +52,10 @@
     <string name="searching">Searching: </string>
     <string name="alertDeleteTitle">Delete this song?</string>
     <string name="deleteSnackbar">The selected song is already deleted.</string>
+    <string name="songTitle">Song Title: </string>
+    <string name="songID">Song ID: </string>
+    <string name="artistName">Artist Name: </string>
+    <string name="artistID">Artist ID: </string>
 
 
 </resources>

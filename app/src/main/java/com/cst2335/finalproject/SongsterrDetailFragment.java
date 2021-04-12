@@ -77,7 +77,6 @@ public class SongsterrDetailFragment extends Fragment {
         artistID = dataFromActivity.getString(SongsterSearch.ITEM_ARTIST_ID);
 
 
-
         TextView textSongName = (TextView)result.findViewById(R.id.detailSongName);
         textSongName.setText("Song Name: " + songName);
 
