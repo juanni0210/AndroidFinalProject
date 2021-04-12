@@ -53,22 +53,33 @@ public class SongsterrFavoritesList extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.songsterr_favorites);
 
-        //Set up
+        /**
+         * Set up element
+         */
         TextView songTitle =  findViewById(R.id.detailSongName);
         TextView songID = findViewById(R.id.detailSongID);
         TextView artistName =  findViewById(R.id.detailArtistName);
         TextView artistID = findViewById(R.id.detailArtistID);
         ImageButton deleteBtn = findViewById(R.id.songsterrDetailFavoriteButton);
         Toolbar toolbar = findViewById(R.id.songsterrToolbar);
+
+        /**
+         * Set toolbar
+         */
         setSupportActionBar(toolbar);
 
+        /**
+         * set listview and adapter
+         */
         ListView theFavList = findViewById(R.id.songsterrFavList);
-
         theFavList.setAdapter( myAdapter = new SongsterrFavListAdapter() );
+
+        /**
+         * click listview show songsters
+         */
         theFavList.setOnItemClickListener( (list, item, position, id) -> {
             SongsterrObject selectedItem = favorites.get(position);
 
@@ -77,25 +88,24 @@ public class SongsterrFavoritesList extends AppCompatActivity {
             String getArtistName = selectedItem.getArtistName();
             String getArtistID = selectedItem.getArtistID();
 
-            songTitle.setText(R.string.songTitle + getSongTitle);
-            songID.setText(R.string.songID + getSongID);
-            artistName.setText(R.string.artistName + getArtistName);
-            artistID.setText(R.string.artistID + getArtistID);
+            songTitle.setText(getString(R.string.songTitle)+getSongTitle);
+            songID.setText(getString(R.string.songID)+getSongID);
+            artistName.setText(getString(R.string.artistName)+getArtistName);
+            artistID.setText(getString(R.string.artistID)+getArtistID);
 
             deleteBtn.setOnClickListener(clk->{
                 AlertDialog.Builder builder = new AlertDialog.Builder(SongsterrFavoritesList.this);
-                View view = LayoutInflater.from(SongsterrFavoritesList.this).inflate(R.layout.songsterr_alert, null);
-
-                TextView alertTitle = (TextView) view.findViewById(R.id.alertTitle);
-                ImageButton alertImg = view.findViewById(R.id.alertImg);
-
-                alertTitle.setText(R.string.alertDeleteTitle);
-                alertImg.setImageResource(R.drawable.exclamation_mark);
+                builder.setTitle(R.string.alertDeleteTitle);
+                builder.setIcon(R.drawable.exclamation_mark);
 
                 builder.setPositiveButton(R.string.yes, (e, arg) -> {
                     deleteItem(selectedItem);
                     favorites.remove(position);
                     myAdapter.notifyDataSetChanged();
+
+                    /**
+                     * clean the result
+                     */
                     songTitle.setText("");
                     songID.setText("");
                     artistName.setText("");
@@ -111,6 +121,9 @@ public class SongsterrFavoritesList extends AppCompatActivity {
 
         });
 
+        /**
+         * click on songID to launch a browser to the song’s guitar music page
+         */
         songID.setOnClickListener(v -> {
             String url = "http://www.songsterr.com/a/wa/song?id="+songID ;
             Intent i = new Intent(Intent.ACTION_VIEW);
@@ -118,6 +131,9 @@ public class SongsterrFavoritesList extends AppCompatActivity {
             startActivity(i);
         });
 
+        /**
+         * click on artistID to launch a web browser to the artist’s list of songs
+         */
         artistID.setOnClickListener(v -> {
             String url = "http://www.songsterr.com/a/wa/artist?id="+artistID ;
             Intent i = new Intent(Intent.ACTION_VIEW);
@@ -126,7 +142,6 @@ public class SongsterrFavoritesList extends AppCompatActivity {
         });
 
         loadDataFromDatabase();
-
     }
 
     protected void deleteItem(SongsterrObject object)
@@ -134,7 +149,9 @@ public class SongsterrFavoritesList extends AppCompatActivity {
         db.delete(SongsterrDatabaseHelper.TABLE_NAME, SongsterrDatabaseHelper.COL_ID + "= ?", new String[] {Long.toString(object.getId())});
     }
 
-
+    /**
+     * function to help load data from database
+     */
     private void loadDataFromDatabase(){
         favorites.clear();
         SongsterrDatabaseHelper dbOpener = new SongsterrDatabaseHelper(this);
@@ -151,7 +168,6 @@ public class SongsterrFavoritesList extends AppCompatActivity {
         int idColIndex = results.getColumnIndex(SongsterrDatabaseHelper.COL_ID);
 
         while (results.moveToNext()) {
-
             String songName = results.getString(songNameColumnIndex);
             String songID = results.getString(songIDColIndex);
             String artistName = results.getString(artistNameColumnIndex);
@@ -235,18 +251,22 @@ public class SongsterrFavoritesList extends AppCompatActivity {
             //what to do when the menu item is selected:
             case R.id.backHomeItem:
                 startActivity(new Intent(SongsterrFavoritesList.this, MainActivity.class));
+                Toast.makeText(this, "Go to main page", Toast.LENGTH_LONG).show();
                 break;
             case R.id.triviaItem:
-                //startActivity(new Intent(TriviaGameLaunchActivity.this, TriviaGameLaunchActivity.class));
+//                startActivity(new Intent(SongsterrFavoritesList.this, TriviaGameLaunchActivity.class));
+                Toast.makeText(this, "Go to trivia game page", Toast.LENGTH_LONG).show();
                 break;
             case R.id.songsterItem:
                 startActivity(new Intent(SongsterrFavoritesList.this, SongsterSearch.class));
                 Toast.makeText(this, "Go to songster page", Toast.LENGTH_LONG).show();
                 break;
             case R.id.carDBItem:
+//                startActivity(new Intent(SongsterrFavoritesList.this, CarDatabase.class));
                 Toast.makeText(this, "Go to car database page", Toast.LENGTH_LONG).show();
                 break;
             case R.id.soccerItem:
+//                startActivity(new Intent(SongsterrFavoritesList.this, SoccerGames.class));
                 Toast.makeText(this, "Go to soccer game page", Toast.LENGTH_LONG).show();
                 break;
             case R.id.helpItem:

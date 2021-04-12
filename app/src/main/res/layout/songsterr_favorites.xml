@@ -32,67 +32,55 @@
 
     <ListView
         android:id="@+id/songsterrFavList"
-        android:layout_width="180dp"
+        android:layout_width="190dp"
         android:layout_height="match_parent"
         android:layout_below="@id/songsterrFavTitle"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="2dp" />
 
     <RelativeLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/detailLayout"
+        android:layout_marginStart="20dp"
         android:layout_toEndOf="@+id/songsterrFavList"
         android:layout_below="@+id/songsterrFavTitle">
 
         <TextView
-            android:id="@+id/songsterDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Songsterr Details:"
-            android:layout_marginLeft="26dp"
-            android:textColor="@color/dark_blue"
-            android:textSize="20dp"
-            android:layout_marginTop="60dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
             android:id="@+id/detailSongName"
             android:textColor="@color/dark_blue"
-            android:textSize="15sp"
-            android:layout_alignParentStart="true"/>
+            android:textSize="16sp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/detailSongID"
-            android:layout_marginLeft="30dp"
-            android:layout_below="@+id/detailSongName"/>
+            android:layout_below="@id/detailSongName"/>
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/detailArtistName"
-            android:layout_marginLeft="30dp"
             android:textColor="@color/dark_blue"
-            android:textSize="15sp"
-            android:layout_below="@id/detailSongID"
-            android:layout_alignParentStart="true"/>
+            android:textSize="16sp"
+            android:layout_below="@id/detailSongID"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/detailArtistID"
-            android:layout_marginLeft="30dp"
             android:layout_below="@id/detailArtistName"
             />
 
         <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="105dp"
+            android:layout_marginStart="135dp"
             android:layout_below="@+id/detailArtistID"
             android:text="@string/removeFav"
             android:background="@drawable/delete_icon"

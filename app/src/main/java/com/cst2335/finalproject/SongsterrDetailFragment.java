@@ -1,6 +1,7 @@
 package com.cst2335.finalproject;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
@@ -17,7 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -46,6 +50,10 @@ public class SongsterrDetailFragment extends Fragment {
      * Artist ID
      */
     private String artistID;
+    /**
+     * ImageButton click back to songster main
+     */
+    private ImageButton goToSongsterMain;
     /**
      * ArrayList holding the search results
      */
@@ -76,20 +84,21 @@ public class SongsterrDetailFragment extends Fragment {
         artistName = dataFromActivity.getString(SongsterSearch.ITEM_ARTIST_NAME);
         artistID = dataFromActivity.getString(SongsterSearch.ITEM_ARTIST_ID);
 
+        TextView textSongName = result.findViewById(R.id.detailSongName);
+        textSongName.setText(getString(R.string.songTitle) + songName);
 
-        TextView textSongName = (TextView)result.findViewById(R.id.detailSongName);
-        textSongName.setText("Song Name: " + songName);
+        TextView textSongID = result.findViewById(R.id.detailSongID);
+        textSongID.setText(getString(R.string.songID) + songID);
 
-        TextView textSongID = (TextView)result.findViewById(R.id.detailSongID);
-        textSongID.setText("Song ID:" + songID);
+        TextView textArtistName = result.findViewById(R.id.detailArtistName);
+        textArtistName.setText(getString(R.string.artistName) + artistName);
 
-        TextView textArtistName = (TextView)result.findViewById(R.id.detailArtistName);
-        textArtistName.setText("Artist Name:" + artistName);
+        TextView textArtistID = result.findViewById(R.id.detailArtistID);
+        textArtistID.setText(getString(R.string.artistID) + artistID);
 
-        TextView textArtistID = (TextView)result.findViewById(R.id.detailArtistID);
-        textArtistID.setText("Artist ID:" + artistID);
-
-
+        /**
+         * click on songID to launch a browser to the song’s guitar music page
+         */
         textSongID.setOnClickListener(v -> {
             String url = "http://www.songsterr.com/a/wa/song?id="+songID ;
             Intent i = new Intent(Intent.ACTION_VIEW);
@@ -97,6 +106,10 @@ public class SongsterrDetailFragment extends Fragment {
             startActivity(i);
         });
 
+
+        /**
+         * click on artistID to launch a web browser to the artist’s list of songs
+         */
         textArtistID.setOnClickListener(v -> {
             String url = "http://www.songsterr.com/a/wa/artist?id="+artistID ;
             Intent i = new Intent(Intent.ACTION_VIEW);
@@ -104,10 +117,24 @@ public class SongsterrDetailFragment extends Fragment {
             startActivity(i);
         });
 
-        // connection to database
+        /**
+         * Click ImageButton to Songster Main
+         */
+        goToSongsterMain = result.findViewById(R.id.songsterrMain);
+        goToSongsterMain.setOnClickListener(clk->{
+            Intent goToSongterMain = new Intent(container.getContext(), SongsterSearch.class);
+            startActivity(goToSongterMain);
+        });
+
+        /**
+         * Connect to database
+         */
         SongsterrDatabaseHelper dbOpener = new SongsterrDatabaseHelper(container.getContext());
         SQLiteDatabase db = dbOpener.getWritableDatabase();
 
+        /**
+         * Add to database
+         */
         ImageButton addFavButton = result.findViewById(R.id.songsterrDetailFavoriteButton);
         addFavButton.setOnClickListener( clk -> {
             ContentValues newRowValues = new ContentValues();
@@ -129,6 +156,7 @@ public class SongsterrDetailFragment extends Fragment {
             Intent goToSaved = new Intent(container.getContext(), SongsterrFavoritesList.class);
             startActivity(goToSaved);
         });
+
 
         return result;
     }

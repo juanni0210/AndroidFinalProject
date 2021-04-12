@@ -20,12 +20,10 @@
     <string name="songsterActivityTitle">Activity Title: Songster Search</string>
     <string name="songsterActivityAuthor">Author: Xueru Chen</string>
     <string name="songsterActivityVersionNumber">Version number: V1.0</string>
-    <string name="song_title">Song Title</string>
-    <string name="artist_name">Artist Name</string>
     <string name="songsterHelpTile">All you need to know about Songsterr Search:</string>
-    <string name="songsterInstructions1">1) Enter song title you want to search, click search button</string>
-    <string name="songsterInstructions2">2) Click song title you want to know details</string>
-    <string name="songsterInstructions3">3) Click Song ID or Artist ID transfer to another websit </string>
+    <string name="songsterInstructions1">1) Enter song title to search, click search button</string>
+    <string name="songsterInstructions2">2) Click song title to show details</string>
+    <string name="songsterInstructions3">3) Click song ID or artist ID launch to another website </string>
     <string name="songsterInstructions4">4) Add to favourites list</string>
     <string name="songsterInstructions5">"5) Or Delete "</string>
 
@@ -48,14 +46,14 @@
     <string name="addFavorite">Add to favorites</string>
     <string name="removeFav">Remove Favorite</string>
     <string name="goToFav">Go to Favorite List</string>
-    <string name="favorite">Favorite List</string>
-    <string name="searching">Searching: </string>
+    <string name="favorite">Favorites List</string>
     <string name="alertDeleteTitle">Delete this song?</string>
     <string name="deleteSnackbar">The selected song is already deleted.</string>
     <string name="songTitle">Song Title: </string>
     <string name="songID">Song ID: </string>
     <string name="artistName">Artist Name: </string>
     <string name="artistID">Artist ID: </string>
+    <string name="songsterr_details">Songsterr Details</string>
 
 
 </resources>
