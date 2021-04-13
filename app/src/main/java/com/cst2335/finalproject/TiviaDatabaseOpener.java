@@ -27,8 +27,10 @@ public class TiviaDatabaseOpener extends SQLiteOpenHelper {
     }
 
 
-    //This function gets called if no database file exists.
-    //Look on your device in the /data/data/package-name/database directory.
+    /**
+     * Called when the database is created for the first time.
+     * @param db SQLiteDatabase: The database.
+     */
     @Override
     public void onCreate(SQLiteDatabase db)
     {
@@ -41,7 +43,12 @@ public class TiviaDatabaseOpener extends SQLiteOpenHelper {
     }
 
 
-    //this function gets called if the database version on your device is lower than VERSION_NUM
+    /**
+     * Called when the database needs to be upgraded.
+     * @param db SQLiteDatabase: The database.
+     * @param oldVersion int: The old database version.
+     * @param newVersion int: The new database version.
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {   //Drop the old table:
@@ -51,7 +58,12 @@ public class TiviaDatabaseOpener extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    //this function gets called if the database version on your device is higher than VERSION_NUM
+    /**
+     * Called when the database needs to be downgraded.
+     * @param db SQLiteDatabase: The database.
+     * @param oldVersion int: The old database version.
+     * @param newVersion int: The new database version.
+     */
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {   //Drop the old table:

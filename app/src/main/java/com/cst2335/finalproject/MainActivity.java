@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import org.json.JSONException;
+
 /**
  * Main Activity of the application. User can access to four projects.
  * @author Juan Ni
@@ -14,6 +16,10 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
     private Button startTriviaBtn, startSongsterBtn, startCarDBBtn, startSoccerBtn;
 
+    /**
+     * Called when the activity is starting.
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
