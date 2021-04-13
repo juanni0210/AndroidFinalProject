@@ -18,14 +18,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EmptyCarActivity"></activity>
-        <activity android:name=".SongsterFavouriteList"></activity>
         <activity android:name=".SongsterSearch" />
+        <activity android:name=".SongsterrEmptyActivity"/>
+        <activity android:name=".SongsterrFavoritesList"/>
         <activity android:name=".CarDatabase" />
+        <activity android:name=".EmptyCarActivity"></activity>
         <activity android:name=".Favorites" />
         <activity android:name=".SoccerGames" />
         <activity android:name=".SoccerGamesEmpty"></activity>
-         <activity android:name=".RatingSoccerAPI"></activity>
+        <activity android:name=".RatingSoccerAPI"></activity>
         <activity android:name=".SavedSoccerGames" />
         <activity android:name=".SoccerNewsPage" />
 
@@ -41,6 +42,7 @@
         <meta-data
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
+
 
         <activity android:name=".MainActivity">
             <intent-filter>

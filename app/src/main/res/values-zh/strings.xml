@@ -85,3 +85,51 @@
     <string name="addToFavorite">添加至收藏夹</string>
     <string name="deleteFromFavorite">移出收藏夹</string>
 </resources>
+
+    <string name="carDBStartBtn">汽车数据库</string>
+    <string name="soccerStartBtn">足球新闻</string>
+    <string name="projectInfo">CST2335 期终项目</string>
+    <string name="teamInfo">© 2021 TECH SAVVY 小组</string>
+
+    <!--    Menu page-->
+    <string name="triviaMenuName">益智问答</string>
+    <string name="songsterMenuName">歌手搜索</string>
+    <string name="carDBMenuName">汽车数据库</string>
+    <string name="soccerMenuName">足球新闻</string>
+    <string name="helpMenuName">帮助</string>
+    <string name="navigationOpen">打开</string>
+    <string name="navigationClose">关闭</string>
+    <string name="closeHelpDialog">关闭</string>
+
+
+    <string name="input">输入搜索内容</string>
+    <string name="search_button">搜索</string>
+    <string name="addFavorite">加到喜欢清单</string>
+
+    <string name="removeFav">移除</string>
+    <string name="goToFav">去到喜欢清单</string>
+    <string name="backHomeIcon">回到主页</string>
+    <string name="songsterActivityTitle">活动题目：歌手搜索</string>
+    <string name="songsterActivityAuthor">作者：陈雪茹</string>
+    <string name="songsterActivityVersionNumber">版本：1.0</string>
+    <string name="songsterHelpTile">须知：</string>
+    <string name="songsterInstructions1">1）输入项搜索的内容(单词加“+”)，点击搜索</string>
+    <string name="songsterInstructions2">2）点击歌曲获得详情</string>
+    <string name="songsterInstructions3">3）点击ID到另外的网页</string>
+    <string name="songsterInstructions4">4）加到喜欢的清单</string>
+    <string name="songsterInstructions5">5）或者删除</string>
+    <string name="alertDeleteTitle">删除这首歌么？</string>
+    <string name="deleteSnackbar">这首歌已经成功删除</string>
+    <string name="songTitle">歌曲题目</string>
+    <string name="songID">歌曲id</string>
+    <string name="artistName">作者姓名</string>
+    <string name="artistID">作者id</string>
+    <string name="songsterr_details">歌曲详细信息</string>
+    <string name="favorite">最喜欢清单</string>
+    <string name="search">"搜索： "</string>
+    <string name="goToMain">到主页</string>
+    <string name="goToTrivia">到益智问答</string>
+    <string name="goToSongster">到歌曲搜索</string>
+    <string name="goToCarDatabase">到汽车数据库</string>
+    <string name="goToSoccerGame">到足球新闻</string>
+    <string name="alertGotoFav">到喜欢清单</string>

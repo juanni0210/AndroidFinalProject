@@ -11,7 +11,7 @@
     <string name="projectInfo">CST2335 Final Project</string>
     <string name="teamInfo">© 2021 TECH SAVVY TEAM</string>
 
-<!--    menu and navigation-->
+    <!--    menu and navigation-->
     <string name="backHomeIcon">Home</string>
     <string name="triviaMenuName">Trivia Game</string>
     <string name="songsterMenuName">Songster Search</string>
@@ -161,5 +161,48 @@
     <string name="addToFavorite">Add to Favorite</string>
     <string name="deleteFromFavorite">Delete from Favorite</string>
 
+
+    <!--   Songsterr Main Menu    -->
+    <string name="triviaMenuName">Trivia Game</string>
+    <string name="songsterMenuName">Songster Search</string>
+    <string name="carDBMenuName">Car Database</string>
+    <string name="soccerMenuName">Soccer Game</string>
+    <string name="helpMenuName">Help</string>
+    <string name="navigationOpen">Open</string>
+    <string name="navigationClose">Close</string>
+    <string name="closeHelpDialog">CLOSE</string>
+    <string name="backHomeIcon">Back to Home page</string>
+    <string name="songsterActivityTitle">Activity Title: Songster Search</string>
+    <string name="songsterActivityAuthor">Author: Xueru Chen</string>
+    <string name="songsterActivityVersionNumber">Version number: V1.0</string>
+    <string name="songsterHelpTile">All you need to know about Songsterr Search:</string>
+    <string name="songsterInstructions1">1) Enter song title or artist name to search(put "+" between word), click search button</string>
+    <string name="songsterInstructions2">2) Click song title to show details</string>
+    <string name="songsterInstructions3">3) Click song ID or artist ID launch to another website </string>
+    <string name="songsterInstructions4">4) Add to favourites list</string>
+    <string name="songsterInstructions5">"5) Or Delete "</string>
+
+    <string name="faveListTitle">Favourites List</string>
+    <string name="input">Input search content</string>
+    <string name="search_button">Search</string>
+
+    <string name="addFavorite">Add to favorites</string>
+    <string name="removeFav">Remove Favorite</string>
+    <string name="goToFav">Go to Favorite List</string>
+    <string name="favorite">Favorites List</string>
+    <string name="alertDeleteTitle">Delete this song?</string>
+    <string name="deleteSnackbar">The selected song is already deleted.</string>
+    <string name="songTitle">Song Title: </string>
+    <string name="songID">Song ID: </string>
+    <string name="artistName">Artist Name: </string>
+    <string name="artistID">Artist ID: </string>
+    <string name="songsterr_details">Songsterr Details</string>
+    <string name="search">Searching:   </string>
+    <string name="goToMain">Go to main page</string>
+    <string name="goToTrivia">Go to trivia game page</string>
+    <string name="goToSongster">Go to songster page</string>
+    <string name="goToCarDatabase">Go to car database page</string>
+    <string name="goToSoccerGame">Go to soccer game page</string>
+    <string name="alertGotoFav">Go to Favorites List?</string>
 
 </resources>

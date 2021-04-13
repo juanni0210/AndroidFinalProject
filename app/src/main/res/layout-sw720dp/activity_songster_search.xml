@@ -4,15 +4,13 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/songsterr_bg"
     android:id="@+id/songsterMain">
 
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/songsterrToolbar"
-        android:background="@color/blue"/>
+        android:id="@+id/songsterrToolbar"/>
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
@@ -33,7 +31,6 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="text"
-                android:padding="15dp"
                 android:hint="@string/input"/>
 
             <ImageButton
@@ -51,9 +48,10 @@
                 android:background="@drawable/heart_outline"
                 android:layout_alignParentEnd="true"/>
 
+
             <ListView
                 android:id="@+id/songsterrListSearch"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:layout_below="@id/songsterrButtonSearch"
                 android:layout_alignParentStart="true" />
@@ -68,6 +66,16 @@
                 android:visibility="invisible"
                 android:layout_below="@id/songsterrEdit"/>
 
+            <FrameLayout
+                android:id="@+id/songsterFragmentLocation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/songsterrListSearch"
+                android:layout_below="@id/songsterrButtonSearch"
+                android:layout_marginLeft="20dp">
+            </FrameLayout>
+
+
         </RelativeLayout>
 
         <!-- THIS IS WHAT IS WHAT POPS OUT FROM THE SIDE:-->
@@ -76,7 +84,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
-            android:background="@drawable/songsterr_bg"
             app:headerLayout="@layout/songster_navigation_header"
             app:menu="@menu/main_menu"
             android:id="@+id/nav_view"/>
