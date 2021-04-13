@@ -29,6 +29,7 @@ import java.util.ArrayList;
 /**
  * Handles displaying and removing items from favorites database
  * can start navigating to favorites items
+ * @author Xueru Chen
  */
 public class SongsterrFavoritesList extends AppCompatActivity {
 

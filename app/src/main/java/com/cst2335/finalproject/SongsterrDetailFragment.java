@@ -28,6 +28,7 @@ import java.util.ArrayList;
 /**
  * Fragment for display information about selected Search chose from list view
  * Handles buttons actions in fragment
+ * @author Xueru Chen
  */
 public class SongsterrDetailFragment extends Fragment {
     /**

@@ -1,5 +1,9 @@
 package com.cst2335.finalproject;
 
+/**
+ * Set up Songster object
+ * @author Xueru Chen
+ */
 public class SongsterrObject {
     /**
      * Name of song
