@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         Intent goToCarDBLaunch = new Intent(MainActivity.this, CarDatabase.class);
         startCarDBBtn.setOnClickListener(v -> startActivity(goToCarDBLaunch));
 
-        Intent goToSoccerLaunch = new Intent(MainActivity.this, SoccerGames.class);
+        Intent goToSoccerLaunch = new Intent(MainActivity.this, RatingSoccerAPI.class);
         startSoccerBtn.setOnClickListener(v -> startActivity(goToSoccerLaunch));
     }
 }

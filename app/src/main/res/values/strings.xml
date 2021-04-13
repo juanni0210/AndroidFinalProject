@@ -125,17 +125,9 @@
     <string name="submitRate">Submit</string>
     <string name="news">Soccer News</string>
     <string name="savedNews">Favorite News</string>
-    <string name="backHomeIcon">Home</string>
-    <string name="triviaMenuName">Trivia Game</string>
-    <string name="songsterMenuName">Songster Search</string>
-    <string name="carDBMenuName">Car Database</string>
-    <string name="soccerMenuName">Soccer Game</string>
-    <string name="helpMenuName">Help</string>
-    <string name="navigationOpen">Open</string>
     <string name="soccerActivityTitle">Soccer Games Activity</string>
     <string name="soccerActivityAuthor">Feiqiong Deng</string>
     <string name="soccerActivityVersionNumber">Version Number: 2</string>
-    <string name="navigationClose">Close</string>
     <string name="soccerHelpTile">Soccer Games Help Menu</string>
     <string name="soccerInstructions1">* Click the title to get details</string>
     <string name="soccerInstructions2">* Click read button to load article in a browser</string>
