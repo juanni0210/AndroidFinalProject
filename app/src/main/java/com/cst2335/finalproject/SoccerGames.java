@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -32,7 +31,6 @@ import com.google.android.material.navigation.NavigationView;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.File;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -41,7 +39,7 @@ import java.util.ArrayList;
 /**
  * This is the SoccerGames class to show the GUI and control the API behavior.
  * @author Feiqiong Deng
- * @version version 1
+ * @version version 1.0
  */
 public class SoccerGames extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -56,8 +54,9 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
     public static final String ITEM_URL = "URL";
 
     /**
-     * This is to initialize the activity and setting the http request.
-     * @param savedInstanceState Passed to superclass onCreate method.
+     * Called when the activity is starting.
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this
+     * Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +69,6 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
         //This loads the toolbar, which calls onCreateOptionsMenu below:
         setSupportActionBar(tBar);
 
-        //For NavigationDrawer:
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
                 drawer, tBar, R.string.navigationOpen, R.string.navigationClose);
@@ -136,6 +134,11 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
         });
     }
 
+    /**
+     * Initialize the contents of the Activity's standard options menu.
+     * @param menu Menu: The options menu in which you place your items.
+     * @return boolean: return true for the menu to be displayed; if you return false it will not be shown.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
@@ -144,6 +147,11 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
         return true;
     }
 
+    /**
+     * This hook is called whenever an item in your options menu is selected.
+     * @param item MenuItem: The menu item that was selected. This value cannot be null.
+     * @return boolean: Return false to allow normal menu processing to proceed, true to consume it here.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //Look at your menu XML file. Put a case for every id in that file:
@@ -190,7 +198,12 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
         return true;
     }
 
-    // Needed for the OnNavigationItemSelected interface:
+
+    /**
+     * Called when an item in the navigation menu is selected.
+     * @param item MenuItem: The selected item.
+     * @return boolean: Return true to display the item as the selected item.
+     */
     @Override
     public boolean onNavigationItemSelected( MenuItem item) {
         switch(item.getItemId())
@@ -342,7 +355,7 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
             LayoutInflater inflater = getLayoutInflater();
 
             //make a new row:
-              View  newView = inflater.inflate(R.layout.row_layout, parent, false);
+              View  newView = inflater.inflate(R.layout.soccer_row_layout, parent, false);
             Item item = getItem(position);
             //set what the text should be for this row:
             TextView tView = newView.findViewById(R.id.textGoesHere);

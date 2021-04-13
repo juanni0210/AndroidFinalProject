@@ -1,11 +1,9 @@
 package com.cst2335.finalproject;
 
-import android.graphics.Bitmap;
-
 /**
  * This is the Item class to create the soccer news item.
  * @author Feiqiong Deng
- * @version version 1
+ * @version version 1.0
  */
 public class Item {
     private String title;

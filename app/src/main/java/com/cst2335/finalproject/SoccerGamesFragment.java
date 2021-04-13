@@ -36,7 +36,7 @@ import static com.cst2335.finalproject.SavedSoccerGames.mySavedAdapter;
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
  * @author Feiqiong Deng
- * @version version 1
+ * @version version 2.0
  */
 public class SoccerGamesFragment extends Fragment {
 
@@ -49,6 +49,13 @@ public class SoccerGamesFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     * @param inflater LayoutInflater: The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container ViewGroup: If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState Bundle: If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return View: the View for the fragment's UI, or null.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -149,6 +156,10 @@ public class SoccerGamesFragment extends Fragment {
         }
     }
 
+    /**
+     * Called when a fragment is first attached to its context.
+     * @param context Context.
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

@@ -28,10 +28,10 @@ import java.net.URL;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DetailsFragment#newInstance} factory method to
+ * Use the {@link DetailsFragment#} factory method to
  * create an instance of this fragment.
  * @author Feiqiong Deng
- * @version version 1
+ * @version version 1.0
  */
 public class DetailsFragment extends Fragment {
 

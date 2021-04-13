@@ -23,7 +23,7 @@ import hotchemi.android.rate.AppRate;
  * A dialog box is shown to ask to rate the API.
  * The user is asked to rate the application using 5 stars and the rating result is saved by SharedPreferences.
  *  @author Feiqiong Deng
- *  @version version 1
+ *  @version version 1.0
  */
 public class RatingSoccerAPI extends AppCompatActivity {
 
@@ -35,6 +35,10 @@ public class RatingSoccerAPI extends AppCompatActivity {
     SharedPreferences prefs;
     SharedPreferences prefsComment;
 
+    /**
+     * This is the method to create the screen display on the activity.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -11,7 +11,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,7 @@ import java.util.ArrayList;
 /**
  * This is the SavedSoccerGames class to show the saved items from the database.
  * @author Feiqiong Deng
- * @version version 2
+ * @version version 2.0
  */
 public class SavedSoccerGames extends AppCompatActivity {
 
@@ -40,6 +39,11 @@ public class SavedSoccerGames extends AppCompatActivity {
     SQLiteDatabase db;
     private ImageView imgView;
 
+    /**
+     * Called when the activity is starting.
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down
+     * then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -196,7 +200,7 @@ public class SavedSoccerGames extends AppCompatActivity {
              LayoutInflater inflater = getLayoutInflater();
 
             //make a new row:
-            View  newView = inflater.inflate(R.layout.row_item_layout, parent, false);
+            View  newView = inflater.inflate(R.layout.soccer_row_item_layout, parent, false);
             Item item = getItem(position);
             //set what the text should be for this row:
             TextView tView = newView.findViewById(R.id.itemGoesHere);
