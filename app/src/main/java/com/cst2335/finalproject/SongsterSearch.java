@@ -46,9 +46,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+/**
+ * Launch page of songster search where user can input song title or artist name to search
+ * @author Xueru Chen
+ */
 public class SongsterSearch extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener{
     /**
-     * tool bar for other activities and help
+     * toolbar for other activities and help
      */
     private Toolbar toolbar;
     /**
@@ -77,9 +81,8 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
     private SQLiteDatabase db;
 
     /**
-     * String for item position text
+     * String for songster information details
      */
-    public static final String ITEM_POSITION = "POSITION";
     public static final String ITEM_SONG_TITLE = "TITLE";
     public static final String ITEM_SONG_ID = "S_ID";
     public static final String ITEM_ARTIST_NAME = "NAME";
@@ -92,13 +95,13 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
         setContentView(R.layout.activity_songster_search);
 
         /**
-         * Set Toolbar
+         * Get toolbar from layout and set Toolbar
          */
         toolbar = findViewById(R.id.songsterrToolbar);
         setSupportActionBar(toolbar);
 
         /**
-         * set NavigationDrawer
+         * Get navigation drawer from layout and set NavigationDrawer
          */
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
@@ -122,7 +125,7 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
         String strSearch = prefs.getString("searchText", "");
 
         /**
-         * Set Listview and adapter
+         * Get listview form layout and set Listview and adapter
          */
 
         search = new ArrayList<>();
@@ -131,12 +134,12 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
         theList.setAdapter(myAdapter);
 
         /**
-         * Progress bar
+         * Get progress bar from layout
          */
         progressBar = findViewById(R.id.songsterrProgress);
 
         /**
-         * Set input editext
+         * Get edit text from layout and set input editext
          */
         EditText editSongsterr = findViewById(R.id.songsterrEdit);
         editSongsterr.setText(strSearch);
@@ -144,7 +147,8 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
         search = new ArrayList<>();
 
         /**
-         * set click search button
+         * Get search button from layout and set click search button
+         * click search button and search url
          */
         searchButton = findViewById(R.id.songsterrButtonSearch);
         searchButton.setOnClickListener(clk ->
@@ -263,6 +267,9 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
         }
     }
 
+    /**
+     * This is the AsyncTask to connect to the link and get data from the API.
+     */
     private class SongsterrQuery extends AsyncTask<String, Integer, String> {
         /**
          * Song name of the search result
@@ -286,7 +293,10 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
          */
         private String searchText;
 
-
+        /**
+         *
+         * @param searchText
+         */
         public SongsterrQuery(String searchText){
             this.searchText=searchText;
         }

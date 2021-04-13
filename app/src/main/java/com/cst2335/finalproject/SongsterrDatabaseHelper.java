@@ -1,16 +1,14 @@
 package com.cst2335.finalproject;
 
-
-import android.app.Activity;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Class to handle tables in database
- * Contains names of columns, table, databse name
- * Contains database version number
+ * Class to handle tables in database extends from SQLiteOpenHelper class to manage database creation and version management.
+ * @author Xueru Chen
  */
+
 public class SongsterrDatabaseHelper extends SQLiteOpenHelper {
     /**
      * Database name
@@ -46,7 +44,7 @@ public class SongsterrDatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_ARTISTID = "artistID";
 
     /**
-     * Constructor for database helper
+     * Constructor for database helper， the Activity where the database is being opened.
      * @param ctx
      */
     public SongsterrDatabaseHelper(Context ctx){

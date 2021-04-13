@@ -77,7 +77,7 @@ public class SongsterrDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         dataFromActivity = getArguments();
-
+        // Inflate the layout for this fragment
         View result =  inflater.inflate(R.layout.songsterr_search_detail, container, false);
         songName = dataFromActivity.getString(SongsterSearch.ITEM_SONG_TITLE);
         songID = dataFromActivity.getString(SongsterSearch.ITEM_SONG_ID);

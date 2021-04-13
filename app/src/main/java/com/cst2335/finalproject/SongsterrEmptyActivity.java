@@ -7,8 +7,12 @@ import android.os.Bundle;
  */
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SongsterrEmptyActivity extends AppCompatActivity {
 
+/**
+ * Display fragments layout when user uses phone.
+ * @author Xueru Chen
+ */
+public class SongsterrEmptyActivity extends AppCompatActivity {
     /**
      * Create and display Search object fragment
      * @param savedInstanceState
@@ -18,8 +22,10 @@ public class SongsterrEmptyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.songster_empty);
 
+        //get the data that was passed from Fragment
         Bundle dataToPass = getIntent().getExtras();
 
+        //This is copied directly from FragmentExample.java lines 47-54
         SongsterrDetailFragment dFragment = new SongsterrDetailFragment();
         dFragment.setArguments(dataToPass);
         getSupportFragmentManager()
