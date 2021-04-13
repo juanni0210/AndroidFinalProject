@@ -6,11 +6,19 @@
     android:layout_height="match_parent"
     android:background="@drawable/trivia_bg"
     tools:context=".TriviaGameOngoingActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="30dp"
+        android:layout_below="@id/toolbar"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
         android:orientation="vertical">
+
         <LinearLayout
             android:id="@+id/statusList"
             android:layout_width="match_parent"
@@ -21,30 +29,33 @@
                 android:id="@+id/unAnswered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
-                android:textSize="18sp"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:layout_weight="1"
-                android:text="@string/unAnsweredText"
-                android:textColor="@color/black" />
+                android:text="@string/unAnsweredText" />
             <TextView
                 android:id="@+id/correctedAns"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
-                android:textSize="18sp"
-                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:layout_weight="1"
                 android:text="@string/correctCountText" />
             <TextView
                 android:id="@+id/wrongAns"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
-                android:textSize="18sp"
-                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:layout_weight="1"
                 android:text="@string/wrongCountText" />
         </LinearLayout>

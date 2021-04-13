@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">课程项目</string>
+    <!--    Main page-->
+    <string name="triviaStartBtn">益智问答</string>
+    <string name="songsterStartBtn">歌手搜索</string>
+    <string name="carDBStartBtn">汽车数据库</string>
+    <string name="soccerStartBtn">足球新闻</string>
+    <string name="projectInfo">CST2335 期终项目</string>
+    <string name="teamInfo"> 2021 TECH SAVVY 小组</string>
+
+    <!--    menu and navigation-->
+    <string name="backHomeIcon">首页</string>
+    <string name="triviaMenuName">益智问答</string>
+    <string name="songsterMenuName">歌手搜索</string>
+    <string name="carDBMenuName">汽车数据库</string>
+    <string name="soccerMenuName">足球新闻</string>
+    <string name="helpMenuName">帮助</string>
+    <string name="navigationOpen">打开</string>
+    <string name="navigationClose">关闭</string>
+
+
     <string name="read">阅读</string>
     <string name="save">保存</string>
     <string name="favorite">喜爱</string>
@@ -31,7 +51,6 @@
     <string name="soccerInstructions5">点击移除会移除新闻</string>
     <string name="closeHelpDialog">关闭</string>
 
-    <string name="app_name">课程项目</string>
     <string name="songster_btn_add">加到列表</string>
     <string name="songster_btn_favourite">喜欢</string>
     <string name="songster_search_hint">输入搜索的内容</string>
@@ -46,25 +65,6 @@
 
 
     <string name="startCarDB">开始汽车数据库</string>
-
-    <!--    Main page-->
-    <string name="triviaStartBtn">益智问答</string>
-    <string name="songsterStartBtn">歌手搜索</string>
-    <string name="carDBStartBtn">汽车数据库</string>
-    <string name="soccerStartBtn">足球新闻</string>
-    <string name="projectInfo">CST2335 期终项目</string>
-    <string name="teamInfo"> 2021 TECH SAVVY 小组</string>
-
-
-    <!--    menu and navigation-->
-    <string name="backHomeIcon">首页</string>
-    <string name="triviaMenuName">益智问答</string>
-    <string name="songsterMenuName">歌手搜索</string>
-    <string name="carDBMenuName">汽车数据库</string>
-    <string name="soccerMenuName">足球新闻</string>
-    <string name="helpMenuName">帮助</string>
-    <string name="navigationOpen">打开</string>
-    <string name="navigationClose">关闭</string>
     <string name="carDatabaseActivityTitle">汽车数据库</string>
     <string name="carDatabaseActivityAuthor">菲菲</string>
     <string name="carDatabaseActivityVersionNumber">1.0</string>
@@ -116,4 +116,76 @@
     <string name="goToCarDatabase">到汽车数据库</string>
     <string name="goToSoccerGame">到足球新闻</string>
     <string name="alertGotoFav">到喜欢清单</string>
+
+    <string name="triviaHelpTile">关于益智问答：</string>
+    <string name="triviaInstructions1">1. 您可以输入想要回答问题的数量，问题难度（简单，中等，困难）和问题类型（选择题，对错题，混合题型）。</string>
+    <string name="triviaInstructions2">2. 答对一道简单问题可得1分，答对一道中等难度问题可得2分，答对一道困难问题可得3分。举例如下：</string>
+    <string name="triviaInstructions3">答对5道简单问题您可以获得5分。</string>
+    <string name="triviaInstructions4">答对5道中等难度问题您可以获得10分。</string>
+    <string name="triviaInstructions5">答对5道困难问题您可以获得15分。</string>
+    <string name="triviaActivityTitle">项目名称：益智游戏</string>
+    <string name="triviaActivityAuthor">作者： 倪娟</string>
+    <string name="triviaActivityVersionNumber">版本： V1.0</string>
+
+
+    <!--    Trivia game launch page-->
+    <string name="trivia_launch_title">选择您的问题：</string>
+    <string name="questions_number_label">问题数量：</string>
+    <string name="difficulty_label">选择难易程度：</string>
+    <string name="question_type_label">选择问题类型：</string>
+    <string-array name="difficulty_array">
+        <item>简单</item>
+        <item>中等</item>
+        <item>困难</item>
+    </string-array>
+    <string-array name="question_type_array">
+        <item>任何类型</item>
+        <item>选择题</item>
+        <item>对错题</item>
+    </string-array>
+    <string name="triviaTimerSwitch">计时器</string>
+    <string name="trivia_switch_on_message">计时器现在已打开。</string>
+    <string name="trivia_switch_off_message">计时器现在已关闭。</string>
+    <string name="undo_text">撤销</string>
+    <string name="triviaGameStartBtn">开始游戏</string>
+    <string name="triviaBackHomeBtn">返回首页</string>
+
+    <!--    Trivia game ongoing page-->
+    <string name="unAnsweredText">未回答</string>
+    <string name="correctCountText">正确</string>
+    <string name="wrongCountText">错误</string>
+    <string name="triviaNextBtn">下一题</string>
+    <string name="selectAnsNotice">请选择一个选项！</string>
+    <string name="triviaStartAgainBtn">再来一局</string>
+
+    <!--    Game result page-->
+    <string name="scoreTitle">得分：</string>
+    <string name="masterpiece">王者！</string>
+    <string name="amazing">非常出色！</string>
+    <string name="great">很棒！</string>
+    <string name="good">表现不错！</string>
+    <string name="keepGoing">继续努力！</string>
+    <string name="saveScoreBtn">保存得分</string>
+
+    <!--    Game result page AlertDialog-->
+    <string name="deleteNotice">您要删除这条记录吗？</string>
+    <string name="triviaSelectRow">您选择的行数是：</string>
+    <string name="showPlayerName">玩家姓名：</string>
+    <string name="showScore">玩家得分：</string>
+    <string name="showQuestionAmount">玩家回答了：</string>
+    <string name="questionText">问题</string>
+    <string name="showDifficultyType">困难程度：</string>
+    <string name="showQuestionType">问题类型：</string>
+    <string name="yesName">确认</string>
+    <string name="noName">取消</string>
+
+    <!--    Game result page pop up window-->
+    <string name="playerNameInput">请在这里输入您的姓名</string>
+    <string name="saveNameBtn">保存</string>
+    <string name="cancelSaveBtn">取消</string>
+
+    <!-- Fragment details page -->
+    <string name="triviaHideBtn">隐藏</string>
+
+
 </resources>

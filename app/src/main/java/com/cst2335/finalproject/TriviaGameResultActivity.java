@@ -2,6 +2,7 @@ package com.cst2335.finalproject;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,6 +12,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -19,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.plattysoft.leonids.ParticleSystem;
 
@@ -35,7 +40,8 @@ public class TriviaGameResultActivity extends AppCompatActivity {
     private Button startAgainBtn, saveScoreBtn, saveNameBtn, cancelSaveBtn;
     private int totalQuestionCount, correctAnswerCount, wrongAnswerCount, gameScore;
     private TextView congratsTextView, scoreView, resultDetailsView, scoreResult;
-    private String difficultyType, questionType, timeSpent;
+    private String difficultyType, timeSpent;
+    private QuestionType questionType;
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
     private EditText playerNameInput;
@@ -52,6 +58,11 @@ public class TriviaGameResultActivity extends AppCompatActivity {
     public static final String DIFFICULTY_TYPE = "DIFFICULTY TYPE";
     public static final String QUESTION_TYPE = "QUESTION TYPE";
 
+
+    /**
+     * Called when the activity is starting.
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +107,7 @@ public class TriviaGameResultActivity extends AppCompatActivity {
         correctAnswerCount = fromGamePage.getIntExtra("CORRECTED_ANSWER_COUNT", 0);
         wrongAnswerCount = fromGamePage.getIntExtra("WRONG_ANSWER_COUNT", 0);
         difficultyType = fromGamePage.getStringExtra("DIFFICULTY_TYPE");
-        questionType = fromGamePage.getStringExtra("QUESTION_TYPE");
+        questionType = (QuestionType) fromGamePage.getSerializableExtra("QUESTION_TYPE");
         timeSpent = fromGamePage.getStringExtra("TIME_SPENT");
         totalQuestionCount = correctAnswerCount + wrongAnswerCount;
 
@@ -148,7 +159,7 @@ public class TriviaGameResultActivity extends AppCompatActivity {
                             + getResources().getString(R.string.showScore) + " " + selectedRecord.getScore() + "." + "\n"
                             + getResources().getString(R.string.showQuestionAmount) + " " + selectedRecord.getQuestionAmount() + " " + getResources().getString(R.string.questionText) + ".")
                     //what the Yes button does:
-                    .setPositiveButton("Yes", (click, arg) -> {
+                    .setPositiveButton(getResources().getString(R.string.yesName), (click, arg) -> {
                         String idTag = Long.toString(id);
                         if (isTablet) {
                             if (getSupportFragmentManager().findFragmentByTag(idTag) != null) {
@@ -161,7 +172,7 @@ public class TriviaGameResultActivity extends AppCompatActivity {
 
                     })
                     //What the No button does:
-                    .setNegativeButton("No", (click, arg) -> { })
+                    .setNegativeButton(getResources().getString(R.string.noName), (click, arg) -> { })
                     //Show the dialog
                     .create().show();
             return true;
@@ -212,6 +223,70 @@ public class TriviaGameResultActivity extends AppCompatActivity {
                 startActivity(goToGameLaunch);
             }
         });
+
+        //This gets the toolbar from the layout:
+        Toolbar tBar = (Toolbar)findViewById(R.id.toolbar);
+        //This loads the toolbar, which calls onCreateOptionsMenu below:
+        setSupportActionBar(tBar);
+    }
+
+    /**
+     * Initialize the contents of the Activity's standard options menu.
+     * @param menu Menu: The options menu in which you place your items.
+     * @return boolean: Return true for the menu to be displayed; if you return false it will not be shown.
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    /**
+     * This hook is called whenever an item in your options menu is selected.
+     * @param item MenuItem: The menu item that was selected. This value cannot be null.
+     * @return boolean: Return false to allow normal menu processing to proceed, true to consume it here.
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String message = null;
+        //Look at your menu XML file. Put a case for every id in that file:
+        switch(item.getItemId())
+        {
+            //what to do when the menu item is selected:
+            case R.id.backHomeItem:
+                startActivity(new Intent(TriviaGameResultActivity.this, MainActivity.class));
+                break;
+            case R.id.triviaItem:
+                startActivity(new Intent(TriviaGameResultActivity.this, TriviaGameLaunchActivity.class));
+                break;
+            case R.id.songsterItem:
+                Toast.makeText(this, "Go to songster page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.carDBItem:
+                Toast.makeText(this, "Go to car database page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.soccerItem:
+                Toast.makeText(this, "Go to soccer game page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.helpItem:
+                AlertDialog.Builder triviaHelpDialog = new AlertDialog.Builder(this);
+                triviaHelpDialog.setTitle(getResources().getString(R.string.triviaHelpTile))
+                        //What is the message:
+                        .setMessage(getResources().getString(R.string.triviaInstructions1) + "\n"
+                                + getResources().getString(R.string.triviaInstructions2) + "\n"
+                                + getResources().getString(R.string.triviaInstructions3) + "\n"
+                                + getResources().getString(R.string.triviaInstructions4) + "\n"
+                                + getResources().getString(R.string.triviaInstructions5))
+                        //What the No button does:
+                        .setNegativeButton(getResources().getString(R.string.closeHelpDialog), (click, arg) -> {
+                        })
+                        //Show the dialog
+                        .create().show();
+                break;
+        }
+        return true;
     }
 
     /**
@@ -278,17 +353,18 @@ public class TriviaGameResultActivity extends AppCompatActivity {
         //add to the database and get the new ID
         ContentValues newRowValues = new ContentValues();
 
+        String questionTypeString = QuestionType.toDisplayText(questionType, getResources());
         //Now provide a value for every database column defined in TriviaDatabaseOpener.java:
         newRowValues.put(TiviaDatabaseOpener.COL_NAME, inputName);
         newRowValues.put(TiviaDatabaseOpener.COL_SCORE, gameScore);
         newRowValues.put(TiviaDatabaseOpener.COL_AMOUNT, totalQuestionCount);
         newRowValues.put(TiviaDatabaseOpener.COL_DIFFICULTY, difficultyType);
-        newRowValues.put(TiviaDatabaseOpener.COL_TYPE, questionType);
+        newRowValues.put(TiviaDatabaseOpener.COL_TYPE, questionTypeString);
 
         //Now insert in the database:
         long newId = triviaDB.insert(TiviaDatabaseOpener.TABLE_NAME, null, newRowValues);
 
-        ScoreRecord record = new ScoreRecord(inputName, gameScore, difficultyType, questionType, totalQuestionCount, newId);
+        ScoreRecord record = new ScoreRecord(inputName, gameScore, difficultyType, questionTypeString, totalQuestionCount, newId);
 
         scoreRecordsList.add(record);
         // sort the socre in order to show the score in the list view from highest to the lowest

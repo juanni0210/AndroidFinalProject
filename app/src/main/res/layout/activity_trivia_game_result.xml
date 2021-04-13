@@ -7,11 +7,18 @@
     android:orientation="vertical"
     android:background="@drawable/trivia_bg"
     tools:context=".TriviaGameResultActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
         android:padding="30dp"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/congratText"
             android:layout_width="wrap_content"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,9 +7,16 @@
     android:orientation="vertical"
     android:background="@drawable/trivia_bg"
     tools:context=".TriviaGameResultActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
         android:padding="30dp"
         android:orientation="vertical">
         <TextView
@@ -54,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/bgbtn"
+            android:background="@drawable/btn_orange"
             android:textSize="16dp"
             android:textColor="@color/purple_color"
             android:textStyle="bold"
@@ -79,16 +86,17 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/startAgainBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bgbtn"
-            android:textSize="16dp"
-            android:textColor="@color/purple_color"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            android:text="@string/triviaStartAgainBtn" />
     </LinearLayout>
-</LinearLayout>
+    <Button
+        android:id="@+id/startAgainBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_orange"
+        android:textSize="16dp"
+        android:textColor="@color/purple_color"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:text="@string/triviaStartAgainBtn" />
+</RelativeLayout>

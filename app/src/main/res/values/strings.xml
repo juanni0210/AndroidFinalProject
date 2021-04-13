@@ -66,6 +66,8 @@
     <string name="questionText">questions</string>
     <string name="showDifficultyType">Difficulty type: </string>
     <string name="showQuestionType">Question type: </string>
+    <string name="yesName">YES</string>
+    <string name="noName">NO</string>
 
     <!--    Game result page pop up window-->
     <string name="playerNameInput">Enter your name here</string>
@@ -154,15 +156,6 @@
 
 
     <!--   Songsterr Main Menu    -->
-    <string name="triviaMenuName">Trivia Game</string>
-    <string name="songsterMenuName">Songster Search</string>
-    <string name="carDBMenuName">Car Database</string>
-    <string name="soccerMenuName">Soccer Game</string>
-    <string name="helpMenuName">Help</string>
-    <string name="navigationOpen">Open</string>
-    <string name="navigationClose">Close</string>
-    <string name="closeHelpDialog">CLOSE</string>
-    <string name="backHomeIcon">Back to Home page</string>
     <string name="songsterActivityTitle">Activity Title: Songster Search</string>
     <string name="songsterActivityAuthor">Author: Xueru Chen</string>
     <string name="songsterActivityVersionNumber">Version number: V1.0</string>
@@ -193,5 +186,29 @@
     <string name="goToCarDatabase">Go to car database page</string>
     <string name="goToSoccerGame">Go to soccer game page</string>
     <string name="alertGotoFav">Go to Favorites List?</string>
+
+    <!--    Menu page-->
+    <string name="backHomeIcon">Home</string>
+    <string name="triviaMenuName">Trivia Game</string>
+    <string name="songsterMenuName">Songster Search</string>
+    <string name="carDBMenuName">Car Database</string>
+    <string name="soccerMenuName">Soccer Game</string>
+    <string name="helpMenuName">Help</string>
+    <string name="triviaHelpTile">All you need to know about Trivia Game:</string>
+    <string name="triviaInstructions1">1. Enter the number of questions you want to answer, select difficulty type (easy, medium, hard) and question type(multiple choice, true or false or both type mixed).</string>
+    <string name="triviaInstructions2">2. 1 score for every easy question, 2 scores for every medium question and 3 scores for every hard question. For example: </string>
+    <string name="triviaInstructions3">Answering 5 easy difficulty type question correct you will get 5 scores.</string>
+    <string name="triviaInstructions4">Answering 5 medium difficulty type question correct you will get 10 scores.</string>
+    <string name="triviaInstructions5">Answering 5 hard difficulty type question correct you will get 15 scores.</string>
+    <string name="closeHelpDialog">CLOSE</string>
+    <string name="triviaActivityTitle">Activity Title: Trivia API</string>
+    <string name="triviaActivityAuthor">Author: Juan Ni</string>
+    <string name="triviaActivityVersionNumber">Version Number: V1.0</string>
+    <string name="navigationOpen">Open</string>
+    <string name="navigationClose">Close</string>
+
+
+
+
 
 </resources>
