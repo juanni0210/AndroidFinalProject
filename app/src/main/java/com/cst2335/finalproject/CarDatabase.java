@@ -68,6 +68,10 @@ public class CarDatabase extends AppCompatActivity implements NavigationView.OnN
     public static final String MODEL_SELECTED = "MODEL";
 
 
+    /**
+     * Called when the activity is starting.
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,10 +100,10 @@ public class CarDatabase extends AppCompatActivity implements NavigationView.OnN
 
         //This gets the toolbar from the layout:
         Toolbar tBar = (Toolbar)findViewById(R.id.toolbar);
-//This loads the toolbar, which calls onCreateOptionsMenu below:
+        //This loads the toolbar, which calls onCreateOptionsMenu below:
         setSupportActionBar(tBar);
 
-//For NavigationDrawer:
+        //For NavigationDrawer:
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
                 drawer, tBar, R.string.navigationOpen, R.string.navigationClose);
@@ -213,6 +217,11 @@ public class CarDatabase extends AppCompatActivity implements NavigationView.OnN
         editor.commit();
     }
 
+    /**
+     * Initialize the contents of the Activity's standard options menu.
+     * @param menu Menu: The options menu in which you place your items.
+     * @return boolean: return true for the menu to be displayed; if you return false it will not be shown.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
@@ -221,6 +230,11 @@ public class CarDatabase extends AppCompatActivity implements NavigationView.OnN
         return true;
     }
 
+    /**
+     * This hook is called whenever an item in your options menu is selected.
+     * @param item MenuItem: The menu item that was selected. This value cannot be null.
+     * @return boolean: Return false to allow normal menu processing to proceed, true to consume it here.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         String message = null;
@@ -252,10 +266,7 @@ public class CarDatabase extends AppCompatActivity implements NavigationView.OnN
                                 "3. After models loaded, long click one item will show you the model info" +
                                 "4. You can also list it into your favorites" +
                                 "5. Short or normal click will choose that item and your can click search details to get more info for this item with online resources")
-                        //What the No button does:
-//                        .setNegativeButton(getResources().getString(R.string.closeHelpDialog), (click, arg) -> {
-//                        })
-                        //Show the dialog
+
                         .create().show();
                 break;
         }
@@ -264,32 +275,11 @@ public class CarDatabase extends AppCompatActivity implements NavigationView.OnN
 
 
 
-
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        String message = null;
-//
-//        switch(item.getItemId())
-//        {
-//            //what to do when the menu item is selected:
-//            case R.id.helpMenu:
-//                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-//                alertDialogBuilder.setTitle("How to play with the Car Database?")
-//                        .setMessage("1. Type in the make or brand that you are interested. " +
-//                                "2. Click the button to search the models of this make. " +
-//                                "3. After models loaded, long click one item will show you the model info" +
-//                                "4. You can also list it into your favorites" +
-//                                "5. Short or normal click will choose that item and your can click search details to get more info for this item with online resources")
-//
-//                        .create().show();
-//                break;
-//
-//        }
-//        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-//        return true;
-//    }
-
+    /**
+     * Called when an item in the navigation menu is selected.
+     * @param item MenuItem: The selected item.
+     * @return boolean: Return true to display the item as the selected item.
+     */
     @Override
     public boolean onNavigationItemSelected( MenuItem item) {
 
@@ -358,21 +348,6 @@ public class CarDatabase extends AppCompatActivity implements NavigationView.OnN
             TextView modelName = newView.findViewById(R.id.modelName);
             makeName.setText(getItem(position).getMake().toString() );
             modelName.setText(getItem(position).getModel().toString() );
-
-            /*
-            Button saveToFavoriteBtn = newView.findViewById(R.id.saveButton);
-            saveToFavoriteBtn.setOnClickListener(v->{
-                ContentValues cValues = new ContentValues();
-                cValues.put(MyCarDB.COL_MAKE, makeName.getText().toString());
-                cValues.put(MyCarDB.COL_MODEL, modelName.getText().toString());
-                cValues.put(MyCarDB.COL_MAKEID, getItem(position).getMakeID());
-                cValues.put(MyCarDB.COL_MODELID, getItem(position).getModelID());
-                long id = db.insert(MyCarDB.TABLE_NAME, null, cValues);
-                Model model = new Model(makeName.getText().toString(), modelName.getText().toString(), id);
-            });
-
-            */
-
 
             //return it to be put in the table
             return newView;

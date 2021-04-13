@@ -1,5 +1,6 @@
 /**
- * This is the the fragment of car details, which is used to fragment
+ * This is is a piece of an application's user interface or behavior that can be placed in an Activity.
+ * The the fragment of car details is used to fragment
  * for tablet and inflate an empty page on another thread for phone
  * @author Sophie Sun
  * @since 1.0
@@ -39,6 +40,13 @@ public class CarDetailsFragment extends Fragment {
 
 
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     * @param inflater LayoutInflater: The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container ViewGroup: If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState Bundle: If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return View: the View for the fragment's UI, or null.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

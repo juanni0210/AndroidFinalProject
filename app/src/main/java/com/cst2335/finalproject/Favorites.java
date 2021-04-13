@@ -84,6 +84,11 @@ public class Favorites extends AppCompatActivity {
         });
 
     }
+
+
+    /**
+     * @param
+     */
     private void loadDataFromDatabase()
     {
 
