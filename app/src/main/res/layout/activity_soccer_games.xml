@@ -5,85 +5,92 @@
     android:id="@+id/newsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_grey"
-    android:padding="@dimen/box_inset_layout_padding"
+    android:background="@drawable/rating_bg"
     tools:context=".SoccerGames"
     android:orientation="vertical"
     tools:deviceIds="wear">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    </LinearLayout>
-    <ListView
-        android:id="@+id/theListView"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content">
-    </ListView>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:visibility="invisible" />
 
-    <FrameLayout
-        android:id="@+id/fragmentLocation"
-        android:layout_below="@id/image"
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"/>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_toEndOf="@+id/theListView" >
+        android:layout_below="@id/toolbar"
+        tools:openDrawer="start">
+        <!-- THIS IS WHAT IS VISIBLE ON SCREEN:-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">>
 
-    </FrameLayout>
+        </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true"
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="43dp"
-        tools:srcCompat="@tools:sample/avatars" />
-
-
-    <Button
-        android:id="@+id/readBtn"
-        android:layout_width="wrap_content"
-        android:layout_toRightOf="@id/theListView"
-        android:layout_alignBottom="@id/theListView"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/read" />
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/newsTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/news"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="35dp"
+            android:elegantTextHeight="true">
+        </TextView>
+        <ListView
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:id="@+id/theListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/newsTop"
+            android:layout_marginBottom="40dp">
+        </ListView>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/saveBtn"
-        android:layout_width="wrap_content"
-        android:layout_toRightOf="@id/readBtn"
-        android:layout_alignBottom="@id/theListView"
-        android:layout_height="wrap_content"
-        android:text="@string/save" />
-
-    <Button
-        android:id="@+id/favoriteBtn"
-        android:layout_width="wrap_content"
-        android:layout_toRightOf="@id/saveBtn"
-        android:layout_alignBottom="@id/theListView"
-        android:layout_height="wrap_content"
-        android:text="@string/favorite" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="160dp">
 
 
+            <ImageButton
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:id="@+id/favoriteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:background="#00000000"
+                app:srcCompat="@drawable/favorite" />
+        </LinearLayout>
 
-<!--    <FrameLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:padding="@dimen/inner_frame_layout_padding"-->
-<!--        app:boxedEdges="all">-->
+        <com.google.android.material.navigation.NavigationView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/soccer_navigation_header"
+            app:menu="@menu/main_menu"
+            android:id="@+id/nav_view"/>
 
-<!--        <TextView-->
-<!--            android:id="@+id/text"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/hello_world" />-->
+    </androidx.drawerlayout.widget.DrawerLayout>
 
-<!--    </FrameLayout>-->
 </RelativeLayout>

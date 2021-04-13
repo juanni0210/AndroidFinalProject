@@ -8,6 +8,6 @@
         android:layout_width="match_parent"
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="@color/black"
-        android:id="@+id/textGoesHere" />
+        android:id="@+id/itemGoesHere" />
 
 </LinearLayout>

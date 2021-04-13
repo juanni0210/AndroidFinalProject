@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/savedLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rating_bg"
+    tools:context=".SavedSoccerGames"
+    android:orientation="vertical"
+    tools:deviceIds="wear">
+
+    <ListView
+        android:id="@+id/theSavedListView"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="60dp"
+        android:layout_below="@id/savedNewsTop">
+    </ListView>
+
+    <TextView
+        android:id="@+id/savedNewsTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:text="@string/savedNews"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:paddingTop="30dp"
+        android:textSize="35dp"
+        android:elegantTextHeight="true">
+    </TextView>
+
+
+    <ImageView
+        android:id="@+id/savedImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_toRightOf="@+id/theSavedListView"
+        android:layout_alignParentEnd="true"
+        android:paddingRight="15dp"
+        android:layout_below="@+id/savedTitle"
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="43dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/savedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/theSavedListView"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/green"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:paddingRight="15dp"
+        android:paddingTop="58dp"
+        android:layout_below="@id/savedNewsTop"
+         />
+
+    <TextView
+        android:id="@+id/savedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/theSavedListView"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:paddingRight="15dp"
+        android:textColor="@color/black"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:layout_below="@id/savedImage"
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="68dp"
+        tools:layout_editor_absoluteY="252dp" />
+
+    <TextView
+        android:id="@+id/blank1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/savedDate"
+        android:layout_toRightOf="@+id/theSavedListView"
+        android:layout_centerHorizontal="true"
+        tools:layout_editor_absoluteX="68dp"
+        tools:layout_editor_absoluteY="252dp" />
+
+
+    <TextView
+        android:id="@+id/savedDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/blank1"
+        android:layout_toRightOf="@+id/theSavedListView"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:paddingRight="15dp"
+        android:textColor="@color/black"
+        tools:layout_editor_absoluteX="68dp"
+        tools:layout_editor_absoluteY="252dp" />
+
+    <TextView
+        android:id="@+id/blank2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/savedDescription"
+        android:layout_toRightOf="@+id/theSavedListView"
+        android:layout_centerHorizontal="true"
+        tools:layout_editor_absoluteX="68dp"
+        tools:layout_editor_absoluteY="252dp" />
+
+    <TextView
+        android:id="@+id/savedLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/blank2"
+        android:textAlignment="center"
+        android:paddingRight="15dp"
+        android:textColor="@color/black"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:layout_toRightOf="@+id/theSavedListView"
+        tools:layout_editor_absoluteX="68dp"
+        tools:layout_editor_absoluteY="252dp" />
+
+    <ImageButton
+        android:id="@+id/readSavedBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:layout_toRightOf="@id/theSavedListView"
+        android:layout_alignBottom="@id/theSavedListView"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="20dp"
+        android:paddingRight="100dp"
+        app:srcCompat="@drawable/browse" />
+
+    <ImageButton
+        android:id="@+id/removeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/readSavedBtn"
+        android:layout_alignBottom="@id/theSavedListView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="30dp"
+        android:background="#00000000"
+        app:srcCompat="@drawable/delete" />
+    
+</RelativeLayout>

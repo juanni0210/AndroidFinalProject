@@ -1,6 +1,7 @@
 package com.cst2335.finalproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
@@ -27,8 +28,10 @@ import java.net.URL;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DetailsFragment#newInstance} factory method to
+ * Use the {@link DetailsFragment#} factory method to
  * create an instance of this fragment.
+ * @author Feiqiong Deng
+ * @version version 1.0
  */
 public class DetailsFragment extends Fragment {
 
@@ -70,12 +73,19 @@ public class DetailsFragment extends Fragment {
 //    @Override
 //    public void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
+////        if (getArguments() != null) {
+////            mParam1 = getArguments().getString(ARG_PARAM1);
+////            mParam2 = getArguments().getString(ARG_PARAM2);
+////        }
 //    }
 
+    /**
+     * This is to create the view of the fragment to show the details of the selected item.
+     * @param inflater this is the layout inflater.
+     * @param container this is the view group container.
+     * @param savedInstanceState this is the bundle containing data from the SoccerGames activity.
+     * @return will return the details of the selected item.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -84,14 +94,6 @@ public class DetailsFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View result =  inflater.inflate(R.layout.fragment_details, container, false);
-
-
-        //show the image
-//        ImageView imgView = findViewById(R.id.imageNews);
-//        ImageView imageView = (ImageView) result.findViewById(R.id.imageNews);
-//        byte[] byteArray = dataFromActivity.getByteArray(SoccerGames.ITEM_IMAGE);
-//        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-//        imageView.setImageBitmap(bmp);
 
         TextView itemDate = (TextView)result.findViewById(R.id.pubDate);
         itemDate.setText(dataFromActivity.getString(SoccerGames.ITEM_DATE));
@@ -102,11 +104,11 @@ public class DetailsFragment extends Fragment {
         TextView itemDesciption = (TextView)result.findViewById(R.id.description);
         itemDesciption.setText(dataFromActivity.getString(SoccerGames.ITEM_DESCRIPTION));
 
-
+        TextView itemimg = (TextView)result.findViewById(R.id.test);
+        itemimg.setText(dataFromActivity.getString(SoccerGames.ITEM_IMAGE));
         // Inflate the layout for this fragment
         return result;
     }
-
 
     @Override
     public void onAttach(Context context) {

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rating_bg"
+    tools:context=".RatingSoccerAPI"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="260dp"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        android:text="@string/rating"
+        android:textAppearance="?android:textAppearanceLarge" />
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingBar" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rating"
+        android:id="@+id/rateCount"
+        android:textAppearance="?android:textAppearanceMedium" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Write Review..."
+        android:id="@+id/review"
+        android:textAppearance="?android:textAppearanceMedium" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submitRate"
+        android:textAllCaps="false"
+        android:id="@+id/submitBtn"
+        app:backgroundTint="@color/green"
+        android:layout_gravity="right"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rating"
+        android:id="@+id/showRating"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

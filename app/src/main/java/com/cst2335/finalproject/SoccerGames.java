@@ -1,123 +1,270 @@
 package com.cst2335.finalproject;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 //import android.support.wearable.activity.WearableActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class SoccerGames extends AppCompatActivity {
+/**
+ * This is the SoccerGames class to show the GUI and control the API behavior.
+ * @author Feiqiong Deng
+ * @version version 1.0
+ */
+public class SoccerGames extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
-//    private TextView mTextView;
     private MyListAdapter myAdapter;
     private ArrayList<Item> elements = new ArrayList<>();
+    ImageView imgView;
     private ProgressBar progressBar;
-
-    public static final String ITEM_SELECTED = "ITEM";
-    public static final String ITEM_POSITION = "POSITION";
+    public static final String ITEM_TITLE = "TITLE";
     public static final String ITEM_IMAGE = "IMAGE";
-    public static final String ITEM_ID = "ID";
     public static final String ITEM_DATE = "DATE";
     public static final String ITEM_DESCRIPTION = "DESCRIPTION";
     public static final String ITEM_URL = "URL";
 
-
+    /**
+     * Called when the activity is starting.
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this
+     * Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_soccer_games);
 
+        //This gets the toolbar from the layout:
+        Toolbar tBar = (Toolbar)findViewById(R.id.toolbar);
+
+        //This loads the toolbar, which calls onCreateOptionsMenu below:
+        setSupportActionBar(tBar);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+                drawer, tBar, R.string.navigationOpen, R.string.navigationClose);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+
         ListView myList = (ListView) findViewById(R.id.theListView);
         myList.setAdapter(myAdapter = new MyListAdapter());
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
+        imgView = findViewById(R.id.image);
+        boolean isTablet = findViewById(R.id.fragmentLocation) != null; //check if the FrameLayout is loaded
 
         MyHTTPRequest req = new MyHTTPRequest();
         req.execute("https://www.goal.com/en/feeds/news");
-//        req.execute("https://feeds.24.com/articles/fin24/tech/rss");
 
-        Button favoriteBtn = findViewById(R.id.favoriteBtn);
-        Button saveBtn = findViewById(R.id.saveBtn);
-        RelativeLayout layout = findViewById(R.id.newsLayout);
+        ImageButton favoriteBtn = findViewById(R.id.favoriteBtn);
+        Intent goToSaved = new Intent(SoccerGames.this, SavedSoccerGames.class);
 
-        favoriteBtn.setOnClickListener( v -> {
-            Toast.makeText(SoccerGames.this, "Favorite news will be coming soon.",Toast.LENGTH_SHORT).show();
+        /*
+        This is to create a toast when clicking the favorite button.
+         */
+        favoriteBtn.setOnClickListener( click -> {
+                    startActivity(goToSaved);
                 }
         );
 
-        saveBtn.setOnClickListener( v -> {
-            Snackbar snackbar= Snackbar.make(layout, "Will be saved in the database.", Snackbar.LENGTH_SHORT);
-            snackbar.show();
-        });
-
+        /*
+        when user click the item on the list view, details of the item will be sent to the fragment.
+         */
         myList.setOnItemClickListener((p, b, pos, id) -> {
             Item selectedItem = elements.get(pos);
+            String getTitle = selectedItem.getTitle();
+            String getDate = selectedItem.getDate();
+            String getImage = selectedItem.getImage();
+            String getDescription = selectedItem.getDescription();
+            String getLink = selectedItem.getUrl();
 
             Bundle dataToPass = new Bundle();
-//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//            selectedItem.getImage().compress(Bitmap.CompressFormat.JPEG, 100, stream);
-//            byte[] byteArray = stream.toByteArray();
+            dataToPass.putString(ITEM_TITLE, getTitle);
+            dataToPass.putString(ITEM_DATE, getDate);
+            dataToPass.putString(ITEM_URL, getLink);
+            dataToPass.putString(ITEM_DESCRIPTION, getDescription);
+            dataToPass.putString(ITEM_IMAGE, getImage);
 
-//            dataToPass.putByteArray(ITEM_IMAGE, byteArray);
-            ImageView imgView = findViewById(R.id.image);
-            imgView.setImageBitmap(selectedItem.getItemImage());
-
-            dataToPass.putString(ITEM_DATE, selectedItem.getDate());
-            dataToPass.putString(ITEM_URL, selectedItem.getUrl());
-            dataToPass.putString(ITEM_DESCRIPTION, selectedItem.getDescription());
-
-            DetailsFragment dFragment = new DetailsFragment(); //add a DetailFragment
-            dFragment.setArguments(dataToPass); //pass it a bundle for information
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragmentLocation, dFragment) //Add the fragment in FrameLayout
-                    .commit(); //actually load the fragment. Calls onCreate() in DetailFragment
+            if(isTablet) {
+                SoccerGamesFragment dFragment = new SoccerGamesFragment(); //add a DetailFragment
+                dFragment.setArguments(dataToPass); //pass it a bundle for information
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentLocation, dFragment) //Add the fragment in FrameLayout
+                        .commit(); //actually load the fragment. Calls onCreate() in DetailFragment
+            }
+            else {
+                Intent soccerGamesFragment = new Intent(SoccerGames.this, SoccerGamesEmpty.class);
+                soccerGamesFragment.putExtras(dataToPass);
+                startActivity(soccerGamesFragment);
+            }
         });
     }
 
+    /**
+     * Initialize the contents of the Activity's standard options menu.
+     * @param menu Menu: The options menu in which you place your items.
+     * @return boolean: return true for the menu to be displayed; if you return false it will not be shown.
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    /**
+     * This hook is called whenever an item in your options menu is selected.
+     * @param item MenuItem: The menu item that was selected. This value cannot be null.
+     * @return boolean: Return false to allow normal menu processing to proceed, true to consume it here.
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //Look at your menu XML file. Put a case for every id in that file:
+        switch(item.getItemId())
+        {
+            //what to do when the menu item is selected:
+            case R.id.backHomeItem:
+                startActivity(new Intent(SoccerGames.this, MainActivity.class));
+                break;
+            case R.id.triviaItem:
+                Toast.makeText(this, "Go to trivia game page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.songsterItem:
+                Toast.makeText(this, "Go to songster page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.carDBItem:
+                Toast.makeText(this, "Go to car database page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.soccerItem:
+                startActivity(new Intent(SoccerGames.this, SoccerGames.class));
+                break;
+            case R.id.helpItem:
+                AlertDialog.Builder builder = new AlertDialog.Builder(SoccerGames.this);
+                View view = LayoutInflater.from(SoccerGames.this).inflate(R.layout.soccer_dialog, null);
+
+                TextView dialogTitle = (TextView) view.findViewById(R.id.dialogTitle);
+                ImageButton dialogBtn = view.findViewById(R.id.dialogBtn);
+                TextView dialogContent = (TextView) view.findViewById(R.id.dialogContent);
+
+                dialogTitle.setText("App Help Menu");
+                dialogBtn.setImageResource(R.drawable.soccerball);
+                dialogContent.setText(getResources().getString(R.string.soccerInstructions1) + "\n"
+                        + getResources().getString(R.string.soccerInstructions2) + "\n"
+                        + getResources().getString(R.string.soccerInstructions3) + "\n"
+                        + getResources().getString(R.string.soccerInstructions4) + "\n"
+                        + getResources().getString(R.string.soccerInstructions5));
+
+                builder.setNegativeButton(getResources().getString(R.string.closeHelpDialog), (click, arg) -> {
+                });
+                builder.setView(view);
+                builder.show();
+                break;
+        }
+        return true;
+    }
+
+
+    /**
+     * Called when an item in the navigation menu is selected.
+     * @param item MenuItem: The selected item.
+     * @return boolean: Return true to display the item as the selected item.
+     */
+    @Override
+    public boolean onNavigationItemSelected( MenuItem item) {
+        switch(item.getItemId())
+        {
+            case R.id.backHomeItem:
+                startActivity(new Intent(SoccerGames.this, MainActivity.class));
+                break;
+            case R.id.triviaItem:
+                Toast.makeText(this, "Go to trivia game page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.songsterItem:
+                Toast.makeText(this, "Go to songster page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.carDBItem:
+                Toast.makeText(this, "Go to car database page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.soccerItem:
+                startActivity(new Intent(SoccerGames.this, SoccerGames.class));
+                break;
+            case R.id.helpItem:
+                AlertDialog.Builder builder = new AlertDialog.Builder(SoccerGames.this);
+                View view = LayoutInflater.from(SoccerGames.this).inflate(R.layout.soccer_dialog, null);
+
+                TextView dialogTitle = (TextView) view.findViewById(R.id.dialogTitle);
+                ImageButton dialogBtn = view.findViewById(R.id.dialogBtn);
+                TextView dialogContent = (TextView) view.findViewById(R.id.dialogContent);
+
+                dialogTitle.setText("App Help Menu");
+                dialogBtn.setImageResource(R.drawable.soccerball);
+                dialogContent.setText(getResources().getString(R.string.soccerInstructions1) + "\n"
+                        + getResources().getString(R.string.soccerInstructions2) + "\n"
+                        + getResources().getString(R.string.soccerInstructions3) + "\n"
+                        + getResources().getString(R.string.soccerInstructions4) + "\n"
+                        + getResources().getString(R.string.soccerInstructions5));
+
+                builder.setNegativeButton(getResources().getString(R.string.closeHelpDialog), (click, arg) -> {
+                });
+                builder.setView(view);
+                builder.show();
+                break;
+        }
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        return false;
+    }
+
+    /**
+     * This is the AsyncTask to connect to the link and get data from the API.
+     */
     private class MyHTTPRequest extends AsyncTask< String, Integer, String> {
         private String title;
         private String date;
         private String image;
         private String link;
         private String description;
-        Bitmap itemImage;
-
-        TextView row = findViewById(R.id.textGoesHere);
 
         public String doInBackground(String ... args)
         {
             try {
-
                 //create a URL object of what server to contact:
                 URL url = new URL(args[0]);
 
@@ -127,7 +274,6 @@ public class SoccerGames extends AppCompatActivity {
                 //wait for data:
                 InputStream response = urlConnection.getInputStream();
 
-                //From part 3: slide 19
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(false);
                 XmlPullParser xpp = factory.newPullParser();
@@ -136,15 +282,13 @@ public class SoccerGames extends AppCompatActivity {
                 boolean insideItem = false;
                 int eventType = xpp.getEventType(); //The parser is currently at START_DOCUMENT
 
-
-                System.out.println("1.========" + xpp.getText() + "===========");
+                // to get the data from the xml and add data to  array list.
                 while(eventType != XmlPullParser.END_DOCUMENT)
                 {
-                    System.out.println("2.========" + xpp.getText() + "===========");
                     if(eventType == XmlPullParser.START_TAG) {
                         if (xpp.getName().equalsIgnoreCase("item")) {
                             insideItem = true;
-                            Item item = new Item(title, date, image, itemImage, link, description);
+                            Item item = new Item(title, date, image, link, description);
                             elements.add(item);
                         } else if (xpp.getName().equalsIgnoreCase("title")) {
                             if (insideItem) {
@@ -164,42 +308,20 @@ public class SoccerGames extends AppCompatActivity {
                             }
                         } else if (xpp.getName().equalsIgnoreCase("media:thumbnail")) {
                             if (insideItem) {
-                                image = xpp.nextText();
-                                if(!fileExistance(image)){
-                                    URL url2 = new URL(image);
-                                    HttpURLConnection imgConnection = (HttpURLConnection) url2.openConnection();
-                                    imgConnection.connect();
-                                    int responseCode = imgConnection.getResponseCode();
-                                    if (responseCode == 200) {
-                                        itemImage = BitmapFactory.decodeStream(imgConnection.getInputStream());
-                                        publishProgress(100);
-                                    }
-                                    FileOutputStream outputStream = openFileOutput( image + ".jpeg", Context.MODE_PRIVATE);
-                                    itemImage.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-                                    outputStream.flush();
-                                    outputStream.close();
-                                } else {
-                                    FileInputStream fis = null;
-                                    try {
-                                        fis = openFileInput(image);
-                                        Log.e("Weather Image", "It is looking for " + image.toString());
-                                        Log.e("Found or Not", "The image is found locally");
-                                    } catch (FileNotFoundException e) {    e.printStackTrace();  }
-                                    itemImage = BitmapFactory.decodeStream(fis);
-                                }
+                                image =  xpp.getAttributeValue(null, "url");
                             }
                         }
                     }
-                        else if (eventType == XmlPullParser.END_TAG && xpp.getName().equalsIgnoreCase("item")){
+                    else if (eventType == XmlPullParser.END_TAG && xpp.getName().equalsIgnoreCase("item")){
                         insideItem = false;
                     }
                     eventType = xpp.next(); //move to the next xml event and store it in a variable
-//                }
-              }
+                }
             }
             catch (Exception e)
             {
-                System.out.println("error");
+                System.out.print("My Error: ");
+                System.out.println(e.getStackTrace());
             }
             return "Done";
         }
@@ -214,15 +336,13 @@ public class SoccerGames extends AppCompatActivity {
         public void onPostExecute(String fromDoInBackground)
         {
             progressBar.setVisibility(View.GONE);
-         myAdapter.notifyDataSetChanged();
-        }
-
-        public boolean fileExistance (String image) {
-            File file = getBaseContext().getFileStreamPath(image);
-            return file.exists();
+            myAdapter.notifyDataSetChanged();
         }
     }
 
+    /**
+     * This is the adapter.
+     */
     private class MyListAdapter extends BaseAdapter {
 
         public int getCount() { return elements.size();}
@@ -235,14 +355,12 @@ public class SoccerGames extends AppCompatActivity {
             LayoutInflater inflater = getLayoutInflater();
 
             //make a new row:
-              View  newView = inflater.inflate(R.layout.soccer_row_layout, parent, false);
+            View  newView = inflater.inflate(R.layout.soccer_row_layout, parent, false);
             Item item = getItem(position);
             //set what the text should be for this row:
             TextView tView = newView.findViewById(R.id.textGoesHere);
             tView.setText(item.getTitle());
 
-//            tView.setText(getItem(position).toString());
-            //return it to be put in the table
             return newView;
         }
     }
