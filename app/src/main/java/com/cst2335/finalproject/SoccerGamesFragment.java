@@ -23,9 +23,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.squareup.picasso.Picasso;
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;

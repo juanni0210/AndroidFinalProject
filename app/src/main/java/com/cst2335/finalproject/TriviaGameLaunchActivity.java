@@ -192,13 +192,13 @@ public class TriviaGameLaunchActivity extends AppCompatActivity implements Navig
                 startActivity(new Intent(TriviaGameLaunchActivity.this, TriviaGameLaunchActivity.class));
                 break;
             case R.id.songsterItem:
-                Toast.makeText(this, "Go to songster page", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(TriviaGameLaunchActivity.this, SongsterSearch.class));
                 break;
             case R.id.carDBItem:
-                Toast.makeText(this, "Go to car database page", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(TriviaGameLaunchActivity.this, CarDatabase.class));
                 break;
             case R.id.soccerItem:
-                Toast.makeText(this, "Go to soccer game page", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(TriviaGameLaunchActivity.this, RatingSoccerAPI.class));
                 break;
             case R.id.helpItem:
                 AlertDialog.Builder triviaHelpDialog = new AlertDialog.Builder(this);
@@ -238,13 +238,13 @@ public class TriviaGameLaunchActivity extends AppCompatActivity implements Navig
                 startActivity(new Intent(TriviaGameLaunchActivity.this, TriviaGameLaunchActivity.class));
                 break;
             case R.id.songsterItem:
-                Toast.makeText(this, "Go to songster page", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(TriviaGameLaunchActivity.this, SongsterSearch.class));
                 break;
             case R.id.carDBItem:
-                Toast.makeText(this, "Go to car database page", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(TriviaGameLaunchActivity.this, CarDatabase.class));
                 break;
             case R.id.soccerItem:
-                Toast.makeText(this, "Go to soccer game page", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(TriviaGameLaunchActivity.this, RatingSoccerAPI.class));
                 break;
             case R.id.helpItem:
                 AlertDialog.Builder triviaHelpDialog = new AlertDialog.Builder(this);

@@ -162,16 +162,16 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
                 startActivity(new Intent(SoccerGames.this, MainActivity.class));
                 break;
             case R.id.triviaItem:
-                Toast.makeText(this, "Go to trivia game page", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(SoccerGames.this, TriviaGameLaunchActivity.class));
                 break;
             case R.id.songsterItem:
-                Toast.makeText(this, "Go to songster page", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(SoccerGames.this, SongsterSearch.class));
                 break;
             case R.id.carDBItem:
-                Toast.makeText(this, "Go to car database page", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(SoccerGames.this, CarDatabase.class));
                 break;
             case R.id.soccerItem:
-                startActivity(new Intent(SoccerGames.this, SoccerGames.class));
+                startActivity(new Intent(SoccerGames.this, RatingSoccerAPI.class));
                 break;
             case R.id.helpItem:
                 AlertDialog.Builder builder = new AlertDialog.Builder(SoccerGames.this);
@@ -212,16 +212,16 @@ public class SoccerGames extends AppCompatActivity implements NavigationView.OnN
                 startActivity(new Intent(SoccerGames.this, MainActivity.class));
                 break;
             case R.id.triviaItem:
-                Toast.makeText(this, "Go to trivia game page", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(SoccerGames.this, TriviaGameLaunchActivity.class));
                 break;
             case R.id.songsterItem:
-                Toast.makeText(this, "Go to songster page", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(SoccerGames.this, SongsterSearch.class));
                 break;
             case R.id.carDBItem:
-                Toast.makeText(this, "Go to car database page", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(SoccerGames.this, CarDatabase.class));
                 break;
             case R.id.soccerItem:
-                startActivity(new Intent(SoccerGames.this, SoccerGames.class));
+                startActivity(new Intent(SoccerGames.this, RatingSoccerAPI.class));
                 break;
             case R.id.helpItem:
                 AlertDialog.Builder builder = new AlertDialog.Builder(SoccerGames.this);

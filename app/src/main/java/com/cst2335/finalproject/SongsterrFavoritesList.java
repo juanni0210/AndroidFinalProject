@@ -256,23 +256,18 @@ public class SongsterrFavoritesList extends AppCompatActivity {
             //what to do when the menu item is selected:
             case R.id.backHomeItem:
                 startActivity(new Intent(SongsterrFavoritesList.this, MainActivity.class));
-                Toast.makeText(this, R.string.goToMain, Toast.LENGTH_LONG).show();
                 break;
             case R.id.triviaItem:
-//                startActivity(new Intent(SongsterrFavoritesList.this, TriviaGameLaunchActivity.class));
-                Toast.makeText(this, R.string.goToTrivia, Toast.LENGTH_LONG).show();
+                startActivity(new Intent(SongsterrFavoritesList.this, TriviaGameLaunchActivity.class));
                 break;
             case R.id.songsterItem:
                 startActivity(new Intent(SongsterrFavoritesList.this, SongsterSearch.class));
-                Toast.makeText(this, R.string.goToSongster, Toast.LENGTH_LONG).show();
                 break;
             case R.id.carDBItem:
-//                startActivity(new Intent(SongsterrFavoritesList.this, CarDatabase.class));
-                Toast.makeText(this, R.string.goToCarDatabase, Toast.LENGTH_LONG).show();
+                startActivity(new Intent(SongsterrFavoritesList.this, CarDatabase.class));
                 break;
             case R.id.soccerItem:
-//                startActivity(new Intent(SongsterrFavoritesList.this, SoccerGames.class));
-                Toast.makeText(this, R.string.goToSoccerGame, Toast.LENGTH_LONG).show();
+                startActivity(new Intent(SongsterrFavoritesList.this, RatingSoccerAPI.class));
                 break;
             case R.id.helpItem:
                 AlertDialog.Builder songsterHelpDialog = new AlertDialog.Builder(this);

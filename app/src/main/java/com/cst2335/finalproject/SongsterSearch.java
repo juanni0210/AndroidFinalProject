@@ -419,23 +419,18 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
             //what to do when the menu item is selected:
             case R.id.backHomeItem:
                 startActivity(new Intent(SongsterSearch.this, MainActivity.class));
-                Toast.makeText(this, R.string.goToMain, Toast.LENGTH_LONG).show();
                 break;
             case R.id.triviaItem:
-                //startActivity(new Intent(SongsterSearch.this, TriviaGameLaunchActivity.class));
-                Toast.makeText(this, R.string.goToTrivia, Toast.LENGTH_LONG).show();
+                startActivity(new Intent(SongsterSearch.this, TriviaGameLaunchActivity.class));
                 break;
             case R.id.songsterItem:
                 startActivity(new Intent(SongsterSearch.this, SongsterSearch.class));
-                Toast.makeText(this, R.string.goToSongster, Toast.LENGTH_LONG).show();
                 break;
             case R.id.carDBItem:
-//                startActivity(new Intent(SongsterSearch.this, CarDatabase.class));
-                Toast.makeText(this, R.string.goToCarDatabase, Toast.LENGTH_LONG).show();
+                startActivity(new Intent(SongsterSearch.this, CarDatabase.class));
                 break;
             case R.id.soccerItem:
-//                startActivity(new Intent(SongsterSearch.this, SoccerGames.class));
-                Toast.makeText(this, R.string.goToSoccerGame, Toast.LENGTH_LONG).show();
+                startActivity(new Intent(SongsterSearch.this, RatingSoccerAPI.class));
                 break;
             case R.id.helpItem:
                 AlertDialog.Builder songsterHelpDialog = new AlertDialog.Builder(this);
@@ -470,23 +465,18 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
         {
             case R.id.backHomeItem:
                 startActivity(new Intent(SongsterSearch.this, MainActivity.class));
-                Toast.makeText(this, R.string.goToMain, Toast.LENGTH_LONG).show();
                 break;
             case R.id.triviaItem:
-                //startActivity(new Intent(SongsterSearch.this, TriviaGameLaunchActivity.class));
-                Toast.makeText(this, R.string.goToTrivia, Toast.LENGTH_LONG).show();
+                startActivity(new Intent(SongsterSearch.this, TriviaGameLaunchActivity.class));
                 break;
             case R.id.songsterItem:
                 startActivity(new Intent(SongsterSearch.this, SongsterSearch.class));
-                Toast.makeText(this, R.string.goToSongster, Toast.LENGTH_LONG).show();
                 break;
             case R.id.carDBItem:
-//                startActivity(new Intent(SongsterSearch.this, CarDatabase.class));
-                Toast.makeText(this, R.string.goToCarDatabase, Toast.LENGTH_LONG).show();
+                startActivity(new Intent(SongsterSearch.this, CarDatabase.class));
                 break;
             case R.id.soccerItem:
-//                startActivity(new Intent(SongsterSearch.this, SoccerGames.class));
-                Toast.makeText(this, R.string.goToSoccerGame, Toast.LENGTH_LONG).show();
+                startActivity(new Intent(SongsterSearch.this, RatingSoccerAPI.class));
                 break;
             case R.id.helpItem:
                 AlertDialog.Builder songsterHelpDialog = new AlertDialog.Builder(this);

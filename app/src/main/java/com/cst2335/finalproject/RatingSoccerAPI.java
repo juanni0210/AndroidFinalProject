@@ -16,7 +16,6 @@ import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import hotchemi.android.rate.AppRate;
 
 /**
  * This is the class to show the rating bar for the API.

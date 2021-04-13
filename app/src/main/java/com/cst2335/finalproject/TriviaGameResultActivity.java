@@ -262,13 +262,13 @@ public class TriviaGameResultActivity extends AppCompatActivity {
                 startActivity(new Intent(TriviaGameResultActivity.this, TriviaGameLaunchActivity.class));
                 break;
             case R.id.songsterItem:
-                Toast.makeText(this, "Go to songster page", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(TriviaGameResultActivity.this, SongsterSearch.class));
                 break;
             case R.id.carDBItem:
-                Toast.makeText(this, "Go to car database page", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(TriviaGameResultActivity.this, CarDatabase.class));
                 break;
             case R.id.soccerItem:
-                Toast.makeText(this, "Go to soccer game page", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(TriviaGameResultActivity.this, RatingSoccerAPI.class));
                 break;
             case R.id.helpItem:
                 AlertDialog.Builder triviaHelpDialog = new AlertDialog.Builder(this);
