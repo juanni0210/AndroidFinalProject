@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="text"
+                android:padding="15dp"
                 android:hint="@string/input"/>
 
             <ImageButton
@@ -49,7 +50,6 @@
                 android:id="@+id/goToFavBtn"
                 android:background="@drawable/heart_outline"
                 android:layout_alignParentEnd="true"/>
-
 
             <ListView
                 android:id="@+id/songsterrListSearch"

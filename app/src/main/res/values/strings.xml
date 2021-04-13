@@ -7,7 +7,8 @@
     <string name="soccerStartBtn">SOCCER GAME</string>
     <string name="projectInfo">CST2335 Final Project</string>
     <string name="teamInfo">© 2021 TECH SAVVY TEAM</string>
-    <!--   Main Menu    -->
+
+    <!--   Songsterr Main Menu    -->
     <string name="triviaMenuName">Trivia Game</string>
     <string name="songsterMenuName">Songster Search</string>
     <string name="carDBMenuName">Car Database</string>
@@ -21,12 +22,11 @@
     <string name="songsterActivityAuthor">Author: Xueru Chen</string>
     <string name="songsterActivityVersionNumber">Version number: V1.0</string>
     <string name="songsterHelpTile">All you need to know about Songsterr Search:</string>
-    <string name="songsterInstructions1">1) Enter song title to search, click search button</string>
+    <string name="songsterInstructions1">1) Enter song title or artist name to search(put "+" between word), click search button</string>
     <string name="songsterInstructions2">2) Click song title to show details</string>
     <string name="songsterInstructions3">3) Click song ID or artist ID launch to another website </string>
     <string name="songsterInstructions4">4) Add to favourites list</string>
     <string name="songsterInstructions5">"5) Or Delete "</string>
-
 
     <!--    Songster page-->
     <string name="songster_btn_add">Add to Favourite</string>
@@ -39,7 +39,6 @@
     <string name="yes">Yes</string>
     <string name="add">Successfully Added!</string>
     <string name="no">No</string>
-
     <string name="input">Input search content</string>
     <string name="search_button">Search</string>
 
@@ -54,6 +53,12 @@
     <string name="artistName">Artist Name: </string>
     <string name="artistID">Artist ID: </string>
     <string name="songsterr_details">Songsterr Details</string>
-
+    <string name="search">Searching:   </string>
+    <string name="goToMain">Go to main page</string>
+    <string name="goToTrivia">Go to trivia game page</string>
+    <string name="goToSongster">Go to songster page</string>
+    <string name="goToCarDatabase">Go to car database page</string>
+    <string name="goToSoccerGame">Go to soccer game page</string>
+    <string name="alertGotoFav">Go to Favorites List?</string>
 
 </resources>

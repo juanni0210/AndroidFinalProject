@@ -78,8 +78,9 @@ public class SongsterrFavoritesList extends AppCompatActivity {
         theFavList.setAdapter( myAdapter = new SongsterrFavListAdapter() );
 
         /**
-         * click listview show songsters
+         * click listview show songster
          */
+
         theFavList.setOnItemClickListener( (list, item, position, id) -> {
             SongsterrObject selectedItem = favorites.get(position);
 
@@ -97,7 +98,6 @@ public class SongsterrFavoritesList extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(SongsterrFavoritesList.this);
                 builder.setTitle(R.string.alertDeleteTitle);
                 builder.setIcon(R.drawable.exclamation_mark);
-
                 builder.setPositiveButton(R.string.yes, (e, arg) -> {
                     deleteItem(selectedItem);
                     favorites.remove(position);
@@ -119,33 +119,37 @@ public class SongsterrFavoritesList extends AppCompatActivity {
                 builder.show();
             });
 
-        });
+            /**
+             * click on songID to launch a browser to the song’s guitar music page
+             */
+            songID.setOnClickListener(v -> {
+                String url = "http://www.songsterr.com/a/wa/song?id="+getSongID ;
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData( Uri.parse(url) );
+                startActivity(i);
+            });
 
-        /**
-         * click on songID to launch a browser to the song’s guitar music page
-         */
-        songID.setOnClickListener(v -> {
-            String url = "http://www.songsterr.com/a/wa/song?id="+songID ;
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData( Uri.parse(url) );
-            startActivity(i);
-        });
+            /**
+             * click on artistID to launch a web browser to the artist’s list of songs
+             */
+            artistID.setOnClickListener(v -> {
+                String url = "http://www.songsterr.com/a/wa/artist?id="+getArtistID ;
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData( Uri.parse(url) );
+                startActivity(i);
+            });
 
-        /**
-         * click on artistID to launch a web browser to the artist’s list of songs
-         */
-        artistID.setOnClickListener(v -> {
-            String url = "http://www.songsterr.com/a/wa/artist?id="+artistID ;
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData( Uri.parse(url) );
-            startActivity(i);
         });
 
         loadDataFromDatabase();
     }
 
-    protected void deleteItem(SongsterrObject object)
-    {
+    /**
+     * Function to del
+     * ete item from databse
+     * @param object
+     */
+    protected void deleteItem(SongsterrObject object) {
         db.delete(SongsterrDatabaseHelper.TABLE_NAME, SongsterrDatabaseHelper.COL_ID + "= ?", new String[] {Long.toString(object.getId())});
     }
 
@@ -251,23 +255,23 @@ public class SongsterrFavoritesList extends AppCompatActivity {
             //what to do when the menu item is selected:
             case R.id.backHomeItem:
                 startActivity(new Intent(SongsterrFavoritesList.this, MainActivity.class));
-                Toast.makeText(this, "Go to main page", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.goToMain, Toast.LENGTH_LONG).show();
                 break;
             case R.id.triviaItem:
 //                startActivity(new Intent(SongsterrFavoritesList.this, TriviaGameLaunchActivity.class));
-                Toast.makeText(this, "Go to trivia game page", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.goToTrivia, Toast.LENGTH_LONG).show();
                 break;
             case R.id.songsterItem:
                 startActivity(new Intent(SongsterrFavoritesList.this, SongsterSearch.class));
-                Toast.makeText(this, "Go to songster page", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.goToSongster, Toast.LENGTH_LONG).show();
                 break;
             case R.id.carDBItem:
 //                startActivity(new Intent(SongsterrFavoritesList.this, CarDatabase.class));
-                Toast.makeText(this, "Go to car database page", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.goToCarDatabase, Toast.LENGTH_LONG).show();
                 break;
             case R.id.soccerItem:
 //                startActivity(new Intent(SongsterrFavoritesList.this, SoccerGames.class));
-                Toast.makeText(this, "Go to soccer game page", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.goToSoccerGame, Toast.LENGTH_LONG).show();
                 break;
             case R.id.helpItem:
                 AlertDialog.Builder songsterHelpDialog = new AlertDialog.Builder(this);

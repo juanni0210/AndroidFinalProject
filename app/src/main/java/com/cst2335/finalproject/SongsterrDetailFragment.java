@@ -151,10 +151,14 @@ public class SongsterrDetailFragment extends Fragment {
 
         });
 
+        /**
+         * Click ImageButton to
+         */
         Button favoriteBtn = result.findViewById(R.id.songsterrDetailGoButton);
         favoriteBtn.setOnClickListener(click -> {
             Intent goToSaved = new Intent(container.getContext(), SongsterrFavoritesList.class);
             startActivity(goToSaved);
+            Toast.makeText(container.getContext(), R.string.goToFav, Toast.LENGTH_LONG).show();
         });
 
 

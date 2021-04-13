@@ -91,10 +91,15 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_songster_search);
 
+        /**
+         * Set Toolbar
+         */
         toolbar = findViewById(R.id.songsterrToolbar);
         setSupportActionBar(toolbar);
 
-        //For NavigationDrawer:
+        /**
+         * set NavigationDrawer
+         */
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
                 drawer, toolbar, R.string.navigationOpen, R.string.navigationClose);
@@ -104,84 +109,110 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Database
+        /**
+         * Set Database
+         */
         SongsterrDatabaseHelper dbOpener = new SongsterrDatabaseHelper(this);
         db = dbOpener.getWritableDatabase();
 
-        //sharedPreference to show last search content
+        /**
+         * sharedPreference to show last search content
+         */
         SharedPreferences prefs = getSharedPreferences("songsterPrefs", Context.MODE_PRIVATE);
         String strSearch = prefs.getString("searchText", "");
 
+        /**
+         * Set Listview and adapter
+         */
 
         search = new ArrayList<>();
         ListView theList = findViewById(R.id.songsterrListSearch);
         myAdapter = new MyListAdapter();
         theList.setAdapter(myAdapter);
 
+        /**
+         * Progress bar
+         */
         progressBar = findViewById(R.id.songsterrProgress);
 
+        /**
+         * Set input editext
+         */
         EditText editSongsterr = findViewById(R.id.songsterrEdit);
         editSongsterr.setText(strSearch);
 
+        search = new ArrayList<>();
+
+        /**
+         * set click search button
+         */
         searchButton = findViewById(R.id.songsterrButtonSearch);
-        searchButton.setOnClickListener( clk ->
+        searchButton.setOnClickListener(clk ->
         {
             SharedPreferences.Editor edit = prefs.edit();
-
             edit.putString("searchText", editSongsterr.getText().toString());
             edit.commit();
-
-            search = new ArrayList<>();
 
             SongsterrQuery query = new SongsterrQuery(editSongsterr.getText().toString());
             query.execute();
 
             //pop up a snackbar to show input searching content
-            Snackbar.make(findViewById(R.id.songsterMain), "Searching: "+ editSongsterr.getText().toString(), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.songsterMain), getString(R.string.search) + editSongsterr.getText().toString(), Snackbar.LENGTH_LONG).show();
         });
 
-        theList.setOnItemClickListener( (list, item, position, id) -> {
+        theList.setOnItemClickListener((list, item, position, id) -> {
+            /**
+             * Get selected items details in variable separately
+             */
             SongsterrObject selectedItem = search.get(position);
             String getSongTitle = selectedItem.getSongName();
             String getSongID = selectedItem.getSongID();
             String getArtistName = selectedItem.getArtistName();
             String getArtistID = selectedItem.getArtistID();
 
+            /**
+             * Pass the data
+             */
             Bundle dataToPass = new Bundle();
-            dataToPass.putString(ITEM_SONG_TITLE,getSongTitle);
-            dataToPass.putString(ITEM_SONG_ID,getSongID);
+            dataToPass.putString(ITEM_SONG_TITLE, getSongTitle);
+            dataToPass.putString(ITEM_SONG_ID, getSongID);
             dataToPass.putString(ITEM_ARTIST_NAME, getArtistName);
-            dataToPass.putString(ITEM_ARTIST_ID,getArtistID);
+            dataToPass.putString(ITEM_ARTIST_ID, getArtistID);
 
+            /**
+             * Check if it is a tablet
+             */
             boolean isTablet = findViewById(R.id.songsterFragmentLocation) != null;
-
-            if(isTablet)
-            {
+            if (isTablet) {
                 SongsterrDetailFragment dFragment = new SongsterrDetailFragment();
-                dFragment.setArguments( dataToPass );
+                dFragment.setArguments(dataToPass);
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.songsterFragmentLocation, dFragment)
                         .commit();
-            }
-            else //isPhone
-            {
+            } else{ //isPhone
                 Intent nextActivity = new Intent(SongsterSearch.this, SongsterrEmptyActivity.class);
                 nextActivity.putExtras(dataToPass); //send data to next activity
                 startActivity(nextActivity); //make the transition
-
             }
-
         });
 
+        /**
+         * Click Favorite button to SongsterrFavoritesList activity
+         */
         goToFavButton = findViewById(R.id.goToFavBtn);
-        goToFavButton.setOnClickListener(clk->{
-            Intent goToFav = new Intent(SongsterSearch.this, SongsterrFavoritesList.class);
-            Toast.makeText(this,R.string.goToFav, Toast.LENGTH_LONG).show();
-            startActivity(goToFav);
+        goToFavButton.setOnClickListener(clk -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(SongsterSearch.this);
+            builder.setTitle(R.string.alertGotoFav);
+            builder.setIcon(R.drawable.exclamation_mark);
+            builder.setPositiveButton(R.string.yes, (e, arg) -> {
+                Intent goToFav = new Intent(SongsterSearch.this, SongsterrFavoritesList.class);
+                startActivity(goToFav);
+                Toast.makeText(this, R.string.goToFav, Toast.LENGTH_LONG).show();
+            });
+            builder.setNegativeButton(R.string.no, (e, arg) -> { });
+            builder.create().show();
         });
-
-
     }
 
     /**
@@ -381,19 +412,23 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
             //what to do when the menu item is selected:
             case R.id.backHomeItem:
                 startActivity(new Intent(SongsterSearch.this, MainActivity.class));
+                Toast.makeText(this, R.string.goToMain, Toast.LENGTH_LONG).show();
                 break;
             case R.id.triviaItem:
-                //startActivity(new Intent(TriviaGameLaunchActivity.this, TriviaGameLaunchActivity.class));
+                //startActivity(new Intent(SongsterSearch.this, TriviaGameLaunchActivity.class));
+                Toast.makeText(this, R.string.goToTrivia, Toast.LENGTH_LONG).show();
                 break;
             case R.id.songsterItem:
                 startActivity(new Intent(SongsterSearch.this, SongsterSearch.class));
-                Toast.makeText(this, "Go to songster page", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.goToSongster, Toast.LENGTH_LONG).show();
                 break;
             case R.id.carDBItem:
-                Toast.makeText(this, "Go to car database page", Toast.LENGTH_LONG).show();
+//                startActivity(new Intent(SongsterSearch.this, CarDatabase.class));
+                Toast.makeText(this, R.string.goToCarDatabase, Toast.LENGTH_LONG).show();
                 break;
             case R.id.soccerItem:
-                Toast.makeText(this, "Go to soccer game page", Toast.LENGTH_LONG).show();
+//                startActivity(new Intent(SongsterSearch.this, SoccerGames.class));
+                Toast.makeText(this, R.string.goToSoccerGame, Toast.LENGTH_LONG).show();
                 break;
             case R.id.helpItem:
                 AlertDialog.Builder songsterHelpDialog = new AlertDialog.Builder(this);
@@ -424,19 +459,23 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
         {
             case R.id.backHomeItem:
                 startActivity(new Intent(SongsterSearch.this, MainActivity.class));
+                Toast.makeText(this, R.string.goToMain, Toast.LENGTH_LONG).show();
                 break;
             case R.id.triviaItem:
-                //startActivity(new Intent(TriviaGameLaunchActivity.this, TriviaGameLaunchActivity.class));
+                //startActivity(new Intent(SongsterSearch.this, TriviaGameLaunchActivity.class));
+                Toast.makeText(this, R.string.goToTrivia, Toast.LENGTH_LONG).show();
                 break;
             case R.id.songsterItem:
                 startActivity(new Intent(SongsterSearch.this, SongsterSearch.class));
-                Toast.makeText(this, "Go to songster page", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.goToSongster, Toast.LENGTH_LONG).show();
                 break;
             case R.id.carDBItem:
-                Toast.makeText(this, "Go to car database page", Toast.LENGTH_LONG).show();
+//                startActivity(new Intent(SongsterSearch.this, CarDatabase.class));
+                Toast.makeText(this, R.string.goToCarDatabase, Toast.LENGTH_LONG).show();
                 break;
             case R.id.soccerItem:
-                Toast.makeText(this, "Go to soccer game page", Toast.LENGTH_LONG).show();
+//                startActivity(new Intent(SongsterSearch.this, SoccerGames.class));
+                Toast.makeText(this, R.string.goToSoccerGame, Toast.LENGTH_LONG).show();
                 break;
             case R.id.helpItem:
                 AlertDialog.Builder songsterHelpDialog = new AlertDialog.Builder(this);
