@@ -7,9 +7,16 @@
     android:orientation="vertical"
     android:background="@drawable/trivia_bg"
     tools:context=".TriviaGameResultActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
         android:padding="30dp"
         android:orientation="vertical">
         <TextView
@@ -54,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/bgbtn"
+            android:background="@drawable/btn_orange"
             android:textSize="16dp"
             android:textColor="@color/purple_color"
             android:textStyle="bold"
@@ -86,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/bgbtn"
+        android:background="@drawable/btn_orange"
         android:textSize="16dp"
         android:textColor="@color/purple_color"
         android:textStyle="bold"

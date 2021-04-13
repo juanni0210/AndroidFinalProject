@@ -32,7 +32,7 @@ import com.google.android.material.snackbar.Snackbar;
  * Launch page of trivia game where user can select question number, type, difficulty type and other options.
  * @author Juan Ni
  */
-public class TriviaGameLaunchActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
+public class TriviaGameLaunchActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DifficultyType difficultyType = DifficultyType.Easy;
     private QuestionType questionType = QuestionType.Any;
     private EditText questionNumberInput;
@@ -44,9 +44,6 @@ public class TriviaGameLaunchActivity extends AppCompatActivity implements Navig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        //full screen
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_trivia_game_launch);
 

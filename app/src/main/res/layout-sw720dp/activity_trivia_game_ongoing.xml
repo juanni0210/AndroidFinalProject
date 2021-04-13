@@ -6,9 +6,14 @@
     android:layout_height="match_parent"
     android:background="@drawable/trivia_bg"
     tools:context=".TriviaGameOngoingActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
         android:padding="50dp"
         android:orientation="vertical">
         <LinearLayout
@@ -25,8 +30,9 @@
                 android:layout_marginTop="100dp"
                 android:layout_marginBottom="10dp"
                 android:textSize="20sp"
-                android:text="@string/unAnsweredText"
-                android:textColor="@color/black" />
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="@string/unAnsweredText" />
             <TextView
                 android:id="@+id/correctedAns"
                 android:layout_width="wrap_content"
@@ -34,7 +40,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:textSize="20sp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:text="@string/correctCountText" />
             <TextView
                 android:id="@+id/wrongAns"
@@ -43,7 +50,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:textSize="20sp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:text="@string/wrongCountText" />
         </LinearLayout>
 
@@ -104,7 +112,7 @@
                     android:layout_marginBottom="20dp"
                     android:layout_marginLeft="50dp"
                     android:textColor="@color/purple_color"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:textStyle="bold"
                     android:text="@string/questionText" />
 

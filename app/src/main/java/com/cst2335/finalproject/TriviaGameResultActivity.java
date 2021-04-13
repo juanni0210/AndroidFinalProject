@@ -2,6 +2,7 @@ package com.cst2335.finalproject;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,6 +12,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -19,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.plattysoft.leonids.ParticleSystem;
 
@@ -213,6 +218,60 @@ public class TriviaGameResultActivity extends AppCompatActivity {
                 startActivity(goToGameLaunch);
             }
         });
+
+        //This gets the toolbar from the layout:
+        Toolbar tBar = (Toolbar)findViewById(R.id.toolbar);
+        //This loads the toolbar, which calls onCreateOptionsMenu below:
+        setSupportActionBar(tBar);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String message = null;
+        //Look at your menu XML file. Put a case for every id in that file:
+        switch(item.getItemId())
+        {
+            //what to do when the menu item is selected:
+            case R.id.backHomeItem:
+                startActivity(new Intent(TriviaGameResultActivity.this, MainActivity.class));
+                break;
+            case R.id.triviaItem:
+                startActivity(new Intent(TriviaGameResultActivity.this, TriviaGameLaunchActivity.class));
+                break;
+            case R.id.songsterItem:
+                Toast.makeText(this, "Go to songster page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.carDBItem:
+                Toast.makeText(this, "Go to car database page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.soccerItem:
+                Toast.makeText(this, "Go to soccer game page", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.helpItem:
+                AlertDialog.Builder triviaHelpDialog = new AlertDialog.Builder(this);
+                triviaHelpDialog.setTitle(getResources().getString(R.string.triviaHelpTile))
+                        //What is the message:
+                        .setMessage(getResources().getString(R.string.triviaInstructions1) + "\n"
+                                + getResources().getString(R.string.triviaInstructions2) + "\n"
+                                + getResources().getString(R.string.triviaInstructions3) + "\n"
+                                + getResources().getString(R.string.triviaInstructions4) + "\n"
+                                + getResources().getString(R.string.triviaInstructions5))
+                        //What the No button does:
+                        .setNegativeButton(getResources().getString(R.string.closeHelpDialog), (click, arg) -> {
+                        })
+                        //Show the dialog
+                        .create().show();
+                break;
+        }
+        return true;
     }
 
     /**
