@@ -12,14 +12,6 @@
     <string name="teamInfo">© 2021 TECH SAVVY TEAM</string>
 
     <!--    menu and navigation-->
-    <string name="backHomeIcon">Home</string>
-    <string name="triviaMenuName">Trivia Game</string>
-    <string name="songsterMenuName">Songster Search</string>
-    <string name="carDBMenuName">Car Database</string>
-    <string name="soccerMenuName">Soccer Game</string>
-    <string name="helpMenuName">Help</string>
-    <string name="navigationOpen">Open</string>
-    <string name="navigationClose">Close</string>
     <string name="carDatabaseActivityTitle">Car Database</string>
     <string name="carDatabaseActivityAuthor">Sophie Sun</string>
     <string name="carDatabaseActivityVersionNumber">carDatabaseActivityVersionNumber</string>
@@ -134,7 +126,6 @@
     <string name="soccerInstructions3">* Click save button to save the article</string>
     <string name="soccerInstructions4">* Click heart button to show favorites</string>
     <string name="soccerInstructions5">* Click delete button to remove the story</string>
-    <string name="closeHelpDialog">Close</string>
 
 
 
@@ -182,14 +173,12 @@
     <string name="songsterInstructions4">4) Add to favourites list</string>
     <string name="songsterInstructions5">"5) Or Delete "</string>
 
-    <string name="faveListTitle">Favourites List</string>
     <string name="input">Input search content</string>
     <string name="search_button">Search</string>
 
     <string name="addFavorite">Add to favorites</string>
     <string name="removeFav">Remove Favorite</string>
     <string name="goToFav">Go to Favorite List</string>
-    <string name="favorite">Favorites List</string>
     <string name="alertDeleteTitle">Delete this song?</string>
     <string name="deleteSnackbar">The selected song is already deleted.</string>
     <string name="songTitle">Song Title: </string>
