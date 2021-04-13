@@ -1,7 +1,6 @@
 package com.cst2335.finalproject;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -11,11 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -29,7 +26,6 @@ import com.google.android.material.snackbar.Snackbar;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -38,8 +34,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class SoccerGames extends AppCompatActivity {
 
@@ -241,7 +235,7 @@ public class SoccerGames extends AppCompatActivity {
             LayoutInflater inflater = getLayoutInflater();
 
             //make a new row:
-              View  newView = inflater.inflate(R.layout.row_layout, parent, false);
+              View  newView = inflater.inflate(R.layout.soccer_row_layout, parent, false);
             Item item = getItem(position);
             //set what the text should be for this row:
             TextView tView = newView.findViewById(R.id.textGoesHere);
