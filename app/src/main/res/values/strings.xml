@@ -11,6 +11,19 @@
     <string name="projectInfo">CST2335 Final Project</string>
     <string name="teamInfo">© 2021 TECH SAVVY TEAM</string>
 
+<!--    menu and navigation-->
+    <string name="backHomeIcon">Home</string>
+    <string name="triviaMenuName">Trivia Game</string>
+    <string name="songsterMenuName">Songster Search</string>
+    <string name="carDBMenuName">Car Database</string>
+    <string name="soccerMenuName">Soccer Game</string>
+    <string name="helpMenuName">Help</string>
+    <string name="navigationOpen">Open</string>
+    <string name="navigationClose">Close</string>
+    <string name="carDatabaseActivityTitle">Car Database</string>
+    <string name="carDatabaseActivityAuthor">Sophie Sun</string>
+    <string name="carDatabaseActivityVersionNumber">carDatabaseActivityVersionNumber</string>
+
 
     <!--    Trivia game launch page-->
     <string name="trivia_launch_title">CHOOSE QUESTIONS:</string>
@@ -95,4 +108,21 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--    <string name="hello_world">Hello Square World!</string>-->
+    <!--    Car Database-->
+    <string name="SaveToFavorites">Save to Favorites</string>
+    <string name="enterHint">Please enter make/brand</string>
+    <string name="searchModel">search model</string>
+    <string name="searchDetail">search details</string>
+    <string name="goToShop">go to shop</string>
+    <string name="favorites">favorites</string>
+    <string name="backToPrevious">Back to previous</string>
+    <string name="deleteFromFavorites">delete from favorites</string>
+    <string name="help">Help</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="detail_make">detail_make</string>
+    <string name="detail_model">detail_model</string>
+    <string name="addToFavorite">Add to Favorite</string>
+    <string name="deleteFromFavorite">Delete from Favorite</string>
+
+
 </resources>

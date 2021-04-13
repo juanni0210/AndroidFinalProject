@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/cardatabase_bg"
+    tools:context=".CarDetailsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="135dp"
+        android:layout_marginRight="135dp"
+        android:layout_marginTop="235dp"
+        android:id="@+id/carInfoLayout"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/makeDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textColor="@color/black"
+            android:textSize="26dp"
+            android:text="@string/detail_make" />
+        <TextView
+            android:id="@+id/modelDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="26dp"
+            android:text="@string/detail_model" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/addDeleteBtn"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="135dp"
+        android:layout_marginRight="135dp"
+        android:layout_marginTop="100dp"
+        android:textSize="16dp"
+        android:text="@string/addToFavorite"
+        android:layout_below="@id/carInfoLayout">
+    </Button>
+    <Button
+        android:id="@+id/shop"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="135dp"
+        android:layout_marginRight="135dp"
+        android:layout_marginTop="20dp"
+        android:textSize="16dp"
+        android:text="@string/goToShop"
+        android:layout_below="@+id/addDeleteBtn"
+        />
+
+</RelativeLayout>

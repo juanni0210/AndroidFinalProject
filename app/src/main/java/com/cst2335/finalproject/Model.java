@@ -1,3 +1,9 @@
+/**
+ * This is the class of model for CarDatabase in this app
+ * @author Sophie Sun
+ * @since 1.0
+ */
+
 package com.cst2335.finalproject;
 
 public class Model {
