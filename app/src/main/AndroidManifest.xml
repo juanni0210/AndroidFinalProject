@@ -16,13 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject">
         <activity android:name=".EmptyCarActivity"></activity>
-        <activity android:name=".Favorites" />
         <activity android:name=".SongsterFavouriteList"></activity>
         <activity android:name=".SongsterSearch" />
-        <activity android:name=".Favorites"></activity>
         <activity android:name=".CarDatabase" />
+        <activity android:name=".Favorites" />
+        <activity android:name=".SoccerGames" />
         <activity android:name=".TriviaEmptyActivity"></activity>
-        <activity android:name=".TriviaDetailsFragment" />
         <activity android:name=".TriviaGameResultActivity" />
         <activity android:name=".TriviaGameOngoingActivity" />
         <activity android:name=".TriviaGameLaunchActivity" />
@@ -30,23 +29,19 @@
             android:name="com.google.android.maps"
             android:required="true" />
 
-        <!--
-               Set to true if your app is Standalone, that is, it does not require the handheld
-               app to run.
-        -->
         <meta-data
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
 
-        <activity
-            android:name=".SoccerGames"
-            android:label="@string/title_activity_soccer_games">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--        <activity-->
+<!--            android:name=".SoccerGames"-->
+<!--            android:label="@string/title_activity_soccer_games">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

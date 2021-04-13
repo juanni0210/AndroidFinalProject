@@ -15,17 +15,11 @@
     <string name="no">不是</string>
     <string name="add_to_favourite">加入喜欢列表</string>
     <string name="backBtn">后退</string>
-    <string name="faveListTitle">喜欢列表</string>
-    <string name="projectInfo">项目信息</string>
-    <string name="teamInfo">组信息</string>
-    <string name="soccerStartBtn">足球游戏</string>
-    <string name="triviaStartBtn">问答游戏</string>
-    <string name="songsterStartBtn">歌手搜索</string>
-    <string name="carDBStartBtn">汽车搜索</string>
+
 
 
     <string name="startCarDB">开始汽车数据库</string>
-    !--    Main page-->
+
     <!--    Main page-->
     <string name="triviaStartBtn">益智问答</string>
     <string name="songsterStartBtn">歌手搜索</string>
@@ -63,6 +57,4 @@
     <string name="detail_model">车型</string>
     <string name="addToFavorite">添加至收藏夹</string>
     <string name="deleteFromFavorite">移出收藏夹</string>
-</resources>
-
 </resources>
