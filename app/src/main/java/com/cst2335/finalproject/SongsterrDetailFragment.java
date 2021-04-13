@@ -26,8 +26,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 
 /**
- * Fragment for display information about selected Search chose from list view
- * Handles buttons actions in fragment
+ * SongsterrDetailFragment is a piece of an application's user interface or behavior that can be placed in an Activity.
  * @author Xueru Chen
  */
 public class SongsterrDetailFragment extends Fragment {
@@ -66,12 +65,11 @@ public class SongsterrDetailFragment extends Fragment {
     }
 
     /**
-     * Displays information about song name and artist in the database
-     * Handles the buttons press of the backbutton the gobutton and the add to favorties button
-     * @param inflater inflater used ti inflate the fragment
-     * @param container container to hold fragment
-     * @param savedInstanceState
-     * @return inflated fragment
+     * Called to have the fragment instantiate its user interface view.
+     * @param inflater LayoutInflater: The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container ViewGroup: If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState Bundle: If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return View: the View for the fragment's UI, or null.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,6 +83,7 @@ public class SongsterrDetailFragment extends Fragment {
         artistName = dataFromActivity.getString(SongsterSearch.ITEM_ARTIST_NAME);
         artistID = dataFromActivity.getString(SongsterSearch.ITEM_ARTIST_ID);
 
+        //Get text view from layout and set text
         TextView textSongName = result.findViewById(R.id.detailSongName);
         textSongName.setText(getString(R.string.songTitle) + songName);
 
@@ -134,7 +133,7 @@ public class SongsterrDetailFragment extends Fragment {
         SQLiteDatabase db = dbOpener.getWritableDatabase();
 
         /**
-         * Add to database
+         * Click button to add to database
          */
         ImageButton addFavButton = result.findViewById(R.id.songsterrDetailFavoriteButton);
         addFavButton.setOnClickListener( clk -> {
@@ -153,7 +152,7 @@ public class SongsterrDetailFragment extends Fragment {
         });
 
         /**
-         * Click ImageButton to
+         * Click ImageButton to go to favorites list page
          */
         Button favoriteBtn = result.findViewById(R.id.songsterrDetailGoButton);
         favoriteBtn.setOnClickListener(click -> {
@@ -161,11 +160,13 @@ public class SongsterrDetailFragment extends Fragment {
             startActivity(goToSaved);
             Toast.makeText(container.getContext(), R.string.goToFav, Toast.LENGTH_LONG).show();
         });
-
-
         return result;
     }
 
+    /**
+     * Called when a fragment is first attached to its context.
+     * @param context Context.
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

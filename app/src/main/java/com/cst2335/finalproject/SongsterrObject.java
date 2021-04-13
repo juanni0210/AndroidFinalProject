@@ -1,7 +1,7 @@
 package com.cst2335.finalproject;
 
 /**
- * Set up Songster object
+ * Class to Set up Songster object
  * @author Xueru Chen
  */
 public class SongsterrObject {
@@ -26,13 +26,28 @@ public class SongsterrObject {
      */
     private long id;
 
-
+    /**
+     * Constructor for songster details
+     * @param songName song title
+     * @param songID song id
+     * @param artistName artist name
+     * @param artistID artist id
+     */
     public SongsterrObject(String songName, String songID, String artistName, String artistID){
         this.songName = songName;
         this.songID = songID;
         this.artistName = artistName;
         this.artistID = artistID;
     }
+
+    /**
+     * Constructor for songster details and id
+     * @param songName song title
+     * @param songID song id
+     * @param artistName artist name
+     * @param artistID artist id
+     * @param id songster id
+     */
     public SongsterrObject(String songName, String songID, String artistName, String artistID, long id){
         this.songName = songName;
         this.songID = songID;

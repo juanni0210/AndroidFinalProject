@@ -52,12 +52,10 @@ public class SongsterrDatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Creates table in db
-     * @param db db helper
+     * Called when the database is created for the first time.
+     * @param db SQLiteDatabase: The database.
      */
-    public void onCreate(SQLiteDatabase db)
-    {
-
+    public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLE_NAME + "( "
                 + COL_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COL_SONGNAME + " TEXT, "
@@ -67,15 +65,13 @@ public class SongsterrDatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Drop old table and create new table on version upgrade
-     * @param db db helper
-     * @param oldVersion old version number
-     * @param newVersion new version number
+     * Called when the database needs to be upgraded.
+     * @param db SQLiteDatabase: The database.
+     * @param oldVersion int: The old database version.
+     * @param newVersion int: The new database version.
      */
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
-    {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-
         onCreate(db);
     }
 
@@ -85,11 +81,8 @@ public class SongsterrDatabaseHelper extends SQLiteOpenHelper {
      * @param oldVersion old version number
      * @param newVersion new version number
      */
-    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion)
-    {
-
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-
         onCreate(db);
     }
 }

@@ -48,8 +48,8 @@ public class SongsterrFavoritesList extends AppCompatActivity {
 
 
     /**
-     * Populates and display favorites in list view
-     * Handles selection of a favorite from listview or back button
+     * Called when the activity is starting.
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
      */
     @SuppressLint("SetTextI18n")
     @Override
@@ -233,9 +233,9 @@ public class SongsterrFavoritesList extends AppCompatActivity {
     }
 
     /**
-     * Inflates menu bar
-     * @param menu menu to be inflated
-     * @return if menu has been inflated
+     * Initialize the contents of the Activity's standard options menu.
+     * @param menu Menu: The options menu in which you place your items.
+     * @return boolean: return true for the menu to be displayed; if you return false it will not be shown.
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -246,9 +246,9 @@ public class SongsterrFavoritesList extends AppCompatActivity {
     }
 
     /**
-     * Handles actions of selected menu items
-     * @param item which item has been selected
-     * @return if actions have been successful
+     * This hook is called whenever an item in your options menu is selected.
+     * @param item MenuItem: The menu item that was selected. This value cannot be null.
+     * @return boolean: Return false to allow normal menu processing to proceed, true to consume it here.
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

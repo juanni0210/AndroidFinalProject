@@ -14,8 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class SongsterrEmptyActivity extends AppCompatActivity {
     /**
-     * Create and display Search object fragment
-     * @param savedInstanceState
+     * Called when the activity is starting.
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

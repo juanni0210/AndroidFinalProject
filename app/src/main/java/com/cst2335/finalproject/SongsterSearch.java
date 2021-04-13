@@ -88,7 +88,10 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
     public static final String ITEM_ARTIST_NAME = "NAME";
     public static final String ITEM_ARTIST_ID = "A_ID";
 
-
+    /**
+     * Called when the activity is starting.
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +116,7 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
         navigationView.setNavigationItemSelectedListener(this);
 
         /**
-         * Set Database
+         * Set and open database
          */
         SongsterrDatabaseHelper dbOpener = new SongsterrDatabaseHelper(this);
         db = dbOpener.getWritableDatabase();
@@ -127,7 +130,6 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
         /**
          * Get listview form layout and set Listview and adapter
          */
-
         search = new ArrayList<>();
         ListView theList = findViewById(R.id.songsterrListSearch);
         myAdapter = new MyListAdapter();
@@ -175,7 +177,7 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
             String getArtistID = selectedItem.getArtistID();
 
             /**
-             * Pass the data
+             * Pass the songster details
              */
             Bundle dataToPass = new Bundle();
             dataToPass.putString(ITEM_SONG_TITLE, getSongTitle);
@@ -202,7 +204,7 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
         });
 
         /**
-         * Click Favorite button to SongsterrFavoritesList activity
+         * Click Favorite button to SongsterrFavoritesList activity, show a alertdialog
          */
         goToFavButton = findViewById(R.id.goToFavBtn);
         goToFavButton.setOnClickListener(clk -> {
@@ -220,19 +222,19 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
     }
 
     /**
-     * Adapter to help display listview
+     * Adapter to help display details in listview
      */
     private class MyListAdapter extends BaseAdapter {
 
         /**
-         *size getter
+         * size getter
          * @return size of listview
          */
         public int getCount() {
             return search.size();  }
 
         /**
-         *
+         * Get positon
          * @param position position of the requested object
          * @return object at position
          */
@@ -240,7 +242,7 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
             return search.get(position);  }
 
         /**
-         *
+         *Get id
          * @param p position of object
          * @return id of the requested object
          */
@@ -357,11 +359,8 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
 
                     tempObj = new SongsterrObject(songName, songId, artistName, artistID);
                     search.add(tempObj);
-
                 }
-
                 publishProgress(100);
-
             }
             catch(MalformedURLException mfe){ ret = "Malformed URL exception"; }
             catch(IOException ioe)          { ret = "IO Exception. Is the Wifi connected?";}
@@ -381,7 +380,6 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
             searchButton.setVisibility(View.INVISIBLE);
             progressBar.setVisibility(View.VISIBLE);
             progressBar.setProgress(values[0]);
-
         }
 
         /**
@@ -393,15 +391,14 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
             super.onPostExecute(sentFromDoInBackground);
             searchButton.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.INVISIBLE);
-
             myAdapter.notifyDataSetChanged();
         }
     }
 
     /**
-     * Inflates menu bar
-     * @param menu menu to be inflated
-     * @return if menu has been inflated
+     * Initialize the contents of the Activity's standard options menu.
+     * @param menu Menu: The options menu in which you place your items.
+     * @return boolean: return true for the menu to be displayed; if you return false it will not be shown.
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -412,9 +409,9 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
     }
 
     /**
-     * Handles actions of selected menu items
-     * @param item which item has been selected
-     * @return if actions have been successful
+     * This hook is called whenever an item in your options menu is selected.
+     * @param item MenuItem: The menu item that was selected. This value cannot be null.
+     * @return boolean: Return false to allow normal menu processing to proceed, true to consume it here.
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -459,7 +456,11 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
         return true;
     }
 
-    // Needed for the OnNavigationItemSelected interface:
+    /**
+     * Called when an item in the navigation menu is selected.
+     * @param item MenuItem: The selected item.
+     * @return boolean: Return true to display the item as the selected item.
+     */
     @Override
     public boolean onNavigationItemSelected( MenuItem item) {
 
@@ -509,8 +510,5 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
 
         return false;
     }
-
-
-
 
 }
