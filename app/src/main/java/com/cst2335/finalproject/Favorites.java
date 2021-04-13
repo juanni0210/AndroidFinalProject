@@ -8,13 +8,11 @@ package com.cst2335.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -139,7 +137,7 @@ public class Favorites extends AppCompatActivity {
 
             //make a new row:
             if (newView == null) {
-                newView = inflater.inflate(R.layout.row_layout, parent, false);
+                newView = inflater.inflate(R.layout.car_database_row_layout, parent, false);
 
             }
             //set what the text should be for this row:

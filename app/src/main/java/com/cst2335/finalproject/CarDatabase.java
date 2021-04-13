@@ -12,7 +12,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,7 +38,6 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,9 +48,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-
-import static com.cst2335.finalproject.MyCarDB.COL_MAKE;
-import static com.cst2335.finalproject.MyCarDB.COL_MODEL;
 
 public class CarDatabase extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     MyListAdapter myAdapter= new MyListAdapter();
@@ -340,7 +335,7 @@ public class CarDatabase extends AppCompatActivity implements NavigationView.OnN
 
             //make a new row:
             if(newView == null) {
-                newView = inflater.inflate(R.layout.row_layout, parent, false);
+                newView = inflater.inflate(R.layout.car_database_row_layout, parent, false);
 
             }
             //set what the text should be for this row:
