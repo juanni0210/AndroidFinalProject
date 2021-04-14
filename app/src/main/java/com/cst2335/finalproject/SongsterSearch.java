@@ -139,6 +139,7 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
          * Get progress bar from layout
          */
         progressBar = findViewById(R.id.songsterrProgress);
+        progressBar.setVisibility(View.VISIBLE);
 
         /**
          * Get edit text from layout and set input editext

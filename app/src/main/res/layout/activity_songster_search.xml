@@ -55,7 +55,7 @@
                 android:id="@+id/songsterrListSearch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/songsterrButtonSearch"
+                android:layout_below="@id/songsterrProgress"
                 android:layout_alignParentStart="true" />
 
             <ProgressBar
@@ -64,7 +64,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_alignBottom="@id/songsterrButtonSearch"
                 android:visibility="invisible"
                 android:layout_below="@id/songsterrEdit"/>
 
