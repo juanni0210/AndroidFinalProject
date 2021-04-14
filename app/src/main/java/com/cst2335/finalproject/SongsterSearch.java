@@ -146,7 +146,6 @@ public class SongsterSearch extends AppCompatActivity implements NavigationView.
          */
         EditText editSongsterr = findViewById(R.id.songsterrEdit);
         editSongsterr.setText(strSearch);
-
         search = new ArrayList<>();
 
         /**
